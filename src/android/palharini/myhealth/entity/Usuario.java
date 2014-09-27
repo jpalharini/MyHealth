@@ -2,10 +2,12 @@ package android.palharini.myhealth.entity;
 
 public class Usuario {
 
-	String nome;
-	String dataNascimento;
-	String altura;
-	String peso;
+	private String nome;
+	private String dataNascimento;
+	private double altura;
+	private double peso;
+	private int minBPM;
+	private int maxBPM;
 	
 	public String getNome() {
 		return nome;
@@ -19,17 +21,29 @@ public class Usuario {
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public String getAltura() {
+	public double getAltura() {
 		return altura;
 	}
-	public void setAltura(String altura) {
+	public void setAltura(double altura) {
 		this.altura = altura;
 	}
-	public String getPeso() {
+	public double getPeso() {
 		return peso;
 	}
-	public void setPeso(String peso) {
+	public void setPeso(double peso) {
 		this.peso = peso;
 	}
-	
+	public int getMinBPM() {
+		return minBPM;
+	}
+	public void setMinBPM(int minBPM) {
+		this.minBPM = minBPM;
+	}
+	public int getMaxBPM() {
+		return maxBPM;
+	}
+	public void setMaxBPM(int maxBPM) {
+		this.maxBPM = maxBPM;
+	}
+
 }
