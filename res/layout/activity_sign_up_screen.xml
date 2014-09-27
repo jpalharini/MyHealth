@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:gravity="center_horizontal"
+    tools:context=".SignUpScreen"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Para começar, preencha seus dados..."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18sp" />
+
+    <EditText
+	    android:id="@+id/editNome"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+	    android:hint="Nome"
+	    android:inputType="textCapWords|textPersonName"
+	    android:textSize="22sp" >
+
+	</EditText>
+
+	<EditText
+	    android:id="@+id/editNasc"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+	    android:hint="Data de nascimento"
+	    android:inputType="date"
+	    android:textSize="22sp" />
+
+	<EditText
+	    android:id="@+id/editAltura"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="20dp"
+	    android:hint="Altura"
+	    android:inputType="number"
+	    android:textSize="22sp" />
+
+	<EditText
+	    android:id="@+id/editPeso"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="20dp"
+	    android:hint="Peso"
+	    android:inputType="number"
+	    android:textSize="22sp" >
+	</EditText>
+
+    <EditText
+        android:id="@+id/editMaxBPM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="BPM Máx. (opcional)"
+        android:inputType="number"
+        android:textSize="22sp" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editMinBPM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="BPM Mín. (opcional)"
+        android:inputType="number"
+        android:textSize="22sp" >
+    </EditText>
+
+    <Button
+	    android:id="@+id/okButton"
+	    style="@style/AppTheme"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+	    android:text="Começar a usar!"
+	    android:textSize="30sp" />
+
+</LinearLayout>

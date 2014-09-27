@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyHealth</string>
+    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_store_data">StoreData</string>
+    <string name="title_activity_peso_fragment">PesoFragment</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
