@@ -2,35 +2,34 @@ package android.palharini.myhealth.entity;
 
 public class Usuario {
 
-	String name;
-	String birth;
-	String height;
-	String weight;
+	String nome;
+	String dataNascimento;
+	String altura;
+	String peso;
 	
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	public String getBirth() {
-		return birth;
+	public String getDataNascimento() {
+		return dataNascimento;
 	}
-	public void setBirth(String birth) {
-		this.birth = birth;
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
-	public String getHeight() {
-		return height;
+	public String getAltura() {
+		return altura;
 	}
-	public void setHeight(String height) {
-		this.height = height;
+	public void setAltura(String altura) {
+		this.altura = altura;
 	}
-	public String getWeight() {
-		return weight;
+	public String getPeso() {
+		return peso;
 	}
-	public void setWeight(String weight) {
-		this.weight = weight;
+	public void setPeso(String peso) {
+		this.peso = peso;
 	}
-	
 	
 }
