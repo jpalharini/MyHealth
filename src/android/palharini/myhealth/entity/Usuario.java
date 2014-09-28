@@ -11,15 +11,6 @@ public class Usuario {
 	private int minBPM;
 	
 	public Usuario(){};
-	
-	public Usuario(
-			int id, String nome, String dataNascimento, double altura, double peso) {
-		this.id = id;
-		this.nome = nome;
-		this.dataNascimento = dataNascimento;
-		this.altura = altura;
-		this.peso = peso;
-	}
 
 	public Usuario(
 			int id, String nome, String dataNascimento, double altura, double peso, int maxBPM, int minBPM) {

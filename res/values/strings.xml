@@ -11,8 +11,8 @@
     <string name="hintBirth">Data de Nascimento</string>
     <string name="hintHeight">Altura</string>
     <string name="hintWeight">Peso</string>
-    <string name="hintMaxBPM">BPM Máx. (opcional)</string>
-    <string name="hintMinBPM">BPM Mín. (opcional)</string>
+    <string name="hintMaxBPM">BPM Máx.</string>
+    <string name="hintMinBPM">BPM Mín.</string>
     <string name="textWelcome">Para começar, informe:</string>
     <string name="textStart">Começar a usar!</string>
     

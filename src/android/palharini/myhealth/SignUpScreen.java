@@ -3,7 +3,6 @@ package android.palharini.myhealth;
 import android.palharini.myhealth.R;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.dao.UsuarioDAO;
@@ -38,30 +37,20 @@ public class SignUpScreen extends Activity {
 		okButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick (View v){
-				String nomeString = nome.getText().toString();
-				String nascString = nasc.getText().toString();
-				String alturaString = altura.getText().toString();
-				final double alturaDouble = Double.parseDouble(alturaString);
-				String pesoString = peso.getText().toString();
-				final double pesoDouble = Double.parseDouble(pesoString);
-				String maxBPMString = maxBPM.getText().toString();
-				String minBPMString = minBPM.getText().toString();
 				
-				if (maxBPMString != null || minBPMString != null) {
-					final int maxBPMInt = Integer.parseInt(maxBPMString);
-					final int minBPMInt = Integer.parseInt(minBPMString);
-					
-					UsuarioDAO dao = new UsuarioDAO();
-					boolean resultado = dao.cadastrarUsuario(new Usuario(
-							0, nomeString, nascString, alturaDouble, pesoDouble, maxBPMInt, minBPMInt));
-				}
-				
-				else {
-					UsuarioDAO dao = new UsuarioDAO();
-					boolean resultado = dao.cadastrarUsuario(new Usuario(
-							0, nomeString, nascString, alturaDouble, pesoDouble));
-				}
+				UsuarioDAO dao = new UsuarioDAO();
+				boolean resultado = dao.cadastrarUsuario(new Usuario(
+						0, 
+						nome.getText().toString(), 
+						nasc.getText().toString(), 
+						Double.parseDouble(altura.getText().toString()),
+						Double.parseDouble(peso.getText().toString()),
+						Integer.parseInt(maxBPM.getText().toString()),
+						Integer.parseInt(minBPM.getText().toString())
+				));
 			}
+				
+				
 		});
 	}
 }
