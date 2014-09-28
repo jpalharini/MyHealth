@@ -13,26 +13,25 @@ public class MainScreen extends FragmentActivity implements ActionBar.TabListene
 	private ViewPager viewPager;
 	private TabsPagerAdapter tabsAdapter;
 	private ActionBar actionBar;
-	// Tab titles
-	private String[] tabs = { "Peso", "Exames"};
+	// Títulos das abas
+	private String[] abas = {"7 dias", "30 dias", "1 ano"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_screen);
-
-		// Initilization
+		
+		// Inicialização do modo de abas
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
 		tabsAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-
 		viewPager.setAdapter(tabsAdapter);
 		actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
 
-		// Adding Tabs
-		for (String tab_name : tabs) {
-			actionBar.addTab(actionBar.newTab().setText(tab_name)
+		// Adicionando abas
+		for (String nomes_abas : abas) {
+			actionBar.addTab(actionBar.newTab().setText(nomes_abas)
 					.setTabListener(this));
 		}
 	}

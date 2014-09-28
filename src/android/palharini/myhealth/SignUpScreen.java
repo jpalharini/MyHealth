@@ -25,6 +25,7 @@ public class SignUpScreen extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		
+		// Campos de entrada
 		final EditText nome = (EditText) findViewById(R.id.editNome);
 		final EditText nasc = (EditText) findViewById(R.id.editNasc);
 		final EditText altura = (EditText) findViewById(R.id.editAltura);
@@ -38,6 +39,7 @@ public class SignUpScreen extends Activity {
 			@Override
 			public void onClick (View v){
 				
+				// Cadastro no banco
 				UsuarioDAO dao = new UsuarioDAO();
 				boolean resultado = dao.cadastrarUsuario(new Usuario(
 						0, 

@@ -15,6 +15,6 @@
     <string name="hintMinBPM">BPM Mín.</string>
     <string name="textWelcome">Para começar, informe:</string>
     <string name="textStart">Começar a usar!</string>
-    
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
