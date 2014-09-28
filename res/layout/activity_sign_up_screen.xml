@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Para começar, preencha seus dados..."
+        android:text="@string/textWelcome"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="18sp" />
 
@@ -22,18 +22,16 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-	    android:hint="Nome"
+	    android:hint="@string/hintName"
 	    android:inputType="textCapWords|textPersonName"
-	    android:textSize="22sp" >
-
-	</EditText>
+	    android:textSize="22sp" />
 
 	<EditText
 	    android:id="@+id/editNasc"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-	    android:hint="Data de nascimento"
+	    android:hint="@string/hintBirth"
 	    android:inputType="date"
 	    android:textSize="22sp" />
 
@@ -42,8 +40,8 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="20dp"
-	    android:hint="Altura"
-	    android:inputType="number|numberDecimal"
+	    android:hint="@string/hintHeight"
+	    android:inputType="numberDecimal"
 	    android:textSize="22sp" />
 
 	<EditText
@@ -51,8 +49,8 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="20dp"
-	    android:hint="Peso"
-	    android:inputType="number|numberDecimal"
+	    android:hint="@string/hintWeight"
+	    android:inputType="numberDecimal"
 	    android:textSize="22sp" >
 	</EditText>
 
@@ -61,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="BPM Máx. (opcional)"
+        android:hint="@string/hintMaxBPM"
         android:inputType="number"
         android:textSize="22sp" >
     </EditText>
@@ -71,7 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="BPM Mín. (opcional)"
+        android:hint="@string/hintMinBPM"
         android:inputType="number"
         android:textSize="22sp" >
     </EditText>
@@ -82,7 +80,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-	    android:text="Começar a usar!"
-	    android:textSize="30sp" />
+	    android:text="@string/textStart"
+	    android:textSize="28sp" />
 
 </LinearLayout>

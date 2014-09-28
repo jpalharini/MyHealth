@@ -62,7 +62,7 @@ public class Usuario {
 		this.peso = peso;
 	}
 	public int getMaxBPM() {
-		return minBPM;
+		return maxBPM;
 	}
 	public void setMaxBPM(int maxBPM) {
 		this.maxBPM = maxBPM;

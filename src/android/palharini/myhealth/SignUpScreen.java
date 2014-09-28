@@ -11,7 +11,6 @@ import android.palharini.myhealth.entity.Usuario;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class SignUpScreen extends Activity {
 
