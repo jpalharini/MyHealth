@@ -43,7 +43,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="20dp"
 	    android:hint="Altura"
-	    android:inputType="number"
+	    android:inputType="number|numberDecimal"
 	    android:textSize="22sp" />
 
 	<EditText
@@ -52,7 +52,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="20dp"
 	    android:hint="Peso"
-	    android:inputType="number"
+	    android:inputType="number|numberDecimal"
 	    android:textSize="22sp" >
 	</EditText>
 
