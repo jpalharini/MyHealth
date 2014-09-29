@@ -3,6 +3,8 @@ package android.palharini.myhealth.entity;
 public class Usuario {
 
 	private int id;
+	private String login;
+	private String senha;
 	private String nome;
 	private String dataNascimento;
 	private double altura;
@@ -13,8 +15,10 @@ public class Usuario {
 	public Usuario(){};
 
 	public Usuario(
-			int id, String nome, String dataNascimento, double altura, double peso, int maxBPM, int minBPM) {
+			int id, String login, String senha, String nome, String dataNascimento, double altura, double peso, int maxBPM, int minBPM) {
 		this.id = id;
+		this.login = login;
+		this.senha = senha;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.altura = altura;
@@ -28,6 +32,19 @@ public class Usuario {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public String getNome() {
 		return nome;
 	}

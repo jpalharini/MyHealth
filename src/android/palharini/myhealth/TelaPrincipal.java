@@ -8,7 +8,7 @@ import android.palharini.myhealth.adapter.TabsPagerAdapter;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
-public class MainScreen extends FragmentActivity implements ActionBar.TabListener {
+public class TelaPrincipal extends FragmentActivity implements ActionBar.TabListener {
 
 	private ViewPager viewPager;
 	private TabsPagerAdapter tabsAdapter;

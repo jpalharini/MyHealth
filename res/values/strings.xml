@@ -7,6 +7,9 @@
     <string name="title_activity_store_data">StoreData</string>
     <string name="title_activity_peso_fragment">PesoFragment</string>
     <string name="action_settings">Settings</string>
+    <string name="hintLogin">Login</string>
+    <string name="hintSenha">Senha</string>
+    <string name="hintConfSenha">Confirme a senha</string>
     <string name="hintName">Nome</string>
     <string name="hintBirth">Data de Nascimento</string>
     <string name="hintHeight">Altura</string>

@@ -23,6 +23,8 @@ public class UsuarioDAO {
 		SoapObject usr = new SoapObject(NAMESPACE, "usuario");
 		
 		usr.addProperty("id", usuario.getId());
+		usr.addProperty("login", usuario.getLogin());
+		usr.addProperty("senha", usuario.getSenha());
 		usr.addProperty("nome", usuario.getNome());
 		usr.addProperty("dataNascimento", usuario.getDataNascimento());
 		usr.addProperty("altura", usuario.getAltura());
@@ -61,6 +63,8 @@ public class UsuarioDAO {
 		SoapObject usr = new SoapObject(NAMESPACE, "usuario");
 		
 		usr.addProperty("id", usuario.getId());
+		usr.addProperty("login", usuario.getLogin());
+		usr.addProperty("senha", usuario.getSenha());
 		usr.addProperty("nome", usuario.getNome());
 		usr.addProperty("dataNascimento", usuario.getDataNascimento());
 		usr.addProperty("altura", usuario.getAltura());
@@ -113,6 +117,7 @@ public class UsuarioDAO {
 			dados = new Usuario();
 			
 			dados.setId(Integer.parseInt(resposta.getProperty("id").toString()));
+			dados.setLogin(resposta.getProperty("login").toString());
 			dados.setNome(resposta.getProperty("nome").toString());
 			dados.setAltura(Double.parseDouble(resposta.getProperty("altura").toString()));
 			dados.setPeso(Double.parseDouble(resposta.getProperty("peso").toString()));

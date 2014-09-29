@@ -5,82 +5,120 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:gravity="center_horizontal"
-    tools:context=".SignUpScreen"
+    tools:context=".TelaCadastro"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/welcomeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/textWelcome"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="18sp" />
-
-    <EditText
-	    android:id="@+id/editNome"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-	    android:hint="@string/hintName"
-	    android:inputType="textCapWords|textPersonName"
-	    android:textSize="22sp" />
-
-	<EditText
-	    android:id="@+id/editNasc"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-	    android:hint="@string/hintBirth"
-	    android:inputType="date"
-	    android:textSize="22sp" />
-
-	<EditText
-	    android:id="@+id/editAltura"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_marginTop="20dp"
-	    android:hint="@string/hintHeight"
-	    android:inputType="numberDecimal"
-	    android:textSize="22sp" />
-
-	<EditText
-	    android:id="@+id/editPeso"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_marginTop="20dp"
-	    android:hint="@string/hintWeight"
-	    android:inputType="numberDecimal"
-	    android:textSize="22sp" >
-	</EditText>
-
-    <EditText
-        android:id="@+id/editMaxBPM"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="@string/hintMaxBPM"
-        android:inputType="number"
-        android:textSize="22sp" >
-    </EditText>
-
-    <EditText
-        android:id="@+id/editMinBPM"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="@string/hintMinBPM"
-        android:inputType="number"
-        android:textSize="22sp" >
-    </EditText>
-
-    <Button
-	    android:id="@+id/okButton"
-	    style="@style/AppTheme"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-	    android:text="@string/textStart"
-	    android:textSize="28sp" />
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    	
+    	<LinearLayout 
+    	    	android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+        
+		    <TextView
+		        android:id="@+id/welcomeText"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="15dp"
+		        android:text="@string/textWelcome"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textSize="18sp" />
+		
+		    <EditText
+		        android:id="@+id/editLogin"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:hint="@string/hintLogin"
+		        android:inputType="text"
+		        android:textSize="22sp" />
+		    
+		    <EditText
+			    android:id="@+id/editSenha"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+			    android:hint="@string/hintSenha"
+			    android:inputType="textPassword"
+			    android:textSize="22sp" />
+		    
+		    <EditText
+			    android:id="@+id/editConfSenha"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+			    android:hint="@string/hintConfSenha"
+			    android:inputType="textPassword"
+			    android:textSize="22sp" />
+		    
+		    <EditText
+			    android:id="@+id/editNome"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+			    android:hint="@string/hintName"
+			    android:inputType="textCapWords|textPersonName"
+			    android:textSize="22sp" />
+		
+			<EditText
+			    android:id="@+id/editNasc"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+			    android:hint="@string/hintBirth"
+			    android:inputType="date"
+			    android:textSize="22sp" />
+		
+			<EditText
+			    android:id="@+id/editAltura"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginTop="20dp"
+			    android:hint="@string/hintHeight"
+			    android:inputType="numberDecimal"
+			    android:textSize="22sp" />
+		
+			<EditText
+			    android:id="@+id/editPeso"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginTop="20dp"
+			    android:hint="@string/hintWeight"
+			    android:inputType="numberDecimal"
+			    android:textSize="22sp" >
+			</EditText>
+		
+		    <EditText
+		        android:id="@+id/editMaxBPM"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:hint="@string/hintMaxBPM"
+		        android:inputType="number"
+		        android:textSize="22sp" >
+		    </EditText>
+		
+		    <EditText
+		        android:id="@+id/editMinBPM"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:hint="@string/hintMinBPM"
+		        android:inputType="number"
+		        android:textSize="22sp" >
+		    </EditText>
+		
+		    <Button
+			    android:id="@+id/okButton"
+			    style="@style/AppTheme"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+		        android:layout_marginTop="35dp"
+			    android:text="@string/textStart"
+			    android:textSize="28sp" />
+		    </LinearLayout>
+	</ScrollView>
 
 </LinearLayout>
