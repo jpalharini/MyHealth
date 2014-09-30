@@ -1,12 +1,14 @@
 package android.palharini.myhealth.entity;
 
+import java.sql.Date;
+
 public class Usuario {
 
 	private int id;
 	private String login;
 	private String senha;
 	private String nome;
-	private String dataNascimento;
+	private Date dataNascimento;
 	private double altura;
 	private double peso;
 	private int maxBPM;
@@ -15,7 +17,7 @@ public class Usuario {
 	public Usuario(){};
 
 	public Usuario(
-			int id, String login, String senha, String nome, String dataNascimento, double altura, double peso, int maxBPM, int minBPM) {
+			int id, String login, String senha, String nome, Date dataNascimento, double altura, double peso, int maxBPM, int minBPM) {
 		this.id = id;
 		this.login = login;
 		this.senha = senha;
@@ -51,10 +53,10 @@ public class Usuario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public double getAltura() {

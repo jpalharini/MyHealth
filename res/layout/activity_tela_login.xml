@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/textLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="@string/textLogin"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/hintLogin"
+        android:inputType="text"
+        android:textSize="22sp" />
+
+    <EditText
+	    android:id="@+id/editSenha"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+	    android:hint="@string/hintSenha"
+	    android:inputType="textPassword"
+	    android:textSize="22sp" />
+    
+    <Button
+	    android:id="@+id/okButton"
+	    style="@style/AppTheme"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+	    android:text="@string/buttonLogin"
+	    android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/textCadastre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:text="@string/textCadastre"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <Button
+	    android:id="@+id/cadastreButton"
+	    style="@style/AppTheme"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+	    android:text="@string/buttonCadastre"
+	    android:textSize="28sp" />
+    
+</LinearLayout>

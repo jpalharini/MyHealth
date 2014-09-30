@@ -16,8 +16,13 @@
     <string name="hintWeight">Peso</string>
     <string name="hintMaxBPM">BPM Máx.</string>
     <string name="hintMinBPM">BPM Mín.</string>
-    <string name="textWelcome">Para começar, informe:</string>
-    <string name="textStart">Começar a usar!</string>
+    <string name="textWelcome">Para seu cadastro, informe:</string>
+    <string name="buttonStart">Começar a usar!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_tela_login">Login</string>
+    <string name="textLogin">Faça seu login ou cadastre-se!</string>
+    <string name="buttonLogin">Login</string>
+    <string name="textCadastre">Não se cadastrou ainda? Cadastre-se!</string>
+    <string name="buttonCadastre">Cadastrar-se</string>
 
 </resources>
