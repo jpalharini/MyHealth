@@ -1,9 +1,11 @@
 package android.palharini.myhealth;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-import org.jasypt.util.password.StrongPasswordEncryptor;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,7 +13,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.dao.UsuarioDAO;
 import android.palharini.myhealth.entity.Usuario;
-import android.palharini.myjealth.fragment.DatePickerFragment;
+import android.palharini.myhealth.fragment.DatePickerFragment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,8 +66,19 @@ public class TelaCadastro extends Activity {
 				String criptSenha = null;
 				
 				if (senhaString.equals(confSenhaString)){
-					StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-					criptSenha = passwordEncryptor.encryptPassword(senhaString);
+					try {
+						MessageDigest md = MessageDigest.getInstance("MD5");
+						md.update(senhaString.getBytes("UTF-8"));
+						BigInteger hash = new BigInteger(1, md.digest());
+						criptSenha = hash.toString(16);
+					} catch (NoSuchAlgorithmException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					
 					String dataNascString = nasc.getText().toString();
 					SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
