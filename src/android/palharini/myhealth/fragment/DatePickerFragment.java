@@ -21,16 +21,16 @@ public DatePickerFragment(EditText datePicker) {
 public Dialog onCreateDialog(Bundle savedInstanceState) {
     // Use the current date as the default date in the picker
     final Calendar c = Calendar.getInstance();
-    int ano = c.get(Calendar.YEAR);
-    int mes = c.get(Calendar.MONTH);
-    int dia = c.get(Calendar.DAY_OF_MONTH);
+    int year = c.get(Calendar.YEAR);
+    int month = c.get(Calendar.MONTH);
+    int day = c.get(Calendar.DAY_OF_MONTH);
 
     // Create a new instance of DatePickerDialog and return it
-    return new DatePickerDialog(getActivity(), this, ano, mes, dia);
+    return new DatePickerDialog(getActivity(), this, year, month, day);
 }
 
     @Override
-    public void onDateSet(DatePicker view, int ano, int mes, int dia) {
-        dataNasc.setText(String.valueOf(dia) + "/" + String.valueOf(mes + 1 ) + "/" + String.valueOf(ano));
+    public void onDateSet(DatePicker view, int year, int month, int day) {
+        dataNasc.setText(String.valueOf(day) + "/" + String.valueOf(month + 1 ) + "/" + String.valueOf(year));
     }
 }

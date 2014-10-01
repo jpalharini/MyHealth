@@ -119,8 +119,8 @@ public class UsuarioDAO {
 			dados.setId(Integer.parseInt(resposta.getProperty("id").toString()));
 			dados.setLogin(resposta.getProperty("login").toString());
 			dados.setNome(resposta.getProperty("nome").toString());
-			dados.setAltura(Double.parseDouble(resposta.getProperty("altura").toString()));
-			dados.setPeso(Double.parseDouble(resposta.getProperty("peso").toString()));
+			dados.setAltura(Integer.parseInt(resposta.getProperty("altura").toString()));
+			dados.setPeso(Integer.parseInt(resposta.getProperty("peso").toString()));
 			dados.setMaxBPM(Integer.parseInt(resposta.getProperty("maxBPM").toString()));
 			dados.setMinBPM(Integer.parseInt(resposta.getProperty("minBPM").toString()));
 			

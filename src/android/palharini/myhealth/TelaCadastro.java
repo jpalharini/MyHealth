@@ -6,6 +6,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -38,7 +40,7 @@ public class TelaCadastro extends Activity {
 		final EditText senha = (EditText) findViewById(R.id.editSenha);
 		final EditText confSenha = (EditText) findViewById(R.id.editConfSenha);
 		final EditText nome = (EditText) findViewById(R.id.editNome);
-		final EditText nasc = (EditText) findViewById(R.id.editNasc);
+		final EditText dataNasc = (EditText) findViewById(R.id.editNasc);
 		final EditText altura = (EditText) findViewById(R.id.editAltura);
 		final EditText peso = (EditText) findViewById(R.id.editPeso);
 		final EditText maxBPM = (EditText) findViewById(R.id.editMaxBPM);
@@ -46,7 +48,7 @@ public class TelaCadastro extends Activity {
 		
 		Button okButton = (Button) findViewById(R.id.okButton);
 		
-		nasc.setOnClickListener(new EditText.OnClickListener () {
+		dataNasc.setOnClickListener(new EditText.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -79,37 +81,32 @@ public class TelaCadastro extends Activity {
 						e.printStackTrace();
 					}
 					
-					
-					String dataNascString = nasc.getText().toString();
-					SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
-					java.util.Date dataNascDate = null;
+					String dataNascString = dataNasc.getText().toString();
+					final String formatoData = "d/MM/yyyy";
+					final String formatoDataSQL = "yyyy-MM-dd";
+					SimpleDateFormat sdf = new SimpleDateFormat(formatoData);
+					SimpleDateFormat sdfSQL = new SimpleDateFormat(formatoDataSQL);
+					Date dataNascDate = null;
 					try {
-						dataNascDate = formatoData.parse(dataNascString);
+						dataNascDate = sdf.parse(dataNascString);
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					java.sql.Date dataNascDateSQL = new java.sql.Date(dataNascDate.getTime());
+					String dataNascSQL = sdfSQL.format(dataNascDate);
 					
 					UsuarioDAO dao = new UsuarioDAO();
-					boolean resultado = dao.cadastrarUsuario(new Usuario(
+					dao.cadastrarUsuario(new Usuario(
 							0, 
 							login.getText().toString(),
 							criptSenha,
 							nome.getText().toString(), 
-							dataNascDateSQL,
-							Double.parseDouble(altura.getText().toString()),
-							Double.parseDouble(peso.getText().toString()),
+							dataNascSQL,
+							Integer.parseInt(altura.getText().toString()),
+							Integer.parseInt(peso.getText().toString()),
 							Integer.parseInt(maxBPM.getText().toString()),
 							Integer.parseInt(minBPM.getText().toString())
 					));
-					if (resultado=true){
-						Intent intent = new Intent(TelaCadastro.this, TelaPrincipal.class);
-					}
-						
-					else {
-						Toast.makeText(getApplicationContext(), "Erro", Toast.LENGTH_SHORT).show();
-					}
 				}
 			}
 		});
