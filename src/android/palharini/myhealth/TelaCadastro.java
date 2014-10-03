@@ -7,10 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.dao.UsuarioDAO;
@@ -19,7 +16,6 @@ import android.palharini.myhealth.fragment.DatePickerFragment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class TelaCadastro extends Activity {
 
@@ -102,8 +98,8 @@ public class TelaCadastro extends Activity {
 							criptSenha,
 							nome.getText().toString(), 
 							dataNascSQL,
-							Integer.parseInt(altura.getText().toString()),
-							Integer.parseInt(peso.getText().toString()),
+							Double.parseDouble(altura.getText().toString()),
+							Double.parseDouble(peso.getText().toString()),
 							Integer.parseInt(maxBPM.getText().toString()),
 							Integer.parseInt(minBPM.getText().toString())
 					));

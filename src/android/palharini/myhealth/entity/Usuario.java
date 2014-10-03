@@ -7,15 +7,15 @@ public class Usuario {
 	private String senha;
 	private String nome;
 	private String dataNascimento;
-	private int altura;
-	private int peso;
+	private Double altura;
+	private Double peso;
 	private int maxBPM;
 	private int minBPM;
 	
 	public Usuario(){};
 
 	public Usuario(
-			int id, String login, String senha, String nome, String dataNascimento, int altura, int peso, int maxBPM, int minBPM) {
+			int id, String login, String senha, String nome, String dataNascimento, Double altura, Double peso, int maxBPM, int minBPM) {
 		this.id = id;
 		this.login = login;
 		this.senha = senha;
@@ -57,16 +57,16 @@ public class Usuario {
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public int getAltura() {
+	public Double getAltura() {
 		return altura;
 	}
-	public void setAltura(int altura) {
+	public void setAltura(Double altura) {
 		this.altura = altura;
 	}
-	public int getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
-	public void setPeso(int peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 	public int getMaxBPM() {
