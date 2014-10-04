@@ -1,4 +1,4 @@
-package android.palharini.myhealth.entity;
+package android.palharini.myhealth.entidades;
 
 public class Indicador {
 

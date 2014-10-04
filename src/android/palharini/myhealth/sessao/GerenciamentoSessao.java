@@ -1,4 +1,4 @@
-package android.palharini.myhealth.session;
+package android.palharini.myhealth.sessao;
  
 import java.util.HashMap;
  

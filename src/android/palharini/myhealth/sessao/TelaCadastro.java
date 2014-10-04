@@ -1,4 +1,4 @@
-package android.palharini.myhealth.session;
+package android.palharini.myhealth.sessao;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -14,9 +14,9 @@ import android.os.StrictMode;
 import android.palharini.myhealth.R;
 import android.palharini.myhealth.R.id;
 import android.palharini.myhealth.R.layout;
-import android.palharini.myhealth.dao.UsuarioDAO;
-import android.palharini.myhealth.entity.Usuario;
-import android.palharini.myhealth.fragment.DatePickerFragment;
+import android.palharini.myhealth.daos.UsuarioDAO;
+import android.palharini.myhealth.entidades.Usuario;
+import android.palharini.myhealth.fragmentos.FragmentoDatePicker;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,7 +53,7 @@ public class TelaCadastro extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				new DatePickerFragment((EditText) v).show(getFragmentManager(), "datePicker");
+				new FragmentoDatePicker((EditText) v).show(getFragmentManager(), "datePicker");
 			}
 			
 		});

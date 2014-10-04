@@ -1,12 +1,12 @@
-package android.palharini.myhealth.adapter;
+package android.palharini.myhealth.adaptadores;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
  
-public class TabsPagerAdapter extends FragmentPagerAdapter {
+public class AdaptadorAbas extends FragmentPagerAdapter {
  
-    public TabsPagerAdapter(FragmentManager fm) {
+    public AdaptadorAbas(FragmentManager fm) {
         super(fm);
     }
 

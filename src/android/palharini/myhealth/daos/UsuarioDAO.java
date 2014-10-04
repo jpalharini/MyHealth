@@ -1,4 +1,4 @@
-package android.palharini.myhealth.dao;
+package android.palharini.myhealth.daos;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -6,7 +6,7 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import android.palharini.myhealth.entity.Usuario;
+import android.palharini.myhealth.entidades.Usuario;
 
 public class UsuarioDAO {
 	

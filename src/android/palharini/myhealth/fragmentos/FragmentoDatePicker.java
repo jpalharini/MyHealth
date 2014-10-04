@@ -1,4 +1,4 @@
-package android.palharini.myhealth.fragment;
+package android.palharini.myhealth.fragmentos;
 
 import java.util.Calendar;
 
@@ -9,11 +9,11 @@ import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class FragmentoDatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
 public EditText dataNasc;
 
-public DatePickerFragment(EditText datePicker) {
+public FragmentoDatePicker(EditText datePicker) {
     dataNasc = datePicker;
 }
 

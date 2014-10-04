@@ -1,4 +1,4 @@
-package android.palharini.myhealth.dao;
+package android.palharini.myhealth.daos;
 
 public class IndicadorDAO {
 

@@ -4,14 +4,14 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.palharini.myhealth.adapter.TabsPagerAdapter;
+import android.palharini.myhealth.adaptadores.AdaptadorAbas;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
 public class TelaPrincipal extends FragmentActivity implements ActionBar.TabListener {
 
 	private ViewPager viewPager;
-	private TabsPagerAdapter tabsAdapter;
+	private AdaptadorAbas tabsAdapter;
 	private ActionBar actionBar;
 	// Títulos das abas
 	private String[] abas = {"7 dias", "30 dias", "1 ano"};
@@ -24,7 +24,7 @@ public class TelaPrincipal extends FragmentActivity implements ActionBar.TabList
 		// Inicialização do modo de abas
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
-		tabsAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+		tabsAdapter = new AdaptadorAbas(getSupportFragmentManager());
 		viewPager.setAdapter(tabsAdapter);
 		actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
