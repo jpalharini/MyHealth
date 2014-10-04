@@ -28,13 +28,13 @@
     		    android:textSize="18sp" />
 		
 		<EditText
-		        android:id="@+id/editLogin"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="20dp"
-		        android:hint="@string/hintLogin"
-		        android:inputType="text"
-		        android:textSize="22sp" />
+		    android:id="@+id/editEmail"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="20dp"
+		    android:hint="@string/hintEmail"
+		    android:inputType="text|textEmailAddress"
+		    android:textSize="22sp" />
 		    
 		<EditText
 			    android:id="@+id/editSenha"

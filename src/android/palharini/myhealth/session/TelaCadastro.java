@@ -1,4 +1,4 @@
-package android.palharini.myhealth;
+package android.palharini.myhealth.session;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -7,9 +7,13 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.palharini.myhealth.R;
+import android.palharini.myhealth.R.id;
+import android.palharini.myhealth.R.layout;
 import android.palharini.myhealth.dao.UsuarioDAO;
 import android.palharini.myhealth.entity.Usuario;
 import android.palharini.myhealth.fragment.DatePickerFragment;
@@ -32,7 +36,7 @@ public class TelaCadastro extends Activity {
 		}
 		
 		// Campos de entrada
-		final EditText login = (EditText) findViewById(R.id.editLogin);
+		final EditText email = (EditText) findViewById(R.id.editEmail);
 		final EditText senha = (EditText) findViewById(R.id.editSenha);
 		final EditText confSenha = (EditText) findViewById(R.id.editConfSenha);
 		final EditText nome = (EditText) findViewById(R.id.editNome);
@@ -94,7 +98,7 @@ public class TelaCadastro extends Activity {
 					UsuarioDAO dao = new UsuarioDAO();
 					dao.cadastrarUsuario(new Usuario(
 							0, 
-							login.getText().toString(),
+							email.getText().toString(),
 							criptSenha,
 							nome.getText().toString(), 
 							dataNascSQL,
