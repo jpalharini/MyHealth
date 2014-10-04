@@ -1,4 +1,4 @@
-package android.palharini.myhealth.sessao;
+package android.palharini.myhealth;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;

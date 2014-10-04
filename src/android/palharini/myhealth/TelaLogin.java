@@ -1,12 +1,13 @@
-package android.palharini.myhealth.sessao;
+package android.palharini.myhealth;
  
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.palharini.myhealth.R;
-import android.palharini.myhealth.TelaPrincipal;
 import android.palharini.myhealth.daos.UsuarioDAO;
 import android.palharini.myhealth.entidades.Usuario;
+import android.palharini.myhealth.sessao.CaixaDialogo;
+import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
