@@ -12,8 +12,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.R;
-import android.palharini.myhealth.R.id;
-import android.palharini.myhealth.R.layout;
 import android.palharini.myhealth.daos.UsuarioDAO;
 import android.palharini.myhealth.entidades.Usuario;
 import android.palharini.myhealth.fragmentos.FragmentoDatePicker;
