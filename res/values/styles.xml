@@ -35,6 +35,11 @@
       <item name="android:dropDownSelector">@drawable/myhealth_list_selector_holo_light</item>
   </style>
 
+  <style name="EditTextMyHealth" parent="android:Widget.Holo.Light.EditText">
+      <item name="android:textSize">22sp</item>
+      <item name="android:layout_marginTop">20dp</item>
+  </style>
+  
   <style name="TabMyHealth">
       <item name="android:gravity">center_horizontal</item>
       <item name="android:paddingLeft">16dip</item>

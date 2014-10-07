@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class TelaCadastro extends Activity {
+public class TelaCadastroUsuario extends Activity {
 
 	Usuario usuario;
 	

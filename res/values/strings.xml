@@ -24,5 +24,6 @@
     <string name="buttonLogin">Login</string>
     <string name="textCadastre">Não se cadastrou ainda? Cadastre-se!</string>
     <string name="buttonCadastre">Cadastrar-se</string>
+    <string name="title_activity_tela_cadastro_indicador">TelaCadastroIndicador</string>
 
 </resources>
