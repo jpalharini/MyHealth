@@ -3,18 +3,19 @@ package android.palharini.myhealth.entidades;
 public class Indicador {
 
 	private int id;
-	private String tipo;
-	private int medida;
+	private int idTipo;
+	private int idUsuario;
+	private double medida;
 	private String unidade;
 	private String timestamp;
 	
 	public Indicador(){}
-	
-	public Indicador(int id, String tipo, int medida, String unidade,
-			String timestamp) {
-		super();
+
+	public Indicador(int id, int idTipo, int idUsuario, double medida,
+			String unidade, String timestamp) {
 		this.id = id;
-		this.tipo = tipo;
+		this.idTipo = idTipo;
+		this.idUsuario = idUsuario;
 		this.medida = medida;
 		this.unidade = unidade;
 		this.timestamp = timestamp;
@@ -28,19 +29,27 @@ public class Indicador {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public int getIdTipo() {
+		return idTipo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setIdTipo(int idTipo) {
+		this.idTipo = idTipo;
 	}
 
-	public int getMedida() {
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public double getMedida() {
 		return medida;
 	}
 
-	public void setMedida(int medida) {
+	public void setMedida(double medida) {
 		this.medida = medida;
 	}
 
@@ -59,4 +68,5 @@ public class Indicador {
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
+	
 }
