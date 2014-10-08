@@ -25,5 +25,13 @@
     <string name="textCadastre">Não se cadastrou ainda? Cadastre-se!</string>
     <string name="buttonCadastre">Cadastrar-se</string>
     <string name="title_activity_tela_cadastro_indicador">TelaCadastroIndicador</string>
+    <string name="spinnerTipo">Selecione o tipo</string>
+    
+    <string-array name="listaTipos">
+        <item >Peso</item>
+        <item >Freq. Cardíaca</item>
+        <item >Glicose</item>
+        <item >Colesterol</item>
+    </string-array>
 
 </resources>

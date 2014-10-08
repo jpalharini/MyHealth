@@ -18,6 +18,7 @@ public class GerenciamentoSessao {
 
     private static final String PREF_NAME = "MyHealthPref";
     private static final String IS_LOGIN = "IsLoggedIn";
+    public static final String KEY_ID = "id";
     public static final String KEY_NAME = "nome";
     public static final String KEY_EMAIL = "email";
      
@@ -27,8 +28,9 @@ public class GerenciamentoSessao {
         editor = pref.edit();
     }
      
-    public void criarSessao(String nome, String email){
+    public void criarSessao(int id, String nome, String email){
         editor.putBoolean(IS_LOGIN, true);
+        editor.putInt(KEY_ID, id);
         editor.putString(KEY_NAME, nome);
         editor.putString(KEY_EMAIL, email);
         editor.commit();
@@ -54,6 +56,11 @@ public class GerenciamentoSessao {
         usuario.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
 
         return usuario;
+    }
+    
+    public String getIdUsuario() {
+    	String id = pref.getString(KEY_ID, null);
+    	return id;
     }
      
     public void logoutUsuario(){
