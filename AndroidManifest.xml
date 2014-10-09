@@ -27,6 +27,10 @@
             android:name=".TelaCadastroIndicador"
             android:label="@string/title_activity_tela_cadastro_indicador" >
         </activity>
+        <activity
+            android:name=".TelaEdicaoUsuario"
+            android:label="@string/title_activity_tela_edicao_usuario" >
+        </activity>
     </application>
 
 </manifest>

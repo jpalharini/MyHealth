@@ -1,0 +1,116 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    tools:context=".TelaCadastroUsuario"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingBottom="15dp"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hintEmail"
+                android:inputType="text|textEmailAddress"
+                android:textSize="22sp" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/editSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hintSenha"
+                android:inputType="textPassword"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/editConfSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hintConfSenha"
+                android:inputType="textPassword"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/editNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hintName"
+                android:inputType="textCapWords|textPersonName"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/editNasc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hintBirth"
+                android:inputType="date"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/editAltura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hintHeight"
+                android:inputType="numberDecimal"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/editPeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hintWeight"
+                android:inputType="numberDecimal"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/editMaxBPM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hintMaxBPM"
+                android:inputType="number"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/editMinBPM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hintMinBPM"
+                android:inputType="number"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/okButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/buttonSalvar"
+                android:textSize="28sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
