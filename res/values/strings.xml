@@ -27,12 +27,23 @@
     <string name="title_activity_tela_cadastro_indicador">TelaCadastroIndicador</string>
     <string name="spinnerTipo">Selecione o tipo</string>
     <string name="buttonSalvar">Salvar</string>
+    <string name="textUnidade">unid.</string>
+    <string name="buttonCadastra">Cadastrar</string>
 
     <string-array name="listaTipos">
         <item>Peso</item>
         <item>Freq. Cardíaca</item>
         <item>Glicose</item>
-        <item>Colesterol</item>
+        <item>HDL</item>
+        <item>LDL</item>
+    </string-array>
+    
+    <string-array name="listaUnidades">
+        <item>kg</item>
+        <item>BPM</item>
+        <item>mg/dL</item>
+        <item>mg/dL</item>
+        <item>mg/dL</item>
     </string-array>
 
     <string name="title_activity_tela_edicao_usuario">TelaEdicaoUsuario</string>

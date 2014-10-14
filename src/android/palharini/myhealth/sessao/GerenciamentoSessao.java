@@ -58,8 +58,8 @@ public class GerenciamentoSessao {
         return usuario;
     }
     
-    public String getIdUsuario() {
-    	String id = pref.getString(KEY_ID, null);
+    public int getIdUsuario() {
+    	int id = pref.getInt(KEY_ID, 0);
     	return id;
     }
      

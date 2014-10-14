@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".TelaCadastroUsuario" >
+    tools:context=".TelaEdicaoUsuario" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -74,15 +74,6 @@
                 android:textSize="22sp" />
 
             <EditText
-                android:id="@+id/editPeso"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="@string/hintWeight"
-                android:inputType="numberDecimal"
-                android:textSize="22sp" />
-
-            <EditText
                 android:id="@+id/editMaxBPM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,7 +92,7 @@
                 android:textSize="22sp" />
 
             <Button
-                android:id="@+id/okButton"
+                android:id="@+id/atualizaButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
