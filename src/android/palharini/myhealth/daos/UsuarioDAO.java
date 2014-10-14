@@ -71,8 +71,6 @@ public class UsuarioDAO {
 		usr.addProperty("senha", usuario.getSenha());
 		usr.addProperty("nome", usuario.getNome());
 		usr.addProperty("dataNascimento", usuario.getDataNascimento());
-		usr.addProperty("altura", usuario.getAltura());
-		usr.addProperty("peso", usuario.getPeso());
 		usr.addProperty("maxBPM", usuario.getMaxBPM());
 		usr.addProperty("minBPM", usuario.getMinBPM());
 		

@@ -27,6 +27,18 @@ public class Usuario {
 		this.minBPM = minBPM;
 	}
 	
+	public Usuario(int id, String email, String senha, String nome,
+			String dataNascimento, Double altura, int maxBPM, int minBPM) {
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.altura = altura;
+		this.maxBPM = maxBPM;
+		this.minBPM = minBPM;
+	}
+
 	public Usuario(
 			int id, String email, String senha, String nome) {
 		this.id = id;
@@ -34,6 +46,7 @@ public class Usuario {
 		this.senha = senha;
 		this.nome = nome;
 	}
+	
 	public int getId() {
 		return id;
 	}

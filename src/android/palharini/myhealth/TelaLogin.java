@@ -64,7 +64,7 @@ public class TelaLogin extends Activity {
                 if(emailString.equals(dados.getEmail()) && criptSenha.equals(dados.getSenha())){
                 	sessao.criarSessao(dados.getId(), dados.getNome(), dados.getEmail());
 
-                    Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaCadastroIndicador.class);
+                    Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
                     startActivity(irTelaPrincipal);
                     finish();
                      
