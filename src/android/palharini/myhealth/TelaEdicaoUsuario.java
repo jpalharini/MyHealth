@@ -106,7 +106,7 @@ public class TelaEdicaoUsuario extends Activity {
 						
 						UsuarioDAO dao = new UsuarioDAO();
 						dao.atualizarUsuario(new Usuario(
-								0, 
+								dados.getId(), 
 								email.getText().toString(),
 								criptSenha,
 								nome.getText().toString(), 

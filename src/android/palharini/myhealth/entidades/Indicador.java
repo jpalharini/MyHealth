@@ -20,6 +20,14 @@ public class Indicador {
 		this.unidade = unidade;
 		this.timestamp = timestamp;
 	}
+	
+	public Indicador(int id, int idTipo, double medida,
+			String unidade) {
+		this.id = id;
+		this.idTipo = idTipo;
+		this.medida = medida;
+		this.unidade = unidade;
+	}
 
 	public int getId() {
 		return id;

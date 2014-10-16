@@ -66,7 +66,6 @@ public class UsuarioDAO {
 		
 		SoapObject usr = new SoapObject(NAMESPACE, "usuario");
 		
-		usr.addProperty("id", usuario.getId());
 		usr.addProperty("email", usuario.getEmail());
 		usr.addProperty("senha", usuario.getSenha());
 		usr.addProperty("nome", usuario.getNome());

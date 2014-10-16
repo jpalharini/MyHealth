@@ -65,10 +65,8 @@ public class IndicadorDAO {
 		
 		ind.addProperty("id", indicador.getId());
 		ind.addProperty("idTipo", indicador.getIdTipo());
-		ind.addProperty("idUsuario", indicador.getIdUsuario());
 		ind.addProperty("medida", indicador.getMedida());
 		ind.addProperty("unidade", indicador.getUnidade());
-		ind.addProperty("timestamp", indicador.getTimestamp());
 		
 		atualizarIndicador.addSoapObject(ind);
 		

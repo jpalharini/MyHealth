@@ -37,7 +37,6 @@
         <item>HDL</item>
         <item>LDL</item>
     </string-array>
-    
     <string-array name="listaUnidades">
         <item>kg</item>
         <item>BPM</item>
@@ -47,5 +46,6 @@
     </string-array>
 
     <string name="title_activity_tela_edicao_usuario">TelaEdicaoUsuario</string>
+    <string name="title_activity_tela_edicao_indicador">TelaEdicaoIndicador</string>
 
 </resources>
