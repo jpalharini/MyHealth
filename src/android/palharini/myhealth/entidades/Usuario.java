@@ -9,13 +9,14 @@ public class Usuario {
 	private String dataNascimento;
 	private Double altura;
 	private Double peso;
-	private int maxBPM;
-	private int minBPM;
+	private int alvoBPM;
+	private boolean lembretePeso;
+	private boolean obterAlvoBPM;
 	
 	public Usuario(){};
 
 	public Usuario(
-			int id, String email, String senha, String nome, String dataNascimento, Double altura, Double peso, int maxBPM, int minBPM) {
+			int id, String email, String senha, String nome, String dataNascimento, Double altura, Double peso) {
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
@@ -23,20 +24,17 @@ public class Usuario {
 		this.dataNascimento = dataNascimento;
 		this.altura = altura;
 		this.peso = peso;
-		this.maxBPM = maxBPM;
-		this.minBPM = minBPM;
 	}
 	
 	public Usuario(int id, String email, String senha, String nome,
-			String dataNascimento, Double altura, int maxBPM, int minBPM) {
+			String dataNascimento, Double altura, int alvoBPM) {
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.altura = altura;
-		this.maxBPM = maxBPM;
-		this.minBPM = minBPM;
+		this.alvoBPM = alvoBPM;
 	}
 
 	public Usuario(
@@ -90,17 +88,11 @@ public class Usuario {
 	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
-	public int getMaxBPM() {
-		return maxBPM;
+	public int getAlvoBPM() {
+		return alvoBPM;
 	}
-	public void setMaxBPM(int maxBPM) {
-		this.maxBPM = maxBPM;
-	}
-	public int getMinBPM() {
-		return minBPM;
-	}
-	public void setMinBPM(int minBPM) {
-		this.minBPM = minBPM;
+	public void setAlvoBPM(int alvoBPM) {
+		this.alvoBPM = alvoBPM;
 	}
 
 }

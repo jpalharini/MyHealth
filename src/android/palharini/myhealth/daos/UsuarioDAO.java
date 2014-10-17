@@ -10,11 +10,12 @@ import android.palharini.myhealth.entidades.Usuario;
 
 public class UsuarioDAO {
 	
-	private static final String URL = "http://172.20.10.4:8080/MyHealthWS/services/UsuarioDAO?wsdl";
-	private static final String NAMESPACE = "http://ws.myhealth.palharini.android";
+	private static final String URL = "http://191.4.36.241:8080/MyHealthWS/services/UsuarioDAO?wsdl";
+	private static final String NAMESPACE = "http://dao.ws.myhealth.palharini.android";
 	
 	private static final String CADASTRAR = "cadastrarUsuario";
 	private static final String ATUALIZAR = "atualizarUsuario";
+	private static final String ATUALIZAR_PESO = "atualizarPesoUsuario";
 	private static final String BUSCAR = "buscarUsuario";
 	private static final String BUSCAR_EMAIL = "buscarUsuarioEmail";
 
@@ -31,8 +32,6 @@ public class UsuarioDAO {
 		usr.addProperty("dataNascimento", usuario.getDataNascimento());
 		usr.addProperty("altura", usuario.getAltura());
 		usr.addProperty("peso", usuario.getPeso());
-		usr.addProperty("maxBPM", usuario.getMaxBPM());
-		usr.addProperty("minBPM", usuario.getMinBPM());
 		
 		cadastrarUsuario.addSoapObject(usr);
 		
@@ -70,8 +69,7 @@ public class UsuarioDAO {
 		usr.addProperty("senha", usuario.getSenha());
 		usr.addProperty("nome", usuario.getNome());
 		usr.addProperty("dataNascimento", usuario.getDataNascimento());
-		usr.addProperty("maxBPM", usuario.getMaxBPM());
-		usr.addProperty("minBPM", usuario.getMinBPM());
+		usr.addProperty("alvoBPM", usuario.getAlvoBPM());
 		
 		atualizarUsuario.addSoapObject(usr);
 		
@@ -84,6 +82,35 @@ public class UsuarioDAO {
 		
 		try {
 			http.call("urn:" + ATUALIZAR, envelope);
+			
+			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
+			
+			return Boolean.parseBoolean(resposta.toString());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
+	public boolean atualizarPesoUsuario(double peso, int id){
+		
+		SoapObject atualizarPesoUsuario = new SoapObject(NAMESPACE, ATUALIZAR_PESO);
+		
+		atualizarPesoUsuario.addProperty("peso", peso);
+		atualizarPesoUsuario.addProperty("id", id);
+		
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		
+		envelope.setOutputSoapObject(atualizarPesoUsuario);
+		envelope.implicitTypes = true;
+		
+		HttpTransportSE http = new HttpTransportSE(URL);
+		
+		try {
+			http.call("urn:" + ATUALIZAR_PESO, envelope);
 			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			
@@ -122,8 +149,7 @@ public class UsuarioDAO {
 			dados.setNome(resposta.getProperty("nome").toString());
 			dados.setAltura(Double.parseDouble(resposta.getProperty("altura").toString()));
 			dados.setPeso(Double.parseDouble(resposta.getProperty("peso").toString()));
-			dados.setMaxBPM(Integer.parseInt(resposta.getProperty("maxBPM").toString()));
-			dados.setMinBPM(Integer.parseInt(resposta.getProperty("minBPM").toString()));
+			dados.setAlvoBPM(Integer.parseInt(resposta.getProperty("alvoBPM").toString()));
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

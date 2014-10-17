@@ -17,6 +17,7 @@ import android.palharini.myhealth.fragmentos.FragmentoDatePicker;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class TelaEdicaoUsuario extends Activity {
@@ -34,8 +35,7 @@ public class TelaEdicaoUsuario extends Activity {
 		final EditText nome = (EditText) findViewById(R.id.editNome);
 		final EditText dataNasc = (EditText) findViewById(R.id.editNasc);
 		final EditText altura = (EditText) findViewById(R.id.editAltura);
-		final EditText maxBPM = (EditText) findViewById(R.id.editMaxBPM);
-		final EditText minBPM = (EditText) findViewById(R.id.editMinBPM);
+		final EditText alvoBPM = (EditText) findViewById(R.id.editAlvoBPM);
 		
 		Button okButton = (Button) findViewById(R.id.okButton);
 		
@@ -46,8 +46,7 @@ public class TelaEdicaoUsuario extends Activity {
 		nome.setText(dados.getNome());
 		dataNasc.setText(dados.getDataNascimento());
 		altura.setText(String.valueOf(dados.getAltura()));
-		maxBPM.setText(String.valueOf(dados.getMaxBPM()));
-		minBPM.setText(String.valueOf(dados.getMinBPM()));
+		alvoBPM.setText(String.valueOf(dados.getAlvoBPM()));
 				
 		dataNasc.setOnClickListener(new EditText.OnClickListener () {
 
@@ -68,8 +67,7 @@ public class TelaEdicaoUsuario extends Activity {
 						!nome.equals(dados.getNome()) || 
 						!dataNasc.equals(dados.getDataNascimento()) ||
 						!altura.equals(String.valueOf(dados.getAltura())) ||
-						!maxBPM.equals(String.valueOf(dados.getMaxBPM())) ||
-						!minBPM.equals(String.valueOf(dados.getMinBPM()))
+						!alvoBPM.equals(String.valueOf(dados.getAlvoBPM()))
 						) {
 			
 					String senhaString = senha.getText().toString();
@@ -112,8 +110,7 @@ public class TelaEdicaoUsuario extends Activity {
 								nome.getText().toString(), 
 								dataNascSQL,
 								Double.parseDouble(altura.getText().toString()),
-								Integer.parseInt(maxBPM.getText().toString()),
-								Integer.parseInt(minBPM.getText().toString())
+								Integer.parseInt(alvoBPM.getText().toString())
 						));
 					}
 				}

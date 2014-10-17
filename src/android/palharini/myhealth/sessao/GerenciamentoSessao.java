@@ -21,6 +21,8 @@ public class GerenciamentoSessao {
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "nome";
     public static final String KEY_EMAIL = "email";
+    public static final String KEY_LEMBRETE_PESO = "lembretePeso";
+    public static final String KEY_ALVO_BPM = "alvoBPM";
      
     public GerenciamentoSessao (Context context){
         this.contexto = context;
@@ -34,7 +36,7 @@ public class GerenciamentoSessao {
         editor.putString(KEY_NAME, nome);
         editor.putString(KEY_EMAIL, email);
         editor.commit();
-    }   
+    }
 
     public void checkLogin(){
     	if(!this.isLoggedIn()){

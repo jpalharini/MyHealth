@@ -16,48 +16,58 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:paddingBottom="15dp"
-            android:orientation="vertical" >
-            
-		    <Spinner
-		        android:id="@+id/spinnerTipo"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:prompt="@string/spinnerTipo" />
-		
-		    <LinearLayout
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="10dp" >
-		
-		        <EditText
-		            android:id="@+id/editMedicao"
-		            android:layout_width="0dp"
-		            android:layout_height="wrap_content"
-		            android:layout_weight="1.24"
-		            android:textSize="22sp"
-		            android:inputType="numberDecimal" >
-		        </EditText>
-		
-		        <TextView
-		            android:id="@+id/textUnidade"
-		            android:layout_width="wrap_content"
-		            android:layout_height="match_parent"
-		            android:padding="10dp"
-		            android:text="@string/textUnidade"
-		            android:textSize="22sp" />
-		
-		    </LinearLayout>
-		    
-		    <Button
-		        android:id="@+id/cadastraButton"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="32dp"
-		        android:text="@string/buttonCadastra"
-		        android:textSize="26sp" />
+            android:orientation="vertical"
+            android:paddingBottom="15dp" >
 
-		</LinearLayout>	    
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/textTipoIndicador"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinnerTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="20sp"
+                android:prompt="@string/spinnerTipo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <EditText
+                    android:id="@+id/editMedicao"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.24"
+                    android:inputType="numberDecimal"
+                    android:textSize="22sp" >
+                </EditText>
+
+                <TextView
+                    android:id="@+id/textUnidade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/textUnidade"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/cadastraButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/buttonCadastra"
+                android:textSize="26sp" />
+        </LinearLayout>
+	    
 	</ScrollView>
 
 

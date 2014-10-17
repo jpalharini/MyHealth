@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         tools:ignore="UselessParent" >
 
-        <LinearLayout
+       	<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -72,22 +72,13 @@
                 android:hint="@string/hintHeight"
                 android:inputType="numberDecimal"
                 android:textSize="22sp" />
-
+            
             <EditText
-                android:id="@+id/editMaxBPM"
+                android:id="@+id/editAlvoBPM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="@string/hintMaxBPM"
-                android:inputType="number"
-                android:textSize="22sp" />
-
-            <EditText
-                android:id="@+id/editMinBPM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="@string/hintMinBPM"
+                android:hint="@string/hintAlvoBPM"
                 android:inputType="number"
                 android:textSize="22sp" />
 

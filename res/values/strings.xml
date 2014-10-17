@@ -14,10 +14,11 @@
     <string name="hintBirth">Data de Nascimento</string>
     <string name="hintHeight">Altura</string>
     <string name="hintWeight">Peso</string>
-    <string name="hintMaxBPM">BPM Máx.</string>
-    <string name="hintMinBPM">BPM Mín.</string>
+    <string name="hintAlvoBPM">Alvo BPM</string>
+    <string name="checkLembretePeso">Definir lembrete de peso</string>
+    <string name="checkAlvoBPM">Obter número ideal de batimentos cardíacos</string>
     <string name="textWelcome">Para seu cadastro, informe:</string>
-    <string name="buttonStart">Começar a usar!</string>
+    <string name="buttonContinuar">Continuar</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_tela_login">Login</string>
     <string name="textLogin">Faça seu login ou cadastre-se!</string>
@@ -29,6 +30,7 @@
     <string name="buttonSalvar">Salvar</string>
     <string name="textUnidade">unid.</string>
     <string name="buttonCadastra">Cadastrar</string>
+    <string name="textTipoIndicador">Escolha o tipo de indicador:</string>
 
     <string-array name="listaTipos">
         <item>Peso</item>
@@ -37,12 +39,13 @@
         <item>HDL</item>
         <item>LDL</item>
     </string-array>
+    
     <string-array name="listaUnidades">
-        <item>kg</item>
-        <item>BPM</item>
-        <item>mg/dL</item>
-        <item>mg/dL</item>
-        <item>mg/dL</item>
+        <item name="peso">kg</item>
+        <item name="bpm">BPM</item>
+        <item name="glicose">mg/dL</item>
+        <item name="hdl">mg/dL</item>
+        <item name="ldl">mg/dL</item>
     </string-array>
 
     <string name="title_activity_tela_edicao_usuario">TelaEdicaoUsuario</string>

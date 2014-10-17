@@ -9,8 +9,8 @@ import android.palharini.myhealth.entidades.Indicador;
 
 public class IndicadorDAO {
 
-	private static final String URL = "http://192.168.1.100:8080/MyHealthWS/services/IndicadorDAO?wsdl";
-	private static final String NAMESPACE = "http://ws.myhealth.palharini.android";
+	private static final String URL = "http://191.4.36.241:8080/MyHealthWS/services/IndicadorDAO?wsdl";
+	private static final String NAMESPACE = "http://dao.ws.myhealth.palharini.android";
 	
 	public static final String CADASTRAR = "cadastrarIndicador";
 	public static final String ATUALIZAR = "atualizarIndicador";
@@ -41,7 +41,7 @@ public class IndicadorDAO {
 		MarshalDouble md = new MarshalDouble();
 		md.register(envelope);
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, 10000);
 		
 		try {
 			http.call("urn:" + CADASTRAR, envelope);

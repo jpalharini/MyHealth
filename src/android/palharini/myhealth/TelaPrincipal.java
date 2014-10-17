@@ -19,7 +19,7 @@ public class TelaPrincipal extends FragmentActivity implements ActionBar.TabList
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_screen);
+		setContentView(R.layout.activity_acompanhamento);
 		
 		// Inicialização do modo de abas
 		viewPager = (ViewPager) findViewById(R.id.pager);

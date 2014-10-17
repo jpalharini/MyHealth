@@ -10,6 +10,7 @@ import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
 import android.palharini.myhealth.daos.IndicadorDAO;
+import android.palharini.myhealth.daos.UsuarioDAO;
 import android.palharini.myhealth.entidades.Indicador;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
@@ -71,6 +72,10 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 		okButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick (View v){
+				if (tipoSelecionadoId == 0){
+					UsuarioDAO dao = new UsuarioDAO();
+					dao.atualizarPesoUsuario(Double.parseDouble(medida.getText().toString()), sessao.getIdUsuario());
+				}
 				IndicadorDAO dao = new IndicadorDAO();
 				dao.cadastrarIndicador(new Indicador(
 						0, 
