@@ -21,8 +21,6 @@ public class GerenciamentoSessao {
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "nome";
     public static final String KEY_EMAIL = "email";
-    public static final String KEY_LEMBRETE_PESO = "lembretePeso";
-    public static final String KEY_ALVO_BPM = "alvoBPM";
      
     public GerenciamentoSessao (Context context){
         this.contexto = context;

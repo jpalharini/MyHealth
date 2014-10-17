@@ -31,6 +31,13 @@
     <string name="textUnidade">unid.</string>
     <string name="buttonCadastra">Cadastrar</string>
     <string name="textTipoIndicador">Escolha o tipo de indicador:</string>
+    <string name="textOla">Olá, </string>
+    <string name="textIMC">Seu IMC atual é:</string>
+    <string name="IMC">XX.X</string>
+    <string name="textStatusIMC">[status]</string>
+    <string name="buttonAcompanhamento">Acompanhamento</string>
+    <string name="buttonDados">Meus dados</string>
+    <string name="buttonConfiguracoes">Configurações</string>
 
     <string-array name="listaTipos">
         <item>Peso</item>
@@ -39,7 +46,6 @@
         <item>HDL</item>
         <item>LDL</item>
     </string-array>
-    
     <string-array name="listaUnidades">
         <item name="peso">kg</item>
         <item name="bpm">BPM</item>
@@ -50,5 +56,7 @@
 
     <string name="title_activity_tela_edicao_usuario">TelaEdicaoUsuario</string>
     <string name="title_activity_tela_edicao_indicador">TelaEdicaoIndicador</string>
+    <string name="title_activity_tela_principal">MyHealth</string>
+    <string name="title_activity_tela_configuracoes">Configurações</string>
 
 </resources>

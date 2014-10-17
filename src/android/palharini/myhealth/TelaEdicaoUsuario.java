@@ -17,7 +17,6 @@ import android.palharini.myhealth.fragmentos.FragmentoDatePicker;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class TelaEdicaoUsuario extends Activity {
@@ -115,7 +114,7 @@ public class TelaEdicaoUsuario extends Activity {
 					}
 				}
 				else {
-					Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
+					Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaAcompanhamento.class);
                     startActivity(voltarTelaPrincipal);
                     finish();
 				}

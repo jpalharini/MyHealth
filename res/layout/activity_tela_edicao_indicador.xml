@@ -58,7 +58,7 @@
 		        android:textSize="26sp" />
 
 		</LinearLayout>	    
+	
 	</ScrollView>
-
 
 </LinearLayout>

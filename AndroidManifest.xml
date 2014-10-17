@@ -35,6 +35,14 @@
             android:name=".TelaEdicaoIndicador"
             android:label="@string/title_activity_tela_edicao_indicador" >
         </activity>
+        <activity
+            android:name=".TelaPrincipal"
+            android:label="@string/title_activity_tela_principal" >
+        </activity>
+        <activity
+            android:name=".TelaConfiguracoes"
+            android:label="@string/title_activity_tela_configuracoes" >
+        </activity>
     </application>
 
 </manifest>

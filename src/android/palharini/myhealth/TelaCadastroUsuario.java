@@ -123,7 +123,7 @@ public class TelaCadastroUsuario extends Activity {
 								));
 				}
 				
-				Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
+				Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaAcompanhamento.class);
 				startActivity(irTelaPrincipal);
 				finish();
 			}
