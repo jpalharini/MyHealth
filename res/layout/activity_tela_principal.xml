@@ -53,14 +53,32 @@
 		        android:layout_marginTop="7dp"
 		        android:text="@string/textStatusIMC"
 		        android:textSize="16sp" />
+		    
+		    <TextView
+		        android:id="@+id/textAlvoBPM"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="40dp"
+		        android:gravity="center_horizontal"
+		        android:text="@string/textAlvoBPM"
+		        android:textSize="16sp" />
+		
+		    <TextView
+		        android:id="@+id/alvoBPM"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="7dp"
+		        android:gravity="center_horizontal"
+		        android:text="@string/alvoBPM"
+		        android:textSize="70sp" />
 		
 		    <Button
 		        android:id="@+id/buttonAcompanhamento"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_marginTop="90dp"
+		        android:layout_marginTop="40dp"
 		        android:text="@string/buttonAcompanhamento"
-		        android:textSize="26sp" />
+		        android:textSize="24sp" />
 		
 		    <Button
 		        android:id="@+id/buttonDados"
@@ -68,7 +86,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dp"
 		        android:text="@string/buttonDados"
-		        android:textSize="26sp" />
+		        android:textSize="24sp" />
 		
 		    <Button
 		        android:id="@+id/buttonConfiguracoes"
@@ -76,7 +94,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dp"
 		        android:text="@string/buttonConfiguracoes"
-		        android:textSize="26sp" />
+		        android:textSize="24sp" />
 		
 		</LinearLayout>
 		

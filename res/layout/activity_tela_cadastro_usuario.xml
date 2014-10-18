@@ -27,7 +27,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/textWelcome"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/editEmail"
@@ -36,7 +36,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="@string/hintEmail"
                 android:inputType="text|textEmailAddress"
-                android:textSize="22sp" >
+                android:textSize="20sp" >
 
                 <requestFocus />
             </EditText>
@@ -48,7 +48,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="@string/hintSenha"
                 android:inputType="textPassword"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editConfSenha"
@@ -57,7 +57,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="@string/hintConfSenha"
                 android:inputType="textPassword"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editNome"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="@string/hintName"
                 android:inputType="textCapWords|textPersonName"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editNasc"
@@ -75,7 +75,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="@string/hintBirth"
                 android:inputType="date"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editAltura"
@@ -84,7 +84,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="@string/hintHeight"
                 android:inputType="numberDecimal"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editPeso"
@@ -93,21 +93,23 @@
                 android:layout_marginTop="20dp"
                 android:hint="@string/hintWeight"
                 android:inputType="numberDecimal"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
             <CheckBox
                 android:id="@+id/checkLembretePeso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/checkLembretePeso" />
+                android:text="@string/checkLembretePeso"
+                android:textSize="18sp" />
 
             <CheckBox
                 android:id="@+id/checkAlvoBPM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/checkAlvoBPM" />
+                android:text="@string/checkAlvoBPM"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/okButton"
@@ -115,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:text="@string/buttonContinuar"
-                android:textSize="28sp" />
+                android:textSize="22sp" />
         </LinearLayout>
     </ScrollView>
 

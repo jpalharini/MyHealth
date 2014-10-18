@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
  
-public class AdaptadorAbas extends FragmentPagerAdapter {
+public class AdaptadorAbasPeriodos extends FragmentPagerAdapter {
  
-    public AdaptadorAbas(FragmentManager fm) {
+    public AdaptadorAbasPeriodos(FragmentManager fm) {
         super(fm);
     }
 

@@ -34,10 +34,14 @@
     <string name="textOla">Olá, </string>
     <string name="textIMC">Seu IMC atual é:</string>
     <string name="IMC">XX.X</string>
+    <string name="textAlvoBPM">Sua freq. cardíaca ideal é:</string>
+    <string name="alvoBPM">XXX</string>
     <string name="textStatusIMC">[status]</string>
     <string name="buttonAcompanhamento">Acompanhamento</string>
     <string name="buttonDados">Meus dados</string>
     <string name="buttonConfiguracoes">Configurações</string>
+    <string name="hintHoraLembrete">Hora do lembrete</string>
+    <string name="buttonLogout">Fazer logout</string>
 
     <string-array name="listaTipos">
         <item>Peso</item>

@@ -10,8 +10,6 @@ public class Usuario {
 	private Double altura;
 	private Double peso;
 	private int alvoBPM;
-	private boolean lembretePeso;
-	private boolean obterAlvoBPM;
 	
 	public Usuario(){};
 

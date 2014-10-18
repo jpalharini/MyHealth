@@ -18,6 +18,58 @@
             android:layout_marginRight="10dp"
             android:paddingBottom="15dp"
             android:orientation="vertical" >
+
+            <CheckBox
+                android:id="@+id/checkLembretePeso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:text="@string/checkLembretePeso" />
+
+            <EditText
+                android:id="@+id/horaLembretePeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:inputType="time"
+                android:textSize="20sp"
+                android:hint="@string/hintHoraLembrete" />
+
+            <CheckBox
+                android:id="@+id/checkLembreteBPM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="18sp"
+                android:text="@string/checkAlvoBPM" />
+
+            <EditText
+                android:id="@+id/horaLembreteBPM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="time"
+                android:textSize="20sp"
+                android:hint="@string/hintHoraLembrete" />
+
+            <Button
+		        android:id="@+id/buttonSalvar"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="25dp"
+		        android:text="@string/buttonSalvar"
+		        android:textSize="24sp" />
+		
+		    <Button
+		        android:id="@+id/buttonLogout"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="30dp"
+		        android:text="@string/buttonLogout"
+		        android:textSize="24sp" />
             
         </LinearLayout>	    
 	
