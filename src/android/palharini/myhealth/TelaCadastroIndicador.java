@@ -92,8 +92,8 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 	public void onItemSelected(AdapterView<?> parent, View view, int posicao, long id) {
 		// TODO Auto-generated method stub
 		final TextView unidade;
-		String[] listUnidades = getResources().getStringArray(R.array.listaUnidades);
-		final List<String> unidades = Arrays.asList(listUnidades);
+		String[] listaUnidades = getResources().getStringArray(R.array.listaUnidades);
+		final List<String> unidades = Arrays.asList(listaUnidades);
 		switch (posicao) {
 		case 0:
 			unidade = (TextView) findViewById(R.id.textUnidade);

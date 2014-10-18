@@ -46,6 +46,7 @@
         <item>HDL</item>
         <item>LDL</item>
     </string-array>
+    
     <string-array name="listaUnidades">
         <item name="peso">kg</item>
         <item name="bpm">BPM</item>
@@ -53,9 +54,18 @@
         <item name="hdl">mg/dL</item>
         <item name="ldl">mg/dL</item>
     </string-array>
+    
+    <string-array name="faixasIMC">
+        <item name="0-18.5">Abaixo do peso</item>
+        <item name="18.6-24.9">Saudável</item>
+        <item name="25-29.9">Excesso de peso</item>
+        <item name="30-34.9">Obesidade</item>
+        <item name="35-39.9">Obesidade severa</item>
+        <item name="40+">Obesidade mórbida</item>
+    </string-array>
 
-    <string name="title_activity_tela_edicao_usuario">TelaEdicaoUsuario</string>
-    <string name="title_activity_tela_edicao_indicador">TelaEdicaoIndicador</string>
+    <string name="title_activity_tela_edicao_usuario">Editar meus dados</string>
+    <string name="title_activity_tela_edicao_indicador">Editar indicador</string>
     <string name="title_activity_tela_principal">MyHealth</string>
     <string name="title_activity_tela_configuracoes">Configurações</string>
 
