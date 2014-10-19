@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.palharini.myhealth.daos.UsuarioDAO;
 import android.palharini.myhealth.entidades.Usuario;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -62,6 +64,33 @@ public class TelaPrincipal extends Activity {
 			imcStatus.setText(faixas.get(4));
 		if (imcDouble >= 40)
 			imcStatus.setText(faixas.get(5));
+		
+		buttonAcompanhamento.setOnClickListener(new Button.OnClickListener () {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent irTelaAcompanhamento = new Intent(getApplicationContext(), TelaAcompanhamento.class);
+				startActivity(irTelaAcompanhamento);
+			}
+		});
+		
+		buttonDados.setOnClickListener(new Button.OnClickListener () {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent irTelaEdicaoUsuario = new Intent(getApplicationContext(), TelaEdicaoUsuario.class);
+				startActivity(irTelaEdicaoUsuario);
+			}
+		});
+		
+		buttonConfiguracoes.setOnClickListener(new Button.OnClickListener () {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent irTelaConfiguracoes = new Intent(getApplicationContext(), TelaConfiguracoes.class);
+				startActivity(irTelaConfiguracoes);
+			}
+		});
 		
 	}
 }

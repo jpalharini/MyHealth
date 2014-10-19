@@ -25,9 +25,9 @@ public class PreferenciasDAO {
 		
 		prefs.addProperty("idUsuario", preferencias.getIdUsuario());
 		prefs.addProperty("lembretePeso", preferencias.isLembretePeso());
-		prefs.addProperty("horaLembrete", preferencias.getHoraLembrete());
-		prefs.addProperty("alvoBPM", preferencias.isAlvoBPM());
-		prefs.addProperty("horaAcorda", preferencias.getHoraAcorda());
+		prefs.addProperty("horaLembretePeso", preferencias.getHoraLembretePeso());
+		prefs.addProperty("lembreteBPM", preferencias.isLembreteBPM());
+		prefs.addProperty("horaLembreteBPM", preferencias.getHoraLembreteBPM());
 		
 		cadastrarPreferencias.addSoapObject(prefs);
 		
@@ -63,9 +63,9 @@ public class PreferenciasDAO {
 		
 		prefs.addProperty("idUsuario", preferencias.getIdUsuario());
 		prefs.addProperty("lembretePeso", preferencias.isLembretePeso());
-		prefs.addProperty("horaLembrete", preferencias.getHoraLembrete());
-		prefs.addProperty("alvoBPM", preferencias.isAlvoBPM());
-		prefs.addProperty("horaAcorda", preferencias.getHoraAcorda());
+		prefs.addProperty("horaLembretePeso", preferencias.getHoraLembretePeso());
+		prefs.addProperty("lembreteBPM", preferencias.isLembreteBPM());
+		prefs.addProperty("horaLembreteBPM", preferencias.getHoraLembreteBPM());
 		
 		atualizarPreferencias.addSoapObject(prefs);
 		
@@ -111,11 +111,10 @@ public class PreferenciasDAO {
 			
 			prefs = new Preferencias();
 			
-			prefs.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
 			prefs.setLembretePeso(Boolean.parseBoolean(resposta.getProperty("lembretePeso").toString()));
-			prefs.setHoraLembrete(resposta.getProperty("horaLembrete").toString());
-			prefs.setAlvoBPM(Boolean.parseBoolean(resposta.getProperty("alvoBPM").toString()));
-			prefs.setHoraAcorda(resposta.getProperty("horaAcorda").toString());
+			prefs.setHoraLembretePeso(resposta.getProperty("horaLembretePeso").toString());
+			prefs.setLembreteBPM(Boolean.parseBoolean(resposta.getProperty("lembreteBPM").toString()));
+			prefs.setHoraLembreteBPM(resposta.getProperty("horaLembreteBPM").toString());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

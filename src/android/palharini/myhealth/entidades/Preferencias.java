@@ -4,25 +4,25 @@ public class Preferencias {
 
 	private int idUsuario;
 	private boolean lembretePeso;
-	private String horaLembrete;
-	private boolean alvoBPM;
+	private String horaLembretePeso;
+	private boolean lembreteBPM;
 	private String horaAcorda;
 	
 	public Preferencias (){}
 	
 	public Preferencias(int idUsuario, boolean lembretePeso,
-			String horaLembrete, boolean alvoBPM, String horaAcorda) {
+			String horaLembretePeso, boolean lembreteBPM, String horaAcorda) {
 		this.idUsuario = idUsuario;
 		this.lembretePeso = lembretePeso;
-		this.horaLembrete = horaLembrete;
-		this.alvoBPM = alvoBPM;
+		this.horaLembretePeso = horaLembretePeso;
+		this.lembreteBPM = lembreteBPM;
 		this.horaAcorda = horaAcorda;
 	}
 	
-	public Preferencias(int idUsuario, boolean lembretePeso, boolean alvoBPM) {
+	public Preferencias(int idUsuario, boolean lembretePeso, boolean lembreteBPM) {
 		this.idUsuario = idUsuario;
 		this.lembretePeso = lembretePeso;
-		this.alvoBPM = alvoBPM;
+		this.lembreteBPM = lembreteBPM;
 	}
 
 	public int getIdUsuario() {
@@ -41,27 +41,27 @@ public class Preferencias {
 		this.lembretePeso = lembretePeso;
 	}
 
-	public String getHoraLembrete() {
-		return horaLembrete;
+	public String getHoraLembretePeso() {
+		return horaLembretePeso;
 	}
 
-	public void setHoraLembrete(String horaLembrete) {
-		this.horaLembrete = horaLembrete;
+	public void setHoraLembretePeso(String horaLembretePeso) {
+		this.horaLembretePeso = horaLembretePeso;
 	}
 
-	public boolean isAlvoBPM() {
-		return alvoBPM;
+	public boolean isLembreteBPM() {
+		return lembreteBPM;
 	}
 
-	public void setAlvoBPM(boolean alvoBPM) {
-		this.alvoBPM = alvoBPM;
+	public void setLembreteBPM(boolean lembreteBPM) {
+		this.lembreteBPM = lembreteBPM;
 	}
 
-	public String getHoraAcorda() {
+	public String getHoraLembreteBPM() {
 		return horaAcorda;
 	}
 
-	public void setHoraAcorda(String horaAcorda) {
+	public void setHoraLembreteBPM(String horaAcorda) {
 		this.horaAcorda = horaAcorda;
 	}
 	

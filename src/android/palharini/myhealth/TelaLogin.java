@@ -23,6 +23,8 @@ public class TelaLogin extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        
         setContentView(R.layout.activity_tela_login);
         
         if (android.os.Build.VERSION.SDK_INT > 9) {
