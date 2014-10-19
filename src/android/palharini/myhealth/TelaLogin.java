@@ -23,8 +23,6 @@ public class TelaLogin extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        
         setContentView(R.layout.activity_tela_login);
         
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -72,11 +70,19 @@ public class TelaLogin extends Activity {
                      
                 }else{
                     // E-mail ou senha incorretos
-                	caixa.showAlertDialog(TelaLogin.this, "Falha no login", "E-mail ou senha incorretos", false);
+                	caixa.showAlertDialog(
+                			TelaLogin.this, 
+                			getString(R.string.textLogonFalha), 
+                			getString(R.string.textLogonErrado), 
+                			false);
                 }               
             }else{
                 // Usuário deixou campos em branco
-            	caixa.showAlertDialog(TelaLogin.this, "Falha no login", "Por favor, digite seu e-mail e senha", false);
+            	caixa.showAlertDialog(
+            			TelaLogin.this, 
+            			getString(R.string.textLogonFalha), 
+            			getString(R.string.textLogonVazio), 
+            			false);
                 }
                  
             }

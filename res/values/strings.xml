@@ -23,8 +23,8 @@
     <string name="title_activity_tela_login">MyHealth</string>
     <string name="textLogin">Faça seu login ou cadastre-se!</string>
     <string name="buttonLogin">Login</string>
-    <string name="textCadastre">Não se cadastrou ainda? Cadastre-se!</string>
-    <string name="buttonCadastre">Cadastrar-se</string>
+    <string name="textCadastre">Não possui conta? Crie agora!</string>
+    <string name="buttonCadastre">Criar conta</string>
     <string name="title_activity_tela_cadastro_indicador">TelaCadastroIndicador</string>
     <string name="spinnerTipo">Selecione o tipo</string>
     <string name="buttonSalvar">Salvar</string>
@@ -43,6 +43,9 @@
     <string name="hintHoraLembrete">Hora do lembrete</string>
     <string name="buttonLogout">Fazer logout</string>
     <string name="descSplash">Splash MyHealth</string>
+    <string name="textLogonFalha">Falha no login</string>
+    <string name="textLogonErrado">E-mail ou senha incorretos</string>
+    <string name="textLogonVazio">Por favor, digite seu e-mail e senha</string>
 
     <string-array name="listaTipos">
         <item>Peso</item>
