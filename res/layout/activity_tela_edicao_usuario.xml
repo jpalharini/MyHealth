@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="@string/hintName"
+                android:hint="@string/hintNome"
                 android:inputType="textCapWords|textPersonName"
                 android:textSize="22sp" />
 
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="@string/hintBirth"
+                android:hint="@string/hintDataNasc"
                 android:inputType="date"
                 android:textSize="22sp" />
 
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="@string/hintHeight"
+                android:hint="@string/hintAltura"
                 android:inputType="numberDecimal"
                 android:textSize="22sp" />
             

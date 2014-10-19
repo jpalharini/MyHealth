@@ -2,51 +2,19 @@
 <resources>
 
     <string name="app_name">MyHealth</string>
-    <string name="title_activity_main_screen">MainScreen</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_store_data">StoreData</string>
-    <string name="title_activity_peso_fragment">PesoFragment</string>
-    <string name="action_settings">Settings</string>
+    
+    <!-- Dados Usuario -->  
     <string name="hintEmail">E-mail</string>
     <string name="hintSenha">Senha</string>
     <string name="hintConfSenha">Confirme a senha</string>
-    <string name="hintName">Nome</string>
-    <string name="hintBirth">Data de Nascimento</string>
-    <string name="hintHeight">Altura</string>
-    <string name="hintWeight">Peso</string>
-    <string name="hintAlvoBPM">Alvo BPM</string>
-    <string name="checkLembretePeso">Definir lembrete de peso</string>
-    <string name="checkAlvoBPM">Obter número ideal de batimentos cardíacos</string>
-    <string name="textWelcome">Para seu cadastro, informe:</string>
-    <string name="buttonContinuar">Continuar</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_tela_login">MyHealth</string>
-    <string name="textLogin">Faça seu login ou cadastre-se!</string>
-    <string name="buttonLogin">Login</string>
-    <string name="textCadastre">Não possui conta? Crie agora!</string>
-    <string name="buttonCadastre">Criar conta</string>
-    <string name="title_activity_tela_cadastro_indicador">TelaCadastroIndicador</string>
+    <string name="hintNome">Nome</string>
+    <string name="hintDataNasc">Data de Nascimento</string>
+    <string name="hintAltura">Altura</string>
+    <string name="hintPeso">Peso</string>
+    <string name="hintAlvoBPM">BPM ideal</string>
+    
+	<!-- Dados Indicador -->
     <string name="spinnerTipo">Selecione o tipo</string>
-    <string name="buttonSalvar">Salvar</string>
-    <string name="textUnidade">unid.</string>
-    <string name="buttonCadastra">Cadastrar</string>
-    <string name="textTipoIndicador">Escolha o tipo de indicador:</string>
-    <string name="textOla">Olá, </string>
-    <string name="textIMC">Seu IMC atual é:</string>
-    <string name="IMC">XX.X</string>
-    <string name="textAlvoBPM">Sua freq. cardíaca ideal é:</string>
-    <string name="alvoBPM">XXX</string>
-    <string name="textStatusIMC">[status]</string>
-    <string name="buttonAcompanhamento">Acompanhamento</string>
-    <string name="buttonDados">Meus dados</string>
-    <string name="buttonConfiguracoes">Configurações</string>
-    <string name="hintHoraLembrete">Hora do lembrete</string>
-    <string name="buttonLogout">Fazer logout</string>
-    <string name="descSplash">Splash MyHealth</string>
-    <string name="textLogonFalha">Falha no login</string>
-    <string name="textLogonErrado">E-mail ou senha incorretos</string>
-    <string name="textLogonVazio">Por favor, digite seu e-mail e senha</string>
-
     <string-array name="listaTipos">
         <item>Peso</item>
         <item>Freq. Cardíaca</item>
@@ -54,6 +22,7 @@
         <item>HDL</item>
         <item>LDL</item>
     </string-array>
+    <string name="textUnidade">unid.</string>
     <string-array name="listaUnidades">
         <item name="peso">kg</item>
         <item name="bpm">BPM</item>
@@ -61,6 +30,37 @@
         <item name="hdl">mg/dL</item>
         <item name="ldl">mg/dL</item>
     </string-array>
+    
+    <!-- Preferências -->
+    <string name="checkLembretePeso">Definir lembrete de peso</string>
+    <string name="checkLembreteBPM">Obter número ideal de batimentos cardíacos</string>
+    <string name="hintHoraLembrete">Hora do lembrete</string>
+    
+    <!-- Tela Cadastro/Edicao Usuario -->
+    <string name="title_activity_tela_cadastro_usuario">Cadastro</string>
+    <string name="title_activity_tela_edicao_usuario">Editar dados</string>
+    <string name="textCadastro">Para seu cadastro, informe:</string>
+    <string name="buttonContinuar">Continuar</string>   
+    <string name="buttonSalvar">Salvar</string>
+    
+    <!-- Tela Cadastro/Edicao Indicador -->
+    <string name="title_activity_tela_cadastro_indicador">Cadastrar indicador</string>
+    <string name="title_activity_tela_edicao_indicador">Editar indicador</string>
+    <string name="textTipoIndicador">Escolha o tipo de indicador:</string>
+    <string name="buttonCadastra">Cadastrar</string>
+    
+    <!-- Login -->
+    <string name="title_activity_tela_login">MyHealth</string>
+    <string name="textLogin">Faça seu login ou cadastre-se!</string>
+    <string name="buttonLogin">Login</string>
+    <string name="textCadastre">Não possui conta? Crie agora!</string>
+    <string name="buttonCadastre">Criar conta</string>
+
+    <!-- Tela Principal -->
+    <string name="title_activity_tela_principal">MyHealth</string>
+    <string name="textOla">Olá, </string>
+    <string name="textIMC">Seu IMC atual é:</string>
+    <string name="IMC">XX.X</string>
     <string-array name="faixasIMC">
         <item name="0-18.5">Abaixo do peso</item>
         <item name="18.6-24.9">Saudável</item>
@@ -69,11 +69,22 @@
         <item name="35-39.9">Obesidade severa</item>
         <item name="40+">Obesidade mórbida</item>
     </string-array>
+    <string name="textStatusIMC">[status]</string>
+    <string name="textAlvoBPM">Sua freq. cardíaca ideal é:</string>
+    <string name="alvoBPM">XXX</string>
+    <string name="buttonAcompanhamento">Acompanhamento</string>
+    <string name="buttonDados">Meus dados</string>
+    <string name="buttonConfiguracoes">Configurações</string>
+    <string name="buttonLogout">Fazer logout</string>
+    
+    <!-- Diálogo Login -->
+    <string name="textLogonFalha">Falha no login</string>
+    <string name="textLogonErrado">E-mail ou senha incorretos</string>
+    <string name="textLogonVazio">Por favor, digite seu e-mail e senha</string>
 
-    <string name="title_activity_tela_edicao_usuario">Editar meus dados</string>
-    <string name="title_activity_tela_edicao_indicador">Editar indicador</string>
-    <string name="title_activity_tela_principal">MyHealth</string>
+    <!-- Diversos -->
     <string name="title_activity_tela_configuracoes">Configurações</string>
-    <string name="title_activity_tela_inicial">TelaInicial</string>
+    <string name="descSplash">Splash MyHealth</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

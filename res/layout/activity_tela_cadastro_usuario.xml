@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:gravity="center_horizontal"
-                android:text="@string/textWelcome"
+                android:text="@string/textCadastro"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="16sp" />
 
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="@string/hintName"
+                android:hint="@string/hintNome"
                 android:inputType="textCapWords|textPersonName"
                 android:textSize="20sp" />
 
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="@string/hintBirth"
+                android:hint="@string/hintDataNasc"
                 android:inputType="date"
                 android:textSize="20sp" />
 
@@ -82,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="@string/hintHeight"
+                android:hint="@string/hintAltura"
                 android:inputType="numberDecimal"
                 android:textSize="20sp" />
 
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="@string/hintWeight"
+                android:hint="@string/hintPeso"
                 android:inputType="numberDecimal"
                 android:textSize="20sp" />
 
@@ -108,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/checkAlvoBPM"
+                android:text="@string/checkLembreteBPM"
                 android:textSize="18sp" />
 
             <Button
