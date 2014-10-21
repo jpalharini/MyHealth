@@ -2,7 +2,6 @@ package android.palharini.myhealth.abas;
 
 import android.os.Bundle;
 import android.palharini.myhealth.R;
-import android.palharini.myhealth.R.layout;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;

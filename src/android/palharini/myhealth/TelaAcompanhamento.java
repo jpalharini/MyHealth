@@ -21,7 +21,6 @@ public class TelaAcompanhamento extends FragmentActivity implements ActionBar.Ta
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_acompanhamento);
 		
-		// Inicialização do modo de abas
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
 		tabsAdapter = new AdaptadorAbasPeriodos(getSupportFragmentManager());

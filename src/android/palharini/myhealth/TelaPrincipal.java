@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.palharini.myhealth.daos.UsuarioDAO;
 import android.palharini.myhealth.entidades.Usuario;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
@@ -19,6 +20,11 @@ public class TelaPrincipal extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_principal);
+		
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+		}
 		
 		final TextView ola = (TextView) findViewById(R.id.textOla);
 		final TextView imc = (TextView) findViewById(R.id.IMC);
@@ -44,7 +50,7 @@ public class TelaPrincipal extends Activity {
 		else {
 			primeiroNomeUsuario = nomeUsuario;
 		}
-		ola.setText(getString(R.string.textOla) + primeiroNomeUsuario);
+		ola.setText(getString(R.string.textOla) + " " + primeiroNomeUsuario);
 		
 		Double imcDouble = (pesoUsuario / (alturaUsuario * alturaUsuario));
 		imc.setText(imcDouble.toString());

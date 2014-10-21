@@ -16,8 +16,10 @@ import android.palharini.myhealth.entidades.Usuario;
 import android.palharini.myhealth.fragmentos.FragmentoDatePicker;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class TelaEdicaoUsuario extends Activity {
 
@@ -26,7 +28,10 @@ public class TelaEdicaoUsuario extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_edicao_usuario);
 		
-		GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
+		final String formatoData = "d/M/yyyy";
+		final String formatoDataSQL = "yyyy-MM-dd";
+		
+		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
 		final EditText email = (EditText) findViewById(R.id.editEmail);
 		final EditText senha = (EditText) findViewById(R.id.editSenha);
@@ -36,18 +41,31 @@ public class TelaEdicaoUsuario extends Activity {
 		final EditText altura = (EditText) findViewById(R.id.editAltura);
 		final EditText alvoBPM = (EditText) findViewById(R.id.editAlvoBPM);
 		
-		Button okButton = (Button) findViewById(R.id.okButton);
+		Button buttonSalvar = (Button) findViewById(R.id.buttonSalvar);
 		
-		UsuarioDAO dao = new UsuarioDAO();
+		final UsuarioDAO dao = new UsuarioDAO();
 		final Usuario dados = dao.buscarUsuario(sessao.getIdUsuario());
 		
 		email.setText(dados.getEmail());
 		nome.setText(dados.getNome());
-		dataNasc.setText(dados.getDataNascimento());
+		
+		String dataNascString = dados.getDataNascimento();
+		SimpleDateFormat sdfSQL = new SimpleDateFormat(formatoDataSQL);
+		SimpleDateFormat sdf = new SimpleDateFormat(formatoData);
+		Date dataNascDate = null;
+		try {
+			dataNascDate = sdfSQL.parse(dataNascString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		final String dataNascAndroid = sdf.format(dataNascDate);
+		dataNasc.setText(dataNascAndroid);
+		
 		altura.setText(String.valueOf(dados.getAltura()));
 		alvoBPM.setText(String.valueOf(dados.getAlvoBPM()));
 				
-		dataNasc.setOnClickListener(new EditText.OnClickListener () {
+		dataNasc.setOnClickListener(new OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -57,16 +75,16 @@ public class TelaEdicaoUsuario extends Activity {
 			
 		});
 		
-		okButton.setOnClickListener(new Button.OnClickListener() {
+		buttonSalvar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick (View v){
 				
 				if (
-						!email.equals(dados.getEmail()) || 
-						!nome.equals(dados.getNome()) || 
-						!dataNasc.equals(dados.getDataNascimento()) ||
-						!altura.equals(String.valueOf(dados.getAltura())) ||
-						!alvoBPM.equals(String.valueOf(dados.getAlvoBPM()))
+						!(email.getText().toString()).equals(dados.getEmail()) || 
+						!(nome.getText().toString()).equals(dados.getNome()) || 
+						!(dataNasc.getText().toString()).equals(dataNascAndroid) ||
+						!(altura.getText().toString()).equals(String.valueOf(dados.getAltura())) ||
+						!(alvoBPM.getText().toString()).equals(String.valueOf(dados.getAlvoBPM()))
 						) {
 			
 					String senhaString = senha.getText().toString();
@@ -88,8 +106,6 @@ public class TelaEdicaoUsuario extends Activity {
 						}
 						
 						String dataNascString = dataNasc.getText().toString();
-						final String formatoData = "d/MM/yyyy";
-						final String formatoDataSQL = "yyyy-MM-dd";
 						SimpleDateFormat sdf = new SimpleDateFormat(formatoData);
 						SimpleDateFormat sdfSQL = new SimpleDateFormat(formatoDataSQL);
 						Date dataNascDate = null;
@@ -100,8 +116,7 @@ public class TelaEdicaoUsuario extends Activity {
 							e.printStackTrace();
 						}
 						String dataNascSQL = sdfSQL.format(dataNascDate);
-						
-						UsuarioDAO dao = new UsuarioDAO();
+
 						dao.atualizarUsuario(new Usuario(
 								dados.getId(), 
 								email.getText().toString(),
@@ -111,10 +126,15 @@ public class TelaEdicaoUsuario extends Activity {
 								Double.parseDouble(altura.getText().toString()),
 								Integer.parseInt(alvoBPM.getText().toString())
 						));
+						
+						Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
+	                    startActivity(voltarTelaPrincipal);
+	                    finish();
 					}
 				}
 				else {
-					Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaAcompanhamento.class);
+					Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
+					Toast.makeText(getApplicationContext(), "Nao houve alteracao", Toast.LENGTH_LONG).show();
                     startActivity(voltarTelaPrincipal);
                     finish();
 				}

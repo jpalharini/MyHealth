@@ -10,7 +10,7 @@ import android.palharini.myhealth.entidades.Usuario;
 
 public class UsuarioDAO {
 	
-	private static final String URL = "http://192.168.1.100:8080/MyHealthWS/services/UsuarioDAO?wsdl";
+	private static final String URL = "http://192.168.129.222:8080/MyHealthWS/services/UsuarioDAO?wsdl";
 	private static final String NAMESPACE = "http://dao.ws.myhealth.palharini.android";
 	
 	private static final String CADASTRAR = "cadastrarUsuario";
@@ -69,6 +69,7 @@ public class UsuarioDAO {
 		usr.addProperty("senha", usuario.getSenha());
 		usr.addProperty("nome", usuario.getNome());
 		usr.addProperty("dataNascimento", usuario.getDataNascimento());
+		usr.addProperty("altura", usuario.getAltura());
 		usr.addProperty("alvoBPM", usuario.getAlvoBPM());
 		
 		atualizarUsuario.addSoapObject(usr);
@@ -77,6 +78,8 @@ public class UsuarioDAO {
 		
 		envelope.setOutputSoapObject(atualizarUsuario);
 		envelope.implicitTypes = true;
+		MarshalDouble md = new MarshalDouble();
+		md.register(envelope);
 		
 		HttpTransportSE http = new HttpTransportSE(URL);
 		
@@ -147,6 +150,7 @@ public class UsuarioDAO {
 			dados.setId(Integer.parseInt(resposta.getProperty("id").toString()));
 			dados.setEmail(resposta.getProperty("email").toString());
 			dados.setNome(resposta.getProperty("nome").toString());
+			dados.setDataNascimento(resposta.getProperty("dataNascimento").toString());
 			dados.setAltura(Double.parseDouble(resposta.getProperty("altura").toString()));
 			dados.setPeso(Double.parseDouble(resposta.getProperty("peso").toString()));
 			dados.setAlvoBPM(Integer.parseInt(resposta.getProperty("alvoBPM").toString()));

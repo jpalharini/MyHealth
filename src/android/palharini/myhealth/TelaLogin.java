@@ -64,12 +64,11 @@ public class TelaLogin extends Activity {
                 if(emailString.equals(dados.getEmail()) && criptSenha.equals(dados.getSenha())){
                 	sessao.criarSessao(dados.getId(), dados.getNome(), dados.getEmail());
 
-                    Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaCadastroIndicador.class);
+                    Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
                     startActivity(irTelaPrincipal);
                     finish();
                      
                 }else{
-                    // E-mail ou senha incorretos
                 	caixa.showAlertDialog(
                 			TelaLogin.this, 
                 			getString(R.string.textLogonFalha), 
@@ -77,7 +76,6 @@ public class TelaLogin extends Activity {
                 			false);
                 }               
             }else{
-                // Usuário deixou campos em branco
             	caixa.showAlertDialog(
             			TelaLogin.this, 
             			getString(R.string.textLogonFalha), 
