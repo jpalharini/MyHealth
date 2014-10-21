@@ -10,8 +10,10 @@ import android.palharini.myhealth.entidades.Preferencias;
 
 public class PreferenciasDAO {
 	
-	private static final String URL = "http://192.168.129.222:8080/MyHealthWS/services/PreferenciasDAO?wsdl";
-	private static final String NAMESPACE = "http://dao.ws.myhealth.palharini.android";
+	ConectaWS conexao = new ConectaWS();
+	
+	private final String URL = conexao.getUrl("PreferenciasDAO");
+	private final String NAMESPACE = conexao.getNamespace();
 	
 	private static final String CADASTRAR = "cadastrarPreferencias";
 	private static final String ATUALIZAR = "atualizarPreferencias";

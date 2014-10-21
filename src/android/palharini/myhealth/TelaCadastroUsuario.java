@@ -4,16 +4,19 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Arrays;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.palharini.myhealth.daos.IndicadorDAO;
 import android.palharini.myhealth.daos.PreferenciasDAO;
 import android.palharini.myhealth.daos.UsuarioDAO;
+import android.palharini.myhealth.datas.FormatoDataNascimento;
+import android.palharini.myhealth.datas.Timestamp;
+import android.palharini.myhealth.entidades.Indicador;
 import android.palharini.myhealth.entidades.Preferencias;
 import android.palharini.myhealth.entidades.Usuario;
 import android.palharini.myhealth.fragmentos.FragmentoDatePicker;
@@ -88,31 +91,45 @@ public class TelaCadastroUsuario extends Activity {
 					}
 					
 					String dataNascString = dataNasc.getText().toString();
-					final String formatoData = "d/MM/yyyy";
-					final String formatoDataSQL = "yyyy-MM-dd";
-					SimpleDateFormat sdf = new SimpleDateFormat(formatoData);
-					SimpleDateFormat sdfSQL = new SimpleDateFormat(formatoDataSQL);
-					Date dataNascDate = null;
-					try {
-						dataNascDate = sdf.parse(dataNascString);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						String dataNascSQL = sdfSQL.format(dataNascDate);
-						
+					FormatoDataNascimento fdn = new FormatoDataNascimento();
+					String dataNascSQL = fdn.formatarData(dataNascString);
+					
 						UsuarioDAO usrdao = new UsuarioDAO();
 						usrdao.cadastrarUsuario(new Usuario(
 								0, 
 								emailString,
 								criptSenha,
 								nomeString, 
-								dataNascSQL,
-								alturaDouble,
-								pesoDouble
+								dataNascSQL
 								));
 		                
 						Usuario usuario = usrdao.buscarUsuarioEmail(emailString);
+						
+						String[] listUnidades = getResources().getStringArray(R.array.listaUnidades);
+						final List<String> unidades = Arrays.asList(listUnidades);
+						
+						final Timestamp ts = new Timestamp();
+						
+						IndicadorDAO inddao = new IndicadorDAO();
+						
+						inddao.cadastrarIndicador(new Indicador(
+								0,
+								1,
+								usuario.getId(),
+								alturaDouble,
+								unidades.get(1),
+								ts.getTimestamp()
+								));
+						
+						inddao.cadastrarIndicador(new Indicador(
+								0,
+								0,
+								usuario.getId(),
+								pesoDouble,
+								unidades.get(0),
+								ts.getTimestamp()
+								));
+
 		                sessao.criarSessao(usuario.getId(), usuario.getNome(), usuario.getEmail());
 		                
 		                PreferenciasDAO prefsdao = new PreferenciasDAO();
@@ -123,7 +140,7 @@ public class TelaCadastroUsuario extends Activity {
 								));
 				}
 				
-				Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaAcompanhamento.class);
+				Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
 				startActivity(irTelaPrincipal);
 				finish();
 			}

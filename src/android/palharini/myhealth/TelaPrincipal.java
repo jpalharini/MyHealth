@@ -7,7 +7,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.palharini.myhealth.daos.IndicadorDAO;
 import android.palharini.myhealth.daos.UsuarioDAO;
+import android.palharini.myhealth.entidades.Indicador;
 import android.palharini.myhealth.entidades.Usuario;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
@@ -36,12 +38,16 @@ public class TelaPrincipal extends Activity {
 		
 		GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
-		UsuarioDAO dao = new UsuarioDAO();
-		Usuario usuario = dao.buscarUsuario(sessao.getIdUsuario());
+		UsuarioDAO usrdao = new UsuarioDAO();
+		Usuario usuario = usrdao.buscarUsuario(sessao.getIdUsuario());
+		
+		IndicadorDAO inddao = new IndicadorDAO();
+		Indicador altura = inddao.buscarIndicadorTipo(sessao.getIdUsuario(), 0, 1);
+		Indicador peso = inddao.buscarIndicadorTipo(sessao.getIdUsuario(), 1, 1);
 		
 		String nomeUsuario = usuario.getNome();
-		Double pesoUsuario = usuario.getPeso();
-		Double alturaUsuario = usuario.getAltura();
+		Double pesoUsuario = peso.getMedida();
+		Double alturaUsuario = altura.getMedida();
 		
 		String primeiroNomeUsuario;
 		if (nomeUsuario.contains(" ")) {

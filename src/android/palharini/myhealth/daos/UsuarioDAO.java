@@ -10,12 +10,14 @@ import android.palharini.myhealth.entidades.Usuario;
 
 public class UsuarioDAO {
 	
-	private static final String URL = "http://192.168.129.222:8080/MyHealthWS/services/UsuarioDAO?wsdl";
-	private static final String NAMESPACE = "http://dao.ws.myhealth.palharini.android";
+	ConectaWS conexao = new ConectaWS();
+	
+	private final String URL = conexao.getUrl("UsuarioDAO");
+	private final String NAMESPACE = conexao.getNamespace();
+
 	
 	private static final String CADASTRAR = "cadastrarUsuario";
 	private static final String ATUALIZAR = "atualizarUsuario";
-	private static final String ATUALIZAR_PESO = "atualizarPesoUsuario";
 	private static final String BUSCAR = "buscarUsuario";
 	private static final String BUSCAR_EMAIL = "buscarUsuarioEmail";
 
@@ -30,8 +32,6 @@ public class UsuarioDAO {
 		usr.addProperty("senha", usuario.getSenha());
 		usr.addProperty("nome", usuario.getNome());
 		usr.addProperty("dataNascimento", usuario.getDataNascimento());
-		usr.addProperty("altura", usuario.getAltura());
-		usr.addProperty("peso", usuario.getPeso());
 		
 		cadastrarUsuario.addSoapObject(usr);
 		
@@ -69,7 +69,6 @@ public class UsuarioDAO {
 		usr.addProperty("senha", usuario.getSenha());
 		usr.addProperty("nome", usuario.getNome());
 		usr.addProperty("dataNascimento", usuario.getDataNascimento());
-		usr.addProperty("altura", usuario.getAltura());
 		usr.addProperty("alvoBPM", usuario.getAlvoBPM());
 		
 		atualizarUsuario.addSoapObject(usr);
@@ -85,35 +84,6 @@ public class UsuarioDAO {
 		
 		try {
 			http.call("urn:" + ATUALIZAR, envelope);
-			
-			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
-			
-			return Boolean.parseBoolean(resposta.toString());
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return true;
-	}
-	
-	public boolean atualizarPesoUsuario(double peso, int id){
-		
-		SoapObject atualizarPesoUsuario = new SoapObject(NAMESPACE, ATUALIZAR_PESO);
-		
-		atualizarPesoUsuario.addProperty("peso", peso);
-		atualizarPesoUsuario.addProperty("id", id);
-		
-		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-		
-		envelope.setOutputSoapObject(atualizarPesoUsuario);
-		envelope.implicitTypes = true;
-		
-		HttpTransportSE http = new HttpTransportSE(URL);
-		
-		try {
-			http.call("urn:" + ATUALIZAR_PESO, envelope);
 			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			
@@ -150,9 +120,7 @@ public class UsuarioDAO {
 			dados.setId(Integer.parseInt(resposta.getProperty("id").toString()));
 			dados.setEmail(resposta.getProperty("email").toString());
 			dados.setNome(resposta.getProperty("nome").toString());
-			dados.setDataNascimento(resposta.getProperty("dataNascimento").toString());
-			dados.setAltura(Double.parseDouble(resposta.getProperty("altura").toString()));
-			dados.setPeso(Double.parseDouble(resposta.getProperty("peso").toString()));
+			dados.setDataNascimento(resposta.getProperty("FormatoDataNascimento").toString());
 			dados.setAlvoBPM(Integer.parseInt(resposta.getProperty("alvoBPM").toString()));
 			
 		} catch (Exception e) {

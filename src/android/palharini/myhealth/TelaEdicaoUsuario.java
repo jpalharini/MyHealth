@@ -38,7 +38,6 @@ public class TelaEdicaoUsuario extends Activity {
 		final EditText confSenha = (EditText) findViewById(R.id.editConfSenha);
 		final EditText nome = (EditText) findViewById(R.id.editNome);
 		final EditText dataNasc = (EditText) findViewById(R.id.editNasc);
-		final EditText altura = (EditText) findViewById(R.id.editAltura);
 		final EditText alvoBPM = (EditText) findViewById(R.id.editAlvoBPM);
 		
 		Button buttonSalvar = (Button) findViewById(R.id.buttonSalvar);
@@ -62,7 +61,6 @@ public class TelaEdicaoUsuario extends Activity {
 		final String dataNascAndroid = sdf.format(dataNascDate);
 		dataNasc.setText(dataNascAndroid);
 		
-		altura.setText(String.valueOf(dados.getAltura()));
 		alvoBPM.setText(String.valueOf(dados.getAlvoBPM()));
 				
 		dataNasc.setOnClickListener(new OnClickListener () {
@@ -83,7 +81,6 @@ public class TelaEdicaoUsuario extends Activity {
 						!(email.getText().toString()).equals(dados.getEmail()) || 
 						!(nome.getText().toString()).equals(dados.getNome()) || 
 						!(dataNasc.getText().toString()).equals(dataNascAndroid) ||
-						!(altura.getText().toString()).equals(String.valueOf(dados.getAltura())) ||
 						!(alvoBPM.getText().toString()).equals(String.valueOf(dados.getAlvoBPM()))
 						) {
 			
@@ -123,7 +120,6 @@ public class TelaEdicaoUsuario extends Activity {
 								criptSenha,
 								nome.getText().toString(), 
 								dataNascSQL,
-								Double.parseDouble(altura.getText().toString()),
 								Integer.parseInt(alvoBPM.getText().toString())
 						));
 						

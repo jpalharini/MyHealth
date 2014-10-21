@@ -1,16 +1,12 @@
 package android.palharini.myhealth;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.palharini.myhealth.daos.IndicadorDAO;
-import android.palharini.myhealth.daos.UsuarioDAO;
+import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.entidades.Indicador;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
@@ -31,29 +27,10 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 		
 		final Spinner tipo = (Spinner) findViewById(R.id.spinnerTipo);
 		final EditText medida = (EditText) findViewById(R.id.editMedicao);
-		final Button okButton = (Button) findViewById(R.id.cadastraButton);
 		
-		final Calendar c = Calendar.getInstance();
-		final int dia = c.get(Calendar.DAY_OF_MONTH);
-	    final int mes = c.get(Calendar.MONTH);
-	    final int ano = c.get(Calendar.YEAR);
-	    final int hora = c.get(Calendar.HOUR_OF_DAY);
-	    final int minuto = c.get(Calendar.MINUTE);
-	    final int segundo = c.get(Calendar.SECOND);
+		final Button okButton = (Button) findViewById(R.id.cadastraButton);
 	    
-	    final String timestamp = String.valueOf(ano) + "-" + String.valueOf(mes + 1) + "-" + String.valueOf(dia) + 
-	    		" " + String.valueOf(hora) + ":" + String.valueOf(minuto) + ":" + String.valueOf(segundo);
-	    
-		final String formatoDataSQL = "yyyy-MM-dd HH:mm:ss";
-		SimpleDateFormat sdfSQL = new SimpleDateFormat(formatoDataSQL);
-		Date timestampDate = null;
-		try {
-			timestampDate = sdfSQL.parse(timestamp);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		final String timestampSQL = sdfSQL.format(timestampDate);
+		final Timestamp ts = new Timestamp();
 		
 		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
@@ -72,10 +49,7 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 		okButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick (View v){
-				if (tipoSelecionadoId == 0){
-					UsuarioDAO dao = new UsuarioDAO();
-					dao.atualizarPesoUsuario(Double.parseDouble(medida.getText().toString()), sessao.getIdUsuario());
-				}
+
 				IndicadorDAO dao = new IndicadorDAO();
 				dao.cadastrarIndicador(new Indicador(
 						0, 
@@ -83,7 +57,7 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 						sessao.getIdUsuario(),
 						Double.parseDouble(medida.getText().toString()), 
 						unidades.get(tipoSelecionadoId),
-						timestampSQL
+						ts.getTimestamp()
 				));
 			}
 		});

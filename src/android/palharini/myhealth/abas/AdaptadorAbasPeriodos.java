@@ -1,4 +1,4 @@
-package android.palharini.myhealth.adaptadores;
+package android.palharini.myhealth.abas;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
