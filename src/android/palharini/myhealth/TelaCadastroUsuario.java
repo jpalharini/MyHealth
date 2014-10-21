@@ -94,50 +94,50 @@ public class TelaCadastroUsuario extends Activity {
 					FormatoDataNascimento fdn = new FormatoDataNascimento();
 					String dataNascSQL = fdn.formatarData(dataNascString);
 					
-						UsuarioDAO usrdao = new UsuarioDAO();
-						usrdao.cadastrarUsuario(new Usuario(
-								0, 
-								emailString,
-								criptSenha,
-								nomeString, 
-								dataNascSQL
-								));
-		                
-						Usuario usuario = usrdao.buscarUsuarioEmail(emailString);
-						
-						String[] listUnidades = getResources().getStringArray(R.array.listaUnidades);
-						final List<String> unidades = Arrays.asList(listUnidades);
-						
-						final Timestamp ts = new Timestamp();
-						
-						IndicadorDAO inddao = new IndicadorDAO();
-						
-						inddao.cadastrarIndicador(new Indicador(
-								0,
-								1,
-								usuario.getId(),
-								alturaDouble,
-								unidades.get(1),
-								ts.getTimestamp()
-								));
-						
-						inddao.cadastrarIndicador(new Indicador(
-								0,
-								0,
-								usuario.getId(),
-								pesoDouble,
-								unidades.get(0),
-								ts.getTimestamp()
-								));
+					UsuarioDAO usrdao = new UsuarioDAO();
+					usrdao.cadastrarUsuario(new Usuario(
+							0, 
+							emailString,
+							criptSenha,
+							nomeString, 
+							dataNascSQL
+							));
+	                
+					Usuario usuario = usrdao.buscarUsuarioEmail(emailString);
+					
+					String[] listUnidades = getResources().getStringArray(R.array.listaUnidades);
+					final List<String> unidades = Arrays.asList(listUnidades);
+					
+					final Timestamp ts = new Timestamp();
+					
+					IndicadorDAO inddao = new IndicadorDAO();
+					
+					inddao.cadastrarIndicador(new Indicador(
+							0,
+							1,
+							usuario.getId(),
+							alturaDouble,
+							unidades.get(1),
+							ts.getTimestamp()
+							));
+					
+					inddao.cadastrarIndicador(new Indicador(
+							0,
+							0,
+							usuario.getId(),
+							pesoDouble,
+							unidades.get(0),
+							ts.getTimestamp()
+							));
 
-		                sessao.criarSessao(usuario.getId(), usuario.getNome(), usuario.getEmail());
-		                
-		                PreferenciasDAO prefsdao = new PreferenciasDAO();
-						prefsdao.cadastrarPreferencias(new Preferencias(
-								sessao.getIdUsuario(),
-								checkLembretePeso.isChecked(),
-								checkAlvoBPM.isChecked()
-								));
+	                sessao.criarSessao(usuario.getId(), usuario.getNome(), usuario.getEmail());
+	                
+	                PreferenciasDAO prefsdao = new PreferenciasDAO();
+					prefsdao.cadastrarPreferencias(new Preferencias(
+							sessao.getIdUsuario(),
+							checkLembretePeso.isChecked(),
+							checkAlvoBPM.isChecked()
+							));
 				}
 				
 				Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
