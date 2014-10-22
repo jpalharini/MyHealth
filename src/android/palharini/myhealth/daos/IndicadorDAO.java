@@ -122,6 +122,7 @@ public class IndicadorDAO {
 		try {
 			http.call("urn:" + BUSCAR_PERIODO, envelope);
 			
+			@SuppressWarnings("unchecked")
 			Vector<SoapObject> resposta = (Vector<SoapObject>) envelope.getResponse();
 			
 			for (SoapObject soapObject : resposta) {
