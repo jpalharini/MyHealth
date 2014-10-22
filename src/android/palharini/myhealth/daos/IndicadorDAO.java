@@ -10,10 +10,11 @@ import android.palharini.myhealth.entidades.Indicador;
 
 public class IndicadorDAO {
 	
-	ConectaWS conexao = new ConectaWS();
+	private static final String classeWS = "IndicadorDAO" + "?wsdl";
+	static ConectaWS conexao = new ConectaWS();
 	
-	private final String URL = conexao.getUrl("IndicadorDAO");
-	private final String NAMESPACE = conexao.getNamespace();
+	private static final String URL = conexao.getURL() + classeWS;
+	private static final String NAMESPACE = conexao.getNamespace();
 	
 	public static final String CADASTRAR = "cadastrarIndicador";
 	public static final String ATUALIZAR = "atualizarIndicador";
@@ -96,12 +97,13 @@ public class IndicadorDAO {
 		return true;
 	}	
 
-	public Indicador buscarIndicadorPeriodo (int idUsuario, String periodo, int data){
+	public Indicador buscarIndicadoresPeriodo (int idUsuario, String periodo, int difData, int data){
 		Indicador indicador = null;
 		
 		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_PERIODO);
 		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
 		buscarIndicadorPeriodo.addProperty("periodo", periodo);
+		buscarIndicadorPeriodo.addProperty("difData", difData);
 		buscarIndicadorPeriodo.addProperty("data", data);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -132,7 +134,42 @@ public class IndicadorDAO {
 		return indicador;
 	}
 	
-	public Indicador buscarIndicadorTipo (int idUsuario, int idTipo, int limite) {
+	public Indicador buscarIndicadoresTipo (int idUsuario, int idTipo) {
+		Indicador indicador = null;
+		
+		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_TIPO);
+		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
+		buscarIndicadorPeriodo.addProperty("idTipo", idTipo);
+		
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		
+		envelope.setOutputSoapObject(buscarIndicadorPeriodo);
+		envelope.implicitTypes = true;
+		
+		HttpTransportSE http = new HttpTransportSE(URL);
+		
+		try {
+			http.call("urn:" + BUSCAR_TIPO, envelope);
+			
+			SoapObject resposta = (SoapObject) envelope.getResponse();
+			
+			indicador = new Indicador();
+			
+			indicador.setId(Integer.parseInt(resposta.getProperty("id").toString()));
+			indicador.setIdTipo(Integer.parseInt(resposta.getProperty("idTipo").toString()));
+			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
+			indicador.setMedida(Double.parseDouble(resposta.getProperty("medida").toString()));
+			indicador.setUnidade(resposta.getProperty("unidade").toString());
+			indicador.setTimestamp(resposta.getProperty("timestamp").toString());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return indicador;
+	}
+	
+	public Indicador buscarIndicadoresTipo (int idUsuario, int idTipo, int limite) {
 		Indicador indicador = null;
 		
 		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_TIPO);
@@ -168,13 +205,52 @@ public class IndicadorDAO {
 		return indicador;
 	}
 	
-	public Indicador buscarIndicadorPeriodoTipo (int idUsuario, int idTipo, String periodo, int data, int limite) {
+	public Indicador buscarIndicadoresPeriodoTipo (int idUsuario, int idTipo, String periodo, int difData, int data) {
 		Indicador indicador = null;
 		
 		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_PERIODO_TIPO);
 		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
 		buscarIndicadorPeriodo.addProperty("idTipo", idTipo);
 		buscarIndicadorPeriodo.addProperty("periodo", periodo);
+		buscarIndicadorPeriodo.addProperty("difData", difData);
+		buscarIndicadorPeriodo.addProperty("data", data);
+		
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		
+		envelope.setOutputSoapObject(buscarIndicadorPeriodo);
+		envelope.implicitTypes = true;
+		
+		HttpTransportSE http = new HttpTransportSE(URL);
+		
+		try {
+			http.call("urn:" + BUSCAR_PERIODO_TIPO, envelope);
+			
+			SoapObject resposta = (SoapObject) envelope.getResponse();
+			
+			indicador = new Indicador();
+			
+			indicador.setId(Integer.parseInt(resposta.getProperty("id").toString()));
+			indicador.setIdTipo(Integer.parseInt(resposta.getProperty("idTipo").toString()));
+			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
+			indicador.setMedida(Double.parseDouble(resposta.getProperty("medida").toString()));
+			indicador.setUnidade(resposta.getProperty("unidade").toString());
+			indicador.setTimestamp(resposta.getProperty("timestamp").toString());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return indicador;
+	}
+	
+	public Indicador buscarIndicadoresPeriodoTipo (int idUsuario, int idTipo, String periodo, int data, int difData, int limite) {
+		Indicador indicador = null;
+		
+		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_PERIODO_TIPO);
+		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
+		buscarIndicadorPeriodo.addProperty("idTipo", idTipo);
+		buscarIndicadorPeriodo.addProperty("periodo", periodo);
+		buscarIndicadorPeriodo.addProperty("difData", difData);
 		buscarIndicadorPeriodo.addProperty("data", data);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

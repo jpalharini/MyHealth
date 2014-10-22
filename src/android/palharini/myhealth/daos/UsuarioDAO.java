@@ -10,10 +10,11 @@ import android.palharini.myhealth.entidades.Usuario;
 
 public class UsuarioDAO {
 	
-	ConectaWS conexao = new ConectaWS();
+	private static final String classeWS = "UsuarioDAO";
+	private static final ConectaWS conexao = new ConectaWS();
 	
-	private final String URL = conexao.getUrl("UsuarioDAO");
-	private final String NAMESPACE = conexao.getNamespace();
+	private static final String URL = conexao.getURL() + classeWS + "?wsdl";
+	private static final String NAMESPACE = conexao.getNamespace();
 
 	
 	private static final String CADASTRAR = "cadastrarUsuario";

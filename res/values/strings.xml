@@ -31,7 +31,8 @@
         <item name="ldl">mg/dL</item>
     </string-array>
     
-    <!-- Preferências -->
+    <!-- Configurações -->
+    <string name="title_activity_tela_configuracoes">Configurações</string>
     <string name="checkLembretePeso">Definir lembrete de peso</string>
     <string name="checkLembreteBPM">Obter número ideal de batimentos cardíacos</string>
     <string name="hintHoraLembrete">Hora do lembrete</string>
@@ -86,7 +87,6 @@
         \n Por favor, verifique sua conexão de rede.</string>
 
     <!-- Diversos -->
-    <string name="title_activity_tela_configuracoes">Configurações</string>
     <string name="descSplash">Splash MyHealth</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

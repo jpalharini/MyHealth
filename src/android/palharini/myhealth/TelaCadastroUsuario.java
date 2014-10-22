@@ -36,8 +36,7 @@ public class TelaCadastroUsuario extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		setContentView(R.layout.activity_tela_cadastro_usuario);
-					
-		// Campos de entrada
+		
 		final EditText email = (EditText) findViewById(R.id.editEmail);
 		final EditText senha = (EditText) findViewById(R.id.editSenha);
 		final EditText confSenha = (EditText) findViewById(R.id.editConfSenha);
