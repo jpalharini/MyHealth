@@ -45,37 +45,39 @@ public class TelaPrincipal extends Activity {
 		Indicador altura = inddao.buscarIndicadorTipo(sessao.getIdUsuario(), 0, 1);
 		Indicador peso = inddao.buscarIndicadorTipo(sessao.getIdUsuario(), 1, 1);
 		
-		String nomeUsuario = usuario.getNome();
-		Double pesoUsuario = peso.getMedida();
-		Double alturaUsuario = altura.getMedida();
-		
-		String primeiroNomeUsuario;
-		if (nomeUsuario.contains(" ")) {
-			primeiroNomeUsuario = nomeUsuario.substring(0, nomeUsuario.indexOf(" "));
+		if (usuario != null && altura != null && peso != null) {
+			String nomeUsuario = usuario.getNome();
+			Double pesoUsuario = peso.getMedida();
+			Double alturaUsuario = altura.getMedida();
+			
+			String primeiroNomeUsuario;
+			if (nomeUsuario.contains(" ")) {
+				primeiroNomeUsuario = nomeUsuario.substring(0, nomeUsuario.indexOf(" "));
+			}
+			else {
+				primeiroNomeUsuario = nomeUsuario;
+			}
+			ola.setText(getString(R.string.textOla) + " " + primeiroNomeUsuario);
+			
+			Double imcDouble = (pesoUsuario / (alturaUsuario * alturaUsuario));
+			imc.setText(imcDouble.toString());
+			
+			String[] listaFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
+			final List<String> faixas = Arrays.asList(listaFaixasIMC);
+			
+			if (imcDouble > 0 && imcDouble <= 18.5)
+				imcStatus.setText(faixas.get(0));
+			if (imcDouble >= 18.6 && imcDouble <= 24.9)
+				imcStatus.setText(faixas.get(1));
+			if (imcDouble >= 25 && imcDouble <= 29.9)
+				imcStatus.setText(faixas.get(2));
+			if (imcDouble >= 30 && imcDouble <= 34.9)
+				imcStatus.setText(faixas.get(3));
+			if (imcDouble >= 35 && imcDouble <= 39.9)
+				imcStatus.setText(faixas.get(4));
+			if (imcDouble >= 40)
+				imcStatus.setText(faixas.get(5));
 		}
-		else {
-			primeiroNomeUsuario = nomeUsuario;
-		}
-		ola.setText(getString(R.string.textOla) + " " + primeiroNomeUsuario);
-		
-		Double imcDouble = (pesoUsuario / (alturaUsuario * alturaUsuario));
-		imc.setText(imcDouble.toString());
-		
-		String[] listaFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
-		final List<String> faixas = Arrays.asList(listaFaixasIMC);
-		
-		if (imcDouble > 0 && imcDouble <= 18.5)
-			imcStatus.setText(faixas.get(0));
-		if (imcDouble >= 18.6 && imcDouble <= 24.9)
-			imcStatus.setText(faixas.get(1));
-		if (imcDouble >= 25 && imcDouble <= 29.9)
-			imcStatus.setText(faixas.get(2));
-		if (imcDouble >= 30 && imcDouble <= 34.9)
-			imcStatus.setText(faixas.get(3));
-		if (imcDouble >= 35 && imcDouble <= 39.9)
-			imcStatus.setText(faixas.get(4));
-		if (imcDouble >= 40)
-			imcStatus.setText(faixas.get(5));
 		
 		buttonAcompanhamento.setOnClickListener(new Button.OnClickListener () {
 			@Override

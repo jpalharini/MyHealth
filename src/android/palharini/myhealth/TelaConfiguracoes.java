@@ -3,9 +3,11 @@ package android.palharini.myhealth;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.palharini.myhealth.daos.PreferenciasDAO;
 import android.palharini.myhealth.entidades.Preferencias;
 import android.palharini.myhealth.fragmentos.FragmentoTimePicker;
+import android.palharini.myhealth.sessao.CaixaDialogo;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +21,11 @@ public class TelaConfiguracoes extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_configuracoes);
 		
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+		}
+		
 		final CheckBox checkLembretePeso = (CheckBox) findViewById(R.id.checkLembretePeso);
 		final EditText horaLembretePeso = (EditText) findViewById(R.id.horaLembretePeso);
 		
@@ -28,19 +35,30 @@ public class TelaConfiguracoes extends Activity {
 		final Button buttonSalvar = (Button) findViewById(R.id.buttonSalvar);
 		final Button buttonLogout = (Button) findViewById(R.id.buttonLogout);
 		
+        final CaixaDialogo caixa = new CaixaDialogo();
+		
 		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
 		final PreferenciasDAO prefsdao = new PreferenciasDAO();
 		final Preferencias prefs = prefsdao.buscarPreferencias(sessao.getIdUsuario());
 		
-		if (prefs.isLembretePeso()) {
-			checkLembretePeso.setChecked(true);
-			horaLembretePeso.setText(prefs.getHoraLembretePeso().toString());
+		if (prefs != null) {
+			if (prefs.isLembretePeso()) {
+				checkLembretePeso.setChecked(true);
+				horaLembretePeso.setText(prefs.getHoraLembretePeso().toString());
+			}
+			
+			if (prefs.isLembreteBPM()) {
+				checkLembreteBPM.setChecked(true);
+				horaLembreteBPM.setText(prefs.getHoraLembreteBPM().toString());
+			}
 		}
-		
-		if (prefs.isLembreteBPM()) {
-			checkLembreteBPM.setChecked(true);
-			horaLembreteBPM.setText(prefs.getHoraLembreteBPM().toString());
+		else {
+			caixa.showAlertDialog(
+        			this, 
+        			getString(R.string.textFalhaConexao), 
+        			getString(R.string.textServidorNaoResponde), 
+        			false);
 		}
 		
 		horaLembretePeso.setOnClickListener(new EditText.OnClickListener () {

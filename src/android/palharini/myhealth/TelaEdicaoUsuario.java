@@ -4,14 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.palharini.myhealth.daos.UsuarioDAO;
+import android.palharini.myhealth.datas.FormatoDataNascimento;
 import android.palharini.myhealth.entidades.Usuario;
 import android.palharini.myhealth.fragmentos.FragmentoDatePicker;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
@@ -27,9 +24,6 @@ public class TelaEdicaoUsuario extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_edicao_usuario);
-		
-		final String formatoData = "d/M/yyyy";
-		final String formatoDataSQL = "yyyy-MM-dd";
 		
 		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
@@ -48,17 +42,8 @@ public class TelaEdicaoUsuario extends Activity {
 		email.setText(dados.getEmail());
 		nome.setText(dados.getNome());
 		
-		String dataNascString = dados.getDataNascimento();
-		SimpleDateFormat sdfSQL = new SimpleDateFormat(formatoDataSQL);
-		SimpleDateFormat sdf = new SimpleDateFormat(formatoData);
-		Date dataNascDate = null;
-		try {
-			dataNascDate = sdfSQL.parse(dataNascString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		final String dataNascAndroid = sdf.format(dataNascDate);
+		FormatoDataNascimento fdn = new FormatoDataNascimento();
+		final String dataNascAndroid = fdn.formatarDataAndroid(dados.getDataNascimento());
 		dataNasc.setText(dataNascAndroid);
 		
 		alvoBPM.setText(String.valueOf(dados.getAlvoBPM()));
@@ -102,17 +87,8 @@ public class TelaEdicaoUsuario extends Activity {
 							e.printStackTrace();
 						}
 						
-						String dataNascString = dataNasc.getText().toString();
-						SimpleDateFormat sdf = new SimpleDateFormat(formatoData);
-						SimpleDateFormat sdfSQL = new SimpleDateFormat(formatoDataSQL);
-						Date dataNascDate = null;
-						try {
-							dataNascDate = sdf.parse(dataNascString);
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						String dataNascSQL = sdfSQL.format(dataNascDate);
+						FormatoDataNascimento fdn = new FormatoDataNascimento();
+						final String dataNascSQL = fdn.formatarDataSQL(dataNasc.getText().toString());
 
 						dao.atualizarUsuario(new Usuario(
 								dados.getId(), 

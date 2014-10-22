@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.palharini.myhealth.daos.IndicadorDAO;
 import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.entidades.Indicador;
@@ -24,6 +25,11 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_cadastro_indicador);
+		
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+		}
 		
 		final Spinner tipo = (Spinner) findViewById(R.id.spinnerTipo);
 		final EditText medida = (EditText) findViewById(R.id.editMedicao);

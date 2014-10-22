@@ -77,10 +77,13 @@
     <string name="buttonConfiguracoes">Configurações</string>
     <string name="buttonLogout">Fazer logout</string>
     
-    <!-- Diálogo Login -->
-    <string name="textLogonFalha">Falha no login</string>
+    <!-- Diálogos -->
+    <string name="textLogonFalha">Falha no login!</string>
     <string name="textLogonErrado">E-mail ou senha incorretos</string>
     <string name="textLogonVazio">Por favor, digite seu e-mail e senha</string>
+    <string name="textFalhaConexao">Falha de rede!</string>
+    <string name="textServidorNaoResponde">Falha ao obter dados do servidor.
+        \n Por favor, verifique sua conexão de rede.</string>
 
     <!-- Diversos -->
     <string name="title_activity_tela_configuracoes">Configurações</string>

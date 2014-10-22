@@ -61,21 +61,31 @@ public class TelaLogin extends Activity {
                 UsuarioDAO dao = new UsuarioDAO();
                 Usuario dados = dao.buscarUsuarioEmail(emailString);
                 
-                if(emailString.equals(dados.getEmail()) && criptSenha.equals(dados.getSenha())){
-                	sessao.criarSessao(dados.getId(), dados.getNome(), dados.getEmail());
-
-                    Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
-                    startActivity(irTelaPrincipal);
-                    finish();
-                     
-                }else{
+                if (dados != null) {                
+	                if(emailString.equals(dados.getEmail()) && criptSenha.equals(dados.getSenha())){
+	                	sessao.criarSessao(dados.getId(), dados.getNome(), dados.getEmail());
+	
+	                    Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
+	                    startActivity(irTelaPrincipal);
+	                    finish();
+	                     
+	                }else{
+	                	caixa.showAlertDialog(
+	                			TelaLogin.this, 
+	                			getString(R.string.textLogonFalha), 
+	                			getString(R.string.textLogonErrado), 
+	                			false);
+	                }
+                }
+                else {
                 	caixa.showAlertDialog(
                 			TelaLogin.this, 
-                			getString(R.string.textLogonFalha), 
-                			getString(R.string.textLogonErrado), 
+                			getString(R.string.textFalhaConexao), 
+                			getString(R.string.textServidorNaoResponde), 
                 			false);
-                }               
-            }else{
+                }
+            }
+            else{
             	caixa.showAlertDialog(
             			TelaLogin.this, 
             			getString(R.string.textLogonFalha), 

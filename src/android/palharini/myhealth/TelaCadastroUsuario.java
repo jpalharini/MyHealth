@@ -92,7 +92,7 @@ public class TelaCadastroUsuario extends Activity {
 					
 					String dataNascString = dataNasc.getText().toString();
 					FormatoDataNascimento fdn = new FormatoDataNascimento();
-					String dataNascSQL = fdn.formatarData(dataNascString);
+					String dataNascSQL = fdn.formatarDataSQL(dataNascString);
 					
 					UsuarioDAO usrdao = new UsuarioDAO();
 					usrdao.cadastrarUsuario(new Usuario(
@@ -114,19 +114,19 @@ public class TelaCadastroUsuario extends Activity {
 					
 					inddao.cadastrarIndicador(new Indicador(
 							0,
-							1,
+							0,
 							usuario.getId(),
 							alturaDouble,
-							unidades.get(1),
+							unidades.get(0),
 							ts.getTimestamp()
 							));
 					
 					inddao.cadastrarIndicador(new Indicador(
 							0,
-							0,
+							1,
 							usuario.getId(),
 							pesoDouble,
-							unidades.get(0),
+							unidades.get(1),
 							ts.getTimestamp()
 							));
 

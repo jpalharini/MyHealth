@@ -6,20 +6,31 @@ import java.util.Date;
 
 public class FormatoDataNascimento {
 
-	private String formatoData = "d/MM/yyyy";
+	private String formatoDataAndroid = "d/M/yyyy";
 	private String formatoDataSQL = "yyyy-MM-dd";
-	SimpleDateFormat sdf = new SimpleDateFormat(formatoData);
+	SimpleDateFormat sdfAnd = new SimpleDateFormat(formatoDataAndroid);
 	SimpleDateFormat sdfSQL = new SimpleDateFormat(formatoDataSQL);
 	Date dataNascDate = null;
 	
-	public String formatarData (String dataNasc) {
+	public String formatarDataSQL (String dataNasc) {
 		try {
-			dataNascDate = sdf.parse(dataNasc);
+			dataNascDate = sdfAnd.parse(dataNasc);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
 		return sdfSQL.format(dataNascDate);
+	}
+	
+	public String formatarDataAndroid (String dataNasc) {
+		try {
+			dataNascDate = sdfSQL.parse(dataNasc);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		return sdfAnd.format(dataNascDate);
 	}
 }
