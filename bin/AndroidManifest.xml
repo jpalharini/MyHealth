@@ -15,12 +15,11 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/MyHealth" >
-        <activity 
-            android:name=".TelaLogin" 
-            android:label="@string/title_activity_tela_login">
+        <activity
+            android:name=".TelaLogin"
+            android:label="@string/title_activity_tela_login" >
         </activity>
-        <activity 
-            android:name=".TelaCadastroUsuario" >
+        <activity android:name=".TelaCadastroUsuario" >
         </activity>
         <activity
             android:name=".TelaCadastroIndicador"
@@ -48,11 +47,16 @@
             android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
- 
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="TelaAcompanhamento"></activity>
+        <activity android:name=".TelaAcompanhamento" >
+        </activity>
+        <activity
+            android:name=".TelaCadastroPreferencias"
+            android:label="@string/title_activity_tela_cadastro_preferencias" >
+        </activity>
     </application>
 
 </manifest>

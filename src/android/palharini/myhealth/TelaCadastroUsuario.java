@@ -12,29 +12,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.daos.IndicadorDAO;
-import android.palharini.myhealth.daos.PreferenciasDAO;
 import android.palharini.myhealth.daos.UsuarioDAO;
 import android.palharini.myhealth.datas.FormatoDataNascimento;
 import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.entidades.Indicador;
-import android.palharini.myhealth.entidades.Preferencias;
 import android.palharini.myhealth.entidades.Usuario;
 import android.palharini.myhealth.fragmentos.FragmentoDatePicker;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class TelaCadastroUsuario extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		if (android.os.Build.VERSION.SDK_INT > 9) {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
+		
 		setContentView(R.layout.activity_tela_cadastro_usuario);
 		
 		final EditText email = (EditText) findViewById(R.id.editEmail);
@@ -44,9 +44,6 @@ public class TelaCadastroUsuario extends Activity {
 		final EditText dataNasc = (EditText) findViewById(R.id.editNasc);
 		final EditText altura = (EditText) findViewById(R.id.editAltura);
 		final EditText peso = (EditText) findViewById(R.id.editPeso);
-		
-		final CheckBox checkLembretePeso = (CheckBox) findViewById(R.id.checkLembretePeso);
-		final CheckBox checkAlvoBPM = (CheckBox) findViewById(R.id.checkAlvoBPM);
 		
 		Button okButton = (Button) findViewById(R.id.okButton);
 		
@@ -94,7 +91,7 @@ public class TelaCadastroUsuario extends Activity {
 					String dataNascSQL = fdn.formatarDataSQL(dataNascString);
 					
 					UsuarioDAO usrdao = new UsuarioDAO();
-					usrdao.cadastrarUsuario(new Usuario(
+					boolean usr = usrdao.cadastrarUsuario(new Usuario(
 							0, 
 							emailString,
 							criptSenha,
@@ -111,7 +108,7 @@ public class TelaCadastroUsuario extends Activity {
 					
 					IndicadorDAO inddao = new IndicadorDAO();
 					
-					inddao.cadastrarIndicador(new Indicador(
+					boolean indAltura = inddao.cadastrarIndicador(new Indicador(
 							0,
 							0,
 							usuario.getId(),
@@ -120,7 +117,7 @@ public class TelaCadastroUsuario extends Activity {
 							ts.getTimestamp()
 							));
 					
-					inddao.cadastrarIndicador(new Indicador(
+					boolean indPeso = inddao.cadastrarIndicador(new Indicador(
 							0,
 							1,
 							usuario.getId(),
@@ -128,15 +125,18 @@ public class TelaCadastroUsuario extends Activity {
 							unidades.get(1),
 							ts.getTimestamp()
 							));
-
-	                sessao.criarSessao(usuario.getId(), usuario.getNome(), usuario.getEmail());
-	                
-	                PreferenciasDAO prefsdao = new PreferenciasDAO();
-					prefsdao.cadastrarPreferencias(new Preferencias(
-							sessao.getIdUsuario(),
-							checkLembretePeso.isChecked(),
-							checkAlvoBPM.isChecked()
-							));
+					
+					if (usr && indAltura && indPeso) {
+						sessao.criarSessao(usuario.getId(), usuario.getNome(), usuario.getEmail());
+						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrOK), Toast.LENGTH_LONG).show();
+						Intent irTelaCadastroPreferencias = new Intent(getApplicationContext(), TelaCadastroPreferencias.class);
+						startActivity(irTelaCadastroPreferencias);
+						finish();
+					}
+					else {
+						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrFalha), Toast.LENGTH_LONG).show();
+					}
+						
 				}
 				
 				Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);

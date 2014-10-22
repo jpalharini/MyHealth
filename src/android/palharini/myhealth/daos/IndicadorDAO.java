@@ -1,5 +1,8 @@
 package android.palharini.myhealth.daos;
 
+import java.util.ArrayList;
+import java.util.Vector;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -97,8 +100,11 @@ public class IndicadorDAO {
 		return true;
 	}	
 
-	public Indicador buscarIndicadoresPeriodo (int idUsuario, String periodo, int difData, int data){
+	public ArrayList<Indicador> buscarIndicadoresPeriodo (int idUsuario, String periodo, int difData, int data){
+		
 		Indicador indicador = null;
+		
+		ArrayList<Indicador> indicadores = new ArrayList<Indicador>();
 		
 		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_PERIODO);
 		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
@@ -116,22 +122,28 @@ public class IndicadorDAO {
 		try {
 			http.call("urn:" + BUSCAR_PERIODO, envelope);
 			
-			SoapObject resposta = (SoapObject) envelope.getResponse();
+			Vector<SoapObject> resposta = (Vector<SoapObject>) envelope.getResponse();
 			
-			indicador = new Indicador();
-			
-			indicador.setId(Integer.parseInt(resposta.getProperty("id").toString()));
-			indicador.setIdTipo(Integer.parseInt(resposta.getProperty("idTipo").toString()));
-			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
-			indicador.setMedida(Double.parseDouble(resposta.getProperty("medida").toString()));
-			indicador.setUnidade(resposta.getProperty("unidade").toString());
-			indicador.setTimestamp(resposta.getProperty("timestamp").toString());
+			for (SoapObject soapObject : resposta) {
+				
+				indicador = new Indicador();
+				
+				indicador.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+				indicador.setIdTipo(Integer.parseInt(soapObject.getProperty("idTipo").toString()));
+				indicador.setIdUsuario(Integer.parseInt(soapObject.getProperty("idUsuario").toString()));
+				indicador.setMedida(Double.parseDouble(soapObject.getProperty("medida").toString()));
+				indicador.setUnidade(soapObject.getProperty("unidade").toString());
+				indicador.setTimestamp(soapObject.getProperty("timestamp").toString());
+				
+				indicadores.add(indicador);
+			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return indicador;
+		return indicadores;
 	}
 	
 	public Indicador buscarIndicadoresTipo (int idUsuario, int idTipo) {

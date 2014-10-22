@@ -95,22 +95,6 @@
                 android:inputType="numberDecimal"
                 android:textSize="20sp" />
 
-            <CheckBox
-                android:id="@+id/checkLembretePeso"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="@string/checkLembretePeso"
-                android:textSize="18sp" />
-
-            <CheckBox
-                android:id="@+id/checkAlvoBPM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/checkLembreteBPM"
-                android:textSize="18sp" />
-
             <Button
                 android:id="@+id/okButton"
                 android:layout_width="match_parent"

@@ -76,5 +76,12 @@ public class Indicador {
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
+
+	@Override
+	public String toString() {
+		return "Indicador [id=" + id + ", idTipo=" + idTipo + ", idUsuario="
+				+ idUsuario + ", medida=" + medida + ", unidade=" + unidade
+				+ ", timestamp=" + timestamp + "]";
+	}
 	
 }
