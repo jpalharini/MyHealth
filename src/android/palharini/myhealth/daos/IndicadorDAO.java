@@ -22,9 +22,10 @@ public class IndicadorDAO {
 	public static final String CADASTRAR = "cadastrarIndicador";
 	public static final String ATUALIZAR = "atualizarIndicador";
 	public static final String EXCLUIR = "excluirIndicador";
-	public static final String BUSCAR_PERIODO = "buscarIndicadorPeriodo";
+	public static final String BUSCAR_PERIODO = "buscarIndicadoresPeriodo";
 	public static final String BUSCAR_TIPO = "buscarIndicadorTipo";
-	public static final String BUSCAR_PERIODO_TIPO = "buscarIndicadorPeriodoTipo";
+	public static final String BUSCAR_TIPO_TODOS = "buscarIndicadoresTipo";
+	public static final String BUSCAR_PERIODO_TIPO = "buscarIndicadoresPeriodoTipo";
 	
 	
 	public boolean cadastrarIndicador (Indicador indicador) {
@@ -147,10 +148,12 @@ public class IndicadorDAO {
 		return indicadores;
 	}
 	
-	public Indicador buscarIndicadoresTipo (int idUsuario, int idTipo) {
+	public ArrayList<Indicador> buscarIndicadoresTipo (int idUsuario, int idTipo) {
 		Indicador indicador = null;
 		
-		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_TIPO);
+		ArrayList<Indicador> indicadores = new ArrayList<Indicador>();
+		
+		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_TIPO_TODOS);
 		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
 		buscarIndicadorPeriodo.addProperty("idTipo", idTipo);
 		
@@ -162,27 +165,34 @@ public class IndicadorDAO {
 		HttpTransportSE http = new HttpTransportSE(URL);
 		
 		try {
-			http.call("urn:" + BUSCAR_TIPO, envelope);
+			http.call("urn:" + BUSCAR_TIPO_TODOS, envelope);
 			
-			SoapObject resposta = (SoapObject) envelope.getResponse();
+			@SuppressWarnings("unchecked")
+			Vector<SoapObject> resposta = (Vector<SoapObject>) envelope.getResponse();
 			
-			indicador = new Indicador();
-			
-			indicador.setId(Integer.parseInt(resposta.getProperty("id").toString()));
-			indicador.setIdTipo(Integer.parseInt(resposta.getProperty("idTipo").toString()));
-			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
-			indicador.setMedida(Double.parseDouble(resposta.getProperty("medida").toString()));
-			indicador.setUnidade(resposta.getProperty("unidade").toString());
-			indicador.setTimestamp(resposta.getProperty("timestamp").toString());
+			for (SoapObject soapObject : resposta) {
+				
+				indicador = new Indicador();
+				
+				indicador.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+				indicador.setIdTipo(Integer.parseInt(soapObject.getProperty("idTipo").toString()));
+				indicador.setIdUsuario(Integer.parseInt(soapObject.getProperty("idUsuario").toString()));
+				indicador.setMedida(Double.parseDouble(soapObject.getProperty("medida").toString()));
+				indicador.setUnidade(soapObject.getProperty("unidade").toString());
+				indicador.setTimestamp(soapObject.getProperty("timestamp").toString());
+				
+				indicadores.add(indicador);
+			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return indicador;
+		return indicadores;
 	}
 	
-	public Indicador buscarIndicadoresTipo (int idUsuario, int idTipo, int limite) {
+	public Indicador buscarIndicadorTipo (int idUsuario, int idTipo, int limite) {
 		Indicador indicador = null;
 		
 		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_TIPO);
@@ -210,16 +220,20 @@ public class IndicadorDAO {
 			indicador.setMedida(Double.parseDouble(resposta.getProperty("medida").toString()));
 			indicador.setUnidade(resposta.getProperty("unidade").toString());
 			indicador.setTimestamp(resposta.getProperty("timestamp").toString());
+		
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 		return indicador;
 	}
 	
-	public Indicador buscarIndicadoresPeriodoTipo (int idUsuario, int idTipo, String periodo, int difData, int data) {
+	public ArrayList<Indicador> buscarIndicadoresPeriodoTipo (int idUsuario, int idTipo, String periodo, int difData, int data) {
 		Indicador indicador = null;
+		
+		ArrayList<Indicador> indicadores = new ArrayList<Indicador>();
 		
 		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_PERIODO_TIPO);
 		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
@@ -238,60 +252,29 @@ public class IndicadorDAO {
 		try {
 			http.call("urn:" + BUSCAR_PERIODO_TIPO, envelope);
 			
-			SoapObject resposta = (SoapObject) envelope.getResponse();
+			@SuppressWarnings("unchecked")
+			Vector<SoapObject> resposta = (Vector<SoapObject>) envelope.getResponse();
 			
-			indicador = new Indicador();
-			
-			indicador.setId(Integer.parseInt(resposta.getProperty("id").toString()));
-			indicador.setIdTipo(Integer.parseInt(resposta.getProperty("idTipo").toString()));
-			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
-			indicador.setMedida(Double.parseDouble(resposta.getProperty("medida").toString()));
-			indicador.setUnidade(resposta.getProperty("unidade").toString());
-			indicador.setTimestamp(resposta.getProperty("timestamp").toString());
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return indicador;
-	}
-	
-	public Indicador buscarIndicadoresPeriodoTipo (int idUsuario, int idTipo, String periodo, int data, int difData, int limite) {
-		Indicador indicador = null;
-		
-		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_PERIODO_TIPO);
-		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
-		buscarIndicadorPeriodo.addProperty("idTipo", idTipo);
-		buscarIndicadorPeriodo.addProperty("periodo", periodo);
-		buscarIndicadorPeriodo.addProperty("difData", difData);
-		buscarIndicadorPeriodo.addProperty("data", data);
-		
-		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-		
-		envelope.setOutputSoapObject(buscarIndicadorPeriodo);
-		envelope.implicitTypes = true;
-		
-		HttpTransportSE http = new HttpTransportSE(URL);
-		
-		try {
-			http.call("urn:" + BUSCAR_PERIODO_TIPO, envelope);
-			
-			SoapObject resposta = (SoapObject) envelope.getResponse();
-			
-			indicador = new Indicador();
-			
-			indicador.setId(Integer.parseInt(resposta.getProperty("id").toString()));
-			indicador.setIdTipo(Integer.parseInt(resposta.getProperty("idTipo").toString()));
-			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
-			indicador.setMedida(Double.parseDouble(resposta.getProperty("medida").toString()));
-			indicador.setUnidade(resposta.getProperty("unidade").toString());
-			indicador.setTimestamp(resposta.getProperty("timestamp").toString());
+			for (SoapObject soapObject : resposta) {
+				
+				indicador = new Indicador();
+				
+				indicador.setId(Integer.parseInt(soapObject.getProperty("id").toString()));
+				indicador.setIdTipo(Integer.parseInt(soapObject.getProperty("idTipo").toString()));
+				indicador.setIdUsuario(Integer.parseInt(soapObject.getProperty("idUsuario").toString()));
+				indicador.setMedida(Double.parseDouble(soapObject.getProperty("medida").toString()));
+				indicador.setUnidade(soapObject.getProperty("unidade").toString());
+				indicador.setTimestamp(soapObject.getProperty("timestamp").toString());
+				
+				indicadores.add(indicador);
+			}
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return indicador;
+		return indicadores;
 	}
 	
 }

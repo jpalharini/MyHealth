@@ -90,6 +90,11 @@
     <string name="buttonDados">Meus dados</string>
     <string name="buttonConfiguracoes">Configurações</string>
     <string name="buttonLogout">Fazer logout</string>
+    
+    <!-- Tela Acompanhamento -->
+    <string name="abaSemana">Semana</string>
+    <string name="abaMes">Mês</string>
+    <string name="abaAno">Ano</string>
 
     <!-- Diálogos -->
     <string name="textLogonFalha">Falha no login!</string>

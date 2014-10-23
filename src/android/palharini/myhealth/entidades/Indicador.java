@@ -79,9 +79,7 @@ public class Indicador {
 
 	@Override
 	public String toString() {
-		return "Indicador [id=" + id + ", idTipo=" + idTipo + ", idUsuario="
-				+ idUsuario + ", medida=" + medida + ", unidade=" + unidade
-				+ ", timestamp=" + timestamp + "]";
+		return timestamp;
 	}
 	
 }

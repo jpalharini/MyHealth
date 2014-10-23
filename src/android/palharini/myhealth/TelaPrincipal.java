@@ -42,8 +42,8 @@ public class TelaPrincipal extends Activity {
 		Usuario usuario = usrdao.buscarUsuario(sessao.getIdUsuario());
 		
 		IndicadorDAO inddao = new IndicadorDAO();
-		Indicador altura = inddao.buscarIndicadoresTipo(sessao.getIdUsuario(), 0, 1);
-		Indicador peso = inddao.buscarIndicadoresTipo(sessao.getIdUsuario(), 1, 1);
+		Indicador altura = inddao.buscarIndicadorTipo(sessao.getIdUsuario(), 0, 1);
+		Indicador peso = inddao.buscarIndicadorTipo(sessao.getIdUsuario(), 1, 1);
 		
 		if (usuario != null && altura != null && peso != null) {
 			String nomeUsuario = usuario.getNome();
