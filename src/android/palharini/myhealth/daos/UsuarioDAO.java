@@ -121,7 +121,7 @@ public class UsuarioDAO {
 			dados.setId(Integer.parseInt(resposta.getProperty("id").toString()));
 			dados.setEmail(resposta.getProperty("email").toString());
 			dados.setNome(resposta.getProperty("nome").toString());
-			dados.setDataNascimento(resposta.getProperty("FormatoDataNascimento").toString());
+			dados.setDataNascimento(resposta.getProperty("dataNascimento").toString());
 			dados.setAlvoBPM(Integer.parseInt(resposta.getProperty("alvoBPM").toString()));
 			
 		} catch (Exception e) {

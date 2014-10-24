@@ -44,7 +44,7 @@
         <activity
             android:name=".TelaInicial"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,6 +56,10 @@
         <activity
             android:name=".TelaCadastroPreferencias"
             android:label="@string/title_activity_tela_cadastro_preferencias" >
+        </activity>
+        <activity
+            android:name=".ListaIndicadores"
+            android:label="@string/title_activity_lista_indicadores" >
         </activity>
     </application>
 

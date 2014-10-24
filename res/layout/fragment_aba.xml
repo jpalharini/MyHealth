@@ -1,15 +1,18 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="android.palharini.myhealth.abas.AbaAno" >
-
-    <!-- TODO: Update blank fragment layout -->
-
-    <ListView
-        android:id="@+id/listViewInd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent" 
+    android:layout_width="match_parent" 
+    android:orientation="vertical" 
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp">
+ 
+    <ListView 
+        android:drawSelectorOnTop="false" 
+        android:id="@+id/listViewInd" 
+        android:layout_height="0dp" 
+        android:layout_weight="1" 
+        android:layout_width="match_parent">
+        
     </ListView>
 
-</FrameLayout>
+</LinearLayout>

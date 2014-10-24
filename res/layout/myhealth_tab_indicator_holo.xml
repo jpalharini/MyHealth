@@ -17,7 +17,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="@dimen/tab_host_default_height"
     android:orientation="horizontal"
-    style="@style/TabMyHealth"
+    style="@style/MyActionBarTabs"
     android:gravity="center">
 
     <ImageView

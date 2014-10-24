@@ -17,11 +17,15 @@
     <string name="spinnerTipo">Selecione o tipo</string>
 
     <string-array name="listaTipos">
+        <item>Altura</item>
         <item>Peso</item>
         <item>Freq. Cardíaca</item>
         <item>Glicose</item>
         <item>HDL</item>
         <item>LDL</item>
+        <item>Gordura corporal</item>
+        <item>Cintura</item>
+        <item>Triglicerídeos</item>
     </string-array>
 
     <string name="textUnidade">unid.</string>
@@ -90,7 +94,7 @@
     <string name="buttonDados">Meus dados</string>
     <string name="buttonConfiguracoes">Configurações</string>
     <string name="buttonLogout">Fazer logout</string>
-    
+
     <!-- Tela Acompanhamento -->
     <string name="abaSemana">Semana</string>
     <string name="abaMes">Mês</string>
@@ -109,5 +113,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_tela_cadastro_preferencias">Preferências</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_lista_indicadores">Indicadores</string>
 
 </resources>
