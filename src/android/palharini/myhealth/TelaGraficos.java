@@ -16,7 +16,7 @@ public class TelaGraficos extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tela_acompanhamento);
+		setContentView(R.layout.activity_tela_graficos);
 
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
