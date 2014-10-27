@@ -11,14 +11,26 @@ public class AdaptadorAbasPeriodos extends FragmentPagerAdapter {
     }
 
 	@Override
-	public Fragment getItem(int arg0) {
+	public Fragment getItem(int index) {
 		// TODO Auto-generated method stub
+		switch (index) {
+        case 0:
+            // Top Rated fragment activity
+            return new AbaSemana();
+        case 1:
+            // Games fragment activity
+            return new AbaMes();
+        case 2:
+            // Movies fragment activity
+            return new AbaAno();
+        }
+		
 		return null;
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 3;
 	}
 }

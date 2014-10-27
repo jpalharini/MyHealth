@@ -4,38 +4,51 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.palharini.myhealth.abas.AbaSemana;
 import android.palharini.myhealth.abas.AdaptadorAbasPeriodos;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
-public class TelaAcompanhamento extends FragmentActivity implements ActionBar.TabListener {
-	
-	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
+public class TelaGraficos extends FragmentActivity implements ActionBar.TabListener {
+		
+	private ViewPager viewPager;
+	private ActionBar actionBar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_acompanhamento);
 
-		final ActionBar actionBar = getActionBar();
-	    
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		actionBar = getActionBar();
+		final AdaptadorAbasPeriodos adapter = new AdaptadorAbasPeriodos(getSupportFragmentManager());
+		
+		viewPager.setAdapter(adapter);
+		actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	 
-        // For each of the sections in the app, add a tab to the action bar.
         actionBar.addTab(actionBar.newTab().setText(R.string.abaSemana).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.abaMes).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.abaAno).setTabListener(this));
+	
+		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			 
+		    @Override
+		    public void onPageSelected(int position) {
+		        // on changing the page
+		        // make respected tab selected
+		        actionBar.setSelectedNavigationItem(position);
+		    }
+		 
+		    @Override
+		    public void onPageScrolled(int arg0, float arg1, int arg2) {
+		    }
+		 
+		    @Override
+		    public void onPageScrollStateChanged(int arg0) {
+		    }
+		});
 	}
 	
-		@Override
-		public void onRestoreInstanceState(Bundle savedInstanceState) {
-		    if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM)) {
-		        getActionBar().setSelectedNavigationItem(savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
-		    }
-		}
-
 		@Override
 		public void onTabReselected(Tab tab, FragmentTransaction ft) {
 			// TODO Auto-generated method stub
@@ -45,17 +58,12 @@ public class TelaAcompanhamento extends FragmentActivity implements ActionBar.Ta
 		@Override
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
 			// TODO Auto-generated method stub
-			
-			if (tab.getPosition() == 0) {
-			      Fragment listaIndSemana = new Fragment();
-			      getSupportFragmentManager().beginTransaction().replace(R.id.container, listaIndSemana).commit();
-			     } 
-	
+			viewPager.setCurrentItem(tab.getPosition());	
 		}
 
 		@Override
 		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 			// TODO Auto-generated method stub
-	
 		}
-	}
+		
+}

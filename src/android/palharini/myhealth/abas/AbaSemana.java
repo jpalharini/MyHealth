@@ -1,34 +1,32 @@
 package android.palharini.myhealth.abas;
 
-import android.app.ListFragment;
 import android.os.Bundle;
 import android.palharini.myhealth.R;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.ListView;
 
 
-public class AbaSemana extends ListFragment {
+public class AbaSemana extends Fragment {
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		View view = inflater.inflate(R.layout.fragment_aba, container, false);
+
+	    final ListView lViewTipos = (ListView) view.findViewById(R.id.listViewInd);
 		
-		ListAdapter listAdapter = new ArrayAdapter<String>(
+		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
 				getActivity(), 
 				android.R.layout.simple_list_item_1, 
 				getResources().getStringArray(R.array.listaTipos));
 		
-		setListAdapter(listAdapter);
+		lViewTipos.setAdapter(listAdapter);
 		
-	}
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		return inflater.inflate(R.layout.fragment_aba, container, false);
+		return view;
 	}
 
 }

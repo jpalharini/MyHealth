@@ -51,7 +51,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TelaAcompanhamento" >
+        <activity android:name=".TelaGraficos" >
         </activity>
         <activity
             android:name=".TelaCadastroPreferencias"
@@ -60,6 +60,10 @@
         <activity
             android:name=".ListaIndicadores"
             android:label="@string/title_activity_lista_indicadores" >
+        </activity>
+        <activity
+            android:name=".TelaTipos"
+            android:label="@string/title_activity_tela_tipos" >
         </activity>
     </application>
 

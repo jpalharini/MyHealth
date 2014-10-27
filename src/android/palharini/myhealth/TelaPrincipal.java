@@ -83,7 +83,7 @@ public class TelaPrincipal extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent irTelaAcompanhamento = new Intent(getApplicationContext(), TelaAcompanhamento.class);
+				Intent irTelaAcompanhamento = new Intent(getApplicationContext(), TelaGraficos.class);
 				startActivity(irTelaAcompanhamento);
 			}
 		});

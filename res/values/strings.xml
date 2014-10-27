@@ -114,5 +114,6 @@
     <string name="title_activity_tela_cadastro_preferencias">Preferências</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_lista_indicadores">Indicadores</string>
+    <string name="title_activity_tela_tipos">Indicadores</string>
 
 </resources>
