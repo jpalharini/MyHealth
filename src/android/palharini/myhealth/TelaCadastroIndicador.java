@@ -63,7 +63,8 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 						sessao.getIdUsuario(),
 						Double.parseDouble(medida.getText().toString()), 
 						unidades.get(tipoSelecionadoId),
-						ts.getTimestamp()
+						ts.getData(),
+						ts.getHorario()
 				));
 			}
 		});

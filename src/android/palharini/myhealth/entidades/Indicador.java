@@ -7,18 +7,20 @@ public class Indicador {
 	private int idUsuario;
 	private double medida;
 	private String unidade;
-	private String timestamp;
+	private String data;
+	private String hora;
 	
 	public Indicador(){}
 
 	public Indicador(int id, int idTipo, int idUsuario, double medida,
-			String unidade, String timestamp) {
+			String unidade, String data, String hora) {
 		this.id = id;
 		this.idTipo = idTipo;
 		this.idUsuario = idUsuario;
 		this.medida = medida;
 		this.unidade = unidade;
-		this.timestamp = timestamp;
+		this.data = data;
+		this.hora = hora;
 	}
 	
 	public Indicador(int id, int idTipo, double medida,
@@ -69,17 +71,25 @@ public class Indicador {
 		this.unidade = unidade;
 	}
 
-	public String getTimestamp() {
-		return timestamp;
+	public String getData() {
+		return data;
 	}
 
-	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 
 	@Override
 	public String toString() {
-		return timestamp;
+		return data + " " + hora;
 	}
 	
 }

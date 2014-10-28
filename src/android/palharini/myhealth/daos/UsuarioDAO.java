@@ -15,7 +15,7 @@ public class UsuarioDAO {
 	
 	private static final String URL = conexao.getURL() + classeWS + "?wsdl";
 	private static final String NAMESPACE = conexao.getNamespace();
-
+	private static final int TIMEOUT = conexao.getTimeout();
 	
 	private static final String CADASTRAR = "cadastrarUsuario";
 	private static final String ATUALIZAR = "atualizarUsuario";
@@ -43,7 +43,7 @@ public class UsuarioDAO {
 		MarshalDouble md = new MarshalDouble();
 		md.register(envelope);
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + CADASTRAR, envelope);
@@ -81,7 +81,7 @@ public class UsuarioDAO {
 		MarshalDouble md = new MarshalDouble();
 		md.register(envelope);
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + ATUALIZAR, envelope);
@@ -109,7 +109,7 @@ public class UsuarioDAO {
 		envelope.setOutputSoapObject(buscarUsuario);
 		envelope.implicitTypes = true;
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + BUSCAR, envelope);
@@ -143,7 +143,7 @@ public class UsuarioDAO {
 		envelope.setOutputSoapObject(buscarUsuarioEmail);
 		envelope.implicitTypes = true;
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + BUSCAR_EMAIL, envelope);

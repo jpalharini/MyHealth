@@ -1,5 +1,6 @@
 package android.palharini.myhealth;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class TelaPrincipal extends Activity {
 		final TextView ola = (TextView) findViewById(R.id.textOla);
 		final TextView imc = (TextView) findViewById(R.id.IMC);
 		final TextView imcStatus = (TextView) findViewById(R.id.textStatusIMC);
+		final TextView fcd = (TextView) findViewById(R.id.alvoBPM);
 		
 		final Button buttonAcompanhamento = (Button) findViewById(R.id.buttonAcompanhamento);
 		final Button buttonDados = (Button) findViewById(R.id.buttonDados);
@@ -77,13 +79,31 @@ public class TelaPrincipal extends Activity {
 				imcStatus.setText(faixas.get(4));
 			if (imcDouble >= 40)
 				imcStatus.setText(faixas.get(5));
+			
+			IndicadorDAO dao = new IndicadorDAO();
+			Indicador indicador = new Indicador();
+			ArrayList<Indicador> indicadores = dao.buscarIndicadoresTipo(sessao.getIdUsuario(), 2);
+			
+			if (indicadores.size() >= 3) {
+				int x;
+				Double bpm, bpmFinal=0.0, fcdDouble;
+				
+				for (x=1; x==3; x++) {
+					indicador = indicadores.get(x);
+					bpm = indicador.getMedida();
+					bpmFinal = bpmFinal+bpm;					
+				}
+				
+				fcdDouble = bpmFinal/3;
+				fcd.setText(fcdDouble.toString());
+			}
 		}
 		
 		buttonAcompanhamento.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent irTelaAcompanhamento = new Intent(getApplicationContext(), TelaGraficos.class);
+				Intent irTelaAcompanhamento = new Intent(getApplicationContext(), TelaTipos.class);
 				startActivity(irTelaAcompanhamento);
 			}
 		});

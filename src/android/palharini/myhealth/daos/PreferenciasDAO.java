@@ -15,10 +15,11 @@ public class PreferenciasDAO {
 	
 	private static final String URL = conexao.getURL() + classeWS + "?wsdl";
 	private static final String NAMESPACE = conexao.getNamespace();
+	private static final int TIMEOUT = conexao.getTimeout();
 	
 	private static final String CADASTRAR = "cadastrarPreferencias";
 	private static final String ATUALIZAR = "atualizarPreferencias";
-	private static final String BUSCAR = "buscarPreferencias";
+	private static final String BUSCAR = "buscarPreferenciasPorId";
 
 	public boolean cadastrarPreferencias (Preferencias preferencias) {
 		
@@ -41,7 +42,7 @@ public class PreferenciasDAO {
 		MarshalDouble md = new MarshalDouble();
 		md.register(envelope);
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + CADASTRAR, envelope);
@@ -77,7 +78,7 @@ public class PreferenciasDAO {
 		envelope.setOutputSoapObject(atualizarPreferencias);
 		envelope.implicitTypes = true;
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + ATUALIZAR, envelope);
@@ -94,7 +95,7 @@ public class PreferenciasDAO {
 		return true;
 	}
 
-	public Preferencias buscarPreferencias(int id){
+	public Preferencias buscarPreferenciasPorId(int id){
 		Preferencias prefs = null;
 		
 		SoapObject buscarPreferencias = new SoapObject (NAMESPACE, BUSCAR);
@@ -105,7 +106,7 @@ public class PreferenciasDAO {
 		envelope.setOutputSoapObject(buscarPreferencias);
 		envelope.implicitTypes = true;
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + BUSCAR, envelope);

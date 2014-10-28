@@ -18,6 +18,7 @@ public class IndicadorDAO {
 	
 	private static final String URL = conexao.getURL() + classeWS;
 	private static final String NAMESPACE = conexao.getNamespace();
+	private static final int TIMEOUT = conexao.getTimeout();
 	
 	public static final String CADASTRAR = "cadastrarIndicador";
 	public static final String ATUALIZAR = "atualizarIndicador";
@@ -26,6 +27,7 @@ public class IndicadorDAO {
 	public static final String BUSCAR_TIPO = "buscarIndicadorTipo";
 	public static final String BUSCAR_TIPO_TODOS = "buscarIndicadoresTipo";
 	public static final String BUSCAR_PERIODO_TIPO = "buscarIndicadoresPeriodoTipo";
+	public static final String BUSCAR_MEDIA = "buscarMediaPeriodo";
 	
 	
 	public boolean cadastrarIndicador (Indicador indicador) {
@@ -39,8 +41,9 @@ public class IndicadorDAO {
 		ind.addProperty("idUsuario", indicador.getIdUsuario());
 		ind.addProperty("medida", indicador.getMedida());
 		ind.addProperty("unidade", indicador.getUnidade());
-		ind.addProperty("timestamp", indicador.getTimestamp());
-		
+		ind.addProperty("data", indicador.getData());
+		ind.addProperty("hora", indicador.getHora());
+
 		cadastrarIndicador.addSoapObject(ind);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -50,7 +53,7 @@ public class IndicadorDAO {
 		MarshalDouble md = new MarshalDouble();
 		md.register(envelope);
 		
-		HttpTransportSE http = new HttpTransportSE(URL, 10000);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + CADASTRAR, envelope);
@@ -84,7 +87,7 @@ public class IndicadorDAO {
 		envelope.setOutputSoapObject(atualizarIndicador);
 		envelope.implicitTypes = true;
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + ATUALIZAR, envelope);
@@ -118,7 +121,7 @@ public class IndicadorDAO {
 		envelope.setOutputSoapObject(buscarIndicadorPeriodo);
 		envelope.implicitTypes = true;
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + BUSCAR_PERIODO, envelope);
@@ -135,7 +138,8 @@ public class IndicadorDAO {
 				indicador.setIdUsuario(Integer.parseInt(soapObject.getProperty("idUsuario").toString()));
 				indicador.setMedida(Double.parseDouble(soapObject.getProperty("medida").toString()));
 				indicador.setUnidade(soapObject.getProperty("unidade").toString());
-				indicador.setTimestamp(soapObject.getProperty("timestamp").toString());
+				indicador.setData(soapObject.getProperty("data").toString());
+				indicador.setHora(soapObject.getProperty("hora").toString());
 				
 				indicadores.add(indicador);
 			}
@@ -162,7 +166,7 @@ public class IndicadorDAO {
 		envelope.setOutputSoapObject(buscarIndicadorPeriodo);
 		envelope.implicitTypes = true;
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + BUSCAR_TIPO_TODOS, envelope);
@@ -179,7 +183,8 @@ public class IndicadorDAO {
 				indicador.setIdUsuario(Integer.parseInt(soapObject.getProperty("idUsuario").toString()));
 				indicador.setMedida(Double.parseDouble(soapObject.getProperty("medida").toString()));
 				indicador.setUnidade(soapObject.getProperty("unidade").toString());
-				indicador.setTimestamp(soapObject.getProperty("timestamp").toString());
+				indicador.setData(soapObject.getProperty("data").toString());
+				indicador.setHora(soapObject.getProperty("hora").toString());
 				
 				indicadores.add(indicador);
 			}
@@ -205,7 +210,7 @@ public class IndicadorDAO {
 		envelope.setOutputSoapObject(buscarIndicadorPeriodo);
 		envelope.implicitTypes = true;
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + BUSCAR_TIPO, envelope);
@@ -219,8 +224,8 @@ public class IndicadorDAO {
 			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
 			indicador.setMedida(Double.parseDouble(resposta.getProperty("medida").toString()));
 			indicador.setUnidade(resposta.getProperty("unidade").toString());
-			indicador.setTimestamp(resposta.getProperty("timestamp").toString());
-		
+			indicador.setData(resposta.getProperty("data").toString());
+			indicador.setHora(resposta.getProperty("hora").toString());		
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -230,7 +235,7 @@ public class IndicadorDAO {
 		return indicador;
 	}
 	
-	public ArrayList<Indicador> buscarIndicadoresPeriodoTipo (int idUsuario, int idTipo, String periodo, int difData, int data) {
+	public ArrayList<Indicador> buscarIndicadoresPeriodoTipo (int idUsuario, int idTipo, String periodo, String dataAtual, int difData) {
 		Indicador indicador = null;
 		
 		ArrayList<Indicador> indicadores = new ArrayList<Indicador>();
@@ -239,15 +244,15 @@ public class IndicadorDAO {
 		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
 		buscarIndicadorPeriodo.addProperty("idTipo", idTipo);
 		buscarIndicadorPeriodo.addProperty("periodo", periodo);
+		buscarIndicadorPeriodo.addProperty("dataAtual", dataAtual);
 		buscarIndicadorPeriodo.addProperty("difData", difData);
-		buscarIndicadorPeriodo.addProperty("data", data);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		
 		envelope.setOutputSoapObject(buscarIndicadorPeriodo);
 		envelope.implicitTypes = true;
 		
-		HttpTransportSE http = new HttpTransportSE(URL);
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
 			http.call("urn:" + BUSCAR_PERIODO_TIPO, envelope);
@@ -264,7 +269,8 @@ public class IndicadorDAO {
 				indicador.setIdUsuario(Integer.parseInt(soapObject.getProperty("idUsuario").toString()));
 				indicador.setMedida(Double.parseDouble(soapObject.getProperty("medida").toString()));
 				indicador.setUnidade(soapObject.getProperty("unidade").toString());
-				indicador.setTimestamp(soapObject.getProperty("timestamp").toString());
+				indicador.setData(soapObject.getProperty("data").toString());
+				indicador.setHora(soapObject.getProperty("hora").toString());
 				
 				indicadores.add(indicador);
 			}
@@ -275,6 +281,40 @@ public class IndicadorDAO {
 			return null;
 		}
 		return indicadores;
+	}
+	
+	public Double buscarMediaPeriodo (int idUsuario, int idTipo, String periodo, String dataAtual, int difData) {
+		
+		Double media = null;
+		
+		SoapObject buscarMediaPeriodo = new SoapObject (NAMESPACE, BUSCAR_MEDIA);
+		buscarMediaPeriodo.addProperty("idUsuario", idUsuario);
+		buscarMediaPeriodo.addProperty("idTipo", idTipo);
+		buscarMediaPeriodo.addProperty("periodo", periodo);
+		buscarMediaPeriodo.addProperty("dataAtual", dataAtual);
+		buscarMediaPeriodo.addProperty("difData", difData);
+		
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		
+		envelope.setOutputSoapObject(buscarMediaPeriodo);
+		envelope.implicitTypes = true;
+		
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
+		
+		try {
+			http.call("urn:" + BUSCAR_MEDIA, envelope);
+			
+			SoapObject resposta = (SoapObject) envelope.getResponse();
+			
+			media = Double.parseDouble(resposta.getProperty("media").toString());
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		return media;
 	}
 	
 }

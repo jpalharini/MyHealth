@@ -114,7 +114,8 @@ public class TelaCadastroUsuario extends Activity {
 							usuario.getId(),
 							alturaDouble,
 							unidades.get(0),
-							ts.getTimestamp()
+							ts.getData(),
+							ts.getHorario()
 							));
 					
 					boolean indPeso = inddao.cadastrarIndicador(new Indicador(
@@ -123,7 +124,8 @@ public class TelaCadastroUsuario extends Activity {
 							usuario.getId(),
 							pesoDouble,
 							unidades.get(1),
-							ts.getTimestamp()
+							ts.getData(),
+							ts.getHorario()
 							));
 					
 					if (usr && indAltura && indPeso) {

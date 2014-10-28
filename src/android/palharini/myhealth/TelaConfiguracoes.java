@@ -40,7 +40,7 @@ public class TelaConfiguracoes extends Activity {
 		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
 		final PreferenciasDAO prefsdao = new PreferenciasDAO();
-		final Preferencias prefs = prefsdao.buscarPreferencias(sessao.getIdUsuario());
+		final Preferencias prefs = prefsdao.buscarPreferenciasPorId(sessao.getIdUsuario());
 		
 		if (prefs != null) {
 			if (prefs.isLembretePeso()) {
