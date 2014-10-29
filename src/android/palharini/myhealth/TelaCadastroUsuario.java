@@ -140,10 +140,6 @@ public class TelaCadastroUsuario extends Activity {
 					}
 						
 				}
-				
-				Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
-				startActivity(irTelaPrincipal);
-				finish();
 			}
 		});
 	}

@@ -23,7 +23,7 @@ public class IndicadorDAO {
 	public static final String CADASTRAR = "cadastrarIndicador";
 	public static final String ATUALIZAR = "atualizarIndicador";
 	public static final String EXCLUIR = "excluirIndicador";
-	public static final String BUSCAR_PERIODO = "buscarIndicadoresPeriodo";
+	public static final String BUSCAR_PERIODO_TODOS = "buscarIndicadoresPeriodo";
 	public static final String BUSCAR_TIPO = "buscarIndicadorTipo";
 	public static final String BUSCAR_TIPO_TODOS = "buscarIndicadoresTipo";
 	public static final String BUSCAR_PERIODO_TIPO = "buscarIndicadoresPeriodoTipo";
@@ -110,21 +110,21 @@ public class IndicadorDAO {
 		
 		ArrayList<Indicador> indicadores = new ArrayList<Indicador>();
 		
-		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_PERIODO);
-		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
-		buscarIndicadorPeriodo.addProperty("periodo", periodo);
-		buscarIndicadorPeriodo.addProperty("difData", difData);
-		buscarIndicadorPeriodo.addProperty("data", data);
+		SoapObject buscarIndicadoresPeriodo = new SoapObject (NAMESPACE, BUSCAR_PERIODO_TODOS);
+		buscarIndicadoresPeriodo.addProperty("idUsuario", idUsuario);
+		buscarIndicadoresPeriodo.addProperty("periodo", periodo);
+		buscarIndicadoresPeriodo.addProperty("difData", difData);
+		buscarIndicadoresPeriodo.addProperty("data", data);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		
-		envelope.setOutputSoapObject(buscarIndicadorPeriodo);
+		envelope.setOutputSoapObject(buscarIndicadoresPeriodo);
 		envelope.implicitTypes = true;
 		
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
-			http.call("urn:" + BUSCAR_PERIODO, envelope);
+			http.call("urn:" + BUSCAR_PERIODO_TODOS, envelope);
 			
 			@SuppressWarnings("unchecked")
 			Vector<SoapObject> resposta = (Vector<SoapObject>) envelope.getResponse();
@@ -240,25 +240,25 @@ public class IndicadorDAO {
 		
 		ArrayList<Indicador> indicadores = new ArrayList<Indicador>();
 		
-		SoapObject buscarIndicadorPeriodo = new SoapObject (NAMESPACE, BUSCAR_PERIODO_TIPO);
-		buscarIndicadorPeriodo.addProperty("idUsuario", idUsuario);
-		buscarIndicadorPeriodo.addProperty("idTipo", idTipo);
-		buscarIndicadorPeriodo.addProperty("periodo", periodo);
-		buscarIndicadorPeriodo.addProperty("dataAtual", dataAtual);
-		buscarIndicadorPeriodo.addProperty("difData", difData);
+		SoapObject buscarIndicadoresPeriodoTipo = new SoapObject (NAMESPACE, BUSCAR_PERIODO_TIPO);
+		buscarIndicadoresPeriodoTipo.addProperty("idUsuario", idUsuario);
+		buscarIndicadoresPeriodoTipo.addProperty("idTipo", idTipo);
+		buscarIndicadoresPeriodoTipo.addProperty("periodo", periodo);
+		buscarIndicadoresPeriodoTipo.addProperty("dataAtual", dataAtual);
+		buscarIndicadoresPeriodoTipo.addProperty("difData", difData);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		
-		envelope.setOutputSoapObject(buscarIndicadorPeriodo);
+		envelope.setOutputSoapObject(buscarIndicadoresPeriodoTipo);
 		envelope.implicitTypes = true;
 		
-		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
+		HttpTransportSE http = new HttpTransportSE(URL);
 		
 		try {
 			http.call("urn:" + BUSCAR_PERIODO_TIPO, envelope);
 			
 			@SuppressWarnings("unchecked")
-			Vector<SoapObject> resposta = (Vector<SoapObject>) envelope.getResponse();
+			ArrayList<SoapObject> resposta = (ArrayList<SoapObject>) envelope.getResponse();
 			
 			for (SoapObject soapObject : resposta) {
 				

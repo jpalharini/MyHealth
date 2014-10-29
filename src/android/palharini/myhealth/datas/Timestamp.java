@@ -29,6 +29,9 @@ public class Timestamp {
     private String data = 
     		String.valueOf(ano) + "-" + String.valueOf(mes + 1) + "-" + String.valueOf(dia);
     
+    private String dataBusca =
+    		String.valueOf(ano) + String.valueOf(mes + 1) + String.valueOf(dia);
+    
     private String horario = 
     		String.valueOf(hora) + ":" + String.valueOf(minuto) + ":" + String.valueOf(segundo);
     
@@ -80,4 +83,7 @@ public class Timestamp {
 		return String.valueOf(ano) + "-" + String.valueOf(mes + 1) + "-" + String.valueOf(dia);
 	}
 	
+	public String getDataAtualBusca() {
+		return dataBusca;
+	}
 }
