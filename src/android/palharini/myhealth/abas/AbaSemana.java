@@ -1,6 +1,10 @@
 package android.palharini.myhealth.abas;
 
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,12 +30,12 @@ import com.androidplot.xy.XYSeries;
 public class AbaSemana extends Fragment {
 
 	int x;
-	int difData = 30;
+	int difData = 7;
 	String periodo = "DAY";
 	
 	Double media;
-	ArrayList<Double> medias = new ArrayList<Double>();
-	ArrayList<Integer> datas = new ArrayList<Integer>();
+	Double[] medias = new Double[difData];
+	Integer[] datas = new Integer[difData];
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,27 +55,35 @@ public class AbaSemana extends Fragment {
 		for (x=difData; x==1; x--) {
 			media = dao.buscarMediaPeriodo(
 					sessao.getIdUsuario(), tipoSelecionado, periodo, ts.getDataAtual(), x);
-			medias.add(media);
-			datas.add(x);
+			medias[x] = media;
+			datas[x] = x;
 		}
 		
-		XYSeries serieMedias = new SimpleXYSeries(medias, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Médias");
-		XYSeries serieDatas = new SimpleXYSeries(datas, SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Datas");
+		XYSeries serieMedias = new SimpleXYSeries(Arrays.asList(medias), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Médias");
 		
 		LineAndPointFormatter formatoMedias = new LineAndPointFormatter();
 		formatoMedias.setPointLabelFormatter(new PointLabelFormatter());
 		formatoMedias.configure(getActivity(), R.xml.formato_serie_medias);
 		grafico.addSeries(serieMedias, formatoMedias);
 
-		LineAndPointFormatter formatoDatas = new LineAndPointFormatter();
-		formatoDatas.setPointLabelFormatter(new PointLabelFormatter());
-		formatoDatas.configure(getActivity(), R.xml.formato_serie_datas);
-		grafico.addSeries(serieDatas, formatoDatas);
-		
-		grafico.setTicksPerRangeLabel(1);
 		grafico.getGraphWidget().setDomainLabelOrientation(-45);
 		
-		ArrayList<Indicador> indicadores = dao.buscarIndicadoresPeriodoTipo(
+		grafico.setDomainValueFormat(new Format() {
+
+			@Override
+			public StringBuffer format(Object object, StringBuffer buffer, FieldPosition field) {
+				// TODO Auto-generated method stub
+				return new StringBuffer(datas [((Number)object).intValue()]);
+			}
+
+			@Override
+			public Object parseObject(String string, ParsePosition position) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+        });
+		
+		ArrayList<Indicador> indicadores = (ArrayList<Indicador>) dao.buscarIndicadoresPeriodoTipo(
 				sessao.getIdUsuario(), tipoSelecionado, periodo, ts.getDataAtualBusca(), difData);
 		
 		ArrayAdapter<Indicador> adapterInd = new ArrayAdapter<Indicador>(

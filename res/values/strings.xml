@@ -85,6 +85,7 @@
     <string name="textStatusIMC">[status]</string>
     <string name="textAlvoBPM">Sua freq. cardíaca ideal é:</string>
     <string name="alvoBPM">XXX</string>
+    <string name="buttonCadIndicador">Cadastrar indicador</string>
     <string name="buttonAcompanhamento">Acompanhamento</string>
     <string name="buttonDados">Meus dados</string>
     <string name="buttonConfiguracoes">Configurações</string>

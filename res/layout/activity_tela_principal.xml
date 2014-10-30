@@ -73,10 +73,18 @@
 		        android:textSize="70sp" />
 		
 		    <Button
-		        android:id="@+id/buttonAcompanhamento"
+		        android:id="@+id/buttonCadIndicador"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="40dp"
+		        android:text="@string/buttonCadIndicador"
+		        android:textSize="24sp" />
+		    
+		    <Button
+		        android:id="@+id/buttonAcompanhamento"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
 		        android:text="@string/buttonAcompanhamento"
 		        android:textSize="24sp" />
 		

@@ -10,16 +10,16 @@ import android.palharini.myhealth.entidades.Preferencias;
 
 public class PreferenciasDAO {
 	
-	private static final String classeWS = "PreferenciasDAO";
-	static ConectaWS conexao = new ConectaWS();
+	private static final String classeWS = "PreferenciasDAO?wsdl";
+	private static final ConectaWS conexao = new ConectaWS();
 	
-	private static final String URL = conexao.getURL() + classeWS + "?wsdl";
+	private static final String URL = conexao.getURL() + classeWS;
 	private static final String NAMESPACE = conexao.getNamespace();
 	private static final int TIMEOUT = conexao.getTimeout();
 	
 	private static final String CADASTRAR = "cadastrarPreferencias";
 	private static final String ATUALIZAR = "atualizarPreferencias";
-	private static final String BUSCAR = "buscarPreferenciasPorId";
+	private static final String BUSCAR = "buscarPreferencias";
 
 	public boolean cadastrarPreferencias (Preferencias preferencias) {
 		
@@ -95,11 +95,11 @@ public class PreferenciasDAO {
 		return true;
 	}
 
-	public Preferencias buscarPreferenciasPorId(int id){
+	public Preferencias buscarPreferencias (int idUsuario){
 		Preferencias prefs = null;
 		
 		SoapObject buscarPreferencias = new SoapObject (NAMESPACE, BUSCAR);
-		buscarPreferencias.addProperty("id", id);
+		buscarPreferencias.addProperty("id", idUsuario);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		

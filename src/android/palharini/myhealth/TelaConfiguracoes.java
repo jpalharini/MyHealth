@@ -40,7 +40,7 @@ public class TelaConfiguracoes extends Activity {
 		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
 		final PreferenciasDAO prefsdao = new PreferenciasDAO();
-		final Preferencias prefs = prefsdao.buscarPreferenciasPorId(sessao.getIdUsuario());
+		final Preferencias prefs = prefsdao.buscarPreferencias(sessao.getIdUsuario());
 		
 		if (prefs != null) {
 			if (prefs.isLembretePeso()) {
@@ -93,6 +93,7 @@ public class TelaConfiguracoes extends Activity {
 						!horaLembreteBPM.getText().toString().equals(prefs.getHoraLembreteBPM())) {
 					
 					Preferencias prefsAtual = new Preferencias(
+							prefs.getId(),
 							sessao.getIdUsuario(),
 							checkLembretePeso.isChecked(),
 							horaLembretePeso.getText().toString(),

@@ -34,6 +34,7 @@ public class TelaPrincipal extends Activity {
 		final TextView imcStatus = (TextView) findViewById(R.id.textStatusIMC);
 		final TextView fcd = (TextView) findViewById(R.id.alvoBPM);
 		
+		final Button buttonCadIndicador = (Button) findViewById(R.id.buttonCadIndicador);
 		final Button buttonAcompanhamento = (Button) findViewById(R.id.buttonAcompanhamento);
 		final Button buttonDados = (Button) findViewById(R.id.buttonDados);
 		final Button buttonConfiguracoes = (Button) findViewById(R.id.buttonConfiguracoes);
@@ -82,7 +83,7 @@ public class TelaPrincipal extends Activity {
 			
 			IndicadorDAO dao = new IndicadorDAO();
 			Indicador indicador = new Indicador();
-			ArrayList<Indicador> indicadores = dao.buscarIndicadoresTipo(sessao.getIdUsuario(), 2);
+			ArrayList<Indicador> indicadores = dao.buscarIndicadoresTipo(sessao.getIdUsuario(), 1);
 			
 			if (indicadores.size() >= 3) {
 				int x;
@@ -98,6 +99,15 @@ public class TelaPrincipal extends Activity {
 				fcd.setText(fcdDouble.toString());
 			}
 		}
+		
+		buttonCadIndicador.setOnClickListener(new Button.OnClickListener () {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent irTelaCadIndicador = new Intent(getApplicationContext(), TelaCadastroIndicador.class);
+				startActivity(irTelaCadIndicador);
+			}
+		});
 		
 		buttonAcompanhamento.setOnClickListener(new Button.OnClickListener () {
 			@Override

@@ -10,10 +10,10 @@ import android.palharini.myhealth.entidades.Usuario;
 
 public class UsuarioDAO {
 	
-	private static final String classeWS = "UsuarioDAO";
+	private static final String classeWS = "UsuarioDAO?wsdl";
 	private static final ConectaWS conexao = new ConectaWS();
 	
-	private static final String URL = conexao.getURL() + classeWS + "?wsdl";
+	private static final String URL = conexao.getURL() + classeWS;
 	private static final String NAMESPACE = conexao.getNamespace();
 	private static final int TIMEOUT = conexao.getTimeout();
 	

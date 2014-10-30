@@ -2,27 +2,31 @@ package android.palharini.myhealth.entidades;
 
 public class Preferencias {
 
+	private int id;
 	private int idUsuario;
 	private boolean lembretePeso;
 	private String horaLembretePeso;
 	private boolean lembreteBPM;
-	private String horaAcorda;
+	private String horaLembreteBPM;
 	
 	public Preferencias (){}
 	
-	public Preferencias(int idUsuario, boolean lembretePeso,
+	public Preferencias(int id, int idUsuario, boolean lembretePeso,
 			String horaLembretePeso, boolean lembreteBPM, String horaAcorda) {
+		this.id = id;
 		this.idUsuario = idUsuario;
 		this.lembretePeso = lembretePeso;
 		this.horaLembretePeso = horaLembretePeso;
 		this.lembreteBPM = lembreteBPM;
-		this.horaAcorda = horaAcorda;
+		this.horaLembreteBPM = horaAcorda;
 	}
-	
-	public Preferencias(int idUsuario, boolean lembretePeso, boolean lembreteBPM) {
-		this.idUsuario = idUsuario;
-		this.lembretePeso = lembretePeso;
-		this.lembreteBPM = lembreteBPM;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getIdUsuario() {
@@ -58,11 +62,11 @@ public class Preferencias {
 	}
 
 	public String getHoraLembreteBPM() {
-		return horaAcorda;
+		return horaLembreteBPM;
 	}
 
-	public void setHoraLembreteBPM(String horaAcorda) {
-		this.horaAcorda = horaAcorda;
+	public void setHoraLembreteBPM(String horaLembreteBPM) {
+		this.horaLembreteBPM = horaLembreteBPM;
 	}
 	
 }

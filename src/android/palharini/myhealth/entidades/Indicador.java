@@ -89,7 +89,7 @@ public class Indicador {
 
 	@Override
 	public String toString() {
-		return data + " " + hora;
+		return this.data + " " + this.hora;
 	}
 	
 }

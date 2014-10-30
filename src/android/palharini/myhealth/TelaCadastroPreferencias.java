@@ -65,6 +65,7 @@ public class TelaCadastroPreferencias extends Activity {
 				// TODO Auto-generated method stub {
 					
 				boolean prefs = prefsdao.cadastrarPreferencias(new Preferencias(
+						0,
 						sessao.getIdUsuario(),
 						checkLembretePeso.isChecked(),
 						horaLembretePeso.getText().toString(),

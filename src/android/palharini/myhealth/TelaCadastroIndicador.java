@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 public class TelaCadastroIndicador extends Activity implements OnItemSelectedListener{
 
+	TextView unidade;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,6 +33,7 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 			StrictMode.setThreadPolicy(policy);
 		}
 		
+		unidade = (TextView) findViewById(R.id.textUnidade);
 		final Spinner tipo = (Spinner) findViewById(R.id.spinnerTipo);
 		final EditText medida = (EditText) findViewById(R.id.editMedicao);
 		
@@ -46,10 +49,7 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 		tipo.setAdapter(tipos);
 		
 		tipo.setOnItemSelectedListener(this);
-		
-		String[] listUnidades = getResources().getStringArray(R.array.listaUnidades);
-		final List<String> unidades = Arrays.asList(listUnidades);
-		
+				
 		final int tipoSelecionadoId = (int) (long) tipo.getSelectedItemId();
 		
 		okButton.setOnClickListener(new Button.OnClickListener() {
@@ -62,7 +62,7 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 						tipoSelecionadoId,
 						sessao.getIdUsuario(),
 						Double.parseDouble(medida.getText().toString()), 
-						unidades.get(tipoSelecionadoId),
+						unidade.getText().toString(),
 						ts.getData(),
 						ts.getHorario()
 				));
@@ -72,7 +72,6 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 
 	public void onItemSelected(AdapterView<?> parent, View view, int posicao, long id) {
 		// TODO Auto-generated method stub
-		final TextView unidade = (TextView) findViewById(R.id.textUnidade);
 		String[] listaUnidades = getResources().getStringArray(R.array.listaUnidades);
 		final List<String> unidades = Arrays.asList(listaUnidades);
 		switch (posicao) {
