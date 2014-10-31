@@ -373,9 +373,9 @@ public class IndicadorDAO {
 		try {
 			http.call("urn:" + BUSCAR_MEDIA, envelope);
 			
-			SoapObject resposta = (SoapObject) envelope.getResponse();
+			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			
-			media = Double.parseDouble(resposta.getProperty("media").toString());
+			media = Double.parseDouble(resposta.toString());
 		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

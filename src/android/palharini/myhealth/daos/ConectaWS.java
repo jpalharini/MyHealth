@@ -2,9 +2,9 @@ package android.palharini.myhealth.daos;
 
 public class ConectaWS {
 
-	private static final String URL = "http://192.168.241.188:8080/MyHealthWS/services/";
+	private static final String URL = "http://192.168.241.230:8080/MyHealthWS/services/";
 	private static final String NAMESPACE = "http://dao.ws.myhealth.palharini.android";
-	private static final int TIMEOUT = 3000;
+	private static final int TIMEOUT = 20000;
 	
 	public String getURL() {
 		return URL;

@@ -2,4 +2,5 @@
 <resources>
     <color name="myhealth_color">#cc0000</color>
     <color name="button_text_color">#ffffff</color>
+    <color name="bgGrafico">#FFFFFF</color>
 </resources>

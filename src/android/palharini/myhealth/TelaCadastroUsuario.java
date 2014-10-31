@@ -20,6 +20,7 @@ import android.palharini.myhealth.entidades.Usuario;
 import android.palharini.myhealth.fragmentos.FragmentoDatePicker;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -45,7 +46,7 @@ public class TelaCadastroUsuario extends Activity {
 		final EditText altura = (EditText) findViewById(R.id.editAltura);
 		final EditText peso = (EditText) findViewById(R.id.editPeso);
 		
-		Button okButton = (Button) findViewById(R.id.okButton);
+		final Button buttonContinuar = (Button) findViewById(R.id.buttonContinuar);
 		
 		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
@@ -59,7 +60,7 @@ public class TelaCadastroUsuario extends Activity {
 			
 		});
 		
-		okButton.setOnClickListener(new Button.OnClickListener() {
+		buttonContinuar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick (View v){
 				

@@ -99,7 +99,7 @@ public class PreferenciasDAO {
 		Preferencias prefs = null;
 		
 		SoapObject buscarPreferencias = new SoapObject (NAMESPACE, BUSCAR);
-		buscarPreferencias.addProperty("id", idUsuario);
+		buscarPreferencias.addProperty("idUsuario", idUsuario);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		
