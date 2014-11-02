@@ -1,4 +1,4 @@
-	package android.palharini.myhealth;
+package android.palharini.myhealth;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -8,7 +8,7 @@ import android.palharini.myhealth.abas.AdaptadorAbasPeriodos;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
-public class TelaGraficos extends FragmentActivity implements ActionBar.TabListener {
+public class TelaIndicadores extends FragmentActivity implements ActionBar.TabListener {
 		
 	private ViewPager viewPager;
 	private ActionBar actionBar;
@@ -16,7 +16,7 @@ public class TelaGraficos extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tela_graficos);
+		setContentView(R.layout.activity_tela_indicadores);
 
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();

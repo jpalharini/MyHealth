@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="libs/ksoap2-android-assembly-3.3.0-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="libs/jasypt-1.9.2.jar"/>
 	<classpathentry kind="lib" path="libs/androidplot-core-0.6.1.jar"/>
+	<classpathentry kind="lib" path="/Users/jpalharini/Downloads/JakeWharton-ActionBarSherlock-5a15d92/actionbarsherlock"/>
+	<classpathentry kind="src" path="/actionbarsherlock"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

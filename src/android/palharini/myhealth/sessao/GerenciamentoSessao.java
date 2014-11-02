@@ -14,7 +14,7 @@ public class GerenciamentoSessao {
     Editor editor;   
     Context contexto;
     
-    int PRIVATE_MODE = 0;
+    Integer PRIVATE_MODE = 0;
 
     private static final String PREF_NAME = "MyHealthPref";
     private static final String IS_LOGIN = "IsLoggedIn";
@@ -28,7 +28,7 @@ public class GerenciamentoSessao {
         editor = pref.edit();
     }
      
-    public void criarSessao(int id, String nome, String email){
+    public void criarSessao(Integer id, String nome, String email){
         editor.putBoolean(IS_LOGIN, true);
         editor.putInt(KEY_ID, id);
         editor.putString(KEY_NAME, nome);
@@ -58,8 +58,8 @@ public class GerenciamentoSessao {
         return usuario;
     }
     
-    public int getIdUsuario() {
-    	int id = pref.getInt(KEY_ID, 0);
+    public Integer getIdUsuario() {
+    	Integer id = pref.getInt(KEY_ID, 0);
     	return id;
     }
      

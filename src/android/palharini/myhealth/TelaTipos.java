@@ -30,7 +30,7 @@ public class TelaTipos extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View view, int posicao, long arg3) {
 				// TODO Auto-generated method stub
-				Intent irTelaGrafico = new Intent(TelaTipos.this, TelaGraficos.class);
+				Intent irTelaGrafico = new Intent(TelaTipos.this, TelaIndicadores.class);
 				irTelaGrafico.putExtra("tipoSelecionado", posicao);
 				startActivity(irTelaGrafico);
 			}

@@ -37,8 +37,6 @@
                 android:hint="@string/hintEmail"
                 android:inputType="text|textEmailAddress"
                 android:textSize="20sp" >
-
-                <requestFocus />
             </EditText>
 
             <EditText

@@ -6,17 +6,19 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.palharini.myhealth.datas.Timestamp;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 public class FragmentoDatePicker extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-public EditText dataNasc;
-
-public FragmentoDatePicker(EditText datePicker) {
-    dataNasc = datePicker;
-}
-
+	Timestamp ts = new Timestamp();
+	public EditText editDataNasc;
+	
+	public FragmentoDatePicker(EditText datePicker) {
+		editDataNasc = datePicker;
+	}
+	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 	    // Use the current date as the default date in the picker
@@ -31,6 +33,10 @@ public FragmentoDatePicker(EditText datePicker) {
 
     @Override
     public void onDateSet(DatePicker view, int ano, int mes, int dia) {
-        dataNasc.setText(String.valueOf(dia) + "/" + String.valueOf(mes + 1 ) + "/" + String.valueOf(ano));
+       String dataNasc = String.valueOf(dia) + "/" + String.valueOf(mes + 1 ) + "/" + String.valueOf(ano);
+       String dataNascAndroid = ts.getDataAndroid(dataNasc);
+       editDataNasc.setText(dataNascAndroid);
+	       
     }
+	
 }

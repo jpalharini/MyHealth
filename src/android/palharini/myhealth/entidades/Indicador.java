@@ -2,17 +2,17 @@ package android.palharini.myhealth.entidades;
 
 public class Indicador {
 
-	private int id;
-	private int idTipo;
-	private int idUsuario;
-	private double medida;
+	private Integer id;
+	private Integer idTipo;
+	private Integer idUsuario;
+	private Double medida;
 	private String unidade;
 	private String data;
 	private String hora;
 	
 	public Indicador(){}
 
-	public Indicador(int id, int idTipo, int idUsuario, double medida,
+	public Indicador(Integer id, Integer idTipo, Integer idUsuario, Double medida,
 			String unidade, String data, String hora) {
 		this.id = id;
 		this.idTipo = idTipo;
@@ -23,7 +23,7 @@ public class Indicador {
 		this.hora = hora;
 	}
 	
-	public Indicador(int id, int idTipo, double medida,
+	public Indicador(Integer id, Integer idTipo, Double medida,
 			String unidade) {
 		this.id = id;
 		this.idTipo = idTipo;
@@ -31,35 +31,35 @@ public class Indicador {
 		this.unidade = unidade;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getIdTipo() {
+	public Integer getIdTipo() {
 		return idTipo;
 	}
 
-	public void setIdTipo(int idTipo) {
+	public void setIdTipo(Integer idTipo) {
 		this.idTipo = idTipo;
 	}
 
-	public int getIdUsuario() {
+	public Integer getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
-	public double getMedida() {
+	public Double getMedida() {
 		return medida;
 	}
 
-	public void setMedida(double medida) {
+	public void setMedida(Double medida) {
 		this.medida = medida;
 	}
 

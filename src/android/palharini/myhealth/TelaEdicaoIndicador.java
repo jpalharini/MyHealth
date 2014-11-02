@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.palharini.myhealth.daos.IndicadorDAO;
 import android.palharini.myhealth.entidades.Indicador;
@@ -23,8 +24,12 @@ public class TelaEdicaoIndicador extends Activity implements OnItemSelectedListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_cadastro_indicador);
 		
+		Intent intent = getIntent();
+		int indicSelecionado = intent.getIntExtra("indicSelecionado", 0);
+				
 		final Spinner tipo = (Spinner) findViewById(R.id.spinnerTipo);
 		final EditText medida = (EditText) findViewById(R.id.editMedicao);
+		final TextView unidade = (TextView) findViewById(R.id.textUnidade);
 		final Button okButton = (Button) findViewById(R.id.cadastraButton);
 		
 		ArrayAdapter<String> tipos = new ArrayAdapter<String>(
@@ -37,14 +42,21 @@ public class TelaEdicaoIndicador extends Activity implements OnItemSelectedListe
 		String[] listUnidades = getResources().getStringArray(R.array.listaUnidades);
 		final List<String> unidades = Arrays.asList(listUnidades);
 		
+		final IndicadorDAO dao = new IndicadorDAO();
+		final Indicador indicador = dao.buscarIndicadorId(indicSelecionado);
+		
+		tipo.setSelection(indicador.getIdTipo());
+		medida.setText(indicador.getMedida().toString());
+		
 		final int tipoSelecionadoId = (int) (long) tipo.getSelectedItemId();
+		unidade.setText(unidades.get(tipoSelecionadoId));
+		
 		
 		okButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick (View v){
-				IndicadorDAO dao = new IndicadorDAO();
-				dao.cadastrarIndicador(new Indicador(
-						0, 
+				dao.atualizarIndicador(new Indicador(
+						indicador.getId(), 
 						tipoSelecionadoId,
 						Double.parseDouble(medida.getText().toString()), 
 						unidades.get(tipoSelecionadoId)

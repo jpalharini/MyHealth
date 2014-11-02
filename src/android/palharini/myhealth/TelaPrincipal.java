@@ -1,5 +1,6 @@
 package android.palharini.myhealth;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +54,8 @@ public class TelaPrincipal extends Activity {
 			Double pesoUsuario = peso.getMedida();
 			Double alturaUsuario = altura.getMedida();
 			
+			alturaUsuario = alturaUsuario/100;
+			
 			String primeiroNomeUsuario;
 			if (nomeUsuario.contains(" ")) {
 				primeiroNomeUsuario = nomeUsuario.substring(0, nomeUsuario.indexOf(" "));
@@ -63,7 +66,8 @@ public class TelaPrincipal extends Activity {
 			ola.setText(getString(R.string.textOla) + " " + primeiroNomeUsuario);
 			
 			Double imcDouble = (pesoUsuario / (alturaUsuario * alturaUsuario));
-			imc.setText(imcDouble.toString());
+			DecimalFormat decimal = new DecimalFormat("0.0");
+			imc.setText(decimal.format(imcDouble));
 			
 			String[] listaFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
 			final List<String> faixas = Arrays.asList(listaFaixasIMC);

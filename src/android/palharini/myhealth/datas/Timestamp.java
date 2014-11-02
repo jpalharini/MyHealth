@@ -9,9 +9,13 @@ public class Timestamp {
 	
 	private String formatoDataSQL = "yyyy-MM-dd";
 	private String formatoHoraSQL = "HH:mm:ss";
+	private String formatoDataAndroid = "dd/MM/yyyy";
+	private String formatoHoraAndroid = "HH:mm";
 	
 	private SimpleDateFormat sdfDataSQL = new SimpleDateFormat(formatoDataSQL);
 	private SimpleDateFormat sdfHoraSQL = new SimpleDateFormat(formatoHoraSQL);
+	private SimpleDateFormat sdfDataAndroid = new SimpleDateFormat(formatoDataAndroid);
+	private SimpleDateFormat sdfHoraAndroid = new SimpleDateFormat(formatoHoraAndroid);
 	
 	Date dataDate = null;
 	Date horaDate = null;
@@ -35,7 +39,7 @@ public class Timestamp {
     private String horario = 
     		String.valueOf(hora) + ":" + String.valueOf(minuto) + ":" + String.valueOf(segundo);
     
-	public String getData() {
+	public String getDataSQL() {
 	    
 	    try {
 	    	dataDate = sdfDataSQL.parse(data);
@@ -47,7 +51,7 @@ public class Timestamp {
 		return sdfDataSQL.format(dataDate);
 	}
 	
-	public String getHorario() {
+	public String getHorarioSQL() {
 	    
 	    try {
 	    	horaDate = sdfHoraSQL.parse(horario);
@@ -57,6 +61,30 @@ public class Timestamp {
 		}
 		
 		return sdfHoraSQL.format(horaDate);
+	}
+	
+	public String getDataAndroid(String data) {
+	    
+	    try {
+	    	dataDate = sdfDataAndroid.parse(data);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sdfDataAndroid.format(dataDate);
+	}
+	
+	public String getHorarioAndroid(String horario) {
+	    
+	    try {
+	    	horaDate = sdfHoraAndroid.parse(horario);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sdfHoraAndroid.format(horaDate);
 	}
 
 	public int getCampoAtual(String periodo) {
