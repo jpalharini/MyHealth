@@ -27,6 +27,25 @@ import android.widget.Toast;
 
 public class TelaCadastroUsuario extends Activity {
 
+	private GerenciamentoSessao sessao;
+	private FormatoDataNascimento fdn;
+	private Timestamp ts;
+	
+	private EditText email, senha, confSenha, nome, dataNasc, altura, peso;
+	private Button buttonContinuar;	
+	
+	private String emailString, nomeString, senhaString, confSenhaString, criptSenha, dataNascString, dataNascSQL;
+	private String[] listUnidades;
+	private List<String> unidades;
+	private Double alturaDouble, pesoDouble;
+	private Boolean usr, indAltura, indPeso;
+	
+	private Usuario usuarioOK, usuarioCheck;
+	private UsuarioDAO usrDAO;
+	private IndicadorDAO indDAO;
+	
+	private Intent irTelaCadastroPreferencias;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,17 +57,20 @@ public class TelaCadastroUsuario extends Activity {
 		
 		setContentView(R.layout.activity_tela_cadastro_usuario);
 		
-		final EditText email = (EditText) findViewById(R.id.editEmail);
-		final EditText senha = (EditText) findViewById(R.id.editSenha);
-		final EditText confSenha = (EditText) findViewById(R.id.editConfSenha);
-		final EditText nome = (EditText) findViewById(R.id.editNome);
-		final EditText dataNasc = (EditText) findViewById(R.id.editNasc);
-		final EditText altura = (EditText) findViewById(R.id.editAltura);
-		final EditText peso = (EditText) findViewById(R.id.editPeso);
+		ts = new Timestamp();
+		indDAO = new IndicadorDAO();
+		fdn = new FormatoDataNascimento();
+		sessao = new GerenciamentoSessao(getApplicationContext());
 		
-		final Button buttonContinuar = (Button) findViewById(R.id.buttonContinuar);
+		email = (EditText) findViewById(R.id.editEmail);
+		senha = (EditText) findViewById(R.id.editSenha);
+		confSenha = (EditText) findViewById(R.id.editConfSenha);
+		nome = (EditText) findViewById(R.id.editNome);
+		dataNasc = (EditText) findViewById(R.id.editNasc);
+		altura = (EditText) findViewById(R.id.editAltura);
+		peso = (EditText) findViewById(R.id.editPeso);
 		
-		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
+		buttonContinuar = (Button) findViewById(R.id.buttonContinuar);
 		
 		dataNasc.setOnClickListener(new EditText.OnClickListener () {
 
@@ -64,14 +86,14 @@ public class TelaCadastroUsuario extends Activity {
 			@Override
 			public void onClick (View v){
 				
-				String emailString = email.getText().toString();
-				String nomeString = nome.getText().toString();
-				Double alturaDouble = Double.parseDouble(altura.getText().toString());
-				Double pesoDouble = Double.parseDouble(peso.getText().toString());
+				emailString = email.getText().toString();
+				nomeString = nome.getText().toString();
+				alturaDouble = Double.parseDouble(altura.getText().toString());
+				pesoDouble = Double.parseDouble(peso.getText().toString());
 
-				String senhaString = senha.getText().toString();
-				String confSenhaString = confSenha.getText().toString();
-				String criptSenha = null;
+				senhaString = senha.getText().toString();
+				confSenhaString = confSenha.getText().toString();
+				criptSenha = null;
 				
 				if (senhaString.equals(confSenhaString)){
 					try {
@@ -87,59 +109,61 @@ public class TelaCadastroUsuario extends Activity {
 						e.printStackTrace();
 					}
 					
-					String dataNascString = dataNasc.getText().toString();
-					FormatoDataNascimento fdn = new FormatoDataNascimento();
-					String dataNascSQL = fdn.formatarDataSQL(dataNascString);
+					dataNascString = dataNasc.getText().toString();
+					dataNascSQL = fdn.formatarDataSQL(dataNascString);
 					
-					UsuarioDAO usrdao = new UsuarioDAO();
-					boolean usr = usrdao.cadastrarUsuario(new Usuario(
-							0, 
-							emailString,
-							criptSenha,
-							nomeString, 
-							dataNascSQL
-							));
-	                
-					Usuario usuario = usrdao.buscarUsuarioEmail(emailString);
+					usuarioCheck = usrDAO.buscarUsuarioEmail(emailString);
 					
-					String[] listUnidades = getResources().getStringArray(R.array.listaUnidades);
-					final List<String> unidades = Arrays.asList(listUnidades);
-					
-					final Timestamp ts = new Timestamp();
-					
-					IndicadorDAO inddao = new IndicadorDAO();
-					
-					boolean indAltura = inddao.cadastrarIndicador(new Indicador(
-							0,
-							0,
-							usuario.getId(),
-							alturaDouble,
-							unidades.get(0),
-							ts.getDataSQL(),
-							ts.getHorarioSQL()
-							));
-					
-					boolean indPeso = inddao.cadastrarIndicador(new Indicador(
-							0,
-							1,
-							usuario.getId(),
-							pesoDouble,
-							unidades.get(1),
-							ts.getDataSQL(),
-							ts.getHorarioSQL()
-							));
-					
-					if (usr && indAltura && indPeso) {
-						sessao.criarSessao(usuario.getId(), usuario.getNome(), usuario.getEmail());
-						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrOK), Toast.LENGTH_LONG).show();
-						Intent irTelaCadastroPreferencias = new Intent(getApplicationContext(), TelaCadastroPreferencias.class);
-						startActivity(irTelaCadastroPreferencias);
-						finish();
+					if (usuarioCheck == null) {
+						usrDAO = new UsuarioDAO();
+						usr = usrDAO.cadastrarUsuario(new Usuario(
+								0, 
+								emailString,
+								criptSenha,
+								nomeString, 
+								dataNascSQL
+								));
+						
+						usuarioOK = usrDAO.buscarUsuarioEmail(emailString);
+						
+						listUnidades = getResources().getStringArray(R.array.listaUnidades);
+						unidades = Arrays.asList(listUnidades);
+						
+						indAltura = indDAO.cadastrarIndicador(new Indicador(
+								0,
+								0,
+								usuarioOK.getId(),
+								alturaDouble,
+								unidades.get(0),
+								ts.getDataSQL(),
+								ts.getHorarioSQL()
+								));
+						
+						indPeso = indDAO.cadastrarIndicador(new Indicador(
+								0,
+								1,
+								usuarioOK.getId(),
+								pesoDouble,
+								unidades.get(1),
+								ts.getDataSQL(),
+								ts.getHorarioSQL()
+								));
+						
+						if (usr && indAltura && indPeso) {
+							sessao.criarSessao(usuarioOK.getId(), usuarioOK.getNome(), usuarioOK.getEmail());
+							Toast.makeText(getApplicationContext(), getString(R.string.toastUsrOK), Toast.LENGTH_LONG).show();
+							irTelaCadastroPreferencias = new Intent(getApplicationContext(), TelaCadastroPreferencias.class);
+							startActivity(irTelaCadastroPreferencias);
+							finish();
+						}
 					}
 					else {
 						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrFalha), Toast.LENGTH_LONG).show();
 					}
 						
+				}
+				else {
+					Toast.makeText(getApplicationContext(), getString(R.string.toastSenhaInv), Toast.LENGTH_LONG).show();
 				}
 			}
 		});

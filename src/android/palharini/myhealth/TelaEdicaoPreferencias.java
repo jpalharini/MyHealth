@@ -26,6 +26,7 @@ public class TelaEdicaoPreferencias extends Activity {
 	private boolean lembretePeso, lembreteBPM;
 	private String horaLembretePesoString, horaLembreteBPMString;
 	private long horaLembretePesoMillis, horaLembreteBPMMillis;
+	private PendingIntent pendingNotificacaoPesoIntent = null, pendingNotificacaoBPMIntent = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -124,18 +125,17 @@ public class TelaEdicaoPreferencias extends Activity {
 							);
 					
 					if (checkLembretePeso.isChecked() != prefs.isLembretePeso()) {
-						PendingIntent notificacaoIntent = null;
 						if (lembretePeso) {
-							notificacaoIntent = marcarNotificacaoPeso(horaLembretePesoMillis);
+							pendingNotificacaoPesoIntent = marcarNotificacaoPeso(horaLembretePesoMillis);
 						}
 						else {
-							cancelarNotificacao(notificacaoIntent);
+							cancelarNotificacao(pendingNotificacaoPesoIntent);
 						}
 						if (lembreteBPM) {
-							notificacaoIntent = marcarNotificacaoBPM(horaLembreteBPMMillis);
+							pendingNotificacaoBPMIntent = marcarNotificacaoBPM(horaLembreteBPMMillis);
 						}
 						else {
-							cancelarNotificacao(notificacaoIntent);
+							cancelarNotificacao(pendingNotificacaoBPMIntent);
 						}
 					}
 					prefsdao.atualizarPreferencias(prefsAtual);
@@ -157,6 +157,8 @@ public class TelaEdicaoPreferencias extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				cancelarNotificacao(pendingNotificacaoPesoIntent);
+				cancelarNotificacao(pendingNotificacaoBPMIntent);
 				sessao.logoutUsuario();
 				Intent voltarTelaLogin = new Intent(getApplicationContext(), TelaLogin.class);
 				startActivity(voltarTelaLogin);

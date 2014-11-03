@@ -56,6 +56,7 @@
     <string name="buttonSalvar">Salvar</string>
     <string name="toastUsrOK">Usuário cadastrado com sucesso!</string>
     <string name="toastUsrFalha">Falha no cadastro do usuário...</string>
+    <string name="toastSenhaInv">As senhas não conferem</string>
     <string name="toastPrefsOK">Preferências salvas com sucesso!</string>
     <string name="toastPrefsFalha">Falha na definição de preferências...</string>
 
