@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="16"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -38,7 +38,7 @@
             android:label="@string/title_activity_tela_principal" >
         </activity>
         <activity
-            android:name=".TelaConfiguracoes"
+            android:name=".TelaEdicaoPreferencias"
             android:label="@string/title_activity_tela_configuracoes" >
         </activity>
         <activity

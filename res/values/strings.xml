@@ -111,6 +111,12 @@
     <string name="textFalhaConexao">Falha de rede!</string>
     <string name="textServidorNaoResponde">Falha ao obter dados do servidor.
         \nPor favor, verifique sua conexão de rede.</string>
+        
+    <!-- Notificações -->
+    <string name="tituloNotificacaoPeso">Hora de pesar-se!</string>
+    <string name="textoNotificacaoPeso">Pese-se e registre o peso no MyHealth</string>
+    <string name="tituloNotificacaoBPM">Hora de medir freq. cardíaca!</string>
+    <string name="textoNotificacaoBPM">Meça sua frequência cardíaca e registre no MyHealth</string>
 
     <!-- Diversos -->
     <string name="descSplash">Splash MyHealth</string>

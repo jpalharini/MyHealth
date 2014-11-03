@@ -135,7 +135,7 @@ public class TelaPrincipal extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent irTelaConfiguracoes = new Intent(getApplicationContext(), TelaConfiguracoes.class);
+				Intent irTelaConfiguracoes = new Intent(getApplicationContext(), TelaEdicaoPreferencias.class);
 				startActivity(irTelaConfiguracoes);
 			}
 		});

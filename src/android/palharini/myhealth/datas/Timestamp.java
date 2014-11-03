@@ -4,23 +4,35 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Timestamp {
 	
 	private String formatoDataSQL = "yyyy-MM-dd";
 	private String formatoHoraSQL = "HH:mm:ss";
+	
+	private String formatoDataSQLBusca = "yyyyMMdd";
+	
 	private String formatoDataAndroid = "dd/MM/yyyy";
-	private String formatoHoraAndroid = "HH:mm";
+	private String formatoHorarioAndroid = "HH:mm";
+	
+	private String formatoHoraAndroid = "HH";
+	private String formatoMinutoAndroid = "HH:mm";
 	
 	private SimpleDateFormat sdfDataSQL = new SimpleDateFormat(formatoDataSQL);
 	private SimpleDateFormat sdfHoraSQL = new SimpleDateFormat(formatoHoraSQL);
-	private SimpleDateFormat sdfDataAndroid = new SimpleDateFormat(formatoDataAndroid);
-	private SimpleDateFormat sdfHoraAndroid = new SimpleDateFormat(formatoHoraAndroid);
 	
-	Date dataDate = null;
-	Date horaDate = null;
-	String dataString;
-	int dataInt;
+	private SimpleDateFormat sdfDataSQLBusca = new SimpleDateFormat(formatoDataSQLBusca);
+	
+	private SimpleDateFormat sdfDataAndroid = new SimpleDateFormat(formatoDataAndroid);
+	private SimpleDateFormat sdfHorarioAndroid = new SimpleDateFormat(formatoHorarioAndroid);
+	
+	private SimpleDateFormat sdfHoraAndroid = new SimpleDateFormat(formatoHoraAndroid);
+	private SimpleDateFormat sdfMinutoAndroid = new SimpleDateFormat(formatoMinutoAndroid);
+	
+	private Date dataDate = null, horaDate = null;
+	private String horaString, minutoString;
+	private long horaMillis, minutoMillis, horarioMillis;
 	
 	private Calendar c = Calendar.getInstance();
 	private int dia = c.get(Calendar.DAY_OF_MONTH);
@@ -38,7 +50,7 @@ public class Timestamp {
     
     private String horario = 
     		String.valueOf(hora) + ":" + String.valueOf(minuto) + ":" + String.valueOf(segundo);
-    
+        
 	public String getDataSQL() {
 	    
 	    try {
@@ -78,40 +90,56 @@ public class Timestamp {
 	public String getHorarioAndroid(String horario) {
 	    
 	    try {
+	    	horaDate = sdfHorarioAndroid.parse(horario);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sdfHorarioAndroid.format(horaDate);
+	}
+
+	public String getDataAtual() {
+		return String.valueOf(ano) + "-" + String.valueOf(mes + 1) + "-" + String.valueOf(dia);
+	}
+	
+	public String getDataAtualBusca() {
+		
+		try {
+	    	dataDate = sdfDataSQLBusca.parse(dataBusca);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sdfDataSQLBusca.format(dataDate);
+	}
+	
+	public long getHorarioMillis (String horario) {
+		
+		try {
 	    	horaDate = sdfHoraAndroid.parse(horario);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return sdfHoraAndroid.format(horaDate);
-	}
-
-	public int getCampoAtual(String periodo) {
-		switch (periodo) {
-		case "yyyy":
-			return ano;
-		case "MM":
-			return mes;
-		case "dd":
-			return dia;
-		case "HH":
-			return hora;
-		case "mm":
-			return minuto;
-		case "ss":
-			return segundo;
+		horaString = sdfHoraAndroid.format(horaDate);
+		
+		try {
+	    	horaDate = sdfMinutoAndroid.parse(horario);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		return 0;
+		minutoString = sdfMinutoAndroid.format(horaDate);
 		
-	}
-	
-	public String getDataAtual() {
-		return String.valueOf(ano) + "-" + String.valueOf(mes + 1) + "-" + String.valueOf(dia);
-	}
-	
-	public String getDataAtualBusca() {
-		return dataBusca;
+		horaMillis = TimeUnit.HOURS.toMillis(Integer.parseInt(horaString));
+		minutoMillis = TimeUnit.MINUTES.toMillis(Integer.parseInt(minutoString));
+		
+		horarioMillis = horaMillis + minutoMillis;
+		
+		return horarioMillis;
 	}
 }

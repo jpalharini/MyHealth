@@ -12,6 +12,7 @@ import android.widget.TimePicker;
 
 public class FragmentoTimePicker extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
+	Calendar c, cal;
 	Timestamp ts = new Timestamp();
 	public EditText horaLembrete;
 	
@@ -22,7 +23,7 @@ public class FragmentoTimePicker extends DialogFragment implements TimePickerDia
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 		    // Use the current date as the default date in the picker
-		    final Calendar c = Calendar.getInstance();
+		    c = Calendar.getInstance();
 		    int hora = c.get(Calendar.HOUR_OF_DAY);
 		    int minuto = c.get(Calendar.MINUTE);
 	

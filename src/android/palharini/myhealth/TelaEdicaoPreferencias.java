@@ -1,12 +1,19 @@
 package android.palharini.myhealth;
 
+import java.util.concurrent.TimeUnit;
+
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.daos.PreferenciasDAO;
+import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.entidades.Preferencias;
 import android.palharini.myhealth.fragmentos.FragmentoTimePicker;
+import android.palharini.myhealth.notificacoes.ServicoNotificacao;
 import android.palharini.myhealth.sessao.CaixaDialogo;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
@@ -14,8 +21,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-public class TelaConfiguracoes extends Activity {
+public class TelaEdicaoPreferencias extends Activity {
 
+	private boolean lembretePeso, lembreteBPM;
+	private String horaLembretePesoString, horaLembreteBPMString;
+	private long horaLembretePesoMillis, horaLembreteBPMMillis;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,6 +48,7 @@ public class TelaConfiguracoes extends Activity {
 		
         final CaixaDialogo caixa = new CaixaDialogo();
 		
+		final Timestamp ts = new Timestamp();
 		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
 		final PreferenciasDAO prefsdao = new PreferenciasDAO();
@@ -81,6 +93,16 @@ public class TelaConfiguracoes extends Activity {
 			
 		});
 		
+		
+		lembretePeso = checkLembretePeso.isChecked();
+		lembreteBPM = checkLembreteBPM.isChecked();
+		
+		horaLembretePesoString = horaLembretePeso.getText().toString();
+		horaLembreteBPMString = horaLembreteBPM.getText().toString();
+		
+		horaLembretePesoMillis = ts.getHorarioMillis(horaLembretePeso.getText().toString());
+		horaLembreteBPMMillis = ts.getHorarioMillis(horaLembreteBPM.getText().toString());
+		
 		buttonSalvar.setOnClickListener(new Button.OnClickListener () {
 
 			@Override
@@ -95,12 +117,29 @@ public class TelaConfiguracoes extends Activity {
 					Preferencias prefsAtual = new Preferencias(
 							prefs.getId(),
 							sessao.getIdUsuario(),
-							checkLembretePeso.isChecked(),
-							horaLembretePeso.getText().toString(),
-							checkLembreteBPM.isChecked(),
-							horaLembreteBPM.getText().toString());
+							lembretePeso,
+							horaLembretePesoString,
+							lembreteBPM,
+							horaLembreteBPMString
+							);
 					
+					if (checkLembretePeso.isChecked() != prefs.isLembretePeso()) {
+						PendingIntent notificacaoIntent = null;
+						if (lembretePeso) {
+							notificacaoIntent = marcarNotificacaoPeso(horaLembretePesoMillis);
+						}
+						else {
+							cancelarNotificacao(notificacaoIntent);
+						}
+						if (lembreteBPM) {
+							notificacaoIntent = marcarNotificacaoBPM(horaLembreteBPMMillis);
+						}
+						else {
+							cancelarNotificacao(notificacaoIntent);
+						}
+					}
 					prefsdao.atualizarPreferencias(prefsAtual);
+					
 					Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
 					startActivity(voltarTelaPrincipal);
 				}
@@ -126,4 +165,41 @@ public class TelaConfiguracoes extends Activity {
 		});
 		
 	}
+	
+	private PendingIntent marcarNotificacaoPeso (long horaLembrete) {
+		 
+        Intent notificacaoIntent = new Intent(this, ServicoNotificacao.class);
+        notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
+        notificacaoIntent.putExtra("tituloNotificacao", getString(R.string.tituloNotificacaoPeso));
+        notificacaoIntent.putExtra("textoNotificacao", getString(R.string.textoNotificacaoPeso));
+        PendingIntent pendingNotificacaoPesoIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoPesoIntent);
+        
+        return pendingNotificacaoPesoIntent;
+
+	}
+    
+
+	private PendingIntent marcarNotificacaoBPM (long horaLembrete) {
+		 
+        Intent notificacaoIntent = new Intent(this, ServicoNotificacao.class);
+        notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
+        notificacaoIntent.putExtra("tituloNotificacao", getString(R.string.tituloNotificacaoBPM));
+        notificacaoIntent.putExtra("textoNotificacao", getString(R.string.textoNotificacaoBPM));
+        PendingIntent pendingNotificacaoBPMIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoBPMIntent);
+        
+        return pendingNotificacaoBPMIntent;
+        
+	} 
+	
+    private void cancelarNotificacao (PendingIntent pendingNotificacaoIntent) {
+    	AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+    	alarmManager.cancel(pendingNotificacaoIntent);
+    }
+    
 }
