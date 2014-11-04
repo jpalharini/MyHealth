@@ -156,10 +156,14 @@ public class TelaCadastroUsuario extends Activity {
 							startActivity(irTelaCadastroPreferencias);
 							finish();
 						}
+						else {
+							Toast.makeText(getApplicationContext(), getString(R.string.toastUsrFalha), Toast.LENGTH_LONG).show();
+						}
 					}
 					else {
-						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrFalha), Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrExiste), Toast.LENGTH_LONG).show();
 					}
+					
 						
 				}
 				else {

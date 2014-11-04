@@ -21,9 +21,28 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TelaCadastroIndicador extends Activity implements OnItemSelectedListener{
+public class TelaCadastroIndicador extends Activity {
 
-	TextView unidade;
+	private Timestamp ts;
+	private GerenciamentoSessao sessao;
+	
+	private IndicadorDAO indDAO;
+	
+	private int idUsuario;
+	private String dataAtual, horarioAtual, unidadeString;
+	private Double medidaString;
+	
+	private Spinner tipo;
+	private EditText medida;
+	private TextView unidade;
+	private Button salvarButton;
+	
+	private ArrayAdapter<String> tipos;
+	private List<String> unidades;
+	private String[] listaUnidades;
+	private int posicaoSpinner;
+	
+	private boolean cadastro;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,39 +54,71 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 			StrictMode.setThreadPolicy(policy);
 		}
 		
-		unidade = (TextView) findViewById(R.id.textUnidade);
-		final Spinner tipo = (Spinner) findViewById(R.id.spinnerTipo);
-		final EditText medida = (EditText) findViewById(R.id.editMedicao);
+		ts = new Timestamp();
+		sessao = new GerenciamentoSessao(getApplicationContext());
 		
-		final Button okButton = (Button) findViewById(R.id.cadastraButton);
-	    
-		final Timestamp ts = new Timestamp();
+		indDAO = new IndicadorDAO();
 		
-		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
+		idUsuario = sessao.getIdUsuario();
+		dataAtual = ts.getDataSQL();
+		horarioAtual = ts.getHorarioSQL();
 		
-		ArrayAdapter<String> tipos = new ArrayAdapter<String>(
+		tipo = (Spinner) findViewById(R.id.spinnerTipo);
+		tipos = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.listaTipos));
 		tipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		tipo.setAdapter(tipos);
 		
-		tipo.setOnItemSelectedListener(this);
+		medida = (EditText) findViewById(R.id.editMedicao);
+		unidade = (TextView) findViewById(R.id.textUnidade);
+		salvarButton = (Button) findViewById(R.id.cadastraButton);
 				
-		final int tipoSelecionadoId = (int) (long) tipo.getSelectedItemId();
+		tipo.setOnItemSelectedListener(new OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int posicaoSpinner, long id) {
+				// TODO Auto-generated method stub
+				listaUnidades = getResources().getStringArray(R.array.listaUnidades);
+				unidades = Arrays.asList(listaUnidades);
+				switch (posicaoSpinner) {
+				case 0:
+					unidade.setText(unidades.get(posicaoSpinner));
+					break;
+				case 1:
+					unidade.setText(unidades.get(posicaoSpinner));
+					break;
+				case 2:
+					unidade.setText(unidades.get(posicaoSpinner));
+					break;
+				case 3:
+					unidade.setText(unidades.get(posicaoSpinner));
+					break;
+				case 4:
+					unidade.setText(unidades.get(posicaoSpinner));
+					break;
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
-		okButton.setOnClickListener(new Button.OnClickListener() {
+		unidadeString = unidade.getText().toString();
+		medidaString = Double.parseDouble(medida.getText().toString());
+		
+		salvarButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick (View v){
-
-				IndicadorDAO dao = new IndicadorDAO();
-				boolean cadastro = dao.cadastrarIndicador(new Indicador(
+				cadastro = indDAO.cadastrarIndicador(new Indicador(
 						0, 
-						tipoSelecionadoId,
-						sessao.getIdUsuario(),
-						Double.parseDouble(medida.getText().toString()), 
-						unidade.getText().toString(),
-						ts.getDataSQL(),
-						ts.getHorarioSQL()
-				));
+						posicaoSpinner,
+						idUsuario,
+						medidaString, 
+						unidadeString,
+						dataAtual,
+						horarioAtual
+						));
 				
 				if (cadastro) {
 					Toast.makeText(getApplicationContext(), R.string.toastIndOk, Toast.LENGTH_LONG).show();
@@ -80,34 +131,5 @@ public class TelaCadastroIndicador extends Activity implements OnItemSelectedLis
 					
 			}
 		});
-	}
-
-	public void onItemSelected(AdapterView<?> parent, View view, int posicao, long id) {
-		// TODO Auto-generated method stub
-		String[] listaUnidades = getResources().getStringArray(R.array.listaUnidades);
-		final List<String> unidades = Arrays.asList(listaUnidades);
-		switch (posicao) {
-		case 0:
-			unidade.setText(unidades.get(posicao));
-			break;
-		case 1:
-			unidade.setText(unidades.get(posicao));
-			break;
-		case 2:
-			unidade.setText(unidades.get(posicao));
-			break;
-		case 3:
-			unidade.setText(unidades.get(posicao));
-			break;
-		case 4:
-			unidade.setText(unidades.get(posicao));
-			break;
-		}
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }

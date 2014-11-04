@@ -25,7 +25,7 @@ public class TelaEdicaoIndicador extends Activity implements OnItemSelectedListe
 		setContentView(R.layout.activity_tela_cadastro_indicador);
 		
 		Intent intent = getIntent();
-		int indicSelecionado = intent.getIntExtra("indicSelecionado", 0);
+		int indicSelecionado = intent.getIntExtra("idIndicador", 0);
 				
 		final Spinner tipo = (Spinner) findViewById(R.id.spinnerTipo);
 		final EditText medida = (EditText) findViewById(R.id.editMedicao);

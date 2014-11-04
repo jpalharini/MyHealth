@@ -19,6 +19,7 @@ public class UsuarioDAO {
 	
 	private static final String CADASTRAR = "cadastrarUsuario";
 	private static final String ATUALIZAR = "atualizarUsuario";
+	private static final String ATUALIZAR_ALVO_BPM = "atualizarAlvoBPM";
 	private static final String BUSCAR = "buscarUsuario";
 	private static final String BUSCAR_EMAIL = "buscarUsuarioEmail";
 
@@ -66,6 +67,7 @@ public class UsuarioDAO {
 		
 		SoapObject usr = new SoapObject(NAMESPACE, "usuario");
 		
+		usr.addProperty("id", usuario.getId());
 		usr.addProperty("email", usuario.getEmail());
 		usr.addProperty("senha", usuario.getSenha());
 		usr.addProperty("nome", usuario.getNome());
@@ -96,6 +98,42 @@ public class UsuarioDAO {
 		}
 		
 		return true;
+	}
+	
+	public boolean atualizarAlvoBPM (int id, int alvoBPM) {
+		
+		SoapObject atualizarUsuario = new SoapObject(NAMESPACE, ATUALIZAR_ALVO_BPM);
+		
+		SoapObject usr = new SoapObject(NAMESPACE, "usuario");
+		
+		usr.addProperty("id", id);
+		usr.addProperty("alvoBPM", alvoBPM);
+		
+		atualizarUsuario.addSoapObject(usr);
+		
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		
+		envelope.setOutputSoapObject(atualizarUsuario);
+		envelope.implicitTypes = true;
+		MarshalDouble md = new MarshalDouble();
+		md.register(envelope);
+		
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
+		
+		try {
+			http.call("urn:" + ATUALIZAR, envelope);
+			
+			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
+			
+			return Boolean.parseBoolean(resposta.toString());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
+		
 	}
 
 	public Usuario buscarUsuario(int id){
