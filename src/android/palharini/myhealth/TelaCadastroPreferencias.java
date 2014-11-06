@@ -27,14 +27,14 @@ public class TelaCadastroPreferencias extends Activity {
 	private Timestamp ts;
 	
 	private CheckBox chLembretePeso, chLembreteBPM;
-	private EditText horaLembretePeso, horaLembreteBPM;
+	private EditText etHoraLembretePeso, etHoraLembreteBPM;
 	private Button btSalvar;
 	
 	private PreferenciasDAO prefsDAO;
 	
-	private boolean lembretePeso, lembreteBPM;
-	private String horaLembretePesoString, horaLembreteBPMString;
-	private long horaLembretePesoMillis, horaLembreteBPMMillis;
+	private boolean blLembretePeso, blLembreteBPM;
+	private String stHoraLembretePeso, stHoraLembreteBPM;
+	private long mlHoraLembretePeso, mlHoraLembreteBPM;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +50,16 @@ public class TelaCadastroPreferencias extends Activity {
 		sessao = new GerenciamentoSessao(getApplicationContext());
 		
 		chLembretePeso = (CheckBox) findViewById(R.id.chLembretePeso);
-		horaLembretePeso = (EditText) findViewById(R.id.horaLembretePeso);
+		etHoraLembretePeso = (EditText) findViewById(R.id.horaLembretePeso);
 		
 		chLembreteBPM = (CheckBox) findViewById(R.id.chLembreteBPM);
-		horaLembreteBPM = (EditText) findViewById(R.id.horaLembreteBPM);
+		etHoraLembreteBPM = (EditText) findViewById(R.id.horaLembreteBPM);
 		
 		btSalvar = (Button) findViewById(R.id.btSalvar);
 		
 		prefsDAO = new PreferenciasDAO();
 		
-		horaLembretePeso.setOnClickListener(new EditText.OnClickListener () {
+		etHoraLembretePeso.setOnClickListener(new EditText.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -69,7 +69,7 @@ public class TelaCadastroPreferencias extends Activity {
 			
 		});
 		
-		horaLembreteBPM.setOnClickListener(new EditText.OnClickListener () {
+		etHoraLembreteBPM.setOnClickListener(new EditText.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -85,31 +85,31 @@ public class TelaCadastroPreferencias extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub {
 				
-				lembretePeso = chLembretePeso.isChecked();
-				lembreteBPM = chLembreteBPM.isChecked();
+				blLembretePeso = chLembretePeso.isChecked();
+				blLembreteBPM = chLembreteBPM.isChecked();
 				
-				horaLembretePesoString = horaLembretePeso.getText().toString();
-				horaLembreteBPMString = horaLembreteBPM.getText().toString();
+				stHoraLembretePeso = etHoraLembretePeso.getText().toString();
+				stHoraLembreteBPM = etHoraLembreteBPM.getText().toString();
 				
-				horaLembretePesoMillis = ts.getHorarioMillis(horaLembretePesoString);
-				horaLembreteBPMMillis = ts.getHorarioMillis(horaLembreteBPMString);
+				mlHoraLembretePeso = ts.getHorarioMillis(stHoraLembretePeso);
+				mlHoraLembreteBPM = ts.getHorarioMillis(stHoraLembreteBPM);
 				
 				boolean prefs = prefsDAO.cadastrarPreferencias(new Preferencias(
 						0,
 						sessao.getIdUsuario(),
-						lembretePeso,
-						horaLembretePesoString,
-						lembreteBPM,
-						horaLembreteBPMString
+						blLembretePeso,
+						stHoraLembretePeso,
+						blLembreteBPM,
+						stHoraLembreteBPM
 						));
 				
 				if (prefs) {
 					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsOK), Toast.LENGTH_LONG).show();
-					if (lembretePeso) {
-						marcarNotificacaoPeso(horaLembretePesoMillis);
+					if (blLembretePeso) {
+						marcarNotificacaoPeso(mlHoraLembretePeso);
 					}
-					if (lembreteBPM) {
-						marcarNotificacaoBPM(horaLembreteBPMMillis);
+					if (blLembreteBPM) {
+						marcarNotificacaoBPM(mlHoraLembreteBPM);
 					}
 					Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
 					startActivity(irTelaPrincipal);

@@ -65,6 +65,10 @@
     <string name="btExcluir">Excluir indicador</string>
     <string name="toastIndOk">Indicador cadastrado com sucesso!</string>
     <string name="toastIndFalha">Falha no cadastro do indicador...</string>
+    <string name="toastIndAtOK">Indicador atualizado com sucesso!</string>
+    <string name="toastIndAtFalha">Falha na atualização do indicador...</string>
+    <string name="toastIndExcOK">Indicador excluído com sucesso!</string>
+    <string name="toastIndExcFalha">Falha na exclusão do indicador...</string>
 
     <!-- Login -->
     <string name="title_activity_tela_login">MyHealth</string>

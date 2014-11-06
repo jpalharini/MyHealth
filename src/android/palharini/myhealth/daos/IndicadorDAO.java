@@ -107,6 +107,34 @@ public class IndicadorDAO {
 		return true;
 	}
 	
+	public boolean excluirIndicador (Integer id) {
+		
+		SoapObject excluirIndicador = new SoapObject(NAMESPACE, EXCLUIR);
+		
+		excluirIndicador.addProperty("id", id);
+				
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		
+		envelope.setOutputSoapObject(excluirIndicador);
+		envelope.implicitTypes = true;
+		
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
+		
+		try {
+			http.call("urn:" + EXCLUIR, envelope);
+			
+			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
+			
+			return Boolean.parseBoolean(resposta.toString());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
 	public Indicador buscarIndicadorId (Integer id) {
 		Indicador indicador = null;
 		
