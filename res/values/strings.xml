@@ -14,9 +14,8 @@
     <string name="hintAlvoBPM">BPM ideal</string>
 
     <!-- Dados Indicador -->
-    <string name="spinnerTipo">Selecione o tipo</string>
-
-    <string-array name="listaTipos">
+    <string name="spTipo">Selecione o tipo</string>
+    <string-array name="lsTipos">
         <item>Altura</item>
         <item>Peso</item>
         <item>Freq. Cardíaca</item>
@@ -27,10 +26,8 @@
         <item>Cintura</item>
         <item>Triglicerídeos</item>
     </string-array>
-
-    <string name="textUnidade">unid.</string>
-
-    <string-array name="listaUnidades">
+    <string name="tvUnidade">unid.</string>
+    <string-array name="lsUnidades">
         <item name="altura">cm</item>
         <item name="peso">kg</item>
         <item name="bpm">BPM</item>
@@ -44,16 +41,15 @@
 
     <!-- Configurações -->
     <string name="title_activity_tela_configuracoes">Configurações</string>
-    <string name="checkLembretePeso">Definir lembrete de peso</string>
-    <string name="checkLembreteBPM">Obter número ideal de batimentos cardíacos</string>
+    <string name="chLembretePeso">Definir lembrete de peso</string>
+    <string name="chLembreteBPM">Obter número ideal de batimentos cardíacos</string>
     <string name="hintHoraLembrete">Hora do lembrete</string>
 
     <!-- Tela Cadastro/Edicao Usuario -->
     <string name="title_activity_tela_cadastro_usuario">Cadastro</string>
     <string name="title_activity_tela_edicao_usuario">Editar dados</string>
-    <string name="textCadastro">Para seu cadastro, informe:</string>
-    <string name="buttonContinuar">Continuar</string>
-    <string name="buttonSalvar">Salvar</string>
+    <string name="tvCadastro">Para seu cadastro, informe:</string>
+    <string name="btContinuar">Continuar</string>
     <string name="toastUsrOK">Usuário cadastrado com sucesso!</string>
     <string name="toastUsrFalha">Falha no cadastro do usuário...</string>
     <string name="toastUsrExiste">E-mail já cadastrado!</string>
@@ -65,21 +61,22 @@
     <string name="title_activity_tela_cadastro_indicador">Cadastrar indicador</string>
     <string name="title_activity_tela_edicao_indicador">Editar indicador</string>
     <string name="textTipoIndicador">Escolha o tipo de indicador:</string>
-    <string name="buttonCadastra">Cadastrar</string>
+    <string name="btSalvar">Salvar</string>
+    <string name="btExcluir">Excluir indicador</string>
     <string name="toastIndOk">Indicador cadastrado com sucesso!</string>
     <string name="toastIndFalha">Falha no cadastro do indicador...</string>
 
     <!-- Login -->
     <string name="title_activity_tela_login">MyHealth</string>
-    <string name="textLogin">Faça seu login ou cadastre-se!</string>
-    <string name="buttonLogin">Login</string>
-    <string name="textCadastre">Não possui conta? Crie agora!</string>
-    <string name="buttonCadastre">Criar conta</string>
+    <string name="tvLogin">Faça seu login ou cadastre-se!</string>
+    <string name="btLogin">Login</string>
+    <string name="tvCadastre">Não possui conta? Crie agora!</string>
+    <string name="btCadastre">Criar conta</string>
 
     <!-- Tela Principal -->
     <string name="title_activity_tela_principal">MyHealth</string>
-    <string name="textOla">Olá, </string>
-    <string name="textIMC">Seu IMC atual é:</string>
+    <string name="tvOla">Olá, </string>
+    <string name="tvIMC">Seu IMC atual é:</string>
     <string name="IMC">XX.X</string>
 
     <string-array name="faixasIMC">
@@ -91,34 +88,34 @@
         <item name="40+">Obesidade mórbida</item>
     </string-array>
 
-    <string name="textStatusIMC">[status]</string>
-    <string name="textAlvoBPM">Sua freq. cardíaca ideal é:</string>
+    <string name="tvStatusIMC">[status]</string>
+    <string name="tvAlvoBPM">Sua freq. cardíaca ideal é:</string>
     <string name="alvoBPM">XXX</string>
-    <string name="buttonCadIndicador">Cadastrar indicador</string>
-    <string name="buttonAcompanhamento">Acompanhamento</string>
-    <string name="buttonDados">Meus dados</string>
-    <string name="buttonConfiguracoes">Configurações</string>
-    <string name="buttonLogout">Fazer logout</string>
+    <string name="btCadIndicador">Cadastrar indicador</string>
+    <string name="btAcompanhamento">Acompanhamento</string>
+    <string name="btDados">Meus dados</string>
+    <string name="btConfiguracoes">Configurações</string>
+    <string name="btLogout">Fazer logout</string>
 
     <!-- Tela Indicadores -->
     <string name="abaSemana">7 dias</string>
     <string name="abaMes">4 semanas</string>
     <string name="abaAno">12 meses</string>
-    <string name="buttonGrafico">Gerar gráfico</string>
+    <string name="btGrafico">Gerar gráfico</string>
 
     <!-- Diálogos -->
-    <string name="textLogonFalha">Falha no login!</string>
-    <string name="textLogonErrado">E-mail ou senha incorretos</string>
-    <string name="textLogonVazio">Por favor, digite seu e-mail e senha</string>
-    <string name="textFalhaConexao">Falha de rede!</string>
-    <string name="textServidorNaoResponde">Falha ao obter dados do servidor.
+    <string name="tvLogonFalha">Falha no login!</string>
+    <string name="tvLogonErrado">E-mail ou senha incorretos</string>
+    <string name="tvLogonVazio">Por favor, digite seu e-mail e senha</string>
+    <string name="tvFalhaConexao">Falha de rede!</string>
+    <string name="tvServidorNaoResponde">Falha ao obter dados do servidor.
         \nPor favor, verifique sua conexão de rede.</string>
         
     <!-- Notificações -->
-    <string name="tituloNotificacaoPeso">Hora de pesar-se!</string>
-    <string name="textoNotificacaoPeso">Pese-se e registre o peso no MyHealth</string>
-    <string name="tituloNotificacaoBPM">Hora de medir freq. cardíaca!</string>
-    <string name="textoNotificacaoBPM">Meça sua frequência cardíaca e registre no MyHealth</string>
+    <string name="ttNotificacaoPeso">Hora de pesar-se!</string>
+    <string name="txNotificacaoPeso">Pese-se e registre o peso no MyHealth</string>
+    <string name="ttNotificacaoBPM">Hora de medir freq. cardíaca!</string>
+    <string name="txNotificacaoBPM">Meça sua frequência cardíaca e registre no MyHealth</string>
 
     <!-- Diversos -->
     <string name="descSplash">Splash MyHealth</string>

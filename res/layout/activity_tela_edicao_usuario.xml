@@ -20,7 +20,7 @@
             android:paddingBottom="15dp" >
 
             <EditText
-                android:id="@+id/editEmail"
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -29,7 +29,7 @@
                 android:textSize="22sp" />
 
             <EditText
-                android:id="@+id/editSenha"
+                android:id="@+id/etSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -38,7 +38,7 @@
                 android:textSize="22sp" />
 
             <EditText
-                android:id="@+id/editConfSenha"
+                android:id="@+id/etConfSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -47,7 +47,7 @@
                 android:textSize="22sp" />
 
             <EditText
-                android:id="@+id/editNome"
+                android:id="@+id/etNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -56,7 +56,7 @@
                 android:textSize="22sp" />
 
             <EditText
-                android:id="@+id/editNasc"
+                android:id="@+id/etNasc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -65,7 +65,7 @@
                 android:textSize="22sp" />
 
             <EditText
-                android:id="@+id/editAltura"
+                android:id="@+id/etAltura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -74,7 +74,7 @@
                 android:textSize="22sp" />
             
             <EditText
-                android:id="@+id/editAlvoBPM"
+                android:id="@+id/etAlvoBPM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -83,11 +83,11 @@
                 android:textSize="22sp" />
 
             <Button
-                android:id="@+id/buttonSalvar"
+                android:id="@+id/btSalvar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="@string/buttonSalvar"
+                android:text="@string/btSalvar"
                 android:textSize="28sp" />
         </LinearLayout>
     </ScrollView>

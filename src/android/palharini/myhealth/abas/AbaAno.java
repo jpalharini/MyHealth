@@ -43,7 +43,7 @@ public class AbaAno extends Fragment {
 		
 		final ListView listaInd = (ListView) view.findViewById(R.id.listViewInd);
 		
-		final Button buttonGrafico = (Button) view.findViewById(R.id.buttonGraficoAno);
+		final Button buttonGrafico = (Button) view.findViewById(R.id.btGrafico);
 		
 		Intent intent = getActivity().getIntent();
 		final Integer tipoSelecionado = intent.getIntExtra("tipoSelecionado", 0);

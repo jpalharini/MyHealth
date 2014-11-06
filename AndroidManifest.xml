@@ -69,6 +69,7 @@
             android:name=".TelaGrafico"
             android:label="@string/title_activity_tela_grafico" >
         </activity>
+        <service android:name=".notificacoes.ServicoNotificacao"></service>
     </application>
 
 </manifest>

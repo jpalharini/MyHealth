@@ -18,16 +18,16 @@
                 android:orientation="vertical">
                 
 	    	<TextView
-		        android:id="@+id/textLogin"
+		        android:id="@+id/tvLogin"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="10dp"
 		        android:gravity="center_horizontal"
-		        android:text="@string/textLogin"
+		        android:text="@string/tvLogin"
 		        android:textAppearance="?android:attr/textAppearanceMedium" />
 		
 		    <EditText
-		        android:id="@+id/editEmail"
+		        android:id="@+id/etEmail"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dp"
@@ -36,7 +36,7 @@
 		        android:textSize="22sp" />
 		
 		    <EditText
-			    android:id="@+id/editSenha"
+			    android:id="@+id/etSenha"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 		        android:layout_marginTop="20dp"
@@ -45,28 +45,28 @@
 			    android:textSize="22sp" />
 		    
 		    <Button
-		        android:id="@+id/loginButton"
+		        android:id="@+id/btLogin"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="25dp"
-		        android:text="@string/buttonLogin"
+		        android:text="@string/btLogin"
 		        android:textSize="28sp" />
 		
 		    <TextView
-		        android:id="@+id/textCadastre"
+		        android:id="@+id/tvCadastre"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="30dp"
 		        android:gravity="center_horizontal"
-		        android:text="@string/textCadastre"
+		        android:text="@string/tvCadastre"
 		        android:textAppearance="?android:attr/textAppearanceMedium" />
 		    
 		    <Button
-			    android:id="@+id/cadastreButton"
+			    android:id="@+id/btCadastre"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 		        android:layout_marginTop="5dp"
-			    android:text="@string/buttonCadastre"
+			    android:text="@string/btCadastre"
 			    android:textSize="28sp" />
 		    </LinearLayout>
     </ScrollView>

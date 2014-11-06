@@ -13,8 +13,13 @@ import android.palharini.myhealth.TelaCadastroIndicador;
 public class ServicoNotificacao extends Service {
 
 	public static int ID_NOTIFICACAO;
+	
+	private Context context;
+	
+	private Notification.Builder builder;
+	private Intent notificacaoIntent;
 
-	private String tituloNotificacao, textoNotificacao;
+	private String ttNotificacao, txNotificacao;
 	private NotificationManager notificationManager;
 	private PendingIntent pendingNotificacaoIntent;
 	
@@ -29,17 +34,17 @@ public class ServicoNotificacao extends Service {
 		// TODO Auto-generated method stub
 		
 		ID_NOTIFICACAO = (int) intent.getExtras().get("ID_NOTIFICACAO");
-		tituloNotificacao = (String) intent.getExtras().get("tituloNotificacao");
-		textoNotificacao = (String) intent.getExtras().get("textoNotificacao");
+		ttNotificacao = (String) intent.getExtras().get("ttNotificacao");
+		txNotificacao = (String) intent.getExtras().get("txNotificacao");
 		
-		Context context = this.getApplicationContext();
+		context = this.getApplicationContext();
 		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-	    Intent notificacaoIntent = new Intent(this, TelaCadastroIndicador.class);
+	    notificacaoIntent = new Intent(this, TelaCadastroIndicador.class);
 		pendingNotificacaoIntent = PendingIntent.getActivity(context, 0, notificacaoIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 		
-		Notification.Builder builder = new Notification.Builder(context);
-        builder.setContentTitle(tituloNotificacao);
-        builder.setContentText(textoNotificacao);
+		builder = new Notification.Builder(context);
+        builder.setContentTitle(ttNotificacao);
+        builder.setContentText(txNotificacao);
         builder.setSmallIcon(R.drawable.ic_launcher);
     	builder.setContentIntent(pendingNotificacaoIntent);
 

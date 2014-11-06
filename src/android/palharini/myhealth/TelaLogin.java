@@ -30,14 +30,14 @@ public class TelaLogin extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 
-    	final EditText email = (EditText) findViewById(R.id.editEmail);
-    	final EditText senha = (EditText) findViewById(R.id.editSenha);
-    	final Button loginButton = (Button) findViewById(R.id.loginButton);
-    	final Button cadastreButton = (Button) findViewById(R.id.cadastreButton);
+    	final EditText email = (EditText) findViewById(R.id.etEmail);
+    	final EditText senha = (EditText) findViewById(R.id.etSenha);
+    	final Button btLogin = (Button) findViewById(R.id.btLogin);
+    	final Button btCadastre = (Button) findViewById(R.id.btCadastre);
         final CaixaDialogo caixa = new CaixaDialogo();
         final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 
-        loginButton.setOnClickListener(new Button.OnClickListener() {      
+        btLogin.setOnClickListener(new Button.OnClickListener() {      
         @Override
         public void onClick(View arg0) {
             String emailString = email.getText().toString();
@@ -72,31 +72,31 @@ public class TelaLogin extends Activity {
 	                }else{
 	                	caixa.showAlertDialog(
 	                			TelaLogin.this, 
-	                			getString(R.string.textLogonFalha), 
-	                			getString(R.string.textLogonErrado), 
+	                			getString(R.string.tvLogonFalha), 
+	                			getString(R.string.tvLogonErrado), 
 	                			false);
 	                }
                 }
                 else {
                 	caixa.showAlertDialog(
                 			TelaLogin.this, 
-                			getString(R.string.textFalhaConexao), 
-                			getString(R.string.textServidorNaoResponde), 
+                			getString(R.string.tvFalhaConexao), 
+                			getString(R.string.tvServidorNaoResponde), 
                 			false);
                 }
             }
             else{
             	caixa.showAlertDialog(
             			TelaLogin.this, 
-            			getString(R.string.textLogonFalha), 
-            			getString(R.string.textLogonVazio), 
+            			getString(R.string.tvLogonFalha), 
+            			getString(R.string.tvLogonVazio), 
             			false);
                 }
                  
             }
         });
         
-        cadastreButton.setOnClickListener(new Button.OnClickListener() {      
+        btCadastre.setOnClickListener(new Button.OnClickListener() {      
             @Override
             public void onClick(View arg0) {
             	Intent irTelaCadastro = new Intent(getApplicationContext(), TelaCadastroUsuario.class);

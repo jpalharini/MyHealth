@@ -38,14 +38,14 @@ public class TelaEdicaoPreferencias extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		
-		final CheckBox checkLembretePeso = (CheckBox) findViewById(R.id.checkLembretePeso);
+		final CheckBox chLembretePeso = (CheckBox) findViewById(R.id.chLembretePeso);
 		final EditText horaLembretePeso = (EditText) findViewById(R.id.horaLembretePeso);
 		
-		final CheckBox checkLembreteBPM = (CheckBox) findViewById(R.id.checkLembreteBPM);
+		final CheckBox chLembreteBPM = (CheckBox) findViewById(R.id.chLembreteBPM);
 		final EditText horaLembreteBPM = (EditText) findViewById(R.id.horaLembreteBPM);
 		
-		final Button buttonSalvar = (Button) findViewById(R.id.buttonSalvar);
-		final Button buttonLogout = (Button) findViewById(R.id.buttonLogout);
+		final Button btSalvar = (Button) findViewById(R.id.btSalvar);
+		final Button btLogout = (Button) findViewById(R.id.btLogout);
 		
         final CaixaDialogo caixa = new CaixaDialogo();
 		
@@ -57,20 +57,20 @@ public class TelaEdicaoPreferencias extends Activity {
 		
 		if (prefs != null) {
 			if (prefs.isLembretePeso()) {
-				checkLembretePeso.setChecked(true);
+				chLembretePeso.setChecked(true);
 				horaLembretePeso.setText(prefs.getHoraLembretePeso().toString());
 			}
 			
 			if (prefs.isLembreteBPM()) {
-				checkLembreteBPM.setChecked(true);
+				chLembreteBPM.setChecked(true);
 				horaLembreteBPM.setText(prefs.getHoraLembreteBPM().toString());
 			}
 		}
 		else {
 			caixa.showAlertDialog(
         			this, 
-        			getString(R.string.textFalhaConexao), 
-        			getString(R.string.textServidorNaoResponde), 
+        			getString(R.string.tvFalhaConexao), 
+        			getString(R.string.tvServidorNaoResponde), 
         			false);
 		}
 		
@@ -95,8 +95,8 @@ public class TelaEdicaoPreferencias extends Activity {
 		});
 		
 		
-		lembretePeso = checkLembretePeso.isChecked();
-		lembreteBPM = checkLembreteBPM.isChecked();
+		lembretePeso = chLembretePeso.isChecked();
+		lembreteBPM = chLembreteBPM.isChecked();
 		
 		horaLembretePesoString = horaLembretePeso.getText().toString();
 		horaLembreteBPMString = horaLembreteBPM.getText().toString();
@@ -104,15 +104,15 @@ public class TelaEdicaoPreferencias extends Activity {
 		horaLembretePesoMillis = ts.getHorarioMillis(horaLembretePeso.getText().toString());
 		horaLembreteBPMMillis = ts.getHorarioMillis(horaLembreteBPM.getText().toString());
 		
-		buttonSalvar.setOnClickListener(new Button.OnClickListener () {
+		btSalvar.setOnClickListener(new Button.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (
-						checkLembretePeso.isChecked() != prefs.isLembretePeso() ||
+						chLembretePeso.isChecked() != prefs.isLembretePeso() ||
 						!horaLembretePeso.getText().toString().equals(prefs.getHoraLembretePeso()) ||
-						checkLembreteBPM.isChecked() != prefs.isLembreteBPM() || 
+						chLembreteBPM.isChecked() != prefs.isLembreteBPM() || 
 						!horaLembreteBPM.getText().toString().equals(prefs.getHoraLembreteBPM())) {
 					
 					Preferencias prefsAtual = new Preferencias(
@@ -124,7 +124,7 @@ public class TelaEdicaoPreferencias extends Activity {
 							horaLembreteBPMString
 							);
 					
-					if (checkLembretePeso.isChecked() != prefs.isLembretePeso()) {
+					if (chLembretePeso.isChecked() != prefs.isLembretePeso()) {
 						if (lembretePeso) {
 							pendingNotificacaoPesoIntent = marcarNotificacaoPeso(horaLembretePesoMillis);
 						}
@@ -152,7 +152,7 @@ public class TelaEdicaoPreferencias extends Activity {
 			
 		});
 		
-		buttonLogout.setOnClickListener(new Button.OnClickListener () {
+		btLogout.setOnClickListener(new Button.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -172,8 +172,8 @@ public class TelaEdicaoPreferencias extends Activity {
 		 
         Intent notificacaoIntent = new Intent(this, ServicoNotificacao.class);
         notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
-        notificacaoIntent.putExtra("tituloNotificacao", getString(R.string.tituloNotificacaoPeso));
-        notificacaoIntent.putExtra("textoNotificacao", getString(R.string.textoNotificacaoPeso));
+        notificacaoIntent.putExtra("ttNotificacao", getString(R.string.ttNotificacaoPeso));
+        notificacaoIntent.putExtra("txNotificacao", getString(R.string.txNotificacaoPeso));
         PendingIntent pendingNotificacaoPesoIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -188,8 +188,8 @@ public class TelaEdicaoPreferencias extends Activity {
 		 
         Intent notificacaoIntent = new Intent(this, ServicoNotificacao.class);
         notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
-        notificacaoIntent.putExtra("tituloNotificacao", getString(R.string.tituloNotificacaoBPM));
-        notificacaoIntent.putExtra("textoNotificacao", getString(R.string.textoNotificacaoBPM));
+        notificacaoIntent.putExtra("ttNotificacao", getString(R.string.ttNotificacaoBPM));
+        notificacaoIntent.putExtra("txNotificacao", getString(R.string.txNotificacaoBPM));
         PendingIntent pendingNotificacaoBPMIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);

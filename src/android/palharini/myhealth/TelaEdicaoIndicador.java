@@ -19,6 +19,11 @@ import android.widget.TextView;
 
 public class TelaEdicaoIndicador extends Activity implements OnItemSelectedListener{
 
+	private Spinner spTipo;
+	private EditText etMedida;
+	private TextView tvUnidade;
+	private Button btSalvar, btExcluir;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,48 +32,52 @@ public class TelaEdicaoIndicador extends Activity implements OnItemSelectedListe
 		Intent intent = getIntent();
 		int indicSelecionado = intent.getIntExtra("idIndicador", 0);
 				
-		final Spinner tipo = (Spinner) findViewById(R.id.spinnerTipo);
-		final EditText medida = (EditText) findViewById(R.id.editMedicao);
-		final TextView unidade = (TextView) findViewById(R.id.textUnidade);
-		final Button okButton = (Button) findViewById(R.id.cadastraButton);
+		spTipo = (Spinner) findViewById(R.id.spTipo);
+		etMedida = (EditText) findViewById(R.id.editMedicao);
+		tvUnidade = (TextView) findViewById(R.id.textUnidade);
+		btSalvar = (Button) findViewById(R.id.btSalvar);
+		btExcluir = (Button) findViewById(R.id.btSalvar);
+		
 		
 		ArrayAdapter<String> tipos = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.listaTipos));
+				this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.lsTipos));
 		tipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		tipo.setAdapter(tipos);
+		spTipo.setAdapter(tipos);
 		
-		tipo.setOnItemSelectedListener(this);
+		spTipo.setOnItemSelectedListener(this);
 		
-		String[] listUnidades = getResources().getStringArray(R.array.listaUnidades);
+		String[] listUnidades = getResources().getStringArray(R.array.lsUnidades);
 		final List<String> unidades = Arrays.asList(listUnidades);
 		
 		final IndicadorDAO dao = new IndicadorDAO();
 		final Indicador indicador = dao.buscarIndicadorId(indicSelecionado);
 		
-		tipo.setSelection(indicador.getIdTipo());
-		medida.setText(indicador.getMedida().toString());
+		spTipo.setSelection(indicador.getIdTipo());
+		etMedida.setText(indicador.getMedida().toString());
 		
-		final int tipoSelecionadoId = (int) (long) tipo.getSelectedItemId();
-		unidade.setText(unidades.get(tipoSelecionadoId));
+		final int tipoSelecionadoId = (int) (long) spTipo.getSelectedItemId();
+		tvUnidade.setText(unidades.get(tipoSelecionadoId));
 		
 		
-		okButton.setOnClickListener(new Button.OnClickListener() {
+		btSalvar.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick (View v){
 				dao.atualizarIndicador(new Indicador(
 						indicador.getId(), 
 						tipoSelecionadoId,
-						Double.parseDouble(medida.getText().toString()), 
+						Double.parseDouble(etMedida.getText().toString()), 
 						unidades.get(tipoSelecionadoId)
 				));
 			}
 		});
+		
+		
 	}
 
 	public void onItemSelected(AdapterView<?> parent, View view, int posicao, long id) {
 		// TODO Auto-generated method stub
 		final TextView unidade;
-		String[] listUnidades = getResources().getStringArray(R.array.listaUnidades);
+		String[] listUnidades = getResources().getStringArray(R.array.lsUnidades);
 		final List<String> unidades = Arrays.asList(listUnidades);
 		switch (posicao) {
 		case 0:

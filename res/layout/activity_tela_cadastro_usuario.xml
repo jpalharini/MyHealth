@@ -20,17 +20,17 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/welcomeText"
+                android:id="@+id/tvCadastro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:gravity="center_horizontal"
-                android:text="@string/textCadastro"
+                android:text="@string/tvCadastro"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editEmail"
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -40,7 +40,7 @@
             </EditText>
 
             <EditText
-                android:id="@+id/editSenha"
+                android:id="@+id/etSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -49,7 +49,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editConfSenha"
+                android:id="@+id/etConfSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -58,7 +58,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editNome"
+                android:id="@+id/etNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -67,7 +67,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editNasc"
+                android:id="@+id/etNasc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -76,7 +76,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editAltura"
+                android:id="@+id/etAltura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -85,7 +85,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editPeso"
+                android:id="@+id/etPeso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -94,11 +94,11 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/buttonContinuar"
+                android:id="@+id/btContinuar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="@string/buttonContinuar"
+                android:text="@string/btContinuar"
                 android:textSize="22sp" />
         </LinearLayout>
     </ScrollView>

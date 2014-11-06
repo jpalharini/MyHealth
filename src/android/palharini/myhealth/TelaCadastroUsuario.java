@@ -31,16 +31,16 @@ public class TelaCadastroUsuario extends Activity {
 	private FormatoDataNascimento fdn;
 	private Timestamp ts;
 	
-	private EditText email, senha, confSenha, nome, dataNasc, altura, peso;
-	private Button buttonContinuar;	
+	private EditText etEmail, etSenha, etConfSenha, etNome, etDataNasc, etAltura, etPeso;
+	private Button btContinuar;	
 	
-	private String emailString, nomeString, senhaString, confSenhaString, criptSenha, dataNascString, dataNascSQL;
-	private String[] listUnidades;
-	private List<String> unidades;
-	private Double alturaDouble, pesoDouble;
-	private Boolean usr, indAltura, indPeso;
+	private String stEmail, stNome, stSenha, stConfSenha, stCriptSenha, stDataNasc, stDataNascSQL;
+	private String[] arrUnidades;
+	private List<String> lsUnidades;
+	private Double dbAltura, dbPeso;
+	private Boolean blUsr, blIndAltura, blIndPeso;
 	
-	private Usuario usuarioOK, usuarioCheck;
+	private Usuario usrUsuario;
 	private UsuarioDAO usrDAO;
 	private IndicadorDAO indDAO;
 	
@@ -58,21 +58,22 @@ public class TelaCadastroUsuario extends Activity {
 		setContentView(R.layout.activity_tela_cadastro_usuario);
 		
 		ts = new Timestamp();
+		usrDAO = new UsuarioDAO();
 		indDAO = new IndicadorDAO();
 		fdn = new FormatoDataNascimento();
 		sessao = new GerenciamentoSessao(getApplicationContext());
 		
-		email = (EditText) findViewById(R.id.editEmail);
-		senha = (EditText) findViewById(R.id.editSenha);
-		confSenha = (EditText) findViewById(R.id.editConfSenha);
-		nome = (EditText) findViewById(R.id.editNome);
-		dataNasc = (EditText) findViewById(R.id.editNasc);
-		altura = (EditText) findViewById(R.id.editAltura);
-		peso = (EditText) findViewById(R.id.editPeso);
+		etEmail = (EditText) findViewById(R.id.etEmail);
+		etSenha = (EditText) findViewById(R.id.etSenha);
+		etConfSenha = (EditText) findViewById(R.id.etConfSenha);
+		etNome = (EditText) findViewById(R.id.etNome);
+		etDataNasc = (EditText) findViewById(R.id.etNasc);
+		etAltura = (EditText) findViewById(R.id.etAltura);
+		etPeso = (EditText) findViewById(R.id.etPeso);
 		
-		buttonContinuar = (Button) findViewById(R.id.buttonContinuar);
+		btContinuar = (Button) findViewById(R.id.btContinuar);
 		
-		dataNasc.setOnClickListener(new EditText.OnClickListener () {
+		etDataNasc.setOnClickListener(new EditText.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -82,25 +83,25 @@ public class TelaCadastroUsuario extends Activity {
 			
 		});
 		
-		buttonContinuar.setOnClickListener(new OnClickListener() {
+		btContinuar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick (View v){
 				
-				emailString = email.getText().toString();
-				nomeString = nome.getText().toString();
-				alturaDouble = Double.parseDouble(altura.getText().toString());
-				pesoDouble = Double.parseDouble(peso.getText().toString());
+				stEmail = etEmail.getText().toString();
+				stNome = etNome.getText().toString();
+				dbAltura = Double.parseDouble(etAltura.getText().toString());
+				dbPeso = Double.parseDouble(etPeso.getText().toString());
 
-				senhaString = senha.getText().toString();
-				confSenhaString = confSenha.getText().toString();
-				criptSenha = null;
+				stSenha = etSenha.getText().toString();
+				stConfSenha = etConfSenha.getText().toString();
+				stCriptSenha = null;
 				
-				if (senhaString.equals(confSenhaString)){
+				if (stSenha.equals(stConfSenha)){
 					try {
 						MessageDigest md = MessageDigest.getInstance("MD5");
-						md.update(senhaString.getBytes("UTF-8"));
+						md.update(stSenha.getBytes("UTF-8"));
 						BigInteger hash = new BigInteger(1, md.digest());
-						criptSenha = hash.toString(16);
+						stCriptSenha = hash.toString(16);
 					} catch (NoSuchAlgorithmException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -109,62 +110,54 @@ public class TelaCadastroUsuario extends Activity {
 						e.printStackTrace();
 					}
 					
-					dataNascString = dataNasc.getText().toString();
-					dataNascSQL = fdn.formatarDataSQL(dataNascString);
+					stDataNasc = etDataNasc.getText().toString();
+					stDataNascSQL = fdn.formatarDataSQL(stDataNasc);
 					
-					usuarioCheck = usrDAO.buscarUsuarioEmail(emailString);
+					usrDAO = new UsuarioDAO();
+					blUsr = usrDAO.cadastrarUsuario(new Usuario(
+							0, 
+							stEmail,
+							stCriptSenha,
+							stNome, 
+							stDataNascSQL
+							));
 					
-					if (usuarioCheck == null) {
-						usrDAO = new UsuarioDAO();
-						usr = usrDAO.cadastrarUsuario(new Usuario(
-								0, 
-								emailString,
-								criptSenha,
-								nomeString, 
-								dataNascSQL
-								));
-						
-						usuarioOK = usrDAO.buscarUsuarioEmail(emailString);
-						
-						listUnidades = getResources().getStringArray(R.array.listaUnidades);
-						unidades = Arrays.asList(listUnidades);
-						
-						indAltura = indDAO.cadastrarIndicador(new Indicador(
-								0,
-								0,
-								usuarioOK.getId(),
-								alturaDouble,
-								unidades.get(0),
-								ts.getDataSQL(),
-								ts.getHorarioSQL()
-								));
-						
-						indPeso = indDAO.cadastrarIndicador(new Indicador(
-								0,
-								1,
-								usuarioOK.getId(),
-								pesoDouble,
-								unidades.get(1),
-								ts.getDataSQL(),
-								ts.getHorarioSQL()
-								));
-						
-						if (usr && indAltura && indPeso) {
-							sessao.criarSessao(usuarioOK.getId(), usuarioOK.getNome(), usuarioOK.getEmail());
-							Toast.makeText(getApplicationContext(), getString(R.string.toastUsrOK), Toast.LENGTH_LONG).show();
-							irTelaCadastroPreferencias = new Intent(getApplicationContext(), TelaCadastroPreferencias.class);
-							startActivity(irTelaCadastroPreferencias);
-							finish();
-						}
-						else {
-							Toast.makeText(getApplicationContext(), getString(R.string.toastUsrFalha), Toast.LENGTH_LONG).show();
-						}
+					usrUsuario = usrDAO.buscarUsuarioEmail(stEmail);
+					
+					arrUnidades = getResources().getStringArray(R.array.lsUnidades);
+					lsUnidades = Arrays.asList(arrUnidades);
+					
+					blIndAltura = indDAO.cadastrarIndicador(new Indicador(
+							0,
+							0,
+							usrUsuario.getId(),
+							dbAltura,
+							lsUnidades.get(0),
+							ts.getDataSQL(),
+							ts.getHorarioSQL()
+							));
+					
+					blIndPeso = indDAO.cadastrarIndicador(new Indicador(
+							0,
+							1,
+							usrUsuario.getId(),
+							dbPeso,
+							lsUnidades.get(1),
+							ts.getDataSQL(),
+							ts.getHorarioSQL()
+							));
+					
+					if (blUsr && blIndAltura && blIndPeso) {
+						sessao.criarSessao(usrUsuario.getId(), usrUsuario.getNome(), usrUsuario.getEmail());
+						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrOK), Toast.LENGTH_LONG).show();
+						irTelaCadastroPreferencias = new Intent(getApplicationContext(), TelaCadastroPreferencias.class);
+						startActivity(irTelaCadastroPreferencias);
+						finish();
 					}
 					else {
-						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrExiste), Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrFalha), Toast.LENGTH_LONG).show();
 					}
 					
-						
 				}
 				else {
 					Toast.makeText(getApplicationContext(), getString(R.string.toastSenhaInv), Toast.LENGTH_LONG).show();

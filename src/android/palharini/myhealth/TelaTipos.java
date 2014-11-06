@@ -21,7 +21,7 @@ public class TelaTipos extends Activity {
 		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
 				this, 
 				android.R.layout.simple_list_item_1, 
-				getResources().getStringArray(R.array.listaTipos));
+				getResources().getStringArray(R.array.lsTipos));
 		
 		lViewTipos.setAdapter(listAdapter);
 		

@@ -30,15 +30,15 @@ public class TelaPrincipal extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		
-		final TextView ola = (TextView) findViewById(R.id.textOla);
+		final TextView ola = (TextView) findViewById(R.id.tvOla);
 		final TextView imc = (TextView) findViewById(R.id.IMC);
-		final TextView imcStatus = (TextView) findViewById(R.id.textStatusIMC);
+		final TextView imcStatus = (TextView) findViewById(R.id.tvStatusIMC);
 		final TextView fcd = (TextView) findViewById(R.id.alvoBPM);
 		
-		final Button buttonCadIndicador = (Button) findViewById(R.id.buttonCadIndicador);
-		final Button buttonAcompanhamento = (Button) findViewById(R.id.buttonAcompanhamento);
-		final Button buttonDados = (Button) findViewById(R.id.buttonDados);
-		final Button buttonConfiguracoes = (Button) findViewById(R.id.buttonConfiguracoes);
+		final Button buttonCadIndicador = (Button) findViewById(R.id.btCadIndicador);
+		final Button buttonAcompanhamento = (Button) findViewById(R.id.btAcompanhamento);
+		final Button buttonDados = (Button) findViewById(R.id.btDados);
+		final Button buttonConfiguracoes = (Button) findViewById(R.id.btConfiguracoes);
 		
 		GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
@@ -63,7 +63,7 @@ public class TelaPrincipal extends Activity {
 			else {
 				primeiroNomeUsuario = nomeUsuario;
 			}
-			ola.setText(getString(R.string.textOla) + " " + primeiroNomeUsuario);
+			ola.setText(getString(R.string.tvOla) + " " + primeiroNomeUsuario);
 			
 			Double imcDouble = (pesoUsuario / (alturaUsuario * alturaUsuario));
 			DecimalFormat decimal = new DecimalFormat("0.0");

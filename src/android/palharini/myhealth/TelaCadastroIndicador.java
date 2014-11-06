@@ -32,15 +32,15 @@ public class TelaCadastroIndicador extends Activity {
 	private String dataAtual, horarioAtual, unidadeString;
 	private Double medidaString;
 	
-	private Spinner tipo;
-	private EditText medida;
-	private TextView unidade;
-	private Button salvarButton;
+	private Spinner spTipo;
+	private EditText etMedida;
+	private TextView tvUnidade;
+	private Button btSalvar;
 	
-	private ArrayAdapter<String> tipos;
-	private List<String> unidades;
-	private String[] listaUnidades;
-	private int posicaoSpinner;
+	private ArrayAdapter<String> adTipos;
+	private List<String> lsUnidades;
+	private String[] arrUnidades;
+	private int posSpinner;
 	
 	private boolean cadastro;
 	
@@ -63,36 +63,36 @@ public class TelaCadastroIndicador extends Activity {
 		dataAtual = ts.getDataSQL();
 		horarioAtual = ts.getHorarioSQL();
 		
-		tipo = (Spinner) findViewById(R.id.spinnerTipo);
-		tipos = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.listaTipos));
-		tipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		tipo.setAdapter(tipos);
+		spTipo = (Spinner) findViewById(R.id.spTipo);
+		adTipos = new ArrayAdapter<String>(
+				this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.lsTipos));
+		adTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spTipo.setAdapter(adTipos);
 		
-		medida = (EditText) findViewById(R.id.editMedicao);
-		unidade = (TextView) findViewById(R.id.textUnidade);
-		salvarButton = (Button) findViewById(R.id.cadastraButton);
+		etMedida = (EditText) findViewById(R.id.editMedicao);
+		tvUnidade = (TextView) findViewById(R.id.textUnidade);
+		btSalvar = (Button) findViewById(R.id.btSalvar);
 				
-		tipo.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View view, int posicaoSpinner, long id) {
+		spTipo.setOnItemSelectedListener(new OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view, int posSpinner, long id) {
 				// TODO Auto-generated method stub
-				listaUnidades = getResources().getStringArray(R.array.listaUnidades);
-				unidades = Arrays.asList(listaUnidades);
-				switch (posicaoSpinner) {
+				arrUnidades = getResources().getStringArray(R.array.lsUnidades);
+				lsUnidades = Arrays.asList(arrUnidades);
+				switch (posSpinner) {
 				case 0:
-					unidade.setText(unidades.get(posicaoSpinner));
+					tvUnidade.setText(lsUnidades.get(posSpinner));
 					break;
 				case 1:
-					unidade.setText(unidades.get(posicaoSpinner));
+					tvUnidade.setText(lsUnidades.get(posSpinner));
 					break;
 				case 2:
-					unidade.setText(unidades.get(posicaoSpinner));
+					tvUnidade.setText(lsUnidades.get(posSpinner));
 					break;
 				case 3:
-					unidade.setText(unidades.get(posicaoSpinner));
+					tvUnidade.setText(lsUnidades.get(posSpinner));
 					break;
 				case 4:
-					unidade.setText(unidades.get(posicaoSpinner));
+					tvUnidade.setText(lsUnidades.get(posSpinner));
 					break;
 				}
 			}
@@ -104,15 +104,15 @@ public class TelaCadastroIndicador extends Activity {
 			}
 		});
 		
-		unidadeString = unidade.getText().toString();
-		medidaString = Double.parseDouble(medida.getText().toString());
+		unidadeString = tvUnidade.getText().toString();
+		medidaString = Double.parseDouble(etMedida.getText().toString());
 		
-		salvarButton.setOnClickListener(new Button.OnClickListener() {
+		btSalvar.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick (View v){
 				cadastro = indDAO.cadastrarIndicador(new Indicador(
 						0, 
-						posicaoSpinner,
+						posSpinner,
 						idUsuario,
 						medidaString, 
 						unidadeString,

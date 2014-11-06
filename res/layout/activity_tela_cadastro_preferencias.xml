@@ -20,12 +20,12 @@
             android:orientation="vertical" >
 
             <CheckBox
-                android:id="@+id/checkLembretePeso"
+                android:id="@+id/chLembretePeso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="18sp"
-                android:text="@string/checkLembretePeso" />
+                android:text="@string/chLembretePeso" />
 
             <EditText
                 android:id="@+id/horaLembretePeso"
@@ -38,12 +38,12 @@
                 android:hint="@string/hintHoraLembrete" />
 
             <CheckBox
-                android:id="@+id/checkLembreteBPM"
+                android:id="@+id/chLembreteBPM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:textSize="18sp"
-                android:text="@string/checkLembreteBPM" />
+                android:text="@string/chLembreteBPM" />
 
             <EditText
                 android:id="@+id/horaLembreteBPM"
@@ -56,11 +56,11 @@
                 android:hint="@string/hintHoraLembrete" />
 
             <Button
-		        android:id="@+id/buttonSalvar"
+		        android:id="@+id/btSalvar"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="25dp"
-		        android:text="@string/buttonSalvar"
+		        android:text="@string/btSalvar"
 		        android:textSize="24sp" />
      
         </LinearLayout>	    

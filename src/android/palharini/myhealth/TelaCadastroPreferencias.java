@@ -23,6 +23,15 @@ import android.widget.Toast;
 
 public class TelaCadastroPreferencias extends Activity {
 	
+	private GerenciamentoSessao sessao;
+	private Timestamp ts;
+	
+	private CheckBox chLembretePeso, chLembreteBPM;
+	private EditText horaLembretePeso, horaLembreteBPM;
+	private Button btSalvar;
+	
+	private PreferenciasDAO prefsDAO;
+	
 	private boolean lembretePeso, lembreteBPM;
 	private String horaLembretePesoString, horaLembreteBPMString;
 	private long horaLembretePesoMillis, horaLembreteBPMMillis;
@@ -37,18 +46,18 @@ public class TelaCadastroPreferencias extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		
-		final CheckBox checkLembretePeso = (CheckBox) findViewById(R.id.checkLembretePeso);
-		final EditText horaLembretePeso = (EditText) findViewById(R.id.horaLembretePeso);
+		ts = new Timestamp();
+		sessao = new GerenciamentoSessao(getApplicationContext());
 		
-		final CheckBox checkLembreteBPM = (CheckBox) findViewById(R.id.checkLembreteBPM);
-		final EditText horaLembreteBPM = (EditText) findViewById(R.id.horaLembreteBPM);
+		chLembretePeso = (CheckBox) findViewById(R.id.chLembretePeso);
+		horaLembretePeso = (EditText) findViewById(R.id.horaLembretePeso);
 		
-		final Button buttonSalvar = (Button) findViewById(R.id.buttonSalvar);
+		chLembreteBPM = (CheckBox) findViewById(R.id.chLembreteBPM);
+		horaLembreteBPM = (EditText) findViewById(R.id.horaLembreteBPM);
 		
-		final Timestamp ts = new Timestamp();
-		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
+		btSalvar = (Button) findViewById(R.id.btSalvar);
 		
-		final PreferenciasDAO prefsdao = new PreferenciasDAO();
+		prefsDAO = new PreferenciasDAO();
 		
 		horaLembretePeso.setOnClickListener(new EditText.OnClickListener () {
 
@@ -69,23 +78,23 @@ public class TelaCadastroPreferencias extends Activity {
 			}
 			
 		});
-
-		lembretePeso = checkLembretePeso.isChecked();
-		lembreteBPM = checkLembreteBPM.isChecked();
 		
-		horaLembretePesoString = horaLembretePeso.getText().toString();
-		horaLembreteBPMString = horaLembreteBPM.getText().toString();
-		
-		horaLembretePesoMillis = ts.getHorarioMillis(horaLembretePeso.getText().toString());
-		horaLembreteBPMMillis = ts.getHorarioMillis(horaLembreteBPM.getText().toString());
-		
-		buttonSalvar.setOnClickListener(new Button.OnClickListener () {
+		btSalvar.setOnClickListener(new Button.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub {
 				
-				boolean prefs = prefsdao.cadastrarPreferencias(new Preferencias(
+				lembretePeso = chLembretePeso.isChecked();
+				lembreteBPM = chLembreteBPM.isChecked();
+				
+				horaLembretePesoString = horaLembretePeso.getText().toString();
+				horaLembreteBPMString = horaLembreteBPM.getText().toString();
+				
+				horaLembretePesoMillis = ts.getHorarioMillis(horaLembretePesoString);
+				horaLembreteBPMMillis = ts.getHorarioMillis(horaLembreteBPMString);
+				
+				boolean prefs = prefsDAO.cadastrarPreferencias(new Preferencias(
 						0,
 						sessao.getIdUsuario(),
 						lembretePeso,
@@ -117,8 +126,8 @@ public class TelaCadastroPreferencias extends Activity {
 		 
         Intent notificacaoIntent = new Intent(this, ServicoNotificacao.class);
         notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
-        notificacaoIntent.putExtra("tituloNotificacao", getString(R.string.tituloNotificacaoPeso));
-        notificacaoIntent.putExtra("textoNotificacao", getString(R.string.textoNotificacaoPeso));
+        notificacaoIntent.putExtra("ttNotificacao", getString(R.string.ttNotificacaoPeso));
+        notificacaoIntent.putExtra("txNotificacao", getString(R.string.txNotificacaoPeso));
         PendingIntent pendingNotificacaoPesoIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -132,8 +141,8 @@ public class TelaCadastroPreferencias extends Activity {
 		 
         Intent notificacaoIntent = new Intent(this, ServicoNotificacao.class);
         notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
-        notificacaoIntent.putExtra("tituloNotificacao", getString(R.string.tituloNotificacaoBPM));
-        notificacaoIntent.putExtra("textoNotificacao", getString(R.string.textoNotificacaoBPM));
+        notificacaoIntent.putExtra("ttNotificacao", getString(R.string.ttNotificacaoBPM));
+        notificacaoIntent.putExtra("txNotificacao", getString(R.string.txNotificacaoBPM));
         PendingIntent pendingNotificacaoBPMIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);

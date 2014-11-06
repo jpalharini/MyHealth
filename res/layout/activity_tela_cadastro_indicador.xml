@@ -29,13 +29,13 @@
                 android:textSize="18sp" />
 
             <Spinner
-                android:id="@+id/spinnerTipo"
+                android:id="@+id/spTipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:textSize="20sp"
-                android:prompt="@string/spinnerTipo" />
+                android:prompt="@string/spTipo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,16 +56,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="@string/textUnidade"
+                    android:text="@string/tvUnidade"
                     android:textSize="20sp" />
             </LinearLayout>
 
             <Button
-                android:id="@+id/cadastraButton"
+                android:id="@+id/btSalvar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/buttonCadastra"
+                android:text="@string/btSalvar"
                 android:textSize="26sp" />
         </LinearLayout>
 	    

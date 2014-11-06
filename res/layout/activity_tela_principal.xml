@@ -21,19 +21,19 @@
            	android:orientation="vertical" >
 		    
 		    <TextView
-		        android:id="@+id/textOla"
+		        android:id="@+id/tvOla"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="20sp"
-		        android:text="@string/textOla" />
+		        android:text="@string/tvOla" />
 		
 		    <TextView
-		        android:id="@+id/textIMC"
+		        android:id="@+id/tvIMC"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="30dp"
 		        android:gravity="center_horizontal"
-		        android:text="@string/textIMC"
+		        android:text="@string/tvIMC"
 		        android:textSize="16sp" />
 		
 		    <TextView
@@ -46,21 +46,21 @@
 		        android:textSize="70sp" />
 		
 		    <TextView
-		        android:id="@+id/textStatusIMC"
+		        android:id="@+id/tvStatusIMC"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:gravity="center_horizontal"
 		        android:layout_marginTop="0dp"
-		        android:text="@string/textStatusIMC"
+		        android:text="@string/tvStatusIMC"
 		        android:textSize="16sp" />
 		    
 		    <TextView
-		        android:id="@+id/textAlvoBPM"
+		        android:id="@+id/tvAlvoBPM"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="40dp"
 		        android:gravity="center_horizontal"
-		        android:text="@string/textAlvoBPM"
+		        android:text="@string/tvAlvoBPM"
 		        android:textSize="16sp" />
 		
 		    <TextView
@@ -73,35 +73,35 @@
 		        android:textSize="70sp" />
 		
 		    <Button
-		        android:id="@+id/buttonCadIndicador"
+		        android:id="@+id/btCadIndicador"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="40dp"
-		        android:text="@string/buttonCadIndicador"
+		        android:text="@string/btCadIndicador"
 		        android:textSize="24sp" />
 		    
 		    <Button
-		        android:id="@+id/buttonAcompanhamento"
+		        android:id="@+id/btAcompanhamento"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dp"
-		        android:text="@string/buttonAcompanhamento"
+		        android:text="@string/btAcompanhamento"
 		        android:textSize="24sp" />
 		
 		    <Button
-		        android:id="@+id/buttonDados"
+		        android:id="@+id/btDados"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dp"
-		        android:text="@string/buttonDados"
+		        android:text="@string/btDados"
 		        android:textSize="24sp" />
 		
 		    <Button
-		        android:id="@+id/buttonConfiguracoes"
+		        android:id="@+id/btConfiguracoes"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dp"
-		        android:text="@string/buttonConfiguracoes"
+		        android:text="@string/btConfiguracoes"
 		        android:textSize="24sp" />
 		
 		</LinearLayout>

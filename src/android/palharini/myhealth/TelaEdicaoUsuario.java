@@ -27,14 +27,14 @@ public class TelaEdicaoUsuario extends Activity {
 		
 		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
 		
-		final EditText email = (EditText) findViewById(R.id.editEmail);
-		final EditText senha = (EditText) findViewById(R.id.editSenha);
-		final EditText confSenha = (EditText) findViewById(R.id.editConfSenha);
-		final EditText nome = (EditText) findViewById(R.id.editNome);
-		final EditText dataNasc = (EditText) findViewById(R.id.editNasc);
-		final EditText alvoBPM = (EditText) findViewById(R.id.editAlvoBPM);
+		final EditText email = (EditText) findViewById(R.id.etEmail);
+		final EditText senha = (EditText) findViewById(R.id.etSenha);
+		final EditText confSenha = (EditText) findViewById(R.id.etConfSenha);
+		final EditText nome = (EditText) findViewById(R.id.etNome);
+		final EditText dataNasc = (EditText) findViewById(R.id.etNasc);
+		final EditText alvoBPM = (EditText) findViewById(R.id.etAlvoBPM);
 		
-		Button buttonSalvar = (Button) findViewById(R.id.buttonSalvar);
+		Button buttonSalvar = (Button) findViewById(R.id.btSalvar);
 		
 		final UsuarioDAO dao = new UsuarioDAO();
 		final Usuario dados = dao.buscarUsuario(sessao.getIdUsuario());
