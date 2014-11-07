@@ -1,4 +1,4 @@
-package android.palharini.myhealth.daos;
+package android.palharini.myhealth.dao;
 
 public class ConectaWS {
 

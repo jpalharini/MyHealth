@@ -4,13 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.palharini.myhealth.daos.UsuarioDAO;
+import android.palharini.myhealth.dao.UsuarioDAO;
 import android.palharini.myhealth.datas.FormatoDataNascimento;
+import android.palharini.myhealth.datas.FragmentoDatePicker;
 import android.palharini.myhealth.entidades.Usuario;
-import android.palharini.myhealth.fragmentos.FragmentoDatePicker;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,35 +21,46 @@ import android.widget.Toast;
 
 public class TelaEdicaoUsuario extends Activity {
 
+	private GerenciamentoSessao sessao;
+	private FormatoDataNascimento fdn;
+	
+	private EditText etEmail, etSenha, etConfSenha, etNome, etDataNasc, etAlvoBPM;
+	private Button btSalvar;	
+	
+	private String stEmail, stNome, stSenha, stConfSenha, stCriptSenha, stDataNasc, stDataNascSQL;
+	private Boolean blUsr;
+	
+	private UsuarioDAO usrDAO;
+	private Usuario usrUsuario;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_edicao_usuario);
 		
-		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
+		usrDAO = new UsuarioDAO();
+		usrUsuario = usrDAO.buscarUsuario(sessao.getIdUsuario());
 		
-		final EditText email = (EditText) findViewById(R.id.etEmail);
-		final EditText senha = (EditText) findViewById(R.id.etSenha);
-		final EditText confSenha = (EditText) findViewById(R.id.etConfSenha);
-		final EditText nome = (EditText) findViewById(R.id.etNome);
-		final EditText dataNasc = (EditText) findViewById(R.id.etNasc);
-		final EditText alvoBPM = (EditText) findViewById(R.id.etAlvoBPM);
+		fdn = new FormatoDataNascimento();
+		sessao = new GerenciamentoSessao(getApplicationContext());
 		
-		Button buttonSalvar = (Button) findViewById(R.id.btSalvar);
+		etEmail = (EditText) findViewById(R.id.etEmail);
+		etSenha = (EditText) findViewById(R.id.etSenha);
+		etConfSenha = (EditText) findViewById(R.id.etConfSenha);
+		etNome = (EditText) findViewById(R.id.etNome);
+		etDataNasc = (EditText) findViewById(R.id.etNasc);
+		etAlvoBPM = (EditText) findViewById(R.id.etAlvoBPM);
+		btSalvar = (Button) findViewById(R.id.btSalvar);
 		
-		final UsuarioDAO dao = new UsuarioDAO();
-		final Usuario dados = dao.buscarUsuario(sessao.getIdUsuario());
+		etEmail.setText(usrUsuario.getEmail());
+		etNome.setText(usrUsuario.getNome());
+
+		stDataNasc = fdn.formatarDataAndroid(usrUsuario.getDataNascimento());
+		etDataNasc.setText(stDataNasc);
 		
-		email.setText(dados.getEmail());
-		nome.setText(dados.getNome());
-		
-		FormatoDataNascimento fdn = new FormatoDataNascimento();
-		final String dataNascAndroid = fdn.formatarDataAndroid(dados.getDataNascimento());
-		dataNasc.setText(dataNascAndroid);
-		
-		alvoBPM.setText(String.valueOf(dados.getAlvoBPM()));
+		etAlvoBPM.setText(String.valueOf(usrUsuario.getAlvoBPM()));
 				
-		dataNasc.setOnClickListener(new OnClickListener () {
+		etDataNasc.setOnClickListener(new OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -58,27 +70,27 @@ public class TelaEdicaoUsuario extends Activity {
 			
 		});
 		
-		buttonSalvar.setOnClickListener(new OnClickListener() {
+		btSalvar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick (View v){
 				
 				if (
-						!(email.getText().toString()).equals(dados.getEmail()) || 
-						!(nome.getText().toString()).equals(dados.getNome()) || 
-						!(dataNasc.getText().toString()).equals(dataNascAndroid) ||
-						!(alvoBPM.getText().toString()).equals(String.valueOf(dados.getAlvoBPM()))
+						!(etEmail.getText().toString()).equals(usrUsuario.getEmail()) || 
+						!(etNome.getText().toString()).equals(usrUsuario.getNome()) || 
+						!(etDataNasc.getText().toString()).equals(stDataNasc) ||
+						!(etAlvoBPM.getText().toString()).equals(String.valueOf(usrUsuario.getAlvoBPM()))
 						) {
 			
-					String senhaString = senha.getText().toString();
-					String confSenhaString = confSenha.getText().toString();
-					String criptSenha = null;
+					stSenha = etSenha.getText().toString();
+					stConfSenha = etConfSenha.getText().toString();
+					stCriptSenha = null;
 					
-					if (senhaString.equals(confSenhaString)){
+					if (stSenha.equals(stConfSenha)){
 						try {
 							MessageDigest md = MessageDigest.getInstance("MD5");
-							md.update(senhaString.getBytes("UTF-8"));
+							md.update(stSenha.getBytes("UTF-8"));
 							BigInteger hash = new BigInteger(1, md.digest());
-							criptSenha = hash.toString(16);
+							stCriptSenha = hash.toString(16);
 						} catch (NoSuchAlgorithmException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -87,21 +99,29 @@ public class TelaEdicaoUsuario extends Activity {
 							e.printStackTrace();
 						}
 						
-						FormatoDataNascimento fdn = new FormatoDataNascimento();
-						final String dataNascSQL = fdn.formatarDataSQL(dataNasc.getText().toString());
+						fdn = new FormatoDataNascimento();
+						stDataNascSQL = fdn.formatarDataSQL(etDataNasc.getText().toString());
 
-						dao.atualizarUsuario(new Usuario(
-								dados.getId(), 
-								email.getText().toString(),
-								criptSenha,
-								nome.getText().toString(), 
-								dataNascSQL,
-								Integer.parseInt(alvoBPM.getText().toString())
-						));
+						stEmail = etEmail.getText().toString();
+						stNome = etNome.getText().toString();
 						
-						Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
-	                    startActivity(voltarTelaPrincipal);
-	                    finish();
+						blUsr = usrDAO.atualizarUsuario(new Usuario(
+								usrUsuario.getId(), 
+								stEmail,
+								stCriptSenha,
+								stNome, 
+								stDataNascSQL,
+								Integer.parseInt(etAlvoBPM.getText().toString())
+						));
+						if (blUsr) {
+							Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
+							Toast.makeText(getApplicationContext(), getString(R.string.toastUsrAtOK), Toast.LENGTH_LONG).show();
+		                    startActivity(voltarTelaPrincipal);
+		                    finish();
+						}
+						else {
+							Toast.makeText(getApplicationContext(), getString(R.string.toastUsrAtFalha), Toast.LENGTH_LONG).show();
+						}
 					}
 				}
 				else {

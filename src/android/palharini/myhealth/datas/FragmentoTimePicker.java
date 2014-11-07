@@ -1,4 +1,4 @@
-package android.palharini.myhealth.fragmentos;
+package android.palharini.myhealth.datas;
 
 import java.util.Calendar;
 
@@ -6,7 +6,6 @@ import android.app.TimePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.palharini.myhealth.datas.Timestamp;
 import android.widget.EditText;
 import android.widget.TimePicker;
 

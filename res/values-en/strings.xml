@@ -4,15 +4,15 @@
     <string name="app_name">MyHealth</string>
 
     <!-- Dados Indicador -->
-    <string name="spTipo">Selecione o tipo</string>
+    <string name="spTipo">Select the type:</string>
     <string-array name="lsTipos">
-        <item>Altura</item>
-        <item>Peso</item>
-        <item>Freq. Cardíaca</item>
-        <item>Glicose</item>
+        <item>Height</item>
+        <item>Weight</item>
+        <item>Heart Rate</item>
+        <item>Glicosis</item>
         <item>HDL</item>
         <item>LDL</item>
-        <item>Gordura corporal</item>
+        <item>Corporal fat</item>
         <item>Cintura</item>
         <item>Triglicerídeos</item>
     </string-array>
@@ -30,40 +30,40 @@
     </string-array>
 
     <!-- Configurações -->
-    <string name="title_activity_tela_configuracoes">Configurações</string>
-    <string name="chLembretePeso">Definir lembrete de peso</string>
-    <string name="chLembreteBPM">Obter número ideal de batimentos cardíacos</string>
-    <string name="hintHoraLembrete">Hora do lembrete</string>
+    <string name="title_activity_tela_configuracoes">Settings</string>
+    <string name="chLembretePeso">Set weight reminder?</string>
+    <string name="chLembreteBPM">Get target heart rate?</string>
+    <string name="hintHoraLembrete">Reminder time</string>
 
     <!-- Tela Cadastro/Edicao Usuario -->
-    <string name="title_activity_tela_cadastro_usuario">Cadastro</string>
-    <string name="title_activity_tela_edicao_usuario">Editar dados</string>
-    <string name="tvCadastro">Para seu cadastro, informe:</string>
+    <string name="title_activity_tela_cadastro_usuario">Sign up</string>
+    <string name="title_activity_tela_edicao_usuario">Edit information</string>
+    <string name="tvCadastro">To sign up, inform...</string>
     <string name="tvEmail">E-mail:</string>
-    <string name="hintEmail">fulano@email.com</string>
-    <string name="tvSenha">Senha:</string>
+    <string name="hintEmail">joe@doe.com</string>
+    <string name="tvSenha">Password:</string>
     <string name="hintSenha">*******</string>
-    <string name="tvConfSenha">Confirme a senha:</string>
+    <string name="tvConfSenha">Confirm password:</string>
     <string name="hintConfSenha">*******</string>
-    <string name="tvNome">Nome completo:</string>
-    <string name="hintNome">Fulano da Silva</string>
-    <string name="tvDataNasc">Data de nascimento:</string>
-    <string name="hintDataNasc">01/01/1970</string>
-    <string name="tvAltura">Altura (centímetros)</string>
+    <string name="tvNome">Full name:</string>
+    <string name="hintNome">Joe Doe</string>
+    <string name="tvDataNasc">Birth date:</string>
+    <string name="hintDataNasc">1970/01/01</string>
+    <string name="tvAltura">Height (centimeters)</string>
     <string name="hintAltura">200</string>
-    <string name="tvPeso">Peso (quilos)</string>
+    <string name="tvPeso">Weight (kilos)</string>
     <string name="hintPeso">100</string>
-    <string name="tvIdealBPM">Freq. cardíaca ideal</string>
+    <string name="tvIdealBPM">Target heart rate</string>
     <string name="hintAlvoBPM">70</string>
-    <string name="btContinuar">Continuar</string>
-    <string name="toastUsrOK">Usuário cadastrado com sucesso!</string>
-    <string name="toastUsrFalha">Falha no cadastro do usuário...</string>
-    <string name="toastUsrAtOK">Usuário atualizado com sucesso!</string>
-    <string name="toastUsrAtFalha">Falha na atualização do usuário...</string>
-    <string name="toastUsrExiste">E-mail já cadastrado!</string>
-    <string name="toastSenhaInv">As senhas não conferem</string>
-    <string name="toastPrefsOK">Preferências salvas com sucesso!</string>
-    <string name="toastPrefsFalha">Falha na definição de preferências...</string>
+    <string name="btContinuar">Continue</string>
+    <string name="toastUsrOK">User successfully signed up</string>
+    <string name="toastUsrFalha">Error on signing up...</string>
+    <string name="toastUsrAtOK">User successfully updated!</string>
+    <string name="toastUsrAtFalha">Error on updating the user...</string>
+    <string name="toastUsrExiste">E-mail already registered!</string>
+    <string name="toastSenhaInv">Passwords don't match</string>
+    <string name="toastPrefsOK">Preferences successfully saved!</string>
+    <string name="toastPrefsFalha">Error on saving preferences...</string>
 
     <!-- Tela Cadastro/Edicao Indicador -->
     <string name="title_activity_tela_cadastro_indicador">Cadastrar indicador</string>

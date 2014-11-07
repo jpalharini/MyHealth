@@ -6,7 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.palharini.myhealth.daos.IndicadorDAO;
+import android.palharini.myhealth.dao.IndicadorDAO;
 import android.palharini.myhealth.entidades.Indicador;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -77,6 +77,18 @@ public class TelaEdicaoIndicador extends Activity {
 					tvUnidade.setText(lsUnidades.get(posSpinner));
 					break;
 				case 4:
+					tvUnidade.setText(lsUnidades.get(posSpinner));
+					break;
+				case 5:
+					tvUnidade.setText(lsUnidades.get(posSpinner));
+					break;
+				case 6:
+					tvUnidade.setText(lsUnidades.get(posSpinner));
+					break;
+				case 7:
+					tvUnidade.setText(lsUnidades.get(posSpinner));
+					break;
+				case 8:
 					tvUnidade.setText(lsUnidades.get(posSpinner));
 					break;
 				}

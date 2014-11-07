@@ -1,4 +1,4 @@
-package android.palharini.myhealth.daos;
+package android.palharini.myhealth.dao;
 
 import java.util.ArrayList;
 import java.util.Vector;

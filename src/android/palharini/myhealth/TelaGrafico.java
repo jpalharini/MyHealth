@@ -15,7 +15,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.palharini.myhealth.daos.IndicadorDAO;
+import android.palharini.myhealth.dao.IndicadorDAO;
 import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 

@@ -1,4 +1,4 @@
-package android.palharini.myhealth.daos;
+package android.palharini.myhealth.dao;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;

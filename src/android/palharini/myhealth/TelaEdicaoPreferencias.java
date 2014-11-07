@@ -9,10 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.palharini.myhealth.daos.PreferenciasDAO;
+import android.palharini.myhealth.dao.PreferenciasDAO;
+import android.palharini.myhealth.datas.FragmentoTimePicker;
 import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.entidades.Preferencias;
-import android.palharini.myhealth.fragmentos.FragmentoTimePicker;
 import android.palharini.myhealth.notificacoes.ServicoNotificacao;
 import android.palharini.myhealth.sessao.CaixaDialogo;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
@@ -23,6 +23,17 @@ import android.widget.EditText;
 
 public class TelaEdicaoPreferencias extends Activity {
 
+	private CaixaDialogo caixa;
+	private Timestamp ts;
+	private GerenciamentoSessao sessao;
+	
+	private PreferenciasDAO prefsDAO;
+	private Preferencias prefs;
+	
+	private CheckBox chLembretePeso, chLembreteBPM;
+	private EditText etHoraLembretePeso, etHoraLembreteBPM;
+	private Button btSalvar, btLogout;
+	
 	private boolean lembretePeso, lembreteBPM;
 	private String horaLembretePesoString, horaLembreteBPMString;
 	private long horaLembretePesoMillis, horaLembreteBPMMillis;
@@ -38,32 +49,32 @@ public class TelaEdicaoPreferencias extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		
-		final CheckBox chLembretePeso = (CheckBox) findViewById(R.id.chLembretePeso);
-		final EditText horaLembretePeso = (EditText) findViewById(R.id.horaLembretePeso);
+		chLembretePeso = (CheckBox) findViewById(R.id.chLembretePeso);
+		etHoraLembretePeso = (EditText) findViewById(R.id.horaLembretePeso);
 		
-		final CheckBox chLembreteBPM = (CheckBox) findViewById(R.id.chLembreteBPM);
-		final EditText horaLembreteBPM = (EditText) findViewById(R.id.horaLembreteBPM);
+		chLembreteBPM = (CheckBox) findViewById(R.id.chLembreteBPM);
+		etHoraLembreteBPM = (EditText) findViewById(R.id.horaLembreteBPM);
 		
-		final Button btSalvar = (Button) findViewById(R.id.btSalvar);
-		final Button btLogout = (Button) findViewById(R.id.btLogout);
+		btSalvar = (Button) findViewById(R.id.btSalvar);
+		btLogout = (Button) findViewById(R.id.btLogout);
 		
-        final CaixaDialogo caixa = new CaixaDialogo();
+        caixa = new CaixaDialogo();
 		
-		final Timestamp ts = new Timestamp();
-		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
+		ts = new Timestamp();
+		sessao = new GerenciamentoSessao(getApplicationContext());
 		
-		final PreferenciasDAO prefsdao = new PreferenciasDAO();
-		final Preferencias prefs = prefsdao.buscarPreferencias(sessao.getIdUsuario());
+		prefsDAO = new PreferenciasDAO();
+		prefs = prefsDAO.buscarPreferencias(sessao.getIdUsuario());
 		
 		if (prefs != null) {
 			if (prefs.isLembretePeso()) {
 				chLembretePeso.setChecked(true);
-				horaLembretePeso.setText(prefs.getHoraLembretePeso().toString());
+				etHoraLembretePeso.setText(prefs.getHoraLembretePeso().toString());
 			}
 			
 			if (prefs.isLembreteBPM()) {
 				chLembreteBPM.setChecked(true);
-				horaLembreteBPM.setText(prefs.getHoraLembreteBPM().toString());
+				etHoraLembreteBPM.setText(prefs.getHoraLembreteBPM().toString());
 			}
 		}
 		else {
@@ -74,7 +85,7 @@ public class TelaEdicaoPreferencias extends Activity {
         			false);
 		}
 		
-		horaLembretePeso.setOnClickListener(new EditText.OnClickListener () {
+		etHoraLembretePeso.setOnClickListener(new EditText.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -84,7 +95,7 @@ public class TelaEdicaoPreferencias extends Activity {
 			
 		});
 		
-		horaLembreteBPM.setOnClickListener(new EditText.OnClickListener () {
+		etHoraLembreteBPM.setOnClickListener(new EditText.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -98,11 +109,11 @@ public class TelaEdicaoPreferencias extends Activity {
 		lembretePeso = chLembretePeso.isChecked();
 		lembreteBPM = chLembreteBPM.isChecked();
 		
-		horaLembretePesoString = horaLembretePeso.getText().toString();
-		horaLembreteBPMString = horaLembreteBPM.getText().toString();
+		horaLembretePesoString = etHoraLembretePeso.getText().toString();
+		horaLembreteBPMString = etHoraLembreteBPM.getText().toString();
 		
-		horaLembretePesoMillis = ts.getHorarioMillis(horaLembretePeso.getText().toString());
-		horaLembreteBPMMillis = ts.getHorarioMillis(horaLembreteBPM.getText().toString());
+		horaLembretePesoMillis = ts.getHorarioMillis(etHoraLembretePeso.getText().toString());
+		horaLembreteBPMMillis = ts.getHorarioMillis(etHoraLembreteBPM.getText().toString());
 		
 		btSalvar.setOnClickListener(new Button.OnClickListener () {
 
@@ -111,9 +122,9 @@ public class TelaEdicaoPreferencias extends Activity {
 				// TODO Auto-generated method stub
 				if (
 						chLembretePeso.isChecked() != prefs.isLembretePeso() ||
-						!horaLembretePeso.getText().toString().equals(prefs.getHoraLembretePeso()) ||
+						!etHoraLembretePeso.getText().toString().equals(prefs.getHoraLembretePeso()) ||
 						chLembreteBPM.isChecked() != prefs.isLembreteBPM() || 
-						!horaLembreteBPM.getText().toString().equals(prefs.getHoraLembreteBPM())) {
+						!etHoraLembreteBPM.getText().toString().equals(prefs.getHoraLembreteBPM())) {
 					
 					Preferencias prefsAtual = new Preferencias(
 							prefs.getId(),
@@ -138,7 +149,7 @@ public class TelaEdicaoPreferencias extends Activity {
 							cancelarNotificacao(pendingNotificacaoBPMIntent);
 						}
 					}
-					prefsdao.atualizarPreferencias(prefsAtual);
+					prefsDAO.atualizarPreferencias(prefsAtual);
 					
 					Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
 					startActivity(voltarTelaPrincipal);

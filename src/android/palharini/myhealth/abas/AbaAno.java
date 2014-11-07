@@ -1,12 +1,13 @@
 package android.palharini.myhealth.abas;
 
 import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.palharini.myhealth.R;
 import android.palharini.myhealth.TelaEdicaoIndicador;
 import android.palharini.myhealth.TelaGrafico;
-import android.palharini.myhealth.daos.IndicadorDAO;
+import android.palharini.myhealth.dao.IndicadorDAO;
 import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.entidades.Indicador;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;

@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.R;
-import android.palharini.myhealth.daos.UsuarioDAO;
+import android.palharini.myhealth.dao.UsuarioDAO;
 import android.palharini.myhealth.entidades.Usuario;
 import android.palharini.myhealth.sessao.CaixaDialogo;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
