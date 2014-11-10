@@ -25,9 +25,10 @@ public class TelaEdicaoIndicador extends Activity {
 	private IndicadorDAO indDAO;
 	
 	private Spinner spTipo;
-	private EditText etMedida;
+	private EditText etMedicao;
 	private TextView tvUnidade;
-	private Button btSalvar, btExcluir;
+	private Button btSalvar;
+	private Button btExcluir;
 	
 	private Integer indicSelecionado, posSpinner;
 	private ArrayAdapter<String> adTipos;
@@ -41,17 +42,16 @@ public class TelaEdicaoIndicador extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tela_cadastro_indicador);
+		setContentView(R.layout.activity_tela_edicao_indicador);
 		
 		dados = getIntent();
 		indicSelecionado = dados.getIntExtra("idIndicador", 0);
 				
 		spTipo = (Spinner) findViewById(R.id.spTipo);
-		etMedida = (EditText) findViewById(R.id.editMedicao);
-		tvUnidade = (TextView) findViewById(R.id.textUnidade);
+		etMedicao = (EditText) findViewById(R.id.etMedicao);
+		tvUnidade = (TextView) findViewById(R.id.tvUnidade);
 		btSalvar = (Button) findViewById(R.id.btSalvar);
 		btExcluir = (Button) findViewById(R.id.btExcluir);
-		
 		
 		adTipos = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.lsTipos));
@@ -108,9 +108,7 @@ public class TelaEdicaoIndicador extends Activity {
 		indicador = indDAO.buscarIndicadorId(indicSelecionado);
 		
 		spTipo.setSelection(indicador.getIdTipo());
-		etMedida.setText(indicador.getMedida().toString());
-		
-		tvUnidade.setText(lsUnidades.get(posSpinner));
+		etMedicao.setText(indicador.getMedida().toString());
 		
 		btSalvar.setOnClickListener(new OnClickListener() {
 			@Override
@@ -118,7 +116,7 @@ public class TelaEdicaoIndicador extends Activity {
 				blAtualizar = indDAO.atualizarIndicador(new Indicador(
 						indicador.getId(), 
 						posSpinner,
-						Double.parseDouble(etMedida.getText().toString()), 
+						Double.parseDouble(etMedicao.getText().toString()), 
 						lsUnidades.get(posSpinner)
 				));
 				

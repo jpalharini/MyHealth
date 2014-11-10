@@ -39,8 +39,6 @@ public class PreferenciasDAO {
 		
 		envelope.setOutputSoapObject(cadastrarPreferencias);
 		envelope.implicitTypes = true;
-		MarshalDouble md = new MarshalDouble();
-		md.register(envelope);
 		
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		

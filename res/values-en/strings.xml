@@ -61,7 +61,7 @@
     <string name="toastUsrAtOK">User successfully updated!</string>
     <string name="toastUsrAtFalha">Error on updating the user...</string>
     <string name="toastUsrExiste">E-mail already registered!</string>
-    <string name="toastSenhaInv">Passwords don't match</string>
+    <string name="toastSenhaInv">Passwords do not match</string>
     <string name="toastPrefsOK">Preferences successfully saved!</string>
     <string name="toastPrefsFalha">Error on saving preferences...</string>
 

@@ -41,8 +41,6 @@ public class UsuarioDAO {
 		
 		envelope.setOutputSoapObject(cadastrarUsuario);
 		envelope.implicitTypes = true;
-		MarshalDouble md = new MarshalDouble();
-		md.register(envelope);
 		
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
