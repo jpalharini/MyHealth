@@ -20,7 +20,7 @@ import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 
 public class TelaGrafico extends Activity {
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/hintDataNasc"
-                android:inputType="date"
+                android:inputType="none"
                 android:textSize="20sp" />
 
             <EditText

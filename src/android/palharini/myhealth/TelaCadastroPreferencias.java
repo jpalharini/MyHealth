@@ -13,9 +13,10 @@ import android.palharini.myhealth.dao.PreferenciasDAO;
 import android.palharini.myhealth.datas.FragmentoTimePicker;
 import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.entidades.Preferencias;
-import android.palharini.myhealth.notificacoes.ServicoNotificacao;
+import android.palharini.myhealth.notificacoes.PublicacaoNotificacao;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -58,8 +59,8 @@ public class TelaCadastroPreferencias extends Activity {
 		btSalvar = (Button) findViewById(R.id.btSalvar);
 		
 		prefsDAO = new PreferenciasDAO();
-		
-		etHoraLembretePeso.setOnClickListener(new EditText.OnClickListener () {
+				
+		etHoraLembretePeso.setOnClickListener(new OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -69,7 +70,7 @@ public class TelaCadastroPreferencias extends Activity {
 			
 		});
 		
-		etHoraLembreteBPM.setOnClickListener(new EditText.OnClickListener () {
+		etHoraLembreteBPM.setOnClickListener(new OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -79,7 +80,7 @@ public class TelaCadastroPreferencias extends Activity {
 			
 		});
 		
-		btSalvar.setOnClickListener(new Button.OnClickListener () {
+		btSalvar.setOnClickListener(new OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -87,12 +88,22 @@ public class TelaCadastroPreferencias extends Activity {
 				
 				blLembretePeso = chLembretePeso.isChecked();
 				blLembreteBPM = chLembreteBPM.isChecked();
+								
+				if (blLembretePeso) {
+					stHoraLembretePeso = etHoraLembretePeso.getText().toString();
+					mlHoraLembreteBPM = ts.getHorarioMillis(stHoraLembretePeso);
+				}
+				else {
+					stHoraLembretePeso = "00:00";
+				}
 				
-				stHoraLembretePeso = etHoraLembretePeso.getText().toString();
-				stHoraLembreteBPM = etHoraLembreteBPM.getText().toString();
-				
-				mlHoraLembretePeso = ts.getHorarioMillis(stHoraLembretePeso);
-				mlHoraLembreteBPM = ts.getHorarioMillis(stHoraLembreteBPM);
+				if (blLembreteBPM) {
+					stHoraLembreteBPM = etHoraLembreteBPM.getText().toString();
+					mlHoraLembreteBPM = ts.getHorarioMillis(stHoraLembreteBPM);
+				}
+				else {
+					stHoraLembreteBPM = "00:00";
+				}
 				
 				boolean prefs = prefsDAO.cadastrarPreferencias(new Preferencias(
 						0,
@@ -124,7 +135,7 @@ public class TelaCadastroPreferencias extends Activity {
 	
 	private PendingIntent marcarNotificacaoPeso (long horaLembrete) {
 		 
-        Intent notificacaoIntent = new Intent(this, ServicoNotificacao.class);
+        Intent notificacaoIntent = new Intent(this, PublicacaoNotificacao.class);
         notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
         notificacaoIntent.putExtra("ttNotificacao", getString(R.string.ttNotificacaoPeso));
         notificacaoIntent.putExtra("txNotificacao", getString(R.string.txNotificacaoPeso));
@@ -139,14 +150,14 @@ public class TelaCadastroPreferencias extends Activity {
     
 	private PendingIntent marcarNotificacaoBPM (long horaLembrete) {
 		 
-        Intent notificacaoIntent = new Intent(this, ServicoNotificacao.class);
-        notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
+        Intent notificacaoIntent = new Intent(this, PublicacaoNotificacao.class);
+        notificacaoIntent.putExtra("ID_NOTIFICACAO", 2);
         notificacaoIntent.putExtra("ttNotificacao", getString(R.string.ttNotificacaoBPM));
         notificacaoIntent.putExtra("txNotificacao", getString(R.string.txNotificacaoBPM));
         PendingIntent pendingNotificacaoBPMIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoBPMIntent);
+        AlarmManager alarmManager = (AlarmManager) getSystemService (Context.ALARM_SERVICE);
+        alarmManager.setRepeating (AlarmManager.RTC_WAKEUP, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoBPMIntent);
         
         return pendingNotificacaoBPMIntent;
         

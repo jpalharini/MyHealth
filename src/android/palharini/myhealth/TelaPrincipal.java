@@ -20,6 +20,14 @@ import android.widget.TextView;
 
 public class TelaPrincipal extends Activity {
 
+	private GerenciamentoSessao sessao;
+	
+	private TextView txOla, txIMC, txStatusIMC, txAlvoBPM;
+	private Button btCadIndicador, btAcompanhamento, btDados, btConfiguracoes;
+	
+	private Integer bpm, bpmDescanso, bpmDescansoFinal, bpmDescansoMedia;
+	private Integer bpmMaximo, bpmReserva, bpmAlvoLimMin, bpmAlvoLimMax, bpmAlvo;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,17 +38,17 @@ public class TelaPrincipal extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		
-		final TextView ola = (TextView) findViewById(R.id.tvOla);
-		final TextView imc = (TextView) findViewById(R.id.IMC);
-		final TextView imcStatus = (TextView) findViewById(R.id.tvStatusIMC);
-		final TextView fcd = (TextView) findViewById(R.id.alvoBPM);
+		txOla = (TextView) findViewById(R.id.tvOla);
+		txIMC = (TextView) findViewById(R.id.IMC);
+		txStatusIMC = (TextView) findViewById(R.id.tvStatusIMC);
+		txAlvoBPM = (TextView) findViewById(R.id.alvoBPM);
 		
-		final Button buttonCadIndicador = (Button) findViewById(R.id.btCadIndicador);
-		final Button buttonAcompanhamento = (Button) findViewById(R.id.btAcompanhamento);
-		final Button buttonDados = (Button) findViewById(R.id.btDados);
-		final Button buttonConfiguracoes = (Button) findViewById(R.id.btConfiguracoes);
+		btCadIndicador = (Button) findViewById(R.id.btCadIndicador);
+		btAcompanhamento = (Button) findViewById(R.id.btAcompanhamento);
+		btDados = (Button) findViewById(R.id.btDados);
+		btConfiguracoes = (Button) findViewById(R.id.btConfiguracoes);
 		
-		GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
+		sessao = new GerenciamentoSessao(getApplicationContext());
 		
 		UsuarioDAO usrdao = new UsuarioDAO();
 		Usuario usuario = usrdao.buscarUsuario(sessao.getIdUsuario());
@@ -53,6 +61,7 @@ public class TelaPrincipal extends Activity {
 			String nomeUsuario = usuario.getNome();
 			Double pesoUsuario = peso.getMedida();
 			Double alturaUsuario = altura.getMedida();
+			Integer idadeUsuario = usrdao.buscarIdadeUsuario(sessao.getIdUsuario());
 			
 			alturaUsuario = alturaUsuario/100;
 			
@@ -63,27 +72,27 @@ public class TelaPrincipal extends Activity {
 			else {
 				primeiroNomeUsuario = nomeUsuario;
 			}
-			ola.setText(getString(R.string.tvOla) + " " + primeiroNomeUsuario);
+			txOla.setText(getString(R.string.tvOla) + " " + primeiroNomeUsuario);
 			
 			Double imcDouble = (pesoUsuario / (alturaUsuario * alturaUsuario));
 			DecimalFormat decimal = new DecimalFormat("0.0");
-			imc.setText(decimal.format(imcDouble));
+			txIMC.setText(decimal.format(imcDouble));
 			
 			String[] listaFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
 			final List<String> faixas = Arrays.asList(listaFaixasIMC);
 			
 			if (imcDouble > 0 && imcDouble <= 18.5)
-				imcStatus.setText(faixas.get(0));
+				txStatusIMC.setText(faixas.get(0));
 			if (imcDouble >= 18.6 && imcDouble <= 24.9)
-				imcStatus.setText(faixas.get(1));
+				txStatusIMC.setText(faixas.get(1));
 			if (imcDouble >= 25 && imcDouble <= 29.9)
-				imcStatus.setText(faixas.get(2));
+				txStatusIMC.setText(faixas.get(2));
 			if (imcDouble >= 30 && imcDouble <= 34.9)
-				imcStatus.setText(faixas.get(3));
+				txStatusIMC.setText(faixas.get(3));
 			if (imcDouble >= 35 && imcDouble <= 39.9)
-				imcStatus.setText(faixas.get(4));
+				txStatusIMC.setText(faixas.get(4));
 			if (imcDouble >= 40)
-				imcStatus.setText(faixas.get(5));
+				txStatusIMC.setText(faixas.get(5));
 			
 			IndicadorDAO dao = new IndicadorDAO();
 			Indicador indicador = new Indicador();
@@ -91,20 +100,24 @@ public class TelaPrincipal extends Activity {
 			
 			if (indicadores.size() >= 3) {
 				int x;
-				Double bpm, bpmFinal=0.0, fcdDouble;
-				
+								
 				for (x=1; x==3; x++) {
 					indicador = indicadores.get(x);
-					bpm = indicador.getMedida();
-					bpmFinal = bpmFinal+bpm;					
+					bpmDescanso = indicador.getMedida().intValue();
+					bpmDescansoFinal = bpmDescanso+bpm;					
 				}
 				
-				fcdDouble = bpmFinal/3;
-				fcd.setText(fcdDouble.toString());
+				bpmDescansoMedia = bpmDescansoFinal / 3;
+				bpmMaximo = 220 - idadeUsuario;
+				bpmReserva = bpmMaximo - bpmDescansoMedia;
+				bpmAlvoLimMin = (bpmReserva * (60 / 100)) + bpmDescansoMedia;
+				bpmAlvoLimMax = (bpmReserva * (80 / 100)) + bpmDescansoMedia;
+				bpmAlvo = (bpmAlvoLimMin + bpmAlvoLimMax) / 2;
+				txAlvoBPM.setText(bpmAlvo.toString());
 			}
 		}
 		
-		buttonCadIndicador.setOnClickListener(new Button.OnClickListener () {
+		btCadIndicador.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -113,7 +126,7 @@ public class TelaPrincipal extends Activity {
 			}
 		});
 		
-		buttonAcompanhamento.setOnClickListener(new Button.OnClickListener () {
+		btAcompanhamento.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -122,7 +135,7 @@ public class TelaPrincipal extends Activity {
 			}
 		});
 		
-		buttonDados.setOnClickListener(new Button.OnClickListener () {
+		btDados.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -131,7 +144,7 @@ public class TelaPrincipal extends Activity {
 			}
 		});
 		
-		buttonConfiguracoes.setOnClickListener(new Button.OnClickListener () {
+		btConfiguracoes.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub

@@ -25,13 +25,8 @@ import android.widget.ListView;
 
 public class AbaMes extends Fragment {
 	
-	Integer x;
-	Integer	difData = 4;
-	String periodo = "WEEK";
-	
-	Double media;
-	Double[] medias = new Double[difData+1];
-	Integer[] datas = new Integer[difData+1];
+	private Integer	difData = 4;
+	private String periodo = "WEEK";
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

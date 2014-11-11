@@ -8,7 +8,7 @@ public class PublicacaoNotificacao extends BroadcastReceiver {
  
     public void onReceive(Context context, Intent intent) {
         Intent service = new Intent(context, ServicoNotificacao.class);
-        context.startService(service);
+        context.startService (service);
  
     }
 }

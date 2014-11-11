@@ -1,5 +1,6 @@
 package android.palharini.myhealth;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
@@ -188,7 +189,7 @@ public class TelaEdicaoPreferencias extends Activity {
         PendingIntent pendingNotificacaoPesoIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoPesoIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, new Date().getTime(), 5000, pendingNotificacaoPesoIntent);
         
         return pendingNotificacaoPesoIntent;
 

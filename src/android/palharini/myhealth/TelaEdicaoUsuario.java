@@ -38,11 +38,12 @@ public class TelaEdicaoUsuario extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_edicao_usuario);
 		
+		sessao = new GerenciamentoSessao(getApplicationContext());
+		
 		usrDAO = new UsuarioDAO();
 		usrUsuario = usrDAO.buscarUsuario(sessao.getIdUsuario());
 		
 		fdn = new FormatoDataNascimento();
-		sessao = new GerenciamentoSessao(getApplicationContext());
 		
 		etEmail = (EditText) findViewById(R.id.etEmail);
 		etSenha = (EditText) findViewById(R.id.etSenha);

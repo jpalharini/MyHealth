@@ -16,7 +16,7 @@ public class TelaInicial extends Activity {
 		final int SPLASH_TIME_OUT = 1500;
 		
 		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
-		
+	 
 		new Handler().postDelayed(new Runnable() {
  
             @Override

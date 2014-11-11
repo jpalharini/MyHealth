@@ -25,13 +25,8 @@ import android.widget.ListView;
 
 public class AbaAno extends Fragment {
 	
-	Integer x;
-	Integer	difData = 12;
-	String periodo = "MONTH";
-	
-	Double media;
-	Double[] medias = new Double[difData+1];
-	Integer[] datas = new Integer[difData+1];
+	private Integer	difData = 12;
+	private String periodo = "MONTH";
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

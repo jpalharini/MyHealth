@@ -22,6 +22,7 @@ public class UsuarioDAO {
 	private static final String ATUALIZAR_ALVO_BPM = "atualizarAlvoBPM";
 	private static final String BUSCAR = "buscarUsuario";
 	private static final String BUSCAR_EMAIL = "buscarUsuarioEmail";
+	private static final String BUSCAR_IDADE = "buscarIdadeUsuario";
 
 	public boolean cadastrarUsuario (Usuario usuario) {
 		
@@ -200,4 +201,33 @@ public class UsuarioDAO {
 		
 		return usr;
 	}
+	
+	public Integer buscarIdadeUsuario (Integer id){
+		Integer idade = null;
+		
+		SoapObject buscarIdadeUsuario = new SoapObject (NAMESPACE, BUSCAR_IDADE);
+		buscarIdadeUsuario.addProperty("id", id);
+		
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		
+		envelope.setOutputSoapObject(buscarIdadeUsuario);
+		envelope.implicitTypes = true;
+		
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
+		
+		try {
+			http.call("urn:" + BUSCAR_IDADE, envelope);
+			
+			SoapObject resposta = (SoapObject) envelope.getResponse();
+			
+			idade = Integer.parseInt(resposta.getProperty("id").toString());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return idade;
+	}
+	
 }

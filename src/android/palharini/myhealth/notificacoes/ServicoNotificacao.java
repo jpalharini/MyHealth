@@ -48,7 +48,7 @@ public class ServicoNotificacao extends Service {
         builder.setSmallIcon(R.drawable.ic_launcher);
     	builder.setContentIntent(pendingNotificacaoIntent);
 
-		notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+		notificationManager = (NotificationManager) getSystemService (NOTIFICATION_SERVICE);
 		notificationManager.notify(ID_NOTIFICACAO, builder.build());
 		
 		return super.onStartCommand(intent, flags, startId);
