@@ -53,8 +53,8 @@
     <string name="hintAltura">200</string>
     <string name="tvPeso">Peso (quilos)</string>
     <string name="hintPeso">100</string>
-    <string name="tvIdealBPM">Freq. cardíaca ideal</string>
-    <string name="hintAlvoBPM">70</string>
+    <string name="tvCadAlvoBPM">Freq. cardíaca ideal</string>
+    <string name="hintCadAlvoBPM">70</string>
     <string name="btContinuar">Continuar</string>
     <string name="toastUsrOK">Usuário cadastrado com sucesso!</string>
     <string name="toastUsrFalha">Falha no cadastro do usuário...</string>

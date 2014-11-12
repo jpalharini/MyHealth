@@ -25,21 +25,37 @@
 		        android:gravity="center_horizontal"
 		        android:text="@string/tvLogin"
 		        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    	
+	    	<TextView
+		        android:id="@+id/tvEmail"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:text="@string/tvEmail"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
 		
 		    <EditText
 		        android:id="@+id/etEmail"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_marginTop="20dp"
+		        android:layout_marginTop="10dp"
 		        android:hint="@string/hintEmail"
 		        android:inputType="textEmailAddress"
 		        android:textSize="22sp" />
 		
+		    <TextView
+		        android:id="@+id/tvSenha"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:text="@string/tvSenha"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+		    
 		    <EditText
 			    android:id="@+id/etSenha"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
-		        android:layout_marginTop="20dp"
+		        android:layout_marginTop="10dp"
 			    android:hint="@string/hintSenha"
 			    android:inputType="textPassword"
 			    android:textSize="22sp" />

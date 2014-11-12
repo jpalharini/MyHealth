@@ -96,7 +96,7 @@ public class TelaPrincipal extends Activity {
 			
 			IndicadorDAO dao = new IndicadorDAO();
 			Indicador indicador = new Indicador();
-			ArrayList<Indicador> indicadores = dao.buscarIndicadoresTipo(sessao.getIdUsuario(), 1);
+			ArrayList<Indicador> indicadores = dao.buscarIndicadoresTipo(sessao.getIdUsuario(), 2);
 			
 			if (indicadores.size() >= 3) {
 				int x;

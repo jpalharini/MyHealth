@@ -19,7 +19,9 @@
             android:name=".TelaLogin"
             android:label="@string/title_activity_tela_login" >
         </activity>
-        <activity android:name=".TelaCadastroUsuario" >
+        <activity 
+            android:name=".TelaCadastroUsuario" 
+            android:label="@string/title_activity_tela_cadastro_usuario" >
         </activity>
         <activity
             android:name=".TelaCadastroIndicador"

@@ -10,19 +10,22 @@
         android:layout_height="0dp"
         android:layout_weight="1" >
 
-        <Button
-            android:id="@+id/btGrafico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/btGrafico" />
+       <com.androidplot.xy.XYPlot
+		   android:id="@+id/xyPlot"
+		   android:layout_width="fill_parent"
+		   android:layout_height="fill_parent"
+		   androidPlot.graphWidget.rangeLabelPaint.textSize="@dimen/range_tick_label_font_size"
+		   androidPlot.graphWidget.rangeOriginLabelPaint.textSize="@dimen/range_tick_label_font_size"
+		   androidPlot.graphWidget.domainLabelPaint.textSize="@dimen/domain_tick_label_font_size"
+		   androidPlot.graphWidget.domainOriginLabelPaint.textSize="@dimen/domain_tick_label_font_size" >
+   		</com.androidplot.xy.XYPlot>
         
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5" >
+        android:layout_weight="1" >
         
 	    <ListView
 	        android:id="@+id/listViewInd"

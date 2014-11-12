@@ -24,7 +24,6 @@ public class IndicadorDAO {
 	public static final String ATUALIZAR = "atualizarIndicador";
 	public static final String EXCLUIR = "excluirIndicador";
 	public static final String BUSCAR_ID = "buscarIndicadorId";
-	public static final String BUSCAR_PERIODO_TODOS = "buscarIndicadoresPeriodo";
 	public static final String BUSCAR_TIPO = "buscarIndicadorTipo";
 	public static final String BUSCAR_TIPO_TODOS = "buscarIndicadoresTipo";
 	public static final String BUSCAR_PERIODO_TIPO = "buscarIndicadoresPeriodoTipo";
@@ -76,8 +75,8 @@ public class IndicadorDAO {
 		
 		SoapObject ind = new SoapObject(NAMESPACE, "indicador");
 		
+		ind.addProperty("id", indicador.getId());
 		ind.addProperty("idTipo", indicador.getIdTipo());
-		ind.addProperty("idUsuario", indicador.getIdUsuario());
 		ind.addProperty("medida", indicador.getMedida());
 		ind.addProperty("unidade", indicador.getUnidade());
 		
@@ -169,77 +168,6 @@ public class IndicadorDAO {
 			return null;
 		}
 		return indicador;
-	}
-
-	public ArrayList<Indicador> buscarIndicadoresPeriodo (Integer idUsuario, String periodo, Integer difData, Integer data){
-		
-		Indicador indicador = null;
-		
-		ArrayList<Indicador> indicadores = new ArrayList<Indicador>();
-		
-		SoapObject buscarIndicadoresPeriodo = new SoapObject (NAMESPACE, BUSCAR_PERIODO_TODOS);
-		buscarIndicadoresPeriodo.addProperty("idUsuario", idUsuario);
-		buscarIndicadoresPeriodo.addProperty("periodo", periodo);
-		buscarIndicadoresPeriodo.addProperty("difData", difData);
-		buscarIndicadoresPeriodo.addProperty("data", data);
-		
-		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-		
-		envelope.setOutputSoapObject(buscarIndicadoresPeriodo);
-		envelope.implicitTypes = true;
-		
-		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
-		
-		try {
-			http.call("urn:" + BUSCAR_PERIODO_TODOS, envelope);
-			
-			Object resposta = envelope.getResponse();
-			
-			if (resposta instanceof Vector) {
-				@SuppressWarnings("unchecked")
-				Vector<SoapObject> vectorResposta = (Vector<SoapObject>) resposta;
-				
-				for (SoapObject soapObject1 : vectorResposta) {
-					
-					indicador = new Indicador();
-					
-					indicador.setId(Integer.parseInt(soapObject1.getProperty("id").toString()));
-					indicador.setIdTipo(Integer.parseInt(soapObject1.getProperty("idTipo").toString()));
-					indicador.setIdUsuario(Integer.parseInt(soapObject1.getProperty("idUsuario").toString()));
-					indicador.setMedida(Double.parseDouble(soapObject1.getProperty("medida").toString()));
-					indicador.setUnidade(soapObject1.getProperty("unidade").toString());
-					indicador.setData(soapObject1.getProperty("data").toString());
-					indicador.setHora(soapObject1.getProperty("hora").toString());
-					
-					indicadores.add(indicador);
-				}
-			}
-			else if (resposta instanceof SoapObject) {
-				SoapObject soapObject = (SoapObject) resposta;
-				Vector<SoapObject> vectorResposta = new Vector<SoapObject>();
-				vectorResposta.add(soapObject);
-				
-				for (SoapObject soapObject2 : vectorResposta) {
-					
-					indicador = new Indicador();
-					
-					indicador.setId(Integer.parseInt(soapObject2.getProperty("id").toString()));
-					indicador.setIdTipo(Integer.parseInt(soapObject2.getProperty("idTipo").toString()));
-					indicador.setIdUsuario(Integer.parseInt(soapObject2.getProperty("idUsuario").toString()));
-					indicador.setMedida(Double.parseDouble(soapObject2.getProperty("medida").toString()));
-					indicador.setUnidade(soapObject2.getProperty("unidade").toString());
-					indicador.setData(soapObject2.getProperty("data").toString());
-					indicador.setHora(soapObject2.getProperty("hora").toString());
-					
-					indicadores.add(indicador);
-				}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-		return indicadores;
 	}
 	
 	public ArrayList<Indicador> buscarIndicadoresTipo (Integer idUsuario, Integer idTipo) {

@@ -31,8 +31,8 @@ public class Timestamp {
 	private SimpleDateFormat sdfMinutoAndroid = new SimpleDateFormat(formatoMinutoAndroid);
 	
 	private Date dataDate = null, horaDate = null;
-	private String dataString, horaString, minutoString;
-	private Long dataMillis, horaMillis, minutoMillis, horarioMillis;
+	private String horaString, minutoString;
+	private Long horaMillis, minutoMillis, horarioMillis;
 	
 	private Calendar c = Calendar.getInstance();
 	private int dia = c.get(Calendar.DAY_OF_MONTH);
@@ -113,24 +113,6 @@ public class Timestamp {
 		}
 		
 		return sdfDataSQLBusca.format(dataDate);
-	}
-	
-	public long getDataMillis (String data) {
-		
-		try {
-			dataDate = sdfHoraAndroid.parse(data);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		dataString = sdfHoraAndroid.format(dataDate);
-		
-		dataMillis = TimeUnit.DAYS.toMillis(Integer.parseInt(dataString));
-		
-		horarioMillis = horaMillis + minutoMillis;
-		
-		return horarioMillis;
 	}
 	
 	public long getHorarioMillis (String horario) {

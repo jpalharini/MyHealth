@@ -19,66 +19,150 @@
             android:orientation="vertical"
             android:paddingBottom="15dp" >
 
+            <TextView
+                android:id="@+id/tvCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:text="@string/tvCadastro"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="16sp" />
+            
+            <TextView
+		        android:id="@+id/tvEmail"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:text="@string/tvEmail"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/hintEmail"
                 android:inputType="text|textEmailAddress"
-                android:textSize="22sp" />
+                android:textSize="20sp" >
+            </EditText>
 
+            <TextView
+		        android:id="@+id/tvSenha"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:text="@string/tvSenha"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+            
             <EditText
                 android:id="@+id/etSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/hintSenha"
                 android:inputType="textPassword"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
+            
+            <TextView
+		        android:id="@+id/tvConfSenha"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:text="@string/tvConfSenha"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:id="@+id/etConfSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/hintConfSenha"
                 android:inputType="textPassword"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
+            <TextView
+		        android:id="@+id/tvNome"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:text="@string/tvNome"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+            
             <EditText
                 android:id="@+id/etNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/hintNome"
                 android:inputType="textCapWords|textPersonName"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
+            <TextView
+		        android:id="@+id/tvDataNasc"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:text="@string/tvDataNasc"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+            
             <EditText
                 android:id="@+id/etNasc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/hintDataNasc"
-                android:inputType="date"
-                android:textSize="22sp" />
+                android:inputType="none"
+                android:textSize="20sp" />
+            
+            <TextView
+		        android:id="@+id/tvAltura"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:text="@string/tvAltura"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:id="@+id/etAltura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:hint="@string/hintAltura"
                 android:inputType="numberDecimal"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
+            
+            <TextView
+		        android:id="@+id/tvPeso"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:text="@string/tvPeso"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/etPeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/hintPeso"
+                android:inputType="numberDecimal"
+                android:textSize="20sp" />
+            
+            <TextView
+		        android:id="@+id/tvCadAlvoBPM"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:text="@string/tvCadAlvoBPM"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
             
             <EditText
                 android:id="@+id/etAlvoBPM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="@string/hintAlvoBPM"
+                android:layout_marginTop="10dp"
+                android:hint="@string/hintCadAlvoBPM"
                 android:inputType="number"
                 android:textSize="22sp" />
 

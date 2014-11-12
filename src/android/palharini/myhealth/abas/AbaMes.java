@@ -1,12 +1,22 @@
 package android.palharini.myhealth.abas;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.androidplot.ui.SizeLayoutType;
+import com.androidplot.ui.SizeMetrics;
+import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.PointLabelFormatter;
+import com.androidplot.xy.SimpleXYSeries;
+import com.androidplot.xy.XYPlot;
+import com.androidplot.xy.XYSeries;
+import com.androidplot.xy.XYStepMode;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.palharini.myhealth.R;
 import android.palharini.myhealth.TelaEdicaoIndicador;
-import android.palharini.myhealth.TelaGrafico;
 import android.palharini.myhealth.dao.IndicadorDAO;
 import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.entidades.Indicador;
@@ -14,12 +24,10 @@ import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 
@@ -38,27 +46,63 @@ public class AbaMes extends Fragment {
 		IndicadorDAO dao = new IndicadorDAO();
 		
 		final ListView listaInd = (ListView) view.findViewById(R.id.listViewInd);
-		
-		final Button buttonGrafico = (Button) view.findViewById(R.id.btGrafico);
+				
+		XYPlot grafico = (XYPlot) view.findViewById(R.id.xyPlot);
+		grafico.getBackgroundPaint().setColor(Color.WHITE);
+		grafico.getGraphWidget().getBackgroundPaint().setColor(Color.WHITE);
+		grafico.getGraphWidget().getGridBackgroundPaint().setColor(Color.WHITE);
+        grafico.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);
+        grafico.setPlotMargins(0, 0, 0, 0);
+        grafico.setPlotPadding(25, 10, 20, 0);
+        grafico.setGridPadding(30, 30, 30, 10);
+        grafico.getGraphWidget().setSize(new SizeMetrics(0, SizeLayoutType.FILL, 0, SizeLayoutType.FILL));
+        grafico.getLayoutManager().remove(grafico.getLegendWidget());
+        grafico.getLayoutManager().remove(grafico.getDomainLabelWidget());
+        grafico.getLayoutManager().remove(grafico.getRangeLabelWidget());
+        grafico.getLayoutManager().remove(grafico.getTitleWidget());  
+        grafico.getLayoutManager().getPaddingPaint().setColor(Color.TRANSPARENT);
+		grafico.setTicksPerRangeLabel(5);
+		grafico.setTicksPerDomainLabel(1);
+		grafico.getGraphWidget().setMarginBottom(15);
 		
 		Intent intent = getActivity().getIntent();
 		final Integer tipoSelecionado = intent.getIntExtra("tipoSelecionado", 0);
 		
-		buttonGrafico.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent irTelaGrafico = new Intent(getActivity(), TelaGrafico.class);
-				irTelaGrafico.putExtra("difData", difData);
-				irTelaGrafico.putExtra("periodo", periodo);
-				irTelaGrafico.putExtra("tipoSelecionado", tipoSelecionado);
-				startActivity(irTelaGrafico);
+		Integer idUsuario = sessao.getIdUsuario();
+		String dataBusca = ts.getDataAtualBusca();
+		
+		Double[] medias = new Double[difData+1];
+		Integer[] datas = new Integer[difData+1];
+		int y = 0;
+		for (int x = difData; x>=0; x--) {
+			Double media = dao.buscarMediaPeriodo(
+					tipoSelecionado, idUsuario, periodo, dataBusca, x);
+			if (media > 0) {
+				medias[x] = media;
+				datas[x] = x;
+				y = x;
 			}
-		});
+			else {
+				medias[x] = medias[y];
+				datas[x] = x;
+				
+			}
+		}
+		
+		XYSeries serieMedias = new SimpleXYSeries (Arrays.asList(datas), Arrays.asList(medias), "Médias");
+		
+		LineAndPointFormatter formatoMedias = new LineAndPointFormatter(
+				Color.RED, 
+				Color.RED, 
+				Color.TRANSPARENT, 
+				null);
+		formatoMedias.setPointLabelFormatter(new PointLabelFormatter());
+		formatoMedias.configure(getActivity(), R.xml.formato_serie_medias);
+		
+		grafico.addSeries(serieMedias, formatoMedias);
 		
 		final ArrayList<Indicador> indicadores = (ArrayList<Indicador>) dao.buscarIndicadoresPeriodoTipo(
-				sessao.getIdUsuario(), tipoSelecionado, periodo, ts.getDataAtualBusca(), difData);
+				idUsuario, tipoSelecionado, periodo, dataBusca, difData);
 		
 		ArrayAdapter<Indicador> adapterInd = new ArrayAdapter<Indicador>(
 				getActivity(), android.R.layout.simple_list_item_1, indicadores);
@@ -77,7 +121,6 @@ public class AbaMes extends Fragment {
 				startActivity(irTelaEdicaoIndicador);
 			}
 		});
-		
 		return view;
 	}
 

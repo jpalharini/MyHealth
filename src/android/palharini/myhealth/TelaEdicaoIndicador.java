@@ -30,7 +30,7 @@ public class TelaEdicaoIndicador extends Activity {
 	private Button btSalvar;
 	private Button btExcluir;
 	
-	private Integer indicSelecionado, posSpinner;
+	private Integer indicSelecionado, posSpinner = 0;
 	private ArrayAdapter<String> adTipos;
 	private String[] arrUnidades;
 	private List<String> lsUnidades;
