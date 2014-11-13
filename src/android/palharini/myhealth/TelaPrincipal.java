@@ -59,8 +59,8 @@ public class TelaPrincipal extends Activity {
 		
 		if (usuario != null && altura != null && peso != null) {
 			String nomeUsuario = usuario.getNome();
-			Double pesoUsuario = peso.getMedida();
-			Double alturaUsuario = altura.getMedida();
+			Double pesoUsuario = peso.getMedida1();
+			Double alturaUsuario = altura.getMedida1();
 			Integer idadeUsuario = usrdao.buscarIdadeUsuario(sessao.getIdUsuario());
 			
 			alturaUsuario = alturaUsuario/100;
@@ -103,7 +103,7 @@ public class TelaPrincipal extends Activity {
 								
 				for (x=1; x==3; x++) {
 					indicador = indicadores.get(x);
-					bpmDescanso = indicador.getMedida().intValue();
+					bpmDescanso = indicador.getMedida1().intValue();
 					bpmDescansoFinal = bpmDescanso+bpm;					
 				}
 				

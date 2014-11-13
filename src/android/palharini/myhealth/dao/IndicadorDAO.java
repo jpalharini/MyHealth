@@ -39,7 +39,7 @@ public class IndicadorDAO {
 		ind.addProperty("id", indicador.getId());
 		ind.addProperty("idTipo", indicador.getIdTipo());
 		ind.addProperty("idUsuario", indicador.getIdUsuario());
-		ind.addProperty("medida", indicador.getMedida());
+		ind.addProperty("medida", indicador.getMedida1());
 		ind.addProperty("unidade", indicador.getUnidade());
 		ind.addProperty("data", indicador.getData());
 		ind.addProperty("hora", indicador.getHora());
@@ -77,7 +77,7 @@ public class IndicadorDAO {
 		
 		ind.addProperty("id", indicador.getId());
 		ind.addProperty("idTipo", indicador.getIdTipo());
-		ind.addProperty("medida", indicador.getMedida());
+		ind.addProperty("medida", indicador.getMedida1());
 		ind.addProperty("unidade", indicador.getUnidade());
 		
 		atualizarIndicador.addSoapObject(ind);
@@ -157,7 +157,7 @@ public class IndicadorDAO {
 			indicador.setId(Integer.parseInt(resposta.getProperty("id").toString()));
 			indicador.setIdTipo(Integer.parseInt(resposta.getProperty("idTipo").toString()));
 			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
-			indicador.setMedida(Double.parseDouble(resposta.getProperty("medida").toString()));
+			indicador.setMedida1(Double.parseDouble(resposta.getProperty("medida").toString()));
 			indicador.setUnidade(resposta.getProperty("unidade").toString());
 			indicador.setData(resposta.getProperty("data").toString());
 			indicador.setHora(resposta.getProperty("hora").toString());		
@@ -202,7 +202,7 @@ public class IndicadorDAO {
 					indicador.setId(Integer.parseInt(soapObject1.getProperty("id").toString()));
 					indicador.setIdTipo(Integer.parseInt(soapObject1.getProperty("idTipo").toString()));
 					indicador.setIdUsuario(Integer.parseInt(soapObject1.getProperty("idUsuario").toString()));
-					indicador.setMedida(Double.parseDouble(soapObject1.getProperty("medida").toString()));
+					indicador.setMedida1(Double.parseDouble(soapObject1.getProperty("medida").toString()));
 					indicador.setUnidade(soapObject1.getProperty("unidade").toString());
 					indicador.setData(soapObject1.getProperty("data").toString());
 					indicador.setHora(soapObject1.getProperty("hora").toString());
@@ -222,7 +222,7 @@ public class IndicadorDAO {
 					indicador.setId(Integer.parseInt(soapObject2.getProperty("id").toString()));
 					indicador.setIdTipo(Integer.parseInt(soapObject2.getProperty("idTipo").toString()));
 					indicador.setIdUsuario(Integer.parseInt(soapObject2.getProperty("idUsuario").toString()));
-					indicador.setMedida(Double.parseDouble(soapObject2.getProperty("medida").toString()));
+					indicador.setMedida1(Double.parseDouble(soapObject2.getProperty("medida").toString()));
 					indicador.setUnidade(soapObject2.getProperty("unidade").toString());
 					indicador.setData(soapObject2.getProperty("data").toString());
 					indicador.setHora(soapObject2.getProperty("hora").toString());
@@ -263,7 +263,7 @@ public class IndicadorDAO {
 			indicador.setId(Integer.parseInt(resposta.getProperty("id").toString()));
 			indicador.setIdTipo(Integer.parseInt(resposta.getProperty("idTipo").toString()));
 			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
-			indicador.setMedida(Double.parseDouble(resposta.getProperty("medida").toString()));
+			indicador.setMedida1(Double.parseDouble(resposta.getProperty("medida").toString()));
 			indicador.setUnidade(resposta.getProperty("unidade").toString());
 			indicador.setData(resposta.getProperty("data").toString());
 			indicador.setHora(resposta.getProperty("hora").toString());		
@@ -311,7 +311,7 @@ public class IndicadorDAO {
 					indicador.setId(Integer.parseInt(soapObject1.getProperty("id").toString()));
 					indicador.setIdTipo(Integer.parseInt(soapObject1.getProperty("idTipo").toString()));
 					indicador.setIdUsuario(Integer.parseInt(soapObject1.getProperty("idUsuario").toString()));
-					indicador.setMedida(Double.parseDouble(soapObject1.getProperty("medida").toString()));
+					indicador.setMedida1(Double.parseDouble(soapObject1.getProperty("medida").toString()));
 					indicador.setUnidade(soapObject1.getProperty("unidade").toString());
 					indicador.setData(soapObject1.getProperty("data").toString());
 					indicador.setHora(soapObject1.getProperty("hora").toString());
@@ -331,7 +331,7 @@ public class IndicadorDAO {
 					indicador.setId(Integer.parseInt(soapObject2.getProperty("id").toString()));
 					indicador.setIdTipo(Integer.parseInt(soapObject2.getProperty("idTipo").toString()));
 					indicador.setIdUsuario(Integer.parseInt(soapObject2.getProperty("idUsuario").toString()));
-					indicador.setMedida(Double.parseDouble(soapObject2.getProperty("medida").toString()));
+					indicador.setMedida1(Double.parseDouble(soapObject2.getProperty("medida").toString()));
 					indicador.setUnidade(soapObject2.getProperty("unidade").toString());
 					indicador.setData(soapObject2.getProperty("data").toString());
 					indicador.setHora(soapObject2.getProperty("hora").toString());

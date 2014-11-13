@@ -21,11 +21,11 @@
             android:paddingBottom="15dp" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/tvTipoIndicador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/textTipoIndicador"
+                android:text="@string/tvTipoIndicador"
                 android:textSize="18sp" />
 
             <Spinner
@@ -37,13 +37,53 @@
                 android:textSize="20sp"
                 android:prompt="@string/spTipo" />
 
+            <TextView
+                android:id="@+id/tvMedida1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/tvMedida1"
+                android:textSize="20sp" />
+            
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" >
-
+                
                 <EditText
-                    android:id="@+id/editMedicao"
+                    android:id="@+id/etMedida1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.24"
+                    android:inputType="numberDecimal"
+                    android:textSize="22sp" >
+                </EditText>
+                
+                <TextView
+                    android:id="@+id/tvUnidade1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/tvUnidade"
+                    android:textSize="20sp" />
+                
+            </LinearLayout>
+                    
+            <TextView
+                android:id="@+id/tvMedida2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/tvMedida2"
+                android:textSize="20sp" />
+        
+           	<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+                
+                <EditText
+                    android:id="@+id/etMedida2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.24"
@@ -52,7 +92,7 @@
                 </EditText>
 
                 <TextView
-                    android:id="@+id/textUnidade"
+                    android:id="@+id/tvUnidade2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"

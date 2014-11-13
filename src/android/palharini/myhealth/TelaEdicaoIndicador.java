@@ -108,7 +108,7 @@ public class TelaEdicaoIndicador extends Activity {
 		indicador = indDAO.buscarIndicadorId(indicSelecionado);
 		
 		spTipo.setSelection(indicador.getIdTipo());
-		etMedicao.setText(indicador.getMedida().toString());
+		etMedicao.setText(indicador.getMedida1().toString());
 		
 		btSalvar.setOnClickListener(new OnClickListener() {
 			@Override

@@ -113,8 +113,13 @@ public class TelaEdicaoPreferencias extends Activity {
 		horaLembretePesoString = etHoraLembretePeso.getText().toString();
 		horaLembreteBPMString = etHoraLembreteBPM.getText().toString();
 		
-		horaLembretePesoMillis = ts.getHorarioMillis(etHoraLembretePeso.getText().toString());
-		horaLembreteBPMMillis = ts.getHorarioMillis(etHoraLembreteBPM.getText().toString());
+		if (horaLembretePesoMillis != 0) {
+			horaLembretePesoMillis = ts.getHorarioMillis(etHoraLembretePeso.getText().toString());
+		}
+		
+		if (horaLembreteBPMMillis != 0) {
+			horaLembreteBPMMillis = ts.getHorarioMillis(etHoraLembreteBPM.getText().toString());
+		}
 		
 		btSalvar.setOnClickListener(new Button.OnClickListener () {
 

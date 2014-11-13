@@ -30,11 +30,11 @@ public class TelaCadastroIndicador extends Activity {
 	
 	private int idUsuario;
 	private String dataAtual, horarioAtual, unidadeString;
-	private Double medidaString;
+	private Double dbMedida1, dbMedida2;
 	
 	private Spinner spTipo;
-	private EditText etMedida;
-	private TextView tvUnidade;
+	private EditText etMedida1, etMedida2;
+	private TextView tvUnidade1, tvUnidade2, tvMedida2;
 	private Button btSalvar;
 	
 	private ArrayAdapter<String> adTipos;
@@ -69,8 +69,13 @@ public class TelaCadastroIndicador extends Activity {
 		adTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spTipo.setAdapter(adTipos);
 		
-		etMedida = (EditText) findViewById(R.id.editMedicao);
-		tvUnidade = (TextView) findViewById(R.id.textUnidade);
+		etMedida1 = (EditText) findViewById(R.id.etMedida1);
+		tvUnidade1 = (TextView) findViewById(R.id.tvUnidade1);
+		
+		tvMedida2 = (TextView) findViewById(R.id.tvMedida2);
+		etMedida2 = (EditText) findViewById(R.id.etMedida2);
+		tvUnidade2 = (TextView) findViewById(R.id.tvUnidade2);
+		
 		btSalvar = (Button) findViewById(R.id.btSalvar);
 				
 		spTipo.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -80,33 +85,68 @@ public class TelaCadastroIndicador extends Activity {
 				lsUnidades = Arrays.asList(arrUnidades);
 				switch (posSpinner) {
 				case 0:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 1:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 2:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 3:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvUnidade2.setText("");
+					tvMedida2.setVisibility(View.VISIBLE);
+					etMedida2.setVisibility(View.VISIBLE);
+					tvUnidade2.setVisibility(View.VISIBLE);
 					break;
 				case 4:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 5:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 6:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 7:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 8:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
+					break;
+				case 9:
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				}
+
 			}
 
 			@Override
@@ -116,21 +156,36 @@ public class TelaCadastroIndicador extends Activity {
 			}
 		});
 		
-		unidadeString = tvUnidade.getText().toString();
-		medidaString = Double.parseDouble(etMedida.getText().toString());
-		
 		btSalvar.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick (View v){
-				cadastro = indDAO.cadastrarIndicador(new Indicador(
-						0, 
-						posSpinner,
-						idUsuario,
-						medidaString, 
-						unidadeString,
-						dataAtual,
-						horarioAtual
-						));
+				unidadeString = tvUnidade1.getText().toString();
+				dbMedida1 = Double.parseDouble(etMedida1.getText().toString());
+				
+				if (posSpinner != 3) {	
+					cadastro = indDAO.cadastrarIndicador(new Indicador(
+							0, 
+							posSpinner,
+							idUsuario,
+							dbMedida1, 
+							unidadeString,
+							dataAtual,
+							horarioAtual
+							));
+				}
+				else {
+					dbMedida2 = Double.parseDouble(etMedida2.getText().toString());
+					cadastro = indDAO.cadastrarIndicador(new Indicador(
+							0, 
+							posSpinner,
+							idUsuario,
+							dbMedida1,
+							dbMedida2, 
+							unidadeString,
+							dataAtual,
+							horarioAtual
+							));
+				}
 				
 				if (cadastro) {
 					Toast.makeText(getApplicationContext(), R.string.toastIndOk, Toast.LENGTH_LONG).show();
