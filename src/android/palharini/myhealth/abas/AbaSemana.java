@@ -75,7 +75,7 @@ public class AbaSemana extends Fragment {
 		Integer[] datas = new Integer[difData+1];
 		int y = 0;
 		for (int x = difData; x>=0; x--) {
-			Double media = dao.buscarMediaPeriodo(
+			Double media = dao.buscarMedia1Periodo(
 					tipoSelecionado, idUsuario, periodo, dataBusca, x);
 			if (media > 0) {
 				medias[x] = media;
@@ -119,6 +119,7 @@ public class AbaSemana extends Fragment {
 				Intent irTelaEdicaoIndicador = new Intent(getActivity(), TelaEdicaoIndicador.class);
 				irTelaEdicaoIndicador.putExtra("idIndicador", indicSelecionado.getId());
 				startActivity(irTelaEdicaoIndicador);
+				getActivity().finish();
 			}
 		});
 		return view;

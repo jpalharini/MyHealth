@@ -218,9 +218,9 @@ public class UsuarioDAO {
 		try {
 			http.call("urn:" + BUSCAR_IDADE, envelope);
 			
-			SoapObject resposta = (SoapObject) envelope.getResponse();
+			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			
-			idade = Integer.parseInt(resposta.getProperty("id").toString());
+			idade = Integer.parseInt(resposta.toString());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

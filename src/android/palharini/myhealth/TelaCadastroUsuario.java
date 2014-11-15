@@ -132,6 +132,7 @@ public class TelaCadastroUsuario extends Activity {
 							0,
 							usrUsuario.getId(),
 							dbAltura,
+							0.0,
 							lsUnidades.get(0),
 							ts.getDataSQL(),
 							ts.getHorarioSQL()
@@ -142,6 +143,7 @@ public class TelaCadastroUsuario extends Activity {
 							1,
 							usrUsuario.getId(),
 							dbPeso,
+							0.0,
 							lsUnidades.get(1),
 							ts.getDataSQL(),
 							ts.getHorarioSQL()

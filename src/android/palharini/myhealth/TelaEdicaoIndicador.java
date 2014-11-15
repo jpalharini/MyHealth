@@ -25,17 +25,19 @@ public class TelaEdicaoIndicador extends Activity {
 	private IndicadorDAO indDAO;
 	
 	private Spinner spTipo;
-	private EditText etMedicao;
-	private TextView tvUnidade;
+	private EditText etMedida1, etMedida2;
+	private TextView tvUnidade1, tvUnidade2, tvMedida2;
 	private Button btSalvar;
 	private Button btExcluir;
 	
-	private Integer indicSelecionado, posSpinner = 0;
+	private Integer indicSelecionado, idTipoSelecionado;
 	private ArrayAdapter<String> adTipos;
 	private String[] arrUnidades;
 	private List<String> lsUnidades;
 	
 	private Boolean blAtualizar, blExcluir;
+	private String stUnidade;
+	private Double dbMedida1, dbMedida2;
 	
 	private Intent dados, voltarAbas;
 	
@@ -48,8 +50,14 @@ public class TelaEdicaoIndicador extends Activity {
 		indicSelecionado = dados.getIntExtra("idIndicador", 0);
 				
 		spTipo = (Spinner) findViewById(R.id.spTipo);
-		etMedicao = (EditText) findViewById(R.id.etMedicao);
-		tvUnidade = (TextView) findViewById(R.id.tvUnidade);
+		
+		etMedida1 = (EditText) findViewById(R.id.etMedida1);
+		tvUnidade1 = (TextView) findViewById(R.id.tvUnidade1);
+		
+		tvMedida2 = (TextView) findViewById(R.id.tvMedida2);
+		etMedida2 = (EditText) findViewById(R.id.etMedida2);
+		tvUnidade2 = (TextView) findViewById(R.id.tvUnidade2);
+		
 		btSalvar = (Button) findViewById(R.id.btSalvar);
 		btExcluir = (Button) findViewById(R.id.btExcluir);
 		
@@ -65,31 +73,65 @@ public class TelaEdicaoIndicador extends Activity {
 				lsUnidades = Arrays.asList(arrUnidades);
 				switch (posSpinner) {
 				case 0:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 1:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 2:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 3:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvUnidade2.setText("");
+					tvMedida2.setVisibility(View.VISIBLE);
+					etMedida2.setVisibility(View.VISIBLE);
+					tvUnidade2.setVisibility(View.VISIBLE);
 					break;
 				case 4:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 5:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 6:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 7:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				case 8:
-					tvUnidade.setText(lsUnidades.get(posSpinner));
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
+					break;
+				case 9:
+					tvUnidade1.setText(lsUnidades.get(posSpinner));
+					tvMedida2.setVisibility(View.GONE);
+					etMedida2.setVisibility(View.GONE);
+					tvUnidade2.setVisibility(View.GONE);
 					break;
 				}
 			}
@@ -108,17 +150,34 @@ public class TelaEdicaoIndicador extends Activity {
 		indicador = indDAO.buscarIndicadorId(indicSelecionado);
 		
 		spTipo.setSelection(indicador.getIdTipo());
-		etMedicao.setText(indicador.getMedida1().toString());
+		etMedida1.setText(indicador.getMedida1().toString());
 		
 		btSalvar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick (View v){
-				blAtualizar = indDAO.atualizarIndicador(new Indicador(
-						indicador.getId(), 
-						posSpinner,
-						Double.parseDouble(etMedicao.getText().toString()), 
-						lsUnidades.get(posSpinner)
-				));
+				dbMedida1 = Double.parseDouble(etMedida1.getText().toString());				
+				stUnidade = tvUnidade1.getText().toString();
+				idTipoSelecionado = spTipo.getSelectedItemPosition();
+				
+				if (idTipoSelecionado !=3) {
+					blAtualizar = indDAO.atualizarIndicador(new Indicador(
+							indicador.getId(), 
+							idTipoSelecionado,
+							dbMedida1,
+							0.0,
+							stUnidade
+					));
+				}
+				else {
+					dbMedida2 = Double.parseDouble(etMedida2.getText().toString());
+					blAtualizar = indDAO.atualizarIndicador(new Indicador(
+							indicador.getId(), 
+							idTipoSelecionado,
+							dbMedida1,
+							dbMedida2,
+							stUnidade
+					));
+				}
 				
 				if (blAtualizar) {
 					Toast.makeText(getApplicationContext(), getString(R.string.toastIndAtOK), Toast.LENGTH_LONG).show();

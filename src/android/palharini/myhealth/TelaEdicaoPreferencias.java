@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class TelaEdicaoPreferencias extends Activity {
 
@@ -36,6 +37,7 @@ public class TelaEdicaoPreferencias extends Activity {
 	private Button btSalvar, btLogout;
 	
 	private boolean lembretePeso, lembreteBPM;
+	private Boolean blPrefs;
 	private String horaLembretePesoString, horaLembreteBPMString;
 	private long horaLembretePesoMillis, horaLembreteBPMMillis;
 	private PendingIntent pendingNotificacaoPesoIntent = null, pendingNotificacaoBPMIntent = null;
@@ -106,13 +108,6 @@ public class TelaEdicaoPreferencias extends Activity {
 			
 		});
 		
-		
-		lembretePeso = chLembretePeso.isChecked();
-		lembreteBPM = chLembreteBPM.isChecked();
-		
-		horaLembretePesoString = etHoraLembretePeso.getText().toString();
-		horaLembreteBPMString = etHoraLembreteBPM.getText().toString();
-		
 		if (horaLembretePesoMillis != 0) {
 			horaLembretePesoMillis = ts.getHorarioMillis(etHoraLembretePeso.getText().toString());
 		}
@@ -126,43 +121,46 @@ public class TelaEdicaoPreferencias extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (
-						chLembretePeso.isChecked() != prefs.isLembretePeso() ||
-						!etHoraLembretePeso.getText().toString().equals(prefs.getHoraLembretePeso()) ||
-						chLembreteBPM.isChecked() != prefs.isLembreteBPM() || 
-						!etHoraLembreteBPM.getText().toString().equals(prefs.getHoraLembreteBPM())) {
-					
-					Preferencias prefsAtual = new Preferencias(
-							prefs.getId(),
-							sessao.getIdUsuario(),
-							lembretePeso,
-							horaLembretePesoString,
-							lembreteBPM,
-							horaLembreteBPMString
-							);
-					
-					if (chLembretePeso.isChecked() != prefs.isLembretePeso()) {
-						if (lembretePeso) {
-							pendingNotificacaoPesoIntent = marcarNotificacaoPeso(horaLembretePesoMillis);
-						}
-						else {
-							cancelarNotificacao(pendingNotificacaoPesoIntent);
-						}
-						if (lembreteBPM) {
-							pendingNotificacaoBPMIntent = marcarNotificacaoBPM(horaLembreteBPMMillis);
-						}
-						else {
-							cancelarNotificacao(pendingNotificacaoBPMIntent);
-						}
+				lembretePeso = chLembretePeso.isChecked();
+				lembreteBPM = chLembreteBPM.isChecked();
+				
+				horaLembretePesoString = etHoraLembretePeso.getText().toString();
+				horaLembreteBPMString = etHoraLembreteBPM.getText().toString();
+				
+				Preferencias prefsAtual = new Preferencias(
+						prefs.getId(),
+						sessao.getIdUsuario(),
+						lembretePeso,
+						horaLembretePesoString,
+						lembreteBPM,
+						horaLembreteBPMString
+						);
+				
+				blPrefs = prefsDAO.atualizarPreferencias(prefsAtual);
+				
+				if (chLembretePeso.isChecked() != prefs.isLembretePeso()) {
+					if (lembretePeso) {
+						pendingNotificacaoPesoIntent = marcarNotificacaoPeso(horaLembretePesoMillis);
 					}
-					prefsDAO.atualizarPreferencias(prefsAtual);
-					
+					else {
+						cancelarNotificacao(pendingNotificacaoPesoIntent);
+					}
+					if (lembreteBPM) {
+						pendingNotificacaoBPMIntent = marcarNotificacaoBPM(horaLembreteBPMMillis);
+					}
+					else {
+						cancelarNotificacao(pendingNotificacaoBPMIntent);
+					}
+				}
+				
+				if (blPrefs) {
+					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsOK), Toast.LENGTH_LONG).show();
 					Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
 					startActivity(voltarTelaPrincipal);
+					finish();
 				}
 				else {
-					Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
-					startActivity(voltarTelaPrincipal);
+					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsFalha), Toast.LENGTH_LONG).show();
 				}
 					
 			}

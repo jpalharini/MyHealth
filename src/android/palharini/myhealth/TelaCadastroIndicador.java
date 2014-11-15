@@ -40,7 +40,7 @@ public class TelaCadastroIndicador extends Activity {
 	private ArrayAdapter<String> adTipos;
 	private List<String> lsUnidades;
 	private String[] arrUnidades;
-	private int posSpinner;
+	private int idTipoSelecionado;
 	
 	private boolean cadastro;
 	
@@ -161,13 +161,15 @@ public class TelaCadastroIndicador extends Activity {
 			public void onClick (View v){
 				unidadeString = tvUnidade1.getText().toString();
 				dbMedida1 = Double.parseDouble(etMedida1.getText().toString());
+				idTipoSelecionado = spTipo.getSelectedItemPosition();
 				
-				if (posSpinner != 3) {	
+				if (idTipoSelecionado != 3) {	
 					cadastro = indDAO.cadastrarIndicador(new Indicador(
 							0, 
-							posSpinner,
+							idTipoSelecionado,
 							idUsuario,
-							dbMedida1, 
+							dbMedida1,
+							0.0,
 							unidadeString,
 							dataAtual,
 							horarioAtual
@@ -177,7 +179,7 @@ public class TelaCadastroIndicador extends Activity {
 					dbMedida2 = Double.parseDouble(etMedida2.getText().toString());
 					cadastro = indDAO.cadastrarIndicador(new Indicador(
 							0, 
-							posSpinner,
+							idTipoSelecionado,
 							idUsuario,
 							dbMedida1,
 							dbMedida2, 

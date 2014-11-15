@@ -27,7 +27,8 @@ public class IndicadorDAO {
 	public static final String BUSCAR_TIPO = "buscarIndicadorTipo";
 	public static final String BUSCAR_TIPO_TODOS = "buscarIndicadoresTipo";
 	public static final String BUSCAR_PERIODO_TIPO = "buscarIndicadoresPeriodoTipo";
-	public static final String BUSCAR_MEDIA = "buscarMediaPeriodo";
+	public static final String BUSCAR_MEDIA_1 = "buscarMedia1Periodo";
+	public static final String BUSCAR_MEDIA_2 = "buscarMedia2Periodo";
 	
 	
 	public boolean cadastrarIndicador (Indicador indicador) {
@@ -39,7 +40,8 @@ public class IndicadorDAO {
 		ind.addProperty("id", indicador.getId());
 		ind.addProperty("idTipo", indicador.getIdTipo());
 		ind.addProperty("idUsuario", indicador.getIdUsuario());
-		ind.addProperty("medida", indicador.getMedida1());
+		ind.addProperty("medida1", indicador.getMedida1());
+		ind.addProperty("medida2", indicador.getMedida2());
 		ind.addProperty("unidade", indicador.getUnidade());
 		ind.addProperty("data", indicador.getData());
 		ind.addProperty("hora", indicador.getHora());
@@ -77,7 +79,8 @@ public class IndicadorDAO {
 		
 		ind.addProperty("id", indicador.getId());
 		ind.addProperty("idTipo", indicador.getIdTipo());
-		ind.addProperty("medida", indicador.getMedida1());
+		ind.addProperty("medida1", indicador.getMedida1());
+		ind.addProperty("medida2", indicador.getMedida2());
 		ind.addProperty("unidade", indicador.getUnidade());
 		
 		atualizarIndicador.addSoapObject(ind);
@@ -157,7 +160,8 @@ public class IndicadorDAO {
 			indicador.setId(Integer.parseInt(resposta.getProperty("id").toString()));
 			indicador.setIdTipo(Integer.parseInt(resposta.getProperty("idTipo").toString()));
 			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
-			indicador.setMedida1(Double.parseDouble(resposta.getProperty("medida").toString()));
+			indicador.setMedida1(Double.parseDouble(resposta.getProperty("medida1").toString()));
+			indicador.setMedida2(Double.parseDouble(resposta.getProperty("medida2").toString()));
 			indicador.setUnidade(resposta.getProperty("unidade").toString());
 			indicador.setData(resposta.getProperty("data").toString());
 			indicador.setHora(resposta.getProperty("hora").toString());		
@@ -202,8 +206,8 @@ public class IndicadorDAO {
 					indicador.setId(Integer.parseInt(soapObject1.getProperty("id").toString()));
 					indicador.setIdTipo(Integer.parseInt(soapObject1.getProperty("idTipo").toString()));
 					indicador.setIdUsuario(Integer.parseInt(soapObject1.getProperty("idUsuario").toString()));
-					indicador.setMedida1(Double.parseDouble(soapObject1.getProperty("medida").toString()));
-					indicador.setUnidade(soapObject1.getProperty("unidade").toString());
+					indicador.setMedida1(Double.parseDouble(soapObject1.getProperty("medida1").toString()));
+					indicador.setMedida2(Double.parseDouble(soapObject1.getProperty("medida2").toString()));
 					indicador.setData(soapObject1.getProperty("data").toString());
 					indicador.setHora(soapObject1.getProperty("hora").toString());
 					
@@ -222,7 +226,8 @@ public class IndicadorDAO {
 					indicador.setId(Integer.parseInt(soapObject2.getProperty("id").toString()));
 					indicador.setIdTipo(Integer.parseInt(soapObject2.getProperty("idTipo").toString()));
 					indicador.setIdUsuario(Integer.parseInt(soapObject2.getProperty("idUsuario").toString()));
-					indicador.setMedida1(Double.parseDouble(soapObject2.getProperty("medida").toString()));
+					indicador.setMedida1(Double.parseDouble(soapObject2.getProperty("medida1").toString()));
+					indicador.setMedida2(Double.parseDouble(soapObject2.getProperty("medida2").toString()));
 					indicador.setUnidade(soapObject2.getProperty("unidade").toString());
 					indicador.setData(soapObject2.getProperty("data").toString());
 					indicador.setHora(soapObject2.getProperty("hora").toString());
@@ -263,7 +268,8 @@ public class IndicadorDAO {
 			indicador.setId(Integer.parseInt(resposta.getProperty("id").toString()));
 			indicador.setIdTipo(Integer.parseInt(resposta.getProperty("idTipo").toString()));
 			indicador.setIdUsuario(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
-			indicador.setMedida1(Double.parseDouble(resposta.getProperty("medida").toString()));
+			indicador.setMedida1(Double.parseDouble(resposta.getProperty("medida1").toString()));
+			indicador.setMedida2(Double.parseDouble(resposta.getProperty("medida2").toString()));
 			indicador.setUnidade(resposta.getProperty("unidade").toString());
 			indicador.setData(resposta.getProperty("data").toString());
 			indicador.setHora(resposta.getProperty("hora").toString());		
@@ -311,7 +317,8 @@ public class IndicadorDAO {
 					indicador.setId(Integer.parseInt(soapObject1.getProperty("id").toString()));
 					indicador.setIdTipo(Integer.parseInt(soapObject1.getProperty("idTipo").toString()));
 					indicador.setIdUsuario(Integer.parseInt(soapObject1.getProperty("idUsuario").toString()));
-					indicador.setMedida1(Double.parseDouble(soapObject1.getProperty("medida").toString()));
+					indicador.setMedida1(Double.parseDouble(soapObject1.getProperty("medida1").toString()));
+					indicador.setMedida2(Double.parseDouble(soapObject1.getProperty("medida2").toString()));					indicador.setUnidade(soapObject1.getProperty("unidade").toString());
 					indicador.setUnidade(soapObject1.getProperty("unidade").toString());
 					indicador.setData(soapObject1.getProperty("data").toString());
 					indicador.setHora(soapObject1.getProperty("hora").toString());
@@ -331,7 +338,8 @@ public class IndicadorDAO {
 					indicador.setId(Integer.parseInt(soapObject2.getProperty("id").toString()));
 					indicador.setIdTipo(Integer.parseInt(soapObject2.getProperty("idTipo").toString()));
 					indicador.setIdUsuario(Integer.parseInt(soapObject2.getProperty("idUsuario").toString()));
-					indicador.setMedida1(Double.parseDouble(soapObject2.getProperty("medida").toString()));
+					indicador.setMedida1(Double.parseDouble(soapObject2.getProperty("medida1").toString()));
+					indicador.setMedida2(Double.parseDouble(soapObject2.getProperty("medida2").toString()));
 					indicador.setUnidade(soapObject2.getProperty("unidade").toString());
 					indicador.setData(soapObject2.getProperty("data").toString());
 					indicador.setHora(soapObject2.getProperty("hora").toString());
@@ -347,11 +355,11 @@ public class IndicadorDAO {
 		return indicadores;
 	}
 	
-	public Double buscarMediaPeriodo (Integer idTipo, Integer idUsuario, String periodo, String dataAtual, Integer difData) {
+	public Double buscarMedia1Periodo (Integer idTipo, Integer idUsuario, String periodo, String dataAtual, Integer difData) {
 		
 		Double media = null;
 		
-		SoapObject buscarMediaPeriodo = new SoapObject (NAMESPACE, BUSCAR_MEDIA);
+		SoapObject buscarMediaPeriodo = new SoapObject (NAMESPACE, BUSCAR_MEDIA_1);
 		buscarMediaPeriodo.addProperty("idTipo", idTipo);
 		buscarMediaPeriodo.addProperty("idUsuario", idUsuario);
 		buscarMediaPeriodo.addProperty("periodo", periodo);
@@ -366,7 +374,41 @@ public class IndicadorDAO {
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
-			http.call("urn:" + BUSCAR_MEDIA, envelope);
+			http.call("urn:" + BUSCAR_MEDIA_1, envelope);
+			
+			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
+			
+			media = Double.parseDouble(resposta.toString());
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		return media;
+	}
+	
+	public Double buscarMedia2Periodo (Integer idTipo, Integer idUsuario, String periodo, String dataAtual, Integer difData) {
+		
+		Double media = null;
+		
+		SoapObject buscarMedia2Periodo = new SoapObject (NAMESPACE, BUSCAR_MEDIA_2);
+		buscarMedia2Periodo.addProperty("idTipo", idTipo);
+		buscarMedia2Periodo.addProperty("idUsuario", idUsuario);
+		buscarMedia2Periodo.addProperty("periodo", periodo);
+		buscarMedia2Periodo.addProperty("dataAtual", dataAtual);
+		buscarMedia2Periodo.addProperty("difData", difData);
+		
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		
+		envelope.setOutputSoapObject(buscarMedia2Periodo);
+		envelope.implicitTypes = true;
+		
+		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
+		
+		try {
+			http.call("urn:" + BUSCAR_MEDIA_2, envelope);
 			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			

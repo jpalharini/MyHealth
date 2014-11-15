@@ -25,17 +25,6 @@ public class Indicador {
 		this.hora = hora;
 	}
 	
-	public Indicador(Integer id, Integer idTipo, Integer idUsuario, Double medida1,
-			String unidade, String data, String hora) {
-		this.id = id;
-		this.idTipo = idTipo;
-		this.idUsuario = idUsuario;
-		this.medida1 = medida1;
-		this.unidade = unidade;
-		this.data = data;
-		this.hora = hora;
-	}
-	
 	public Indicador(Integer id, Integer idTipo, Double medida1, Double medida2,
 			String unidade) {
 		this.id = id;
@@ -45,14 +34,6 @@ public class Indicador {
 		this.unidade = unidade;
 	}
 	
-	public Indicador(Integer id, Integer idTipo, Double medida1,
-			String unidade) {
-		this.id = id;
-		this.idTipo = idTipo;
-		this.medida1 = medida1;
-		this.unidade = unidade;
-	}
-
 	public Integer getId() {
 		return id;
 	}
