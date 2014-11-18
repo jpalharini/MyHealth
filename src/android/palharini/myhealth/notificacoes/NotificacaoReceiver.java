@@ -3,19 +3,16 @@ package android.palharini.myhealth.notificacoes;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
 import android.palharini.myhealth.R;
 import android.palharini.myhealth.TelaCadastroIndicador;
 
-public class ServicoNotificacao extends Service {
-
-	public static int ID_NOTIFICACAO;
-	
-	private Context context;
-	
+public class NotificacaoReceiver extends BroadcastReceiver {
+ 
+	public int ID_NOTIFICACAO;
+		
 	private Notification.Builder builder;
 	private Intent notificacaoIntent;
 
@@ -23,23 +20,15 @@ public class ServicoNotificacao extends Service {
 	private NotificationManager notificationManager;
 	private PendingIntent pendingNotificacaoIntent;
 	
-	@Override
-	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		// TODO Auto-generated method stub
+    public void onReceive(Context context, Intent intent) {
+ 
+    	ID_NOTIFICACAO = intent.getIntExtra("ID_NOTIFICACAO", 0);
+    			
+		ttNotificacao = intent.getStringExtra("ttNotificacao");
+		txNotificacao = intent.getStringExtra("txNotificacao");
 		
-		ID_NOTIFICACAO = (int) intent.getExtras().get("ID_NOTIFICACAO");
-		ttNotificacao = (String) intent.getExtras().get("ttNotificacao");
-		txNotificacao = (String) intent.getExtras().get("txNotificacao");
-		
-		context = this.getApplicationContext();
 		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-	    notificacaoIntent = new Intent(this, TelaCadastroIndicador.class);
+	    notificacaoIntent = new Intent(context, TelaCadastroIndicador.class);
 		pendingNotificacaoIntent = PendingIntent.getActivity(context, 0, notificacaoIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 		
 		builder = new Notification.Builder(context);
@@ -48,10 +37,7 @@ public class ServicoNotificacao extends Service {
         builder.setSmallIcon(R.drawable.ic_launcher);
     	builder.setContentIntent(pendingNotificacaoIntent);
 
-		notificationManager = (NotificationManager) getSystemService (NOTIFICATION_SERVICE);
-		notificationManager.notify(ID_NOTIFICACAO, builder.build());
-		
-		return super.onStartCommand(intent, flags, startId);
-	}
-
+    	notificationManager.notify(ID_NOTIFICACAO, builder.build());
+        
+    }
 }

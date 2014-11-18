@@ -1,6 +1,6 @@
 package android.palharini.myhealth;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
@@ -12,9 +12,8 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.dao.PreferenciasDAO;
 import android.palharini.myhealth.datas.FragmentoTimePicker;
-import android.palharini.myhealth.datas.Timestamp;
 import android.palharini.myhealth.entidades.Preferencias;
-import android.palharini.myhealth.notificacoes.ServicoNotificacao;
+import android.palharini.myhealth.notificacoes.NotificacaoReceiver;
 import android.palharini.myhealth.sessao.CaixaDialogo;
 import android.palharini.myhealth.sessao.GerenciamentoSessao;
 import android.view.View;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 public class TelaEdicaoPreferencias extends Activity {
 
 	private CaixaDialogo caixa;
-	private Timestamp ts;
 	private GerenciamentoSessao sessao;
 	
 	private PreferenciasDAO prefsDAO;
@@ -36,10 +34,11 @@ public class TelaEdicaoPreferencias extends Activity {
 	private EditText etHoraLembretePeso, etHoraLembreteBPM;
 	private Button btSalvar, btLogout;
 	
-	private boolean lembretePeso, lembreteBPM;
+	private Calendar calHoraLembretePeso, calHoraLembreteBPM;
+	private Boolean lembretePeso, lembreteBPM;
 	private Boolean blPrefs;
-	private String horaLembretePesoString, horaLembreteBPMString;
-	private long horaLembretePesoMillis, horaLembreteBPMMillis;
+	private String stHoraLembretePeso, stHoraLembreteBPM;
+	private String[] arrHoraLembretePeso, arrHoraLembreteBPM;
 	private PendingIntent pendingNotificacaoPesoIntent = null, pendingNotificacaoBPMIntent = null;
 	
 	@Override
@@ -63,8 +62,7 @@ public class TelaEdicaoPreferencias extends Activity {
 		
         caixa = new CaixaDialogo();
 		
-		ts = new Timestamp();
-		sessao = new GerenciamentoSessao(getApplicationContext());
+        sessao = new GerenciamentoSessao(getApplicationContext());
 		
 		prefsDAO = new PreferenciasDAO();
 		prefs = prefsDAO.buscarPreferencias(sessao.getIdUsuario());
@@ -108,14 +106,6 @@ public class TelaEdicaoPreferencias extends Activity {
 			
 		});
 		
-		if (horaLembretePesoMillis != 0) {
-			horaLembretePesoMillis = ts.getHorarioMillis(etHoraLembretePeso.getText().toString());
-		}
-		
-		if (horaLembreteBPMMillis != 0) {
-			horaLembreteBPMMillis = ts.getHorarioMillis(etHoraLembreteBPM.getText().toString());
-		}
-		
 		btSalvar.setOnClickListener(new Button.OnClickListener () {
 
 			@Override
@@ -124,29 +114,53 @@ public class TelaEdicaoPreferencias extends Activity {
 				lembretePeso = chLembretePeso.isChecked();
 				lembreteBPM = chLembreteBPM.isChecked();
 				
-				horaLembretePesoString = etHoraLembretePeso.getText().toString();
-				horaLembreteBPMString = etHoraLembreteBPM.getText().toString();
+				stHoraLembretePeso = etHoraLembretePeso.getText().toString();
+				stHoraLembreteBPM = etHoraLembreteBPM.getText().toString();
+				
+				if (lembretePeso) {
+					stHoraLembretePeso = etHoraLembretePeso.getText().toString();
+					arrHoraLembretePeso = stHoraLembretePeso.split(":");
+					calHoraLembretePeso = Calendar.getInstance();
+					calHoraLembretePeso.setTimeInMillis(System.currentTimeMillis());
+					calHoraLembretePeso.set(Calendar.HOUR_OF_DAY, Integer.parseInt(arrHoraLembretePeso[0]));
+					calHoraLembretePeso.set(Calendar.MINUTE, Integer.parseInt(arrHoraLembretePeso[1]));
+				}
+				else {
+					stHoraLembretePeso = "00:00";
+				}
+				
+				if (lembreteBPM) {
+					stHoraLembreteBPM = etHoraLembreteBPM.getText().toString();
+					arrHoraLembreteBPM = stHoraLembreteBPM.split(":");
+					calHoraLembreteBPM = Calendar.getInstance();
+					calHoraLembreteBPM.setTimeInMillis(System.currentTimeMillis());
+					calHoraLembreteBPM.set(Calendar.HOUR_OF_DAY, Integer.parseInt(arrHoraLembreteBPM[0]));
+					calHoraLembreteBPM.set(Calendar.MINUTE, Integer.parseInt(arrHoraLembreteBPM[1]));
+				}
+				else {
+					stHoraLembreteBPM = "00:00";
+				}
 				
 				Preferencias prefsAtual = new Preferencias(
 						prefs.getId(),
 						sessao.getIdUsuario(),
 						lembretePeso,
-						horaLembretePesoString,
+						stHoraLembretePeso,
 						lembreteBPM,
-						horaLembreteBPMString
+						stHoraLembreteBPM
 						);
 				
 				blPrefs = prefsDAO.atualizarPreferencias(prefsAtual);
 				
 				if (chLembretePeso.isChecked() != prefs.isLembretePeso()) {
 					if (lembretePeso) {
-						pendingNotificacaoPesoIntent = marcarNotificacaoPeso(horaLembretePesoMillis);
+						pendingNotificacaoPesoIntent = marcarNotificacaoPeso(calHoraLembretePeso.getTimeInMillis());
 					}
 					else {
 						cancelarNotificacao(pendingNotificacaoPesoIntent);
 					}
 					if (lembreteBPM) {
-						pendingNotificacaoBPMIntent = marcarNotificacaoBPM(horaLembreteBPMMillis);
+						pendingNotificacaoBPMIntent = marcarNotificacaoBPM(calHoraLembreteBPM.getTimeInMillis());
 					}
 					else {
 						cancelarNotificacao(pendingNotificacaoBPMIntent);
@@ -183,26 +197,26 @@ public class TelaEdicaoPreferencias extends Activity {
 		
 	}
 	
-	private PendingIntent marcarNotificacaoPeso (long horaLembrete) {
+	public PendingIntent marcarNotificacaoPeso (long horaLembrete) {
 		 
-        Intent notificacaoIntent = new Intent(this, ServicoNotificacao.class);
+        Intent notificacaoIntent = new Intent(this, NotificacaoReceiver.class);
         notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
         notificacaoIntent.putExtra("ttNotificacao", getString(R.string.ttNotificacaoPeso));
         notificacaoIntent.putExtra("txNotificacao", getString(R.string.txNotificacaoPeso));
         PendingIntent pendingNotificacaoPesoIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, new Date().getTime(), 5000, pendingNotificacaoPesoIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoPesoIntent);
         
         return pendingNotificacaoPesoIntent;
 
 	}
     
 
-	private PendingIntent marcarNotificacaoBPM (long horaLembrete) {
+	public PendingIntent marcarNotificacaoBPM (long horaLembrete) {
 		 
-        Intent notificacaoIntent = new Intent(this, ServicoNotificacao.class);
-        notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
+        Intent notificacaoIntent = new Intent(this, NotificacaoReceiver.class);
+        notificacaoIntent.putExtra("ID_NOTIFICACAO", 2);
         notificacaoIntent.putExtra("ttNotificacao", getString(R.string.ttNotificacaoBPM));
         notificacaoIntent.putExtra("txNotificacao", getString(R.string.txNotificacaoBPM));
         PendingIntent pendingNotificacaoBPMIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -214,7 +228,7 @@ public class TelaEdicaoPreferencias extends Activity {
         
 	} 
 	
-    private void cancelarNotificacao (PendingIntent pendingNotificacaoIntent) {
+    public void cancelarNotificacao (PendingIntent pendingNotificacaoIntent) {
     	AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
     	alarmManager.cancel(pendingNotificacaoIntent);
     }

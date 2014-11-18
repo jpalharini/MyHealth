@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class Timestamp {
 	
@@ -15,10 +14,7 @@ public class Timestamp {
 	
 	private String formatoDataAndroid = "dd/MM/yyyy";
 	private String formatoHorarioAndroid = "HH:mm";
-	
-	private String formatoHoraAndroid = "HH";
-	private String formatoMinutoAndroid = "mm";
-	
+		
 	private SimpleDateFormat sdfDataSQL = new SimpleDateFormat(formatoDataSQL);
 	private SimpleDateFormat sdfHoraSQL = new SimpleDateFormat(formatoHoraSQL);
 	
@@ -27,12 +23,7 @@ public class Timestamp {
 	private SimpleDateFormat sdfDataAndroid = new SimpleDateFormat(formatoDataAndroid);
 	private SimpleDateFormat sdfHorarioAndroid = new SimpleDateFormat(formatoHorarioAndroid);
 	
-	private SimpleDateFormat sdfHoraAndroid = new SimpleDateFormat(formatoHoraAndroid);
-	private SimpleDateFormat sdfMinutoAndroid = new SimpleDateFormat(formatoMinutoAndroid);
-	
 	private Date dataDate = null, horaDate = null;
-	private String horaString, minutoString;
-	private Long horaMillis, minutoMillis, horarioMillis;
 	
 	private Calendar c = Calendar.getInstance();
 	private int dia = c.get(Calendar.DAY_OF_MONTH);
@@ -115,31 +106,4 @@ public class Timestamp {
 		return sdfDataSQLBusca.format(dataDate);
 	}
 	
-	public long getHorarioMillis (String horario) {
-		
-		try {
-	    	horaDate = sdfHoraAndroid.parse(horario);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		horaString = sdfHoraAndroid.format(horaDate);
-		
-		try {
-	    	horaDate = sdfMinutoAndroid.parse(horario);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		minutoString = sdfMinutoAndroid.format(horaDate);
-		
-		horaMillis = TimeUnit.HOURS.toMillis(Integer.parseInt(horaString));
-		minutoMillis = TimeUnit.MINUTES.toMillis(Integer.parseInt(minutoString));
-		
-		horarioMillis = horaMillis + minutoMillis;
-		
-		return horarioMillis;
-	}
 }
