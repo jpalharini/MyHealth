@@ -30,24 +30,43 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
 public class AbaMes extends Fragment {
 	
-	private Integer	difData = 4;
-	private String periodo = "WEEK";
+	private static Integer difData = 4;
+	private static String periodo = "WEEK";
+	
+	private GerenciamentoSessao sessao;
+	private Timestamp ts;
+	
+	private IndicadorDAO indDAO;
+	
+	private ListView lvIndicadores;
+	private Integer intTipoIndicador;
+	private int x, y=0;
+	
+	private String stDataBusca;
+	private Double dbMedia, vtMedias1[], vtMedias2[];
+	private Integer intIdUsuario, vtDatas[];
+	private ArrayList<Indicador> arrIndicadores;
+	private ArrayAdapter<Indicador> adIndicadores;
+	
+	private XYPlot grafico;
+	private XYSeries grafSerie1, grafSerie2;
+	private LineAndPointFormatter grafFormat;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.fragment_aba_mes, container, false);
+		View view = inflater.inflate(R.layout.fragment_aba_semana, container, false);
 		
-		GerenciamentoSessao sessao = new GerenciamentoSessao(getActivity());
-		Timestamp ts = new Timestamp();
-		IndicadorDAO dao = new IndicadorDAO();
+		sessao = new GerenciamentoSessao(getActivity());
+		ts = new Timestamp();
+		indDAO = new IndicadorDAO();
 		
-		final ListView listaInd = (ListView) view.findViewById(R.id.listViewInd);
+		lvIndicadores = (ListView) view.findViewById(R.id.listViewInd);
 				
-		XYPlot grafico = (XYPlot) view.findViewById(R.id.xyPlot);
+		grafico = (XYPlot) view.findViewById(R.id.xyPlot);
+		
 		grafico.getBackgroundPaint().setColor(Color.WHITE);
 		grafico.getGraphWidget().getBackgroundPaint().setColor(Color.WHITE);
 		grafico.getGraphWidget().getGridBackgroundPaint().setColor(Color.WHITE);
@@ -66,59 +85,81 @@ public class AbaMes extends Fragment {
 		grafico.getGraphWidget().setMarginBottom(15);
 		
 		Intent intent = getActivity().getIntent();
-		final Integer tipoSelecionado = intent.getIntExtra("tipoSelecionado", 0);
+		intTipoIndicador = intent.getIntExtra("tipoSelecionado", 0);
 		
-		Integer idUsuario = sessao.getIdUsuario();
-		String dataBusca = ts.getDataAtualBusca();
+		intIdUsuario = sessao.getIdUsuario();
+		stDataBusca = ts.getDataAtualBusca();
 		
-		Double[] medias = new Double[difData+1];
-		Integer[] datas = new Integer[difData+1];
-		int y = 0;
-		for (int x = difData; x>=0; x--) {
-			Double media = dao.buscarMedia1Periodo(
-					tipoSelecionado, idUsuario, periodo, dataBusca, x);
-			if (media > 0) {
-				medias[x] = media;
-				datas[x] = x;
+		vtMedias1 = new Double[difData+1];
+		vtMedias2 = new Double[difData+1];
+		
+		vtDatas = new Integer[difData+1];
+		
+		for (x = difData; x>=0; x--) {
+			dbMedia = indDAO.buscarMedia1Periodo(
+					intTipoIndicador, intIdUsuario, periodo, stDataBusca, x);
+			if (dbMedia > 0) {
+				vtMedias1[x] = dbMedia;
+				vtDatas[x] = x;
 				y = x;
 			}
 			else {
-				medias[x] = medias[y];
-				datas[x] = x;
+				vtMedias1[x] = vtMedias1[y];
+				vtDatas[x] = x;
 				
 			}
 		}
 		
-		XYSeries serieMedias = new SimpleXYSeries (Arrays.asList(datas), Arrays.asList(medias), "Médias");
+		grafSerie1 = new SimpleXYSeries (Arrays.asList(vtDatas), Arrays.asList(vtMedias1), "Médias");
 		
-		LineAndPointFormatter formatoMedias = new LineAndPointFormatter(
+		grafFormat = new LineAndPointFormatter(
 				Color.RED, 
 				Color.RED, 
 				Color.TRANSPARENT, 
 				null);
-		formatoMedias.setPointLabelFormatter(new PointLabelFormatter());
-		formatoMedias.configure(getActivity(), R.xml.formato_serie_medias);
+		grafFormat.setPointLabelFormatter(new PointLabelFormatter());
+		grafFormat.configure(getActivity(), R.xml.formato_serie_medias);
 		
-		grafico.addSeries(serieMedias, formatoMedias);
+		grafico.addSeries(grafSerie1, grafFormat);
 		
-		final ArrayList<Indicador> indicadores = (ArrayList<Indicador>) dao.buscarIndicadoresPeriodoTipo(
-				idUsuario, tipoSelecionado, periodo, dataBusca, difData);
+		if (intTipoIndicador == 3) {
+			for (int x = difData; x>=0; x--) {
+				dbMedia = indDAO.buscarMedia2Periodo(
+						intTipoIndicador, intIdUsuario, periodo, stDataBusca, x);
+				if (dbMedia > 0) {
+					vtMedias2[x] = dbMedia;
+					vtDatas[x] = x;
+					y = x;
+				}
+				else {
+					vtMedias2[x] = vtMedias2[y];
+					vtDatas[x] = x;
+					
+				}
+			}
+			grafSerie2 = new SimpleXYSeries (Arrays.asList(vtDatas), Arrays.asList(vtMedias2), "Médias");
+			grafico.addSeries(grafSerie2, grafFormat);			
+		}
 		
-		ArrayAdapter<Indicador> adapterInd = new ArrayAdapter<Indicador>(
-				getActivity(), android.R.layout.simple_list_item_1, indicadores);
+		arrIndicadores = (ArrayList<Indicador>) indDAO.buscarIndicadoresPeriodoTipo(
+				intIdUsuario, intTipoIndicador, periodo, stDataBusca, difData);
 		
-		listaInd.setAdapter(adapterInd);
+		adIndicadores = new ArrayAdapter<Indicador>(
+				getActivity(), android.R.layout.simple_list_item_1, arrIndicadores);
 		
-		listaInd.setOnItemClickListener(new OnItemClickListener() {
+		lvIndicadores.setAdapter(adIndicadores);
+		
+		lvIndicadores.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
 				// TODO Auto-generated method stub
 				Indicador indicSelecionado = new Indicador();
-				indicSelecionado = (Indicador) listaInd.getItemAtPosition(position);
+				indicSelecionado = (Indicador) lvIndicadores.getItemAtPosition(position);
 				Intent irTelaEdicaoIndicador = new Intent(getActivity(), TelaEdicaoIndicador.class);
 				irTelaEdicaoIndicador.putExtra("idIndicador", indicSelecionado.getId());
 				startActivity(irTelaEdicaoIndicador);
+				getActivity().finish();
 			}
 		});
 		return view;

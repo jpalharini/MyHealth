@@ -20,6 +20,14 @@ import android.widget.EditText;
  
 public class TelaLogin extends Activity {
  
+	private GerenciamentoSessao sessao;
+	private CaixaDialogo caixa;
+	
+	private EditText etEmail, etSenha;
+	private Button btLogin, btCadastre;
+	
+	private String stEmail, stSenha, stCriptSenha;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,25 +38,28 @@ public class TelaLogin extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 
-    	final EditText email = (EditText) findViewById(R.id.etEmail);
-    	final EditText senha = (EditText) findViewById(R.id.etSenha);
-    	final Button btLogin = (Button) findViewById(R.id.btLogin);
-    	final Button btCadastre = (Button) findViewById(R.id.btCadastre);
-        final CaixaDialogo caixa = new CaixaDialogo();
-        final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
+        caixa = new CaixaDialogo();
+        sessao = new GerenciamentoSessao(getApplicationContext());
+
+    	etEmail = (EditText) findViewById(R.id.etEmail);
+    	etSenha = (EditText) findViewById(R.id.etSenha);
+    	btLogin = (Button) findViewById(R.id.btLogin);
+    	btCadastre = (Button) findViewById(R.id.btCadastre);
+        caixa = new CaixaDialogo();
+        sessao = new GerenciamentoSessao(getApplicationContext());
 
         btLogin.setOnClickListener(new Button.OnClickListener() {      
         @Override
         public void onClick(View arg0) {
-            String emailString = email.getText().toString();
-            String senhaString = senha.getText().toString();
-            String criptSenha = null;
+            stEmail = etEmail.getText().toString();
+            stSenha = etSenha.getText().toString();
+            stCriptSenha = null;
             
             try {
 				MessageDigest md = MessageDigest.getInstance("MD5");
-				md.update(senhaString.getBytes("UTF-8"));
+				md.update(stSenha.getBytes("UTF-8"));
 				BigInteger hash = new BigInteger(1, md.digest());
-				criptSenha = hash.toString(16);
+				stCriptSenha = hash.toString(16);
 			} catch (NoSuchAlgorithmException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -57,12 +68,12 @@ public class TelaLogin extends Activity {
 				e.printStackTrace();
 			}
               
-            if(emailString.trim().length() > 0 && criptSenha.trim().length() > 0){
+            if(stEmail.trim().length() > 0 && stCriptSenha.trim().length() > 0){
                 UsuarioDAO dao = new UsuarioDAO();
-                Usuario dados = dao.buscarUsuarioEmail(emailString);
+                Usuario dados = dao.buscarUsuarioEmail(stEmail);
                 
                 if (dados != null) {                
-	                if(emailString.equals(dados.getEmail()) && criptSenha.equals(dados.getSenha())){
+	                if(stEmail.equals(dados.getEmail()) && stCriptSenha.equals(dados.getSenha())){
 	                	sessao.criarSessao(dados.getId(), dados.getNome(), dados.getEmail());
 	
 	                    Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);

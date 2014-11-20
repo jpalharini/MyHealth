@@ -13,6 +13,8 @@ public class TelaIndicadores extends FragmentActivity implements ActionBar.TabLi
 	private ViewPager viewPager;
 	private ActionBar actionBar;
 	
+	private AdaptadorAbasPeriodos adAbas;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,9 +22,9 @@ public class TelaIndicadores extends FragmentActivity implements ActionBar.TabLi
 
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
-		final AdaptadorAbasPeriodos adapter = new AdaptadorAbasPeriodos(getSupportFragmentManager());
+		adAbas = new AdaptadorAbasPeriodos(getSupportFragmentManager());
 		
-		viewPager.setAdapter(adapter);
+		viewPager.setAdapter(adAbas);
 		actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	 

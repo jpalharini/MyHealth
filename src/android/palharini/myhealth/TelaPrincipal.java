@@ -22,11 +22,20 @@ public class TelaPrincipal extends Activity {
 
 	private GerenciamentoSessao sessao;
 	
+	private UsuarioDAO usrDAO;
+	private Usuario usuario;
+	private IndicadorDAO indDAO;
+	private Indicador indAltura, indPeso, indicador;
+	
 	private TextView txOla, txIMC, txStatusIMC, txAlvoBPM;
 	private Button btCadIndicador, btAcompanhamento, btDados, btConfiguracoes;
 	
-	private Integer bpm, bpmDescanso, bpmDescansoFinal, bpmDescansoMedia;
-	private Integer bpmMaximo, bpmReserva, bpmAlvoLimMin, bpmAlvoLimMax, bpmAlvo;
+	private ArrayList<Indicador> arrIndicadores;
+	private List<String> lsFaixasIMC;
+	private String stNome, stPrimeiroNome, vtFaixasIMC[];
+	private Double dbAltura, dbPeso, dbIMC;
+	private Integer intIdade, bpm, bpmDescanso, bpmDescansoFinal, bpmDescansoMedia, bpmMaximo,
+	bpmReserva, bpmAlvoLimMin, bpmAlvoLimMax, bpmAlvo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,65 +59,62 @@ public class TelaPrincipal extends Activity {
 		
 		sessao = new GerenciamentoSessao(getApplicationContext());
 		
-		UsuarioDAO usrdao = new UsuarioDAO();
-		Usuario usuario = usrdao.buscarUsuario(sessao.getIdUsuario());
+		usrDAO = new UsuarioDAO();
+		usuario = usrDAO.buscarUsuario(sessao.getIdUsuario());
 		
-		IndicadorDAO inddao = new IndicadorDAO();
-		Indicador altura = inddao.buscarIndicadorTipo(sessao.getIdUsuario(), 0, 1);
-		Indicador peso = inddao.buscarIndicadorTipo(sessao.getIdUsuario(), 1, 1);
+		indDAO = new IndicadorDAO();
+		indAltura = indDAO.buscarIndicadorTipo(sessao.getIdUsuario(), 0, 1);
+		indPeso = indDAO.buscarIndicadorTipo(sessao.getIdUsuario(), 1, 1);
 		
-		if (usuario != null && altura != null && peso != null) {
-			String nomeUsuario = usuario.getNome();
-			Double pesoUsuario = peso.getMedida1();
-			Double alturaUsuario = altura.getMedida1();
-			Integer idadeUsuario = usrdao.buscarIdadeUsuario(sessao.getIdUsuario());
+		if (usuario != null && indAltura != null && indPeso != null) {
+			stNome = usuario.getNome();
+			dbPeso = indPeso.getMedida1();
+			dbAltura = indAltura.getMedida1();
+			intIdade = usrDAO.buscarIdadeUsuario(sessao.getIdUsuario());
 			
-			alturaUsuario = alturaUsuario/100;
+			dbAltura = dbAltura/100;
 			
-			String primeiroNomeUsuario;
-			if (nomeUsuario.contains(" ")) {
-				primeiroNomeUsuario = nomeUsuario.substring(0, nomeUsuario.indexOf(" "));
+			if (stNome.contains(" ")) {
+				stPrimeiroNome = stNome.substring(0, stNome.indexOf(" "));
 			}
 			else {
-				primeiroNomeUsuario = nomeUsuario;
+				stPrimeiroNome = stNome;
 			}
-			txOla.setText(getString(R.string.tvOla) + " " + primeiroNomeUsuario);
+			txOla.setText(getString(R.string.tvOla) + " " + stPrimeiroNome);
 			
-			Double imcDouble = (pesoUsuario / (alturaUsuario * alturaUsuario));
+			dbIMC = (dbPeso / (dbAltura * dbAltura));
 			DecimalFormat decimal = new DecimalFormat("0.0");
-			txIMC.setText(decimal.format(imcDouble));
+			txIMC.setText(decimal.format(dbIMC));
 			
-			String[] listaFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
-			final List<String> faixas = Arrays.asList(listaFaixasIMC);
+			vtFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
+			lsFaixasIMC = Arrays.asList(vtFaixasIMC);
 			
-			if (imcDouble > 0 && imcDouble <= 18.5)
-				txStatusIMC.setText(faixas.get(0));
-			if (imcDouble >= 18.6 && imcDouble <= 24.9)
-				txStatusIMC.setText(faixas.get(1));
-			if (imcDouble >= 25 && imcDouble <= 29.9)
-				txStatusIMC.setText(faixas.get(2));
-			if (imcDouble >= 30 && imcDouble <= 34.9)
-				txStatusIMC.setText(faixas.get(3));
-			if (imcDouble >= 35 && imcDouble <= 39.9)
-				txStatusIMC.setText(faixas.get(4));
-			if (imcDouble >= 40)
-				txStatusIMC.setText(faixas.get(5));
+			if (dbIMC > 0 && dbIMC <= 18.5)
+				txStatusIMC.setText(lsFaixasIMC.get(0));
+			if (dbIMC >= 18.6 && dbIMC <= 24.9)
+				txStatusIMC.setText(lsFaixasIMC.get(1));
+			if (dbIMC >= 25 && dbIMC <= 29.9)
+				txStatusIMC.setText(lsFaixasIMC.get(2));
+			if (dbIMC >= 30 && dbIMC <= 34.9)
+				txStatusIMC.setText(lsFaixasIMC.get(3));
+			if (dbIMC >= 35 && dbIMC <= 39.9)
+				txStatusIMC.setText(lsFaixasIMC.get(4));
+			if (dbIMC >= 40)
+				txStatusIMC.setText(lsFaixasIMC.get(5));
 			
-			IndicadorDAO dao = new IndicadorDAO();
-			Indicador indicador = new Indicador();
-			ArrayList<Indicador> indicadores = dao.buscarIndicadoresTipo(sessao.getIdUsuario(), 2);
+			arrIndicadores = indDAO.buscarIndicadoresTipo(sessao.getIdUsuario(), 2);
 			
-			if (indicadores.size() >= 3) {
+			if (arrIndicadores.size() >= 3) {
 				int x;
 								
 				for (x=1; x==3; x++) {
-					indicador = indicadores.get(x);
+					indicador = arrIndicadores.get(x);
 					bpmDescanso = indicador.getMedida1().intValue();
 					bpmDescansoFinal = bpmDescanso+bpm;					
 				}
 				
 				bpmDescansoMedia = bpmDescansoFinal / 3;
-				bpmMaximo = 220 - idadeUsuario;
+				bpmMaximo = 220 - intIdade;
 				bpmReserva = bpmMaximo - bpmDescansoMedia;
 				bpmAlvoLimMin = (bpmReserva * (60 / 100)) + bpmDescansoMedia;
 				bpmAlvoLimMax = (bpmReserva * (80 / 100)) + bpmDescansoMedia;

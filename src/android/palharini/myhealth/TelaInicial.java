@@ -8,14 +8,18 @@ import android.palharini.myhealth.sessao.GerenciamentoSessao;
 
 public class TelaInicial extends Activity {
 	
+	private int SPLASH_TIME_OUT;
+	
+	private GerenciamentoSessao sessao;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_inicial);
 		
-		final int SPLASH_TIME_OUT = 1500;
+		SPLASH_TIME_OUT = 1500;
 		
-		final GerenciamentoSessao sessao = new GerenciamentoSessao(getApplicationContext());
+		sessao = new GerenciamentoSessao(getApplicationContext());
 	 
 		new Handler().postDelayed(new Runnable() {
  
