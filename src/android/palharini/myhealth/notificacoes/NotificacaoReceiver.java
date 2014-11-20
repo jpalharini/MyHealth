@@ -11,7 +11,7 @@ import android.palharini.myhealth.TelaCadastroIndicador;
 
 public class NotificacaoReceiver extends BroadcastReceiver {
  
-	public int ID_NOTIFICACAO;
+	private int ID_NOTIFICACAO;
 		
 	private Notification.Builder builder;
 	private Intent notificacaoIntent;
@@ -29,6 +29,7 @@ public class NotificacaoReceiver extends BroadcastReceiver {
 		
 		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 	    notificacaoIntent = new Intent(context, TelaCadastroIndicador.class);
+	    notificacaoIntent.putExtra("tipoSelecionado", ID_NOTIFICACAO);
 		pendingNotificacaoIntent = PendingIntent.getActivity(context, 0, notificacaoIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 		
 		builder = new Notification.Builder(context);

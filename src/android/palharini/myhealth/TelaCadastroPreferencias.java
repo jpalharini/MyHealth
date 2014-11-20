@@ -36,6 +36,7 @@ public class TelaCadastroPreferencias extends Activity {
 	private String stHoraLembretePeso, stHoraLembreteBPM;
 	private Calendar calHoraLembretePeso, calHoraLembreteBPM;
 	private String[] arrHoraLembretePeso, arrHoraLembreteBPM;
+	private long mlHoraLembretePeso, mlHoraLembreteBPM;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +96,7 @@ public class TelaCadastroPreferencias extends Activity {
 					calHoraLembretePeso.setTimeInMillis(System.currentTimeMillis());
 					calHoraLembretePeso.set(Calendar.HOUR_OF_DAY, Integer.parseInt(arrHoraLembretePeso[0]));
 					calHoraLembretePeso.set(Calendar.MINUTE, Integer.parseInt(arrHoraLembretePeso[1]));
-					marcarNotificacaoPeso(calHoraLembretePeso.getTimeInMillis());
+					mlHoraLembretePeso = calHoraLembretePeso.getTimeInMillis();
 				}
 				else {
 					stHoraLembretePeso = "00:00";
@@ -108,7 +109,7 @@ public class TelaCadastroPreferencias extends Activity {
 					calHoraLembreteBPM.setTimeInMillis(System.currentTimeMillis());
 					calHoraLembreteBPM.set(Calendar.HOUR_OF_DAY, Integer.parseInt(arrHoraLembreteBPM[0]));
 					calHoraLembreteBPM.set(Calendar.MINUTE, Integer.parseInt(arrHoraLembreteBPM[1]));
-					marcarNotificacaoBPM(calHoraLembreteBPM.getTimeInMillis());
+					mlHoraLembreteBPM = calHoraLembreteBPM.getTimeInMillis();
 				}
 				else {
 					stHoraLembreteBPM = "00:00";
@@ -126,10 +127,10 @@ public class TelaCadastroPreferencias extends Activity {
 				if (prefs) {
 					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsOK), Toast.LENGTH_LONG).show();
 					if (blLembretePeso) {
-						marcarNotificacaoPeso(calHoraLembretePeso.getTimeInMillis());
+						marcarNotificacaoPeso(mlHoraLembretePeso);
 					}
 					if (blLembreteBPM) {
-						marcarNotificacaoBPM(calHoraLembreteBPM.getTimeInMillis());
+						marcarNotificacaoBPM(mlHoraLembreteBPM);
 					}
 					Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
 					startActivity(irTelaPrincipal);
@@ -144,27 +145,31 @@ public class TelaCadastroPreferencias extends Activity {
 	
 	public void marcarNotificacaoPeso (long horaLembrete) {
 		 
-        Intent notificacaoIntent = new Intent(this, NotificacaoReceiver.class);
-        notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
-        notificacaoIntent.putExtra("ttNotificacao", getString(R.string.ttNotificacaoPeso));
-        notificacaoIntent.putExtra("txNotificacao", getString(R.string.txNotificacaoPeso));
-        PendingIntent pendingNotificacaoPesoIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent notificacaoIntentPeso = new Intent(this, NotificacaoReceiver.class);
+        notificacaoIntentPeso.putExtra("ID_NOTIFICACAO", 1);
+        notificacaoIntentPeso.putExtra("ttNotificacao", getString(R.string.ttNotificacaoPeso));
+        notificacaoIntentPeso.putExtra("txNotificacao", getString(R.string.txNotificacaoPeso));
+        PendingIntent pendingNotificacaoPesoIntent = PendingIntent.getBroadcast(
+        		this, 1, notificacaoIntentPeso, PendingIntent.FLAG_UPDATE_CURRENT);
         
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoPesoIntent);
+        alarmManager.setRepeating (
+        		AlarmManager.RTC, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoPesoIntent);
         
 	}
     
 	public void marcarNotificacaoBPM (long horaLembrete) {
 		 
-        Intent notificacaoIntent = new Intent(this, NotificacaoReceiver.class);
-        notificacaoIntent.putExtra("ID_NOTIFICACAO", 2);
-        notificacaoIntent.putExtra("ttNotificacao", getString(R.string.ttNotificacaoBPM));
-        notificacaoIntent.putExtra("txNotificacao", getString(R.string.txNotificacaoBPM));
-        PendingIntent pendingNotificacaoBPMIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent notificacaoIntentBPM = new Intent(this, NotificacaoReceiver.class);
+        notificacaoIntentBPM.putExtra("ID_NOTIFICACAO", 2);
+        notificacaoIntentBPM.putExtra("ttNotificacao", getString(R.string.ttNotificacaoBPM));
+        notificacaoIntentBPM.putExtra("txNotificacao", getString(R.string.txNotificacaoBPM));
+        PendingIntent pendingNotificacaoBPMIntent = PendingIntent.getBroadcast(
+        		this, 2, notificacaoIntentBPM, PendingIntent.FLAG_UPDATE_CURRENT);
         
         AlarmManager alarmManager = (AlarmManager) getSystemService (Context.ALARM_SERVICE);
-        alarmManager.setRepeating (AlarmManager.RTC_WAKEUP, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoBPMIntent);
+        alarmManager.setRepeating (
+        		AlarmManager.RTC, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoBPMIntent);
                 
 	}
 

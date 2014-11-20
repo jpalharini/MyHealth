@@ -7,10 +7,9 @@ import android.content.DialogInterface;
   
 public class CaixaDialogo {
 
-    @SuppressWarnings("deprecation")
 	public void showAlertDialog(Context context, String titulo, String mensagem,
             Boolean status) {
-        AlertDialog caixaDialogo = new AlertDialog.Builder(context).create();
+        AlertDialog.Builder caixaDialogo = new AlertDialog.Builder(context);
 
         caixaDialogo.setTitle(titulo);
         caixaDialogo.setMessage(mensagem);
@@ -18,12 +17,11 @@ public class CaixaDialogo {
         if(status != null)
         	caixaDialogo.setIcon((status) ? R.drawable.ok : R.drawable.fail);
 
-        caixaDialogo.setButton("OK", new DialogInterface.OnClickListener() {
+        caixaDialogo.setNeutralButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             }
         });
   
-        // Showing Alert Message
         caixaDialogo.show();
     }
 }

@@ -44,6 +44,8 @@ public class TelaCadastroIndicador extends Activity {
 	
 	private boolean cadastro;
 	
+	private Intent tipo;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,6 +55,8 @@ public class TelaCadastroIndicador extends Activity {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
+		
+		tipo = getIntent();
 		
 		ts = new Timestamp();
 		sessao = new GerenciamentoSessao(getApplicationContext());
@@ -77,6 +81,8 @@ public class TelaCadastroIndicador extends Activity {
 		tvUnidade2 = (TextView) findViewById(R.id.tvUnidade2);
 		
 		btSalvar = (Button) findViewById(R.id.btSalvar);
+		
+		spTipo.setSelection(tipo.getIntExtra("tipoSelecionado", 0));
 				
 		spTipo.setOnItemSelectedListener(new OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view, int posSpinner, long id) {

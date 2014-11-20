@@ -72,7 +72,7 @@
             android:label="@string/title_activity_tela_grafico" >
         </activity>
         <receiver 
-            android:name=".PublicacaoNotificacao">
+            android:name=".notificacoes.NotificacaoReceiver">
         </receiver>
     </application>
 
