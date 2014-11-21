@@ -112,6 +112,7 @@ public class TelaLogin extends Activity {
             public void onClick(View arg0) {
             	Intent irTelaCadastro = new Intent(getApplicationContext(), TelaCadastroUsuario.class);
                 startActivity(irTelaCadastro);
+                finish();
             }
         });
     }        

@@ -115,57 +115,6 @@
                 android:inputType="none"
                 android:textSize="20sp" />
             
-            <TextView
-		        android:id="@+id/tvAltura"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="20dp"
-		        android:text="@string/tvAltura"
-		        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/etAltura"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="@string/hintAltura"
-                android:inputType="numberDecimal"
-                android:textSize="20sp" />
-            
-            <TextView
-		        android:id="@+id/tvPeso"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="20dp"
-		        android:text="@string/tvPeso"
-		        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/etPeso"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="@string/hintPeso"
-                android:inputType="numberDecimal"
-                android:textSize="20sp" />
-            
-            <TextView
-		        android:id="@+id/tvCadAlvoBPM"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="20dp"
-		        android:text="@string/tvCadAlvoBPM"
-		        android:textAppearance="?android:attr/textAppearanceMedium" />
-            
-            <EditText
-                android:id="@+id/etAlvoBPM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="@string/hintCadAlvoBPM"
-                android:inputType="number"
-                android:textSize="22sp" />
-
             <Button
                 android:id="@+id/btSalvar"
                 android:layout_width="match_parent"

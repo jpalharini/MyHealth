@@ -6,7 +6,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.palharini.myhealth.dao.UsuarioDAO;
 import android.palharini.myhealth.datas.FormatoDataNascimento;
@@ -24,7 +23,7 @@ public class TelaEdicaoUsuario extends Activity {
 	private GerenciamentoSessao sessao;
 	private FormatoDataNascimento fdn;
 	
-	private EditText etEmail, etSenha, etConfSenha, etNome, etDataNasc, etAlvoBPM;
+	private EditText etEmail, etSenha, etConfSenha, etNome, etDataNasc;
 	private Button btSalvar;	
 	
 	private String stEmail, stNome, stSenha, stConfSenha, stCriptSenha, stDataNasc, stDataNascSQL;
@@ -50,7 +49,6 @@ public class TelaEdicaoUsuario extends Activity {
 		etConfSenha = (EditText) findViewById(R.id.etConfSenha);
 		etNome = (EditText) findViewById(R.id.etNome);
 		etDataNasc = (EditText) findViewById(R.id.etNasc);
-		etAlvoBPM = (EditText) findViewById(R.id.etAlvoBPM);
 		btSalvar = (Button) findViewById(R.id.btSalvar);
 		
 		etEmail.setText(usrUsuario.getEmail());
@@ -58,9 +56,7 @@ public class TelaEdicaoUsuario extends Activity {
 
 		stDataNasc = fdn.formatarDataAndroid(usrUsuario.getDataNascimento());
 		etDataNasc.setText(stDataNasc);
-		
-		etAlvoBPM.setText(String.valueOf(usrUsuario.getAlvoBPM()));
-				
+						
 		etDataNasc.setOnClickListener(new OnClickListener () {
 
 			@Override
@@ -74,62 +70,46 @@ public class TelaEdicaoUsuario extends Activity {
 		btSalvar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick (View v){
-				
-				if (
-						!(etEmail.getText().toString()).equals(usrUsuario.getEmail()) || 
-						!(etNome.getText().toString()).equals(usrUsuario.getNome()) || 
-						!(etDataNasc.getText().toString()).equals(stDataNasc) ||
-						!(etAlvoBPM.getText().toString()).equals(String.valueOf(usrUsuario.getAlvoBPM()))
-						) {
 			
-					stSenha = etSenha.getText().toString();
-					stConfSenha = etConfSenha.getText().toString();
-					stCriptSenha = null;
-					
-					if (stSenha.equals(stConfSenha)){
-						try {
-							MessageDigest md = MessageDigest.getInstance("MD5");
-							md.update(stSenha.getBytes("UTF-8"));
-							BigInteger hash = new BigInteger(1, md.digest());
-							stCriptSenha = hash.toString(16);
-						} catch (NoSuchAlgorithmException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (UnsupportedEncodingException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
-						fdn = new FormatoDataNascimento();
-						stDataNascSQL = fdn.formatarDataSQL(etDataNasc.getText().toString());
-
-						stEmail = etEmail.getText().toString();
-						stNome = etNome.getText().toString();
-						
-						blUsr = usrDAO.atualizarUsuario(new Usuario(
-								usrUsuario.getId(), 
-								stEmail,
-								stCriptSenha,
-								stNome, 
-								stDataNascSQL,
-								Integer.parseInt(etAlvoBPM.getText().toString())
-						));
-						if (blUsr) {
-							Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
-							Toast.makeText(getApplicationContext(), getString(R.string.toastUsrAtOK), Toast.LENGTH_LONG).show();
-		                    startActivity(voltarTelaPrincipal);
-		                    finish();
-						}
-						else {
-							Toast.makeText(getApplicationContext(), getString(R.string.toastUsrAtFalha), Toast.LENGTH_LONG).show();
-						}
+				stSenha = etSenha.getText().toString();
+				stConfSenha = etConfSenha.getText().toString();
+				stCriptSenha = null;
+				
+				if (stSenha.equals(stConfSenha)){
+					try {
+						MessageDigest md = MessageDigest.getInstance("MD5");
+						md.update(stSenha.getBytes("UTF-8"));
+						BigInteger hash = new BigInteger(1, md.digest());
+						stCriptSenha = hash.toString(16);
+					} catch (NoSuchAlgorithmException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedEncodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				}
-				else {
-					Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
-					Toast.makeText(getApplicationContext(), "Nao houve alteracao", Toast.LENGTH_LONG).show();
-                    startActivity(voltarTelaPrincipal);
-                    finish();
+					
+					fdn = new FormatoDataNascimento();
+					stDataNascSQL = fdn.formatarDataSQL(etDataNasc.getText().toString());
+
+					stEmail = etEmail.getText().toString();
+					stNome = etNome.getText().toString();
+					
+					blUsr = usrDAO.atualizarUsuario(new Usuario(
+							usrUsuario.getId(), 
+							stEmail,
+							stCriptSenha,
+							stNome, 
+							stDataNascSQL,
+							0
+					));
+					if (blUsr) {
+						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrAtOK), Toast.LENGTH_LONG).show();
+	                    finish();
+					}
+					else {
+						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrAtFalha), Toast.LENGTH_LONG).show();
+					}
 				}
 			}
 		});

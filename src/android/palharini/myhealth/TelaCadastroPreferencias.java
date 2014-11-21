@@ -134,6 +134,7 @@ public class TelaCadastroPreferencias extends Activity {
 					}
 					Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
 					startActivity(irTelaPrincipal);
+					finish();
 				}
 				else {
 					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsFalha), Toast.LENGTH_LONG).show();

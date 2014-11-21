@@ -34,11 +34,11 @@ public class TelaPrincipal extends Activity {
 	private List<String> lsFaixasIMC;
 	private String stNome, stPrimeiroNome, vtFaixasIMC[];
 	private Double dbAltura, dbPeso, dbIMC;
-	private Integer intIdade, bpm, bpmDescanso, bpmDescansoFinal, bpmDescansoMedia, bpmMaximo,
+	private Integer intIdade, bpmDescanso, bpmDescansoFinal, bpmDescansoMedia, bpmMaximo,
 	bpmReserva, bpmAlvoLimMin, bpmAlvoLimMax, bpmAlvo;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_principal);
 		
@@ -60,69 +60,13 @@ public class TelaPrincipal extends Activity {
 		sessao = new GerenciamentoSessao(getApplicationContext());
 		
 		usrDAO = new UsuarioDAO();
-		usuario = usrDAO.buscarUsuario(sessao.getIdUsuario());
-		
+
 		indDAO = new IndicadorDAO();
-		indAltura = indDAO.buscarIndicadorTipo(sessao.getIdUsuario(), 0, 1);
-		indPeso = indDAO.buscarIndicadorTipo(sessao.getIdUsuario(), 1, 1);
 		
-		if (usuario != null && indAltura != null && indPeso != null) {
-			stNome = usuario.getNome();
-			dbPeso = indPeso.getMedida1();
-			dbAltura = indAltura.getMedida1();
-			intIdade = usrDAO.buscarIdadeUsuario(sessao.getIdUsuario());
-			
-			dbAltura = dbAltura/100;
-			
-			if (stNome.contains(" ")) {
-				stPrimeiroNome = stNome.substring(0, stNome.indexOf(" "));
-			}
-			else {
-				stPrimeiroNome = stNome;
-			}
-			txOla.setText(getString(R.string.tvOla) + " " + stPrimeiroNome);
-			
-			dbIMC = (dbPeso / (dbAltura * dbAltura));
-			DecimalFormat decimal = new DecimalFormat("0.0");
-			txIMC.setText(decimal.format(dbIMC));
-			
-			vtFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
-			lsFaixasIMC = Arrays.asList(vtFaixasIMC);
-			
-			if (dbIMC > 0 && dbIMC <= 18.5)
-				txStatusIMC.setText(lsFaixasIMC.get(0));
-			if (dbIMC >= 18.6 && dbIMC <= 24.9)
-				txStatusIMC.setText(lsFaixasIMC.get(1));
-			if (dbIMC >= 25 && dbIMC <= 29.9)
-				txStatusIMC.setText(lsFaixasIMC.get(2));
-			if (dbIMC >= 30 && dbIMC <= 34.9)
-				txStatusIMC.setText(lsFaixasIMC.get(3));
-			if (dbIMC >= 35 && dbIMC <= 39.9)
-				txStatusIMC.setText(lsFaixasIMC.get(4));
-			if (dbIMC >= 40)
-				txStatusIMC.setText(lsFaixasIMC.get(5));
-			
-			arrIndicadores = indDAO.buscarIndicadoresTipo(sessao.getIdUsuario(), 2);
-			
-			if (arrIndicadores.size() >= 3) {
-				int x;
-								
-				for (x=1; x==3; x++) {
-					indicador = arrIndicadores.get(x);
-					bpmDescanso = indicador.getMedida1().intValue();
-					bpmDescansoFinal = bpmDescanso+bpm;					
-				}
-				
-				bpmDescansoMedia = bpmDescansoFinal / 3;
-				bpmMaximo = 220 - intIdade;
-				bpmReserva = bpmMaximo - bpmDescansoMedia;
-				bpmAlvoLimMin = (bpmReserva * (60 / 100)) + bpmDescansoMedia;
-				bpmAlvoLimMax = (bpmReserva * (80 / 100)) + bpmDescansoMedia;
-				bpmAlvo = (bpmAlvoLimMin + bpmAlvoLimMax) / 2;
-				txAlvoBPM.setText(bpmAlvo.toString());
-			}
-		}
-		
+		setNomeUsuario();
+		calcularIMC();
+		calcularBPMIdeal();
+	
 		btCadIndicador.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
@@ -159,5 +103,89 @@ public class TelaPrincipal extends Activity {
 			}
 		});
 		
+	}
+	
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		// TODO Auto-generated method stub
+		super.onWindowFocusChanged(hasFocus);
+		setNomeUsuario();
+		calcularIMC();
+		calcularBPMIdeal();
+	}
+	
+	public void setNomeUsuario () {
+		
+		usuario = usrDAO.buscarUsuario(sessao.getIdUsuario());
+		
+		stNome = usuario.getNome();
+		
+		if (stNome.contains(" ")) {
+			stPrimeiroNome = stNome.substring(0, stNome.indexOf(" "));
+		}
+		else {
+			stPrimeiroNome = stNome;
+		}
+		
+		txOla.setText(getString(R.string.tvOla) + " " + stPrimeiroNome);
+	}
+	
+	public void calcularIMC () {
+		
+		indAltura = indDAO.buscarIndicadorTipo(sessao.getIdUsuario(), 0, 1);
+		indPeso = indDAO.buscarIndicadorTipo(sessao.getIdUsuario(), 1, 1);
+		
+		dbPeso = indPeso.getMedida1();
+		dbAltura = indAltura.getMedida1();
+		
+		dbAltura = dbAltura/100;
+		
+		dbIMC = (dbPeso / (dbAltura * dbAltura));
+		DecimalFormat decimal = new DecimalFormat("0.0");
+		txIMC.setText(decimal.format(dbIMC));
+		
+		vtFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
+		lsFaixasIMC = Arrays.asList(vtFaixasIMC);
+		
+		if (dbIMC > 0 && dbIMC <= 18.5)
+			txStatusIMC.setText(lsFaixasIMC.get(0));
+		if (dbIMC >= 18.6 && dbIMC <= 24.9)
+			txStatusIMC.setText(lsFaixasIMC.get(1));
+		if (dbIMC >= 25 && dbIMC <= 29.9)
+			txStatusIMC.setText(lsFaixasIMC.get(2));
+		if (dbIMC >= 30 && dbIMC <= 34.9)
+			txStatusIMC.setText(lsFaixasIMC.get(3));
+		if (dbIMC >= 35 && dbIMC <= 39.9)
+			txStatusIMC.setText(lsFaixasIMC.get(4));
+		if (dbIMC >= 40)
+			txStatusIMC.setText(lsFaixasIMC.get(5));
+	}
+	
+	public void calcularBPMIdeal () {
+		
+		intIdade = usrDAO.buscarIdadeUsuario(sessao.getIdUsuario());
+		
+		arrIndicadores = indDAO.buscarIndicadoresTipo(sessao.getIdUsuario(), 2);
+		
+		bpmDescansoFinal=0;
+		
+		if (arrIndicadores.size() >= 3) {
+			int x;
+							
+			for (x=1; x<=3; x++) {
+				indicador = arrIndicadores.get(x);
+				bpmDescanso = indicador.getMedida1().intValue();
+				bpmDescansoFinal = bpmDescansoFinal + bpmDescanso;					
+			}
+			
+			bpmDescansoMedia = bpmDescansoFinal / 3;
+			bpmMaximo = 220 - intIdade;
+			bpmReserva = bpmMaximo - bpmDescansoMedia;
+			bpmAlvoLimMin = (bpmReserva * (60 / 100)) + bpmDescansoMedia;
+			bpmAlvoLimMax = (bpmReserva * (80 / 100)) + bpmDescansoMedia;
+			bpmAlvo = (bpmAlvoLimMin + bpmAlvoLimMax) / 2;
+			
+			txAlvoBPM.setText(bpmAlvo + " BPM");
+		}
 	}
 }

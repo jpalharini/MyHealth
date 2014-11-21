@@ -113,7 +113,7 @@
 	    <string name="abaSemana">7 dias</string>
 	    <string name="abaMes">4 semanas</string>
 	    <string name="abaAno">12 meses</string>
-	    <string name="btGrafico">Gerar gráfico</string>
+	   	<string name="btCadastrarInd">Cadastrar indicador</string>
 
     <!-- Diálogos -->
 	    <string name="tvLogonFalha">Falha no login!</string>

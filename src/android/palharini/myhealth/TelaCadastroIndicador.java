@@ -197,8 +197,7 @@ public class TelaCadastroIndicador extends Activity {
 				
 				if (cadastro) {
 					Toast.makeText(getApplicationContext(), R.string.toastIndOk, Toast.LENGTH_LONG).show();
-					Intent irTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
-					startActivity(irTelaPrincipal);
+					finish();
 				}
 				else {
 					Toast.makeText(getApplicationContext(), R.string.toastIndFalha, Toast.LENGTH_LONG).show();

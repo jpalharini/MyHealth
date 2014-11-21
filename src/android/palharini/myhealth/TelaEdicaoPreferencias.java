@@ -169,8 +169,6 @@ public class TelaEdicaoPreferencias extends Activity {
 				
 				if (blPrefs) {
 					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsOK), Toast.LENGTH_LONG).show();
-					Intent voltarTelaPrincipal = new Intent(getApplicationContext(), TelaPrincipal.class);
-					startActivity(voltarTelaPrincipal);
 					finish();
 				}
 				else {

@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.palharini.myhealth.R;
+import android.palharini.myhealth.TelaCadastroIndicador;
 import android.palharini.myhealth.TelaEdicaoIndicador;
 import android.palharini.myhealth.dao.IndicadorDAO;
 import android.palharini.myhealth.datas.Timestamp;
@@ -28,7 +29,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+
 
 public class AbaMes extends Fragment {
 	
@@ -41,6 +44,7 @@ public class AbaMes extends Fragment {
 	private IndicadorDAO indDAO;
 	
 	private ListView lvIndicadores;
+	private Button btCadastrarInd;
 	private Integer intTipoIndicador;
 	private int x, y=0;
 	
@@ -64,6 +68,7 @@ public class AbaMes extends Fragment {
 		indDAO = new IndicadorDAO();
 		
 		lvIndicadores = (ListView) view.findViewById(R.id.listViewInd);
+		btCadastrarInd = (Button) view.findViewById(R.id.btCadastrarInd);
 				
 		grafico = (XYPlot) view.findViewById(R.id.xyPlot);
 		
@@ -159,7 +164,16 @@ public class AbaMes extends Fragment {
 				Intent irTelaEdicaoIndicador = new Intent(getActivity(), TelaEdicaoIndicador.class);
 				irTelaEdicaoIndicador.putExtra("idIndicador", indicSelecionado.getId());
 				startActivity(irTelaEdicaoIndicador);
-				getActivity().finish();
+			}
+		});
+		
+		btCadastrarInd.setOnClickListener(new Button.OnClickListener () {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent irTelaCadIndicador = new Intent(getActivity(), TelaCadastroIndicador.class);
+				irTelaCadIndicador.putExtra("tipoSelecionado", intTipoIndicador);
+				startActivity(irTelaCadIndicador);
 			}
 		});
 		return view;

@@ -39,7 +39,7 @@ public class TelaEdicaoIndicador extends Activity {
 	private String stUnidade;
 	private Double dbMedida1, dbMedida2;
 	
-	private Intent dados, voltarAbas;
+	private Intent dados;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -181,8 +181,6 @@ public class TelaEdicaoIndicador extends Activity {
 				
 				if (blAtualizar) {
 					Toast.makeText(getApplicationContext(), getString(R.string.toastIndAtOK), Toast.LENGTH_LONG).show();
-					voltarAbas = new Intent(getApplicationContext(), TelaIndicadores.class);
-					startActivity(voltarAbas);
 					finish();
 				}
 				else {
@@ -198,8 +196,6 @@ public class TelaEdicaoIndicador extends Activity {
 				
 				if (blExcluir) {
 					Toast.makeText(getApplicationContext(), getString(R.string.toastIndExcOK), Toast.LENGTH_LONG).show();
-					voltarAbas = new Intent(getApplicationContext(), TelaIndicadores.class);
-					startActivity(voltarAbas);
 					finish();
 				}
 				else {
