@@ -3,15 +3,16 @@
 
     <string name="app_name">MyHealth</string>
 
-    <!-- Configurações -->
-	    <string name="title_activity_tela_configuracoes">Configurações</string>
+    <!-- Preferencias -->
+	    <string name="title_activity_preferences_register">Preferências</string>
+   	    <string name="title_activity_preferences_edit">Preferências</string>
 	    <string name="chLembretePeso">Definir lembrete de peso</string>
 	    <string name="chLembreteBPM">Obter número ideal de batimentos cardíacos</string>
 	    <string name="hintHoraLembrete">Hora do lembrete</string>
 
     <!-- Tela Cadastro/Edicao Usuario -->
-	    <string name="title_activity_tela_cadastro_usuario">Cadastro</string>
-	    <string name="title_activity_tela_edicao_usuario">Editar dados</string>
+	    <string name="title_activity_user_register">Cadastro</string>
+	    <string name="title_activity_user_edit">Editar dados</string>
 	    <string name="tvCadastro">Para seu cadastro, informe:</string>
 	    <string name="tvEmail">E-mail:</string>
 	    <string name="hintEmail">fulano@email.com</string>
@@ -40,8 +41,8 @@
 	    <string name="toastPrefsFalha">Falha na definição de preferências...</string>
 
     <!-- Tela Cadastro/Edicao Indicador -->
-	    <string name="title_activity_tela_cadastro_indicador">Cadastrar indicador</string>
-	    <string name="title_activity_tela_edicao_indicador">Editar indicador</string>
+	    <string name="title_activity_indicator_register">Cadastrar indicador</string>
+	    <string name="title_activity_indicator_edit">Editar indicador</string>
 	    <string name="tvTipoIndicador">Escolha o tipo de indicador:</string>
 	    <string name="tvMedida1">Defina o valor da medida:</string>
 	    <string name="tvMedida2">Defina o valor da segunda medida:</string>
@@ -81,14 +82,14 @@
 	    <string name="toastIndExcFalha">Falha na exclusão do indicador...</string>
 
     <!-- Login -->
-	    <string name="title_activity_tela_login">MyHealth</string>
+	    <string name="title_activity_login">MyHealth</string>
 	    <string name="tvLogin">Faça seu login ou cadastre-se!</string>
 	    <string name="btLogin">Login</string>
 	    <string name="tvCadastre">Não possui conta? Crie agora!</string>
 	    <string name="btCadastre">Criar conta</string>
 
     <!-- Tela Principal -->
-	    <string name="title_activity_tela_principal">MyHealth</string>
+	    <string name="title_activity_main">MyHealth</string>
 	    <string name="tvOla">Olá, </string>
 	    <string name="tvIMC">Seu IMC atual é:</string>
 	    <string name="IMC">XX.X</string>
@@ -110,6 +111,7 @@
 	    <string name="btLogout">Fazer logout</string>
 
     <!-- Tela Indicadores -->
+  	    <string name="title_activity_indicator_typeslist">Indicadores</string>
 	    <string name="abaSemana">7 dias</string>
 	    <string name="abaMes">4 semanas</string>
 	    <string name="abaAno">12 meses</string>
@@ -132,10 +134,7 @@
     <!-- Diversos -->
 	    <string name="descSplash">Splash MyHealth</string>
 	    <string name="hello_blank_fragment">Hello blank fragment</string>
-	    <string name="title_activity_tela_cadastro_preferencias">Preferências</string>
 	    <string name="hello_world">Hello world!</string>
-	    <string name="title_activity_lista_indicadores">Indicadores</string>
-	    <string name="title_activity_tela_tipos">Indicadores</string>
 	    <string name="title_activity_tela_grafico">Gráfico</string>
 
 </resources>

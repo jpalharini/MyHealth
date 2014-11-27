@@ -15,65 +15,69 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/MyHealth" >
-        <activity
-            android:name=".TelaLogin"
-            android:label="@string/title_activity_tela_login" >
-        </activity>
-        <activity 
-            android:name=".TelaCadastroUsuario" 
-            android:label="@string/title_activity_tela_cadastro_usuario" >
-        </activity>
-        <activity
-            android:name=".TelaCadastroIndicador"
-            android:label="@string/title_activity_tela_cadastro_indicador" >
-        </activity>
-        <activity
-            android:name=".TelaEdicaoUsuario"
-            android:label="@string/title_activity_tela_edicao_usuario" >
-        </activity>
-        <activity
-            android:name=".TelaEdicaoIndicador"
-            android:label="@string/title_activity_tela_edicao_indicador" >
-        </activity>
-        <activity
-            android:name=".TelaPrincipal"
-            android:label="@string/title_activity_tela_principal" >
-        </activity>
-        <activity
-            android:name=".TelaEdicaoPreferencias"
-            android:label="@string/title_activity_tela_configuracoes" >
-        </activity>
-        <activity
-            android:name=".TelaInicial"
+       	<activity
+            android:name=".activities.Splash"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TelaIndicadores" >
-        </activity>
+        
         <activity
-            android:name=".TelaCadastroPreferencias"
-            android:label="@string/title_activity_tela_cadastro_preferencias" >
+            android:name=".activities.Login"
+            android:label="@string/title_activity_login" >
         </activity>
+        
         <activity
-            android:name=".ListaIndicadores"
-            android:label="@string/title_activity_lista_indicadores" >
+            android:name=".activities.Main"
+            android:label="@string/title_activity_main" >
         </activity>
+        
         <activity
-            android:name=".TelaTipos"
-            android:label="@string/title_activity_tela_tipos" >
+            android:name=".activities.register.UserRegister" 
+            android:label="@string/title_activity_user_register" >
         </activity>
+        
         <activity
-            android:name=".TelaGrafico"
-            android:label="@string/title_activity_tela_grafico" >
+            android:name=".activities.edit.UserEdit"
+            android:label="@string/title_activity_user_edit" >
         </activity>
+        
+       	<activity 
+           	android:name=".activities.register.IndicatorRegister"
+            android:label="@string/title_activity_indicator_register" >
+        </activity>
+        
+        <activity
+  			android:name=".activities.edit.IndicatorEdit"
+            android:label="@string/title_activity_indicator_edit">
+        </activity>
+        
+        <activity
+            android:name=".activities.register.PreferencesRegister"
+            android:label="@string/title_activity_preferences_register" >
+        </activity>
+            
+        <activity
+            android:name=".activities.edit.PreferencesEdit"
+            android:label="@string/title_activity_preferences_edit" >
+        </activity>
+
+        <activity
+            android:name=".activities.IndicatorTypesList"
+            android:label="@string/title_activity_indicator_typeslist" >
+        </activity>
+        
+        <activity
+            android:name=".fragments.tabs.adapters.TabsAdapter" >
+        </activity>
+        
         <receiver 
-            android:name=".notificacoes.NotificacaoReceiver">
+            android:name=".notifications.NotificationReceiver">
         </receiver>
+        
     </application>
 
 </manifest>
