@@ -1,17 +1,6 @@
 package android.palharini.myhealth.fragments.tabs;
 
-import java.util.Arrays;
-import java.util.List;
-
-import com.androidplot.ui.SizeLayoutType;
-import com.androidplot.ui.SizeMetrics;
-import com.androidplot.xy.LineAndPointFormatter;
-import com.androidplot.xy.PointLabelFormatter;
-import com.androidplot.xy.SimpleXYSeries;
-import com.androidplot.xy.XYPlot;
-import com.androidplot.xy.XYSeries;
-import com.androidplot.xy.XYStepMode;
-
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,7 +12,6 @@ import android.palharini.myhealth.db.dao.IndicatorDAO;
 import android.palharini.myhealth.db.entities.Indicator;
 import android.palharini.myhealth.fragments.tabs.adapters.IndicatorsListAdapter;
 import android.palharini.myhealth.session.SessionManager;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +19,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import com.androidplot.ui.SizeLayoutType;
+import com.androidplot.ui.SizeMetrics;
+import com.androidplot.xy.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MonthTab extends Fragment {
 	
