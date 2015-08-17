@@ -24,44 +24,47 @@ import java.util.List;
 
 public class Main extends Activity {
 
-	private SessionManager sessao;
+	private SessionManager session;
 	
 	private UserDAO usrDAO;
 	private User user;
 	private IndicatorDAO indDAO;
-	private Indicator indAltura, indPeso, indicator;
+	private Indicator indHeight, indWeight, indicator;
 	
-	private TextView txOla, txIMC, txStatusIMC, txAlvoBPM;
-	private Button btCadIndicador, btAcompanhamento, btDados, btConfiguracoes;
+	private TextView tvHello, tvBMI, tvStatusBMI, tvTargetBPM;
+	private Button btInsIndicator, btMonitoring, btUserInfo, btSettings;
 	
-	private ArrayList<Indicator> arrIndicadores;
-	private List<String> lsFaixasIMC;
-	private String stNome, stPrimeiroNome, vtFaixasIMC[];
-	private Double dbAltura, dbPeso, dbIMC;
-	private Integer intIdade, bpmDescanso, bpmDescansoFinal, bpmDescansoMedia, bpmMaximo,
-	bpmReserva, bpmAlvoLimMin, bpmAlvoLimMax, bpmAlvo;
+	private ArrayList<Indicator> arrayIndicators;
+	private List<String> listRangesBMI;
+	private String stName, stFirstName, vtFaixasIMC[];
+	private Double dbHeight, dbWeight, dbBMI;
+	private Integer intAge;
+	// Heart Rate measures
+	private Integer intRestingBPM, intFinalRestingBPM, intAvgRestingBPM, intMaxBPM,
+            intReserveBPM, intMinTargetBPM, intMaxTargetBPM, intTargetBPM;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
+		// TODO Isolate data processing threads from UI thread
 		if (android.os.Build.VERSION.SDK_INT > 9) {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
 		
-		txOla = (TextView) findViewById(R.id.tvOla);
-		txIMC = (TextView) findViewById(R.id.IMC);
-		txStatusIMC = (TextView) findViewById(R.id.tvStatusIMC);
-		txAlvoBPM = (TextView) findViewById(R.id.alvoBPM);
+		tvHello = (TextView) findViewById(R.id.tvOla);
+		tvBMI = (TextView) findViewById(R.id.IMC);
+		tvStatusBMI = (TextView) findViewById(R.id.tvStatusIMC);
+		tvTargetBPM = (TextView) findViewById(R.id.alvoBPM);
 		
-		btCadIndicador = (Button) findViewById(R.id.btCadIndicador);
-		btAcompanhamento = (Button) findViewById(R.id.btAcompanhamento);
-		btDados = (Button) findViewById(R.id.btDados);
-		btConfiguracoes = (Button) findViewById(R.id.btConfiguracoes);
+		btInsIndicator = (Button) findViewById(R.id.btCadIndicador);
+		btMonitoring = (Button) findViewById(R.id.btAcompanhamento);
+		btUserInfo = (Button) findViewById(R.id.btDados);
+		btSettings = (Button) findViewById(R.id.btConfiguracoes);
 		
-		sessao = new SessionManager(getApplicationContext());
+		session = new SessionManager(getApplicationContext());
 		
 		usrDAO = new UserDAO();
 
@@ -71,7 +74,7 @@ public class Main extends Activity {
 		calcularIMC();
 		calcularBPMIdeal();
 	
-		btCadIndicador.setOnClickListener(new Button.OnClickListener () {
+		btInsIndicator.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -80,7 +83,7 @@ public class Main extends Activity {
 			}
 		});
 		
-		btAcompanhamento.setOnClickListener(new Button.OnClickListener () {
+		btMonitoring.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -89,7 +92,7 @@ public class Main extends Activity {
 			}
 		});
 		
-		btDados.setOnClickListener(new Button.OnClickListener () {
+		btUserInfo.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -98,7 +101,7 @@ public class Main extends Activity {
 			}
 		});
 		
-		btConfiguracoes.setOnClickListener(new Button.OnClickListener () {
+		btSettings.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -120,77 +123,77 @@ public class Main extends Activity {
 	
 	public void setNomeUsuario () {
 		
-		user = usrDAO.buscarUsuario(sessao.getIdUsuario());
+		user = usrDAO.buscarUsuario(session.getIdUsuario());
 		
-		stNome = user.getNome();
+		stName = user.getNome();
 		
-		if (stNome.contains(" ")) {
-			stPrimeiroNome = stNome.substring(0, stNome.indexOf(" "));
+		if (stName.contains(" ")) {
+			stFirstName = stName.substring(0, stName.indexOf(" "));
 		}
 		else {
-			stPrimeiroNome = stNome;
+			stFirstName = stName;
 		}
 		
-		txOla.setText(getString(R.string.tvOla) + " " + stPrimeiroNome);
+		tvHello.setText(getString(R.string.tvOla) + " " + stFirstName);
 	}
 	
 	public void calcularIMC () {
 		
-		indAltura = indDAO.buscarIndicadorTipo(sessao.getIdUsuario(), 0, 1);
-		indPeso = indDAO.buscarIndicadorTipo(sessao.getIdUsuario(), 1, 1);
+		indHeight = indDAO.buscarIndicadorTipo(session.getIdUsuario(), 0, 1);
+		indWeight = indDAO.buscarIndicadorTipo(session.getIdUsuario(), 1, 1);
 		
-		dbPeso = indPeso.getMedida1();
-		dbAltura = indAltura.getMedida1();
+		dbWeight = indWeight.getMedida1();
+		dbHeight = indHeight.getMedida1();
 		
-		dbAltura = dbAltura/100;
+		dbHeight = dbHeight /100;
 		
-		dbIMC = (dbPeso / (dbAltura * dbAltura));
+		dbBMI = (dbWeight / (dbHeight * dbHeight));
 		DecimalFormat decimal = new DecimalFormat("0.0");
-		txIMC.setText(decimal.format(dbIMC));
+		tvBMI.setText(decimal.format(dbBMI));
 		
 		vtFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
-		lsFaixasIMC = Arrays.asList(vtFaixasIMC);
+		listRangesBMI = Arrays.asList(vtFaixasIMC);
 		
-		if (dbIMC > 0 && dbIMC <= 18.5)
-			txStatusIMC.setText(lsFaixasIMC.get(0));
-		if (dbIMC >= 18.6 && dbIMC <= 24.9)
-			txStatusIMC.setText(lsFaixasIMC.get(1));
-		if (dbIMC >= 25 && dbIMC <= 29.9)
-			txStatusIMC.setText(lsFaixasIMC.get(2));
-		if (dbIMC >= 30 && dbIMC <= 34.9)
-			txStatusIMC.setText(lsFaixasIMC.get(3));
-		if (dbIMC >= 35 && dbIMC <= 39.9)
-			txStatusIMC.setText(lsFaixasIMC.get(4));
-		if (dbIMC >= 40)
-			txStatusIMC.setText(lsFaixasIMC.get(5));
+		if (dbBMI > 0 && dbBMI <= 18.5)
+			tvStatusBMI.setText(listRangesBMI.get(0));
+		if (dbBMI >= 18.6 && dbBMI <= 24.9)
+			tvStatusBMI.setText(listRangesBMI.get(1));
+		if (dbBMI >= 25 && dbBMI <= 29.9)
+			tvStatusBMI.setText(listRangesBMI.get(2));
+		if (dbBMI >= 30 && dbBMI <= 34.9)
+			tvStatusBMI.setText(listRangesBMI.get(3));
+		if (dbBMI >= 35 && dbBMI <= 39.9)
+			tvStatusBMI.setText(listRangesBMI.get(4));
+		if (dbBMI >= 40)
+			tvStatusBMI.setText(listRangesBMI.get(5));
 	}
 	
 	public void calcularBPMIdeal () {
 
-		intIdade = usrDAO.buscarIdadeUsuario(sessao.getIdUsuario());
+		intAge = usrDAO.buscarIdadeUsuario(session.getIdUsuario());
 		
-		arrIndicadores = indDAO.buscarIndicadoresTipo(sessao.getIdUsuario(), 2);
+		arrayIndicators = indDAO.buscarIndicadoresTipo(session.getIdUsuario(), 2);
 		
-		bpmDescansoFinal=0;
+		intFinalRestingBPM =0;
 		
-		if (arrIndicadores.size() >= 3) {
+		if (arrayIndicators.size() >= 3) {
 			int x;
 							
 			for (x=1; x<=3; x++) {
-				indicator = arrIndicadores.get(x);
-				bpmDescanso = indicator.getMedida1().intValue();
-				bpmDescansoFinal = bpmDescansoFinal + bpmDescanso;					
+				indicator = arrayIndicators.get(x);
+				intRestingBPM = indicator.getMedida1().intValue();
+				intFinalRestingBPM = intFinalRestingBPM + intRestingBPM;
 			}
 			
-			bpmDescansoMedia = bpmDescansoFinal / 3;
-			bpmMaximo = 220 - intIdade;
-			bpmReserva = bpmMaximo - bpmDescansoMedia;
+			intAvgRestingBPM = intFinalRestingBPM / 3;
+			intMaxBPM = 220 - intAge;
+			intReserveBPM = intMaxBPM - intAvgRestingBPM;
 
-			bpmAlvoLimMin = (bpmReserva * (60 / 100)) + bpmDescansoMedia;
-			bpmAlvoLimMax = (bpmReserva * (80 / 100)) + bpmDescansoMedia;
-			bpmAlvo = (bpmAlvoLimMin + bpmAlvoLimMax) / 2;
+			intMinTargetBPM = (intReserveBPM * (60 / 100)) + intAvgRestingBPM;
+			intMaxTargetBPM = (intReserveBPM * (80 / 100)) + intAvgRestingBPM;
+			intTargetBPM = (intMinTargetBPM + intMaxTargetBPM) / 2;
 			
-			txAlvoBPM.setText(bpmAlvo + " BPM");
+			tvTargetBPM.setText(intTargetBPM + " BPM");
 		}
 	}
 }
