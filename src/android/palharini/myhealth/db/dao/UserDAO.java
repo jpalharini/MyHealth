@@ -19,22 +19,22 @@ public class UserDAO {
 	private static final String NAMESPACE = conexao.getNamespace();
 	private static final int TIMEOUT = conexao.getTimeout();
 	
-	private static final String CADASTRAR = "cadastrarUsuario";
-	private static final String ATUALIZAR = "atualizarUsuario";
-	private static final String ATUALIZAR_ALVO_BPM = "atualizarAlvoBPM";
-	private static final String BUSCAR = "buscarUsuario";
-	private static final String BUSCAR_EMAIL = "buscarUsuarioEmail";
-	private static final String BUSCAR_IDADE = "buscarIdadeUsuario";
+	private static final String REGISTER = "cadastrarUsuario";
+	private static final String UPDATE = "atualizarUsuario";
+	private static final String UPDATE_BMI_TARGET = "atualizarAlvoBPM";
+	private static final String SEARCH = "searchUser";
+	private static final String SEARCH_EMAIL = "buscarUsuarioEmail";
+	private static final String SEARCH_AGE = "selectUserAge";
 
 	public boolean cadastrarUsuario (User user) {
 		
-		SoapObject cadastrarUsuario = new SoapObject(NAMESPACE, CADASTRAR);
+		SoapObject cadastrarUsuario = new SoapObject(NAMESPACE, REGISTER);
 		
 		SoapObject usr = new SoapObject(NAMESPACE, "usuario");
 		
 		usr.addProperty("id", user.getId());
 		usr.addProperty("email", user.getEmail());
-		usr.addProperty("senha", user.getSenha());
+		usr.addProperty("senha", user.getPassword());
 		usr.addProperty("nome", user.getNome());
 		usr.addProperty("dataNascimento", user.getDataNascimento());
 		
@@ -48,7 +48,7 @@ public class UserDAO {
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
-			http.call("urn:" + CADASTRAR, envelope);
+			http.call("urn:" + REGISTER, envelope);
 			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			
@@ -64,13 +64,13 @@ public class UserDAO {
 		
 	public boolean atualizarUsuario(User user){
 		
-		SoapObject atualizarUsuario = new SoapObject(NAMESPACE, ATUALIZAR);
+		SoapObject atualizarUsuario = new SoapObject(NAMESPACE, UPDATE);
 		
 		SoapObject usr = new SoapObject(NAMESPACE, "usuario");
 		
 		usr.addProperty("id", user.getId());
 		usr.addProperty("email", user.getEmail());
-		usr.addProperty("senha", user.getSenha());
+		usr.addProperty("senha", user.getPassword());
 		usr.addProperty("nome", user.getNome());
 		usr.addProperty("dataNascimento", user.getDataNascimento());
 		usr.addProperty("alvoBPM", user.getAlvoBPM());
@@ -87,7 +87,7 @@ public class UserDAO {
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
-			http.call("urn:" + ATUALIZAR, envelope);
+			http.call("urn:" + UPDATE, envelope);
 			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			
@@ -103,7 +103,7 @@ public class UserDAO {
 	
 	public boolean atualizarAlvoBPM (int id, int alvoBPM) {
 		
-		SoapObject atualizarUsuario = new SoapObject(NAMESPACE, ATUALIZAR_ALVO_BPM);
+		SoapObject atualizarUsuario = new SoapObject(NAMESPACE, UPDATE_BMI_TARGET);
 		
 		SoapObject usr = new SoapObject(NAMESPACE, "usuario");
 		
@@ -122,7 +122,7 @@ public class UserDAO {
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
-			http.call("urn:" + ATUALIZAR, envelope);
+			http.call("urn:" + UPDATE, envelope);
 			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			
@@ -137,10 +137,10 @@ public class UserDAO {
 		
 	}
 
-	public User buscarUsuario(int id){
+	public User searchUser(int id){
 		User dados = null;
 		
-		SoapObject buscarUsuario = new SoapObject (NAMESPACE, BUSCAR);
+		SoapObject buscarUsuario = new SoapObject (NAMESPACE, SEARCH);
 		buscarUsuario.addProperty("id", id);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -151,7 +151,7 @@ public class UserDAO {
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
-			http.call("urn:" + BUSCAR, envelope);
+			http.call("urn:" + SEARCH, envelope);
 			
 			SoapObject resposta = (SoapObject) envelope.getResponse();
 			
@@ -174,7 +174,7 @@ public class UserDAO {
 	public User buscarUsuarioEmail(String email){
 		User usr = null;
 		
-		SoapObject buscarUsuarioEmail = new SoapObject (NAMESPACE, BUSCAR_EMAIL);
+		SoapObject buscarUsuarioEmail = new SoapObject (NAMESPACE, SEARCH_EMAIL);
 		buscarUsuarioEmail.addProperty("email", email);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -185,7 +185,7 @@ public class UserDAO {
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
-			http.call("urn:" + BUSCAR_EMAIL, envelope);
+			http.call("urn:" + SEARCH_EMAIL, envelope);
 			
 			SoapObject resposta = (SoapObject) envelope.getResponse();
 			
@@ -193,7 +193,7 @@ public class UserDAO {
 			
 			usr.setId(Integer.parseInt(resposta.getProperty("id").toString()));
 			usr.setEmail(resposta.getProperty("email").toString());
-			usr.setSenha(resposta.getProperty("senha").toString());
+			usr.setPassword(resposta.getProperty("senha").toString());
 			usr.setNome(resposta.getProperty("nome").toString());
 			
 		} catch (Exception e) {
@@ -204,10 +204,10 @@ public class UserDAO {
 		return usr;
 	}
 	
-	public Integer buscarIdadeUsuario (Integer id){
+	public Integer selectUserAge(Integer id){
 		Integer idade = null;
 		
-		SoapObject buscarIdadeUsuario = new SoapObject (NAMESPACE, BUSCAR_IDADE);
+		SoapObject buscarIdadeUsuario = new SoapObject (NAMESPACE, SEARCH_AGE);
 		buscarIdadeUsuario.addProperty("id", id);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -218,7 +218,7 @@ public class UserDAO {
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
 		
 		try {
-			http.call("urn:" + BUSCAR_IDADE, envelope);
+			http.call("urn:" + SEARCH_AGE, envelope);
 			
 			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
 			

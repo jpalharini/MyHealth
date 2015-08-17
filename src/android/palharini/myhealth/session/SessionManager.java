@@ -58,7 +58,7 @@ public class SessionManager {
         return usuario;
     }
     
-    public Integer getIdUsuario() {
+    public Integer getUserID() {
     	Integer id = pref.getInt(KEY_ID, 0);
     	return id;
     }

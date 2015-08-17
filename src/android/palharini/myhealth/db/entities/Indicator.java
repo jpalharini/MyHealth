@@ -58,7 +58,7 @@ public class Indicator {
 		this.idUsuario = idUsuario;
 	}
 
-	public Double getMedida1() {
+	public Double getMeasure1() {
 		return medida1;
 	}
 

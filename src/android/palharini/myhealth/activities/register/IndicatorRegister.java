@@ -64,7 +64,7 @@ public class IndicatorRegister extends Activity {
 		
 		indDAO = new IndicatorDAO();
 		
-		idUsuario = sessao.getIdUsuario();
+		idUsuario = sessao.getUserID();
 		dataAtual = fd.getDataAtualSQL();
 		horarioAtual = fd.getHorarioAtualSQL();
 		

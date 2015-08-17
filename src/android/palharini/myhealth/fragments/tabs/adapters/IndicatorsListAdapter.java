@@ -69,7 +69,7 @@ public class IndicatorsListAdapter extends BaseAdapter {
 		indicator = lsIndicators.get(position);
 		
 		if (indicator != null) {
-			holder.tvMeasure.setText(indicator.getMedida1().toString());
+			holder.tvMeasure.setText(indicator.getMeasure1().toString());
 			holder.tvUnit.setText(indicator.getUnidade());
 			
 //			String stDate = df.getDataAndroid(indicator.getData());

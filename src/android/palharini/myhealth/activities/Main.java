@@ -36,7 +36,9 @@ public class Main extends Activity {
 	
 	private ArrayList<Indicator> arrayIndicators;
 	private List<String> listRangesBMI;
-	private String stName, stFirstName, vtFaixasIMC[];
+	private String stName;
+    private String stFirstName;
+    private String[] vtFaixasIMC;
 	private Double dbHeight, dbWeight, dbBMI;
 	private Integer intAge;
 	// Heart Rate measures
@@ -54,10 +56,10 @@ public class Main extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		
-		tvHello = (TextView) findViewById(R.id.tvOla);
-		tvBMI = (TextView) findViewById(R.id.IMC);
-		tvStatusBMI = (TextView) findViewById(R.id.tvStatusIMC);
-		tvTargetBPM = (TextView) findViewById(R.id.alvoBPM);
+		tvHello = (TextView) findViewById(R.id.tvHello);
+		tvBMI = (TextView) findViewById(R.id.tvBMI);
+		tvStatusBMI = (TextView) findViewById(R.id.tvStatusBMI);
+		tvTargetBPM = (TextView) findViewById(R.id.tvTargetBPM);
 		
 		btInsIndicator = (Button) findViewById(R.id.btCadIndicador);
 		btMonitoring = (Button) findViewById(R.id.btAcompanhamento);
@@ -70,16 +72,16 @@ public class Main extends Activity {
 
 		indDAO = new IndicatorDAO();
 		
-		setNomeUsuario();
-		calcularIMC();
-		calcularBPMIdeal();
+		setUserName();
+		calcBMI();
+		calcIdealBMI();
 	
 		btInsIndicator.setOnClickListener(new Button.OnClickListener () {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent irTelaCadIndicador = new Intent(getApplicationContext(), IndicatorRegister.class);
-				startActivity(irTelaCadIndicador);
+				Intent goInsIndicatorScreen = new Intent(getApplicationContext(), IndicatorRegister.class);
+				startActivity(goInsIndicatorScreen);
 			}
 		});
 		
@@ -87,8 +89,8 @@ public class Main extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent irTelaAcompanhamento = new Intent(getApplicationContext(), IndicatorTypesList.class);
-				startActivity(irTelaAcompanhamento);
+				Intent goMonitoringScreen = new Intent(getApplicationContext(), IndicatorTypesList.class);
+				startActivity(goMonitoringScreen);
 			}
 		});
 		
@@ -96,8 +98,8 @@ public class Main extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent irTelaEdicaoUsuario = new Intent(getApplicationContext(), UserEdit.class);
-				startActivity(irTelaEdicaoUsuario);
+				Intent goEditUserScreen = new Intent(getApplicationContext(), UserEdit.class);
+				startActivity(goEditUserScreen);
 			}
 		});
 		
@@ -105,8 +107,8 @@ public class Main extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent irTelaConfiguracoes = new Intent(getApplicationContext(), PreferencesEdit.class);
-				startActivity(irTelaConfiguracoes);
+				Intent goSettingsScreen = new Intent(getApplicationContext(), PreferencesEdit.class);
+				startActivity(goSettingsScreen);
 			}
 		});
 		
@@ -116,14 +118,14 @@ public class Main extends Activity {
 	public void onWindowFocusChanged(boolean hasFocus) {
 		// TODO Auto-generated method stub
 		super.onWindowFocusChanged(hasFocus);
-		setNomeUsuario();
-		calcularIMC();
-		calcularBPMIdeal();
+		setUserName();
+		calcBMI();
+		calcIdealBMI();
 	}
 	
-	public void setNomeUsuario () {
+	public void setUserName() {
 		
-		user = usrDAO.buscarUsuario(session.getIdUsuario());
+		user = usrDAO.searchUser(session.getUserID());
 		
 		stName = user.getNome();
 		
@@ -137,13 +139,13 @@ public class Main extends Activity {
 		tvHello.setText(getString(R.string.tvOla) + " " + stFirstName);
 	}
 	
-	public void calcularIMC () {
+	public void calcBMI() {
 		
-		indHeight = indDAO.buscarIndicadorTipo(session.getIdUsuario(), 0, 1);
-		indWeight = indDAO.buscarIndicadorTipo(session.getIdUsuario(), 1, 1);
+		indHeight = indDAO.buscarIndicadorTipo(session.getUserID(), 0, 1);
+		indWeight = indDAO.buscarIndicadorTipo(session.getUserID(), 1, 1);
 		
-		dbWeight = indWeight.getMedida1();
-		dbHeight = indHeight.getMedida1();
+		dbWeight = indWeight.getMeasure1();
+		dbHeight = indHeight.getMeasure1();
 		
 		dbHeight = dbHeight /100;
 		
@@ -153,7 +155,8 @@ public class Main extends Activity {
 		
 		vtFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
 		listRangesBMI = Arrays.asList(vtFaixasIMC);
-		
+
+        // BMI Categories - according to http://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm
 		if (dbBMI > 0 && dbBMI <= 18.5)
 			tvStatusBMI.setText(listRangesBMI.get(0));
 		if (dbBMI >= 18.6 && dbBMI <= 24.9)
@@ -168,11 +171,11 @@ public class Main extends Activity {
 			tvStatusBMI.setText(listRangesBMI.get(5));
 	}
 	
-	public void calcularBPMIdeal () {
+	public void calcIdealBMI() {
 
-		intAge = usrDAO.buscarIdadeUsuario(session.getIdUsuario());
+		intAge = usrDAO.selectUserAge(session.getUserID());
 		
-		arrayIndicators = indDAO.buscarIndicadoresTipo(session.getIdUsuario(), 2);
+		arrayIndicators = indDAO.selectIndicatorTypes(session.getUserID(), 2);
 		
 		intFinalRestingBPM =0;
 		
@@ -181,7 +184,7 @@ public class Main extends Activity {
 							
 			for (x=1; x<=3; x++) {
 				indicator = arrayIndicators.get(x);
-				intRestingBPM = indicator.getMedida1().intValue();
+				intRestingBPM = indicator.getMeasure1().intValue();
 				intFinalRestingBPM = intFinalRestingBPM + intRestingBPM;
 			}
 			

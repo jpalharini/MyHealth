@@ -4,7 +4,7 @@ public class User {
 
 	private int id;
 	private String email;
-	private String senha;
+	private String password;
 	private String nome;
 	private String dataNascimento;
 	private int alvoBPM;
@@ -12,29 +12,29 @@ public class User {
 	public User(){};
 
 	public User(
-			int id, String email, String senha, String nome, String dataNascimento) {
+			int id, String email, String password, String nome, String dataNascimento) {
 		this.id = id;
 		this.email = email;
-		this.senha = senha;
+		this.password = password;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 	}
 	
-	public User(int id, String email, String senha, String nome,
-			String dataNascimento, int alvoBPM) {
+	public User(int id, String email, String password, String nome,
+				String dataNascimento, int alvoBPM) {
 		this.id = id;
 		this.email = email;
-		this.senha = senha;
+		this.password = password;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.alvoBPM = alvoBPM;
 	}
 
 	public User(
-			int id, String email, String senha, String nome) {
+			int id, String email, String password, String nome) {
 		this.id = id;
 		this.email = email;
-		this.senha = senha;
+		this.password = password;
 		this.nome = nome;
 	}
 	
@@ -50,11 +50,11 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getNome() {

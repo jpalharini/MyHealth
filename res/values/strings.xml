@@ -13,32 +13,32 @@
     <!-- Tela Cadastro/Edicao Usuario -->
 	    <string name="title_activity_user_register">Cadastro</string>
 	    <string name="title_activity_user_edit">Editar dados</string>
-	    <string name="tvCadastro">Para seu cadastro, informe:</string>
+	    <string name="tvRegisterTip">Para seu cadastro, informe:</string>
 	    <string name="tvEmail">E-mail:</string>
 	    <string name="hintEmail">fulano@email.com</string>
-	    <string name="tvSenha">Senha:</string>
-	    <string name="hintSenha">*******</string>
-	    <string name="tvConfSenha">Confirme a senha:</string>
-	    <string name="hintConfSenha">*******</string>
-	    <string name="tvNome">Nome completo:</string>
-	    <string name="hintNome">Fulano da Silva</string>
-	    <string name="tvDataNasc">Data de nascimento:</string>
-	    <string name="hintDataNasc">01/01/1970</string>
-	    <string name="tvAltura">Altura (centímetros)</string>
-	    <string name="hintAltura">200</string>
-	    <string name="tvPeso">Peso (quilos)</string>
-	    <string name="hintPeso">100</string>
-	    <string name="tvCadAlvoBPM">Freq. cardíaca ideal</string>
-	    <string name="hintCadAlvoBPM">70</string>
-	    <string name="btContinuar">Continuar</string>
+	    <string name="tvPassword">Senha:</string>
+	    <string name="hintPassword">*******</string>
+	    <string name="tvConfPassword">Confirme a senha:</string>
+	    <string name="hintConfPassword">*******</string>
+	    <string name="tvName">Nome completo:</string>
+	    <string name="hintName">Fulano da Silva</string>
+	    <string name="tvBirthDate">Data de nascimento:</string>
+	    <string name="hintBirthDate">01/01/1970</string>
+	    <string name="tvHeight">Altura (centímetros)</string>
+	    <string name="hintHeight">200</string>
+	    <string name="tvWeight">Peso (quilos)</string>
+	    <string name="hintWeight">100</string>
+	    <string name="tvRegTargetHR">Freq. cardíaca ideal</string>
+	    <string name="hintRegTargetHR">70</string>
+	    <string name="btContinue">Continuar</string>
 	    <string name="toastUsrOK">Usuário cadastrado com sucesso!</string>
-	    <string name="toastUsrFalha">Falha no cadastro do usuário...</string>
-	    <string name="toastUsrAtOK">Usuário atualizado com sucesso!</string>
-	    <string name="toastUsrAtFalha">Falha na atualização do usuário...</string>
-	    <string name="toastUsrExiste">E-mail já cadastrado!</string>
-	    <string name="toastSenhaInv">As senhas não conferem</string>
+	    <string name="toastUsrFail">Falha no cadastro do usuário...</string>
+	    <string name="toastUsrUpdOK">Usuário atualizado com sucesso!</string>
+	    <string name="toastUsrUpdFail">Falha na atualização do usuário...</string>
+	    <string name="toastUsrExists">E-mail já cadastrado!</string>
+	    <string name="toastNoMatchPass">As senhas não conferem</string>
 	    <string name="toastPrefsOK">Preferências salvas com sucesso!</string>
-	    <string name="toastPrefsFalha">Falha na definição de preferências...</string>
+	    <string name="toastPrefsFail">Falha na definição de preferências...</string>
 
     <!-- Tela Cadastro/Edicao Indicador -->
 	    <string name="title_activity_indicator_register">Cadastrar indicador</string>
@@ -119,8 +119,8 @@
 
     <!-- Diálogos -->
 	    <string name="tvLogonFalha">Falha no login!</string>
-	    <string name="tvLogonErrado">E-mail ou senha incorretos</string>
-	    <string name="tvLogonVazio">Por favor, digite seu e-mail e senha</string>
+	    <string name="tvLogonErrado">E-mail ou password incorretos</string>
+	    <string name="tvLogonVazio">Por favor, digite seu e-mail e password</string>
 	    <string name="tvFalhaConexao">Falha de rede!</string>
 	    <string name="tvServidorNaoResponde">Falha ao obter dados do servidor.
 	        \nPor favor, verifique sua conexão de rede.</string>

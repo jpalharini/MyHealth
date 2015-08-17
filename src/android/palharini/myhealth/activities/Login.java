@@ -74,7 +74,7 @@ public class Login extends Activity {
                 User dados = dao.buscarUsuarioEmail(stEmail);
                 
                 if (dados != null) {                
-	                if(stEmail.equals(dados.getEmail()) && stCriptSenha.equals(dados.getSenha())){
+	                if(stEmail.equals(dados.getEmail()) && stCriptSenha.equals(dados.getPassword())){
 	                	sessao.criarSessao(dados.getId(), dados.getNome(), dados.getEmail());
 	
 	                    Intent irTelaPrincipal = new Intent(getApplicationContext(), Main.class);

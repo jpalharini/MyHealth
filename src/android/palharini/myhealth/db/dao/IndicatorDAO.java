@@ -27,7 +27,7 @@ public class IndicatorDAO {
 	public static final String EXCLUIR = "excluirIndicador";
 	public static final String BUSCAR_ID = "buscarIndicadorId";
 	public static final String BUSCAR_TIPO = "buscarIndicadorTipo";
-	public static final String BUSCAR_TIPO_TODOS = "buscarIndicadoresTipo";
+	public static final String BUSCAR_TIPO_TODOS = "selectIndicatorTypes";
 	public static final String BUSCAR_PERIODO_TIPO = "buscarIndicadoresPeriodoTipo";
 	public static final String BUSCAR_MEDIA_1 = "buscarMedia1Periodo";
 	public static final String BUSCAR_MEDIA_2 = "buscarMedia2Periodo";
@@ -42,7 +42,7 @@ public class IndicatorDAO {
 		ind.addProperty("id", indicator.getId());
 		ind.addProperty("idTipo", indicator.getIdTipo());
 		ind.addProperty("idUsuario", indicator.getIdUsuario());
-		ind.addProperty("medida1", indicator.getMedida1());
+		ind.addProperty("medida1", indicator.getMeasure1());
 		ind.addProperty("medida2", indicator.getMedida2());
 		ind.addProperty("unidade", indicator.getUnidade());
 		ind.addProperty("data", indicator.getData());
@@ -81,7 +81,7 @@ public class IndicatorDAO {
 		
 		ind.addProperty("id", indicator.getId());
 		ind.addProperty("idTipo", indicator.getIdTipo());
-		ind.addProperty("medida1", indicator.getMedida1());
+		ind.addProperty("medida1", indicator.getMeasure1());
 		ind.addProperty("medida2", indicator.getMedida2());
 		ind.addProperty("unidade", indicator.getUnidade());
 		
@@ -176,7 +176,7 @@ public class IndicatorDAO {
 		return indicator;
 	}
 	
-	public ArrayList<Indicator> buscarIndicadoresTipo (Integer idUsuario, Integer idTipo) {
+	public ArrayList<Indicator> selectIndicatorTypes(Integer idUsuario, Integer idTipo) {
 		Indicator indicator = null;
 		
 		ArrayList<Indicator> indicadores = new ArrayList<Indicator>();

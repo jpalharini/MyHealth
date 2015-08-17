@@ -151,7 +151,7 @@ public class IndicatorEdit extends Activity {
 		indicator = indDAO.buscarIndicadorId(indicSelecionado);
 		
 		spTipo.setSelection(indicator.getIdTipo());
-		etMedida1.setText(indicator.getMedida1().toString());
+		etMedida1.setText(indicator.getMeasure1().toString());
 		
 		btSalvar.setOnClickListener(new OnClickListener() {
 			@Override

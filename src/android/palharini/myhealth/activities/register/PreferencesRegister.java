@@ -119,7 +119,7 @@ public class PreferencesRegister extends Activity {
 				
 				boolean prefs = prefsDAO.cadastrarPreferencias(new Preferences(
 						0,
-						sessao.getIdUsuario(),
+						sessao.getUserID(),
 						blLembretePeso,
 						stHoraLembretePeso,
 						blLembreteBPM,
@@ -139,7 +139,7 @@ public class PreferencesRegister extends Activity {
 					finish();
 				}
 				else {
-					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsFalha), Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsFail), Toast.LENGTH_LONG).show();
 				}
 			}
 		});

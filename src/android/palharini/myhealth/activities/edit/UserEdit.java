@@ -41,7 +41,7 @@ public class UserEdit extends Activity {
 		sessao = new SessionManager(getApplicationContext());
 		
 		usrDAO = new UserDAO();
-		usrUsuario = usrDAO.buscarUsuario(sessao.getIdUsuario());
+		usrUsuario = usrDAO.searchUser(sessao.getUserID());
 		
 		fd = new DateFormat();
 		
@@ -104,11 +104,11 @@ public class UserEdit extends Activity {
 							0
 					));
 					if (blUsr) {
-						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrAtOK), Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrUpdOK), Toast.LENGTH_LONG).show();
 	                    finish();
 					}
 					else {
-						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrAtFalha), Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrUpdFail), Toast.LENGTH_LONG).show();
 					}
 				}
 			}

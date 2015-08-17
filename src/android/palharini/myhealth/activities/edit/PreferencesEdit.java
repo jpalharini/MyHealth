@@ -67,7 +67,7 @@ public class PreferencesEdit extends Activity {
         sessao = new SessionManager(getApplicationContext());
 		
 		prefsDAO = new PreferencesDAO();
-		prefs = prefsDAO.buscarPreferencias(sessao.getIdUsuario());
+		prefs = prefsDAO.buscarPreferencias(sessao.getUserID());
 		
 		if (prefs != null) {
 			if (prefs.isLembretePeso()) {
@@ -145,7 +145,7 @@ public class PreferencesEdit extends Activity {
 				
 				Preferences prefsAtual = new Preferences(
 						prefs.getId(),
-						sessao.getIdUsuario(),
+						sessao.getUserID(),
 						lembretePeso,
 						stHoraLembretePeso,
 						lembreteBPM,
@@ -174,7 +174,7 @@ public class PreferencesEdit extends Activity {
 					finish();
 				}
 				else {
-					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsFalha), Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsFail), Toast.LENGTH_LONG).show();
 				}
 					
 			}

@@ -21,7 +21,7 @@
            	android:orientation="vertical" >
 		    
 		    <TextView
-		        android:id="@+id/tvOla"
+		        android:id="@+id/tvHello"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textSize="20sp"
@@ -37,7 +37,7 @@
 		        android:textSize="16sp" />
 		
 		    <TextView
-		        android:id="@+id/IMC"
+		        android:id="@+id/tvBMI"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="7dp"
@@ -46,7 +46,7 @@
 		        android:textSize="70sp" />
 		
 		    <TextView
-		        android:id="@+id/tvStatusIMC"
+		        android:id="@+id/tvStatusBMI"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:gravity="center_horizontal"
@@ -64,7 +64,7 @@
 		        android:textSize="16sp" />
 		
 		    <TextView
-		        android:id="@+id/alvoBPM"
+		        android:id="@+id/tvTargetBPM"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="7dp"

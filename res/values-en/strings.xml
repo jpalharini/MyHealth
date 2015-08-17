@@ -38,32 +38,32 @@
     <!-- Tela Cadastro/Edicao Usuario -->
     <string name="title_activity_tela_cadastro_usuario">Sign up</string>
     <string name="title_activity_tela_edicao_usuario">Edit information</string>
-    <string name="tvCadastro">To sign up, inform...</string>
+    <string name="tvRegisterTip">To sign up, inform...</string>
     <string name="tvEmail">E-mail:</string>
     <string name="hintEmail">joe@doe.com</string>
-    <string name="tvSenha">Password:</string>
-    <string name="hintSenha">*******</string>
-    <string name="tvConfSenha">Confirm password:</string>
-    <string name="hintConfSenha">*******</string>
-    <string name="tvNome">Full name:</string>
-    <string name="hintNome">Joe Doe</string>
-    <string name="tvDataNasc">Birth date:</string>
-    <string name="hintDataNasc">1970/01/01</string>
-    <string name="tvAltura">Height (centimeters)</string>
-    <string name="hintAltura">200</string>
-    <string name="tvPeso">Weight (kilos)</string>
-    <string name="hintPeso">100</string>
+    <string name="tvPassword">Password:</string>
+    <string name="hintPassword">*******</string>
+    <string name="tvConfPassword">Confirm password:</string>
+    <string name="hintConfPassword">*******</string>
+    <string name="tvName">Full name:</string>
+    <string name="hintName">Joe Doe</string>
+    <string name="tvBirthDate">Birth date:</string>
+    <string name="hintBirthDate">1970/01/01</string>
+    <string name="tvHeight">Height (centimeters)</string>
+    <string name="hintHeight">200</string>
+    <string name="tvWeight">Weight (kilos)</string>
+    <string name="hintWeight">100</string>
     <string name="tvIdealBPM">Target heart rate</string>
     <string name="hintAlvoBPM">70</string>
-    <string name="btContinuar">Continue</string>
+    <string name="btContinue">Continue</string>
     <string name="toastUsrOK">User successfully signed up</string>
-    <string name="toastUsrFalha">Error on signing up...</string>
-    <string name="toastUsrAtOK">User successfully updated!</string>
-    <string name="toastUsrAtFalha">Error on updating the user...</string>
-    <string name="toastUsrExiste">E-mail already registered!</string>
-    <string name="toastSenhaInv">Passwords do not match</string>
+    <string name="toastUsrFail">Error on signing up...</string>
+    <string name="toastUsrUpdOK">User successfully updated!</string>
+    <string name="toastUsrUpdFail">Error on updating the user...</string>
+    <string name="toastUsrExists">E-mail already registered!</string>
+    <string name="toastNoMatchPass">Passwords do not match</string>
     <string name="toastPrefsOK">Preferences successfully saved!</string>
-    <string name="toastPrefsFalha">Error on saving preferences...</string>
+    <string name="toastPrefsFail">Error on saving preferences...</string>
 
     <!-- Tela Cadastro/Edicao Indicador -->
     <string name="title_activity_tela_cadastro_indicador">Cadastrar indicador</string>
@@ -117,8 +117,8 @@
 
     <!-- Diálogos -->
     <string name="tvLogonFalha">Falha no login!</string>
-    <string name="tvLogonErrado">E-mail ou senha incorretos</string>
-    <string name="tvLogonVazio">Por favor, digite seu e-mail e senha</string>
+    <string name="tvLogonErrado">E-mail ou password incorretos</string>
+    <string name="tvLogonVazio">Por favor, digite seu e-mail e password</string>
     <string name="tvFalhaConexao">Falha de rede!</string>
     <string name="tvServidorNaoResponde">Falha ao obter dados do servidor.
         \nPor favor, verifique sua conexão de rede.</string>

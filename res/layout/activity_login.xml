@@ -48,7 +48,7 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dp"
-		        android:text="@string/tvSenha"
+		        android:text="@string/tvPassword"
 		        android:textAppearance="?android:attr/textAppearanceMedium" />
 		    
 		    <EditText
@@ -56,7 +56,7 @@
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 		        android:layout_marginTop="10dp"
-			    android:hint="@string/hintSenha"
+			    android:hint="@string/hintPassword"
 			    android:inputType="textPassword"
 			    android:textSize="22sp" />
 		    

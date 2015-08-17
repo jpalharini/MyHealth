@@ -155,12 +155,12 @@ public class UserRegister extends Activity {
 						finish();
 					}
 					else {
-						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrFalha), Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrFail), Toast.LENGTH_LONG).show();
 					}
 					
 				}
 				else {
-					Toast.makeText(getApplicationContext(), getString(R.string.toastSenhaInv), Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.toastNoMatchPass), Toast.LENGTH_LONG).show();
 				}
 			}
 		});

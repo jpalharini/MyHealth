@@ -85,7 +85,7 @@ public class MonthTab extends Fragment {
 		Intent intent = getActivity().getIntent();
 		intTipoIndicador = intent.getIntExtra("tipoSelecionado", 0);
 		
-		intIdUsuario = sessao.getIdUsuario();
+		intIdUsuario = sessao.getUserID();
 		stDataBusca = ts.getDataAtualBusca();
 		
 		vtMedias1 = new Double[difData+1];
