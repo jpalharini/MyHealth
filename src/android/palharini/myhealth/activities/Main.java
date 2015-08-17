@@ -166,7 +166,7 @@ public class Main extends Activity {
 	}
 	
 	public void calcularBPMIdeal () {
-		
+
 		intIdade = usrDAO.buscarIdadeUsuario(sessao.getIdUsuario());
 		
 		arrIndicadores = indDAO.buscarIndicadoresTipo(sessao.getIdUsuario(), 2);
@@ -185,6 +185,7 @@ public class Main extends Activity {
 			bpmDescansoMedia = bpmDescansoFinal / 3;
 			bpmMaximo = 220 - intIdade;
 			bpmReserva = bpmMaximo - bpmDescansoMedia;
+
 			bpmAlvoLimMin = (bpmReserva * (60 / 100)) + bpmDescansoMedia;
 			bpmAlvoLimMax = (bpmReserva * (80 / 100)) + bpmDescansoMedia;
 			bpmAlvo = (bpmAlvoLimMin + bpmAlvoLimMax) / 2;
