@@ -34,7 +34,7 @@ public class DatePickerBox extends DialogFragment implements DatePickerDialog.On
     @Override
     public void onDateSet(DatePicker view, int ano, int mes, int dia) {
        String dataNasc = String.valueOf(dia) + "/" + String.valueOf(mes + 1 ) + "/" + String.valueOf(ano);
-       String dataNascAndroid = ts.getDataAndroid(dataNasc);
+       String dataNascAndroid = ts.getDateAndroid(dataNasc);
        editDataNasc.setText(dataNascAndroid);
 	       
     }

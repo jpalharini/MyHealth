@@ -58,7 +58,7 @@ public class PreferencesRegister extends Activity {
 		chLembreteBPM = (CheckBox) findViewById(R.id.chLembreteBPM);
 		etHoraLembreteBPM = (EditText) findViewById(R.id.horaLembreteBPM);
 		
-		btSalvar = (Button) findViewById(R.id.btSalvar);
+		btSalvar = (Button) findViewById(R.id.btSave);
 		
 		prefsDAO = new PreferencesDAO();
 				

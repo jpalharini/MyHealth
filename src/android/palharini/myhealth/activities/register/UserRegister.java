@@ -1,17 +1,11 @@
 package android.palharini.myhealth.activities.register;
 
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.R;
+import android.palharini.myhealth.activities.CryptPassword;
 import android.palharini.myhealth.date_time.DateFormat;
 import android.palharini.myhealth.date_time.pickers.DatePickerBox;
 import android.palharini.myhealth.db.dao.IndicatorDAO;
@@ -25,24 +19,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class UserRegister extends Activity {
 
-	private SessionManager sessao;
-	private DateFormat fd;
+	private User user;
+	private UserDAO userDAO;
+	private IndicatorDAO indicatorDAO;
+
+	private SessionManager sessionManager;
+	private DateFormat dateFormat;
+    private CryptPassword cryptPassword;
 	
-	private EditText etEmail, etSenha, etConfSenha, etNome, etDataNasc, etAltura, etPeso;
-	private Button btContinuar;	
+	private EditText etEmail, etPassword, etConfPassword, etName, etBirthDate, etHeight, etWeight;
+	private Button btContinue;
 	
-	private String stEmail, stNome, stSenha, stConfSenha, stCriptSenha, stDataNasc, stDataNascSQL;
-	private String[] arrUnidades;
-	private List<String> lsUnidades;
-	private Double dbAltura, dbPeso;
-	private Boolean blUsr, blIndAltura, blIndPeso;
-	
-	private User usrUsuario;
-	private UserDAO usrDAO;
-	private IndicatorDAO indDAO;
-	
+	private String strEmail, strName, strPassword, strConfPassword, strCryptPassword, strBirthDate, strBirthDate_SQL;
+	private String[] strArrUnits;
+	private List<String> lsUnits;
+	private Double dbHeight, dbWeight;
+	private Boolean blUser, blHeightInd, blWeightInd;
+
 	private Intent irTelaCadastroPreferencias;
 	
 	@Override
@@ -55,23 +53,25 @@ public class UserRegister extends Activity {
 		}
 		
 		setContentView(R.layout.activity_user_register);
-		
-		fd = new DateFormat();
-		usrDAO = new UserDAO();
-		indDAO = new IndicatorDAO();
-		sessao = new SessionManager(getApplicationContext());
-		
+
+        userDAO = new UserDAO();
+        indicatorDAO = new IndicatorDAO();
+
+        sessionManager = new SessionManager(getApplicationContext());
+        dateFormat = new DateFormat();
+        cryptPassword = new CryptPassword();
+
 		etEmail = (EditText) findViewById(R.id.etEmail);
-		etSenha = (EditText) findViewById(R.id.etSenha);
-		etConfSenha = (EditText) findViewById(R.id.etConfSenha);
-		etNome = (EditText) findViewById(R.id.etNome);
-		etDataNasc = (EditText) findViewById(R.id.etNasc);
-		etAltura = (EditText) findViewById(R.id.etAltura);
-		etPeso = (EditText) findViewById(R.id.etPeso);
+		etPassword = (EditText) findViewById(R.id.etPassword);
+		etConfPassword = (EditText) findViewById(R.id.etConfPassword);
+		etName = (EditText) findViewById(R.id.etName);
+		etBirthDate = (EditText) findViewById(R.id.etBirthDate);
+		etHeight = (EditText) findViewById(R.id.etHeight);
+		etWeight = (EditText) findViewById(R.id.etWeight);
 		
-		btContinuar = (Button) findViewById(R.id.btContinuar);
+		btContinue = (Button) findViewById(R.id.btContinue);
 		
-		etDataNasc.setOnClickListener(new EditText.OnClickListener () {
+		etBirthDate.setOnClickListener(new EditText.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -81,74 +81,62 @@ public class UserRegister extends Activity {
 			
 		});
 		
-		btContinuar.setOnClickListener(new OnClickListener() {
+		btContinue.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick (View v){
 				
-				stEmail = etEmail.getText().toString();
-				stNome = etNome.getText().toString();
-				dbAltura = Double.parseDouble(etAltura.getText().toString());
-				dbPeso = Double.parseDouble(etPeso.getText().toString());
+				strEmail = etEmail.getText().toString();
+				strName = etName.getText().toString();
+				dbHeight = Double.parseDouble(etHeight.getText().toString());
+				dbWeight = Double.parseDouble(etWeight.getText().toString());
 
-				stSenha = etSenha.getText().toString();
-				stConfSenha = etConfSenha.getText().toString();
-				stCriptSenha = null;
+				strPassword = etPassword.getText().toString();
+				strConfPassword = etConfPassword.getText().toString();
+				strCryptPassword = null;
 				
-				if (stSenha.equals(stConfSenha)){
-					try {
-						MessageDigest md = MessageDigest.getInstance("MD5");
-						md.update(stSenha.getBytes("UTF-8"));
-						BigInteger hash = new BigInteger(1, md.digest());
-						stCriptSenha = hash.toString(16);
-					} catch (NoSuchAlgorithmException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (UnsupportedEncodingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				if (strPassword.equals(strConfPassword)){
+					strCryptPassword = cryptPassword.encryptPassword(strPassword);
 					
-					stDataNasc = etDataNasc.getText().toString();
-					stDataNascSQL = fd.getDataSQL(stDataNasc);
+					strBirthDate = etBirthDate.getText().toString();
+					strBirthDate_SQL = dateFormat.getDateSQL(strBirthDate);
 					
-					usrDAO = new UserDAO();
-					blUsr = usrDAO.cadastrarUsuario(new User(
-							0, 
-							stEmail,
-							stCriptSenha,
-							stNome, 
-							stDataNascSQL
+					blUser = userDAO.cadastrarUsuario(new User(
+							0,
+							strEmail,
+							strCryptPassword,
+							strName,
+							strBirthDate_SQL
 							));
 					
-					usrUsuario = usrDAO.buscarUsuarioEmail(stEmail);
+					user = userDAO.searchUserByEmail(strEmail);
 					
-					arrUnidades = getResources().getStringArray(R.array.lsUnidades);
-					lsUnidades = Arrays.asList(arrUnidades);
+					strArrUnits = getResources().getStringArray(R.array.lsUnidades);
+					lsUnits = Arrays.asList(strArrUnits);
 					
-					blIndAltura = indDAO.cadastrarIndicador(new Indicator(
+					blHeightInd = indicatorDAO.cadastrarIndicador(new Indicator(
 							0,
 							0,
-							usrUsuario.getId(),
-							dbAltura,
+							user.getId(),
+							dbHeight,
 							0.0,
-							lsUnidades.get(0),
-							fd.getDataAtualSQL(),
-							fd.getHorarioAtualSQL()
+							lsUnits.get(0),
+							dateFormat.getDataAtualSQL(),
+							dateFormat.getHorarioAtualSQL()
 							));
 					
-					blIndPeso = indDAO.cadastrarIndicador(new Indicator(
+					blWeightInd = indicatorDAO.cadastrarIndicador(new Indicator(
 							0,
 							1,
-							usrUsuario.getId(),
-							dbPeso,
+							user.getId(),
+							dbWeight,
 							0.0,
-							lsUnidades.get(1),
-							fd.getDataAtualSQL(),
-							fd.getHorarioAtualSQL()
+							lsUnits.get(1),
+							dateFormat.getDataAtualSQL(),
+							dateFormat.getHorarioAtualSQL()
 							));
 					
-					if (blUsr && blIndAltura && blIndPeso) {
-						sessao.criarSessao(usrUsuario.getId(), usrUsuario.getNome(), usrUsuario.getEmail());
+					if (blUser && blHeightInd && blWeightInd) {
+						sessionManager.criarSessao(user.getId(), user.getNome(), user.getEmail());
 						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrOK), Toast.LENGTH_LONG).show();
 						irTelaCadastroPreferencias = new Intent(getApplicationContext(), PreferencesRegister.class);
 						startActivity(irTelaCadastroPreferencias);

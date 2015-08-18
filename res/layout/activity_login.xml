@@ -52,7 +52,7 @@
 		        android:textAppearance="?android:attr/textAppearanceMedium" />
 		    
 		    <EditText
-			    android:id="@+id/etSenha"
+			    android:id="@+id/etPassword"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 		        android:layout_marginTop="10dp"
@@ -78,7 +78,7 @@
 		        android:textAppearance="?android:attr/textAppearanceMedium" />
 		    
 		    <Button
-			    android:id="@+id/btCadastre"
+			    android:id="@+id/btRegister"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 		        android:layout_marginTop="5dp"

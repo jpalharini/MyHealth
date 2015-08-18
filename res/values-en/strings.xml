@@ -5,7 +5,7 @@
 
     <!-- Dados Indicador -->
     <string name="spTipo">Select the type:</string>
-    <string-array name="lsTipos">
+    <string-array name="lsTypes">
         <item>Height</item>
         <item>Weight</item>
         <item>Heart Rate</item>

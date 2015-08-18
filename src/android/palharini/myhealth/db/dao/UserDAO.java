@@ -23,7 +23,7 @@ public class UserDAO {
 	private static final String UPDATE = "atualizarUsuario";
 	private static final String UPDATE_BMI_TARGET = "atualizarAlvoBPM";
 	private static final String SEARCH = "searchUser";
-	private static final String SEARCH_EMAIL = "buscarUsuarioEmail";
+	private static final String SEARCH_EMAIL = "searchUserByEmail";
 	private static final String SEARCH_AGE = "selectUserAge";
 
 	public boolean cadastrarUsuario (User user) {
@@ -36,7 +36,7 @@ public class UserDAO {
 		usr.addProperty("email", user.getEmail());
 		usr.addProperty("senha", user.getPassword());
 		usr.addProperty("nome", user.getNome());
-		usr.addProperty("dataNascimento", user.getDataNascimento());
+		usr.addProperty("dataNascimento", user.getBirthDate());
 		
 		cadastrarUsuario.addSoapObject(usr);
 		
@@ -72,7 +72,7 @@ public class UserDAO {
 		usr.addProperty("email", user.getEmail());
 		usr.addProperty("senha", user.getPassword());
 		usr.addProperty("nome", user.getNome());
-		usr.addProperty("dataNascimento", user.getDataNascimento());
+		usr.addProperty("dataNascimento", user.getBirthDate());
 		usr.addProperty("alvoBPM", user.getAlvoBPM());
 		
 		atualizarUsuario.addSoapObject(usr);
@@ -171,7 +171,7 @@ public class UserDAO {
 		return dados;
 	}
 	
-	public User buscarUsuarioEmail(String email){
+	public User searchUserByEmail(String email){
 		User usr = null;
 		
 		SoapObject buscarUsuarioEmail = new SoapObject (NAMESPACE, SEARCH_EMAIL);

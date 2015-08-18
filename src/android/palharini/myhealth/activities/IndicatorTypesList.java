@@ -23,18 +23,18 @@ public class IndicatorTypesList extends Activity {
 		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
 				this, 
 				android.R.layout.simple_list_item_1, 
-				getResources().getStringArray(R.array.lsTipos));
+				getResources().getStringArray(R.array.lsTypes));
 		
 		lViewTipos.setAdapter(listAdapter);
 		
 		lViewTipos.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> adapter, View view, int posicao, long arg3) {
+			public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
 				// TODO Auto-generated method stub
-				Intent irTelaGrafico = new Intent(IndicatorTypesList.this, TabsAdapter.class);
-				irTelaGrafico.putExtra("tipoSelecionado", posicao);
-				startActivity(irTelaGrafico);
+				Intent goGraphScreen = new Intent(IndicatorTypesList.this, TabsAdapter.class);
+				goGraphScreen.putExtra("tipoSelecionado", position);
+				startActivity(goGraphScreen);
 			}
 		});
 		

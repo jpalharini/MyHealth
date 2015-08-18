@@ -72,7 +72,7 @@ public class IndicatorsListAdapter extends BaseAdapter {
 			holder.tvMeasure.setText(indicator.getMeasure1().toString());
 			holder.tvUnit.setText(indicator.getUnidade());
 			
-//			String stDate = df.getDataAndroid(indicator.getData());
+//			String stDate = df.getDateAndroid(indicator.getData());
 //			String stTime = df.getHorarioAndroid(indicator.getHora());
 			
 			holder.tvDate.setText(indicator.getData());

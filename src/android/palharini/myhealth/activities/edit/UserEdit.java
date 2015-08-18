@@ -1,13 +1,9 @@
 package android.palharini.myhealth.activities.edit;
 
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.palharini.myhealth.R;
+import android.palharini.myhealth.activities.CryptPassword;
 import android.palharini.myhealth.date_time.DateFormat;
 import android.palharini.myhealth.date_time.pickers.DatePickerBox;
 import android.palharini.myhealth.db.dao.UserDAO;
@@ -21,44 +17,49 @@ import android.widget.Toast;
 
 public class UserEdit extends Activity {
 
-	private SessionManager sessao;
-	private DateFormat fd;
+    private UserDAO userDAO;
+    private User user;
+
+    private SessionManager sessionManager;
+	private DateFormat dateFormat;
+    private CryptPassword cryptPassword;
 	
-	private EditText etEmail, etSenha, etConfSenha, etNome, etDataNasc;
-	private Button btSalvar;	
+	private EditText etEmail, etPassword, etConfPassword, etName, etBirthDate;
+	private Button btSave;
 	
-	private String stEmail, stNome, stSenha, stConfSenha, stCriptSenha, stDataNasc, stDataNascSQL;
-	private Boolean blUsr;
-	
-	private UserDAO usrDAO;
-	private User usrUsuario;
+	private String strEmail, strName, strPassword, strConfPassword, strCryptPassword, strBirthDate, strBirthDate_SQL;
+	private Boolean blUser;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_edit);
-		
-		sessao = new SessionManager(getApplicationContext());
-		
-		usrDAO = new UserDAO();
-		usrUsuario = usrDAO.searchUser(sessao.getUserID());
-		
-		fd = new DateFormat();
-		
-		etEmail = (EditText) findViewById(R.id.etEmail);
-		etSenha = (EditText) findViewById(R.id.etSenha);
-		etConfSenha = (EditText) findViewById(R.id.etConfSenha);
-		etNome = (EditText) findViewById(R.id.etNome);
-		etDataNasc = (EditText) findViewById(R.id.etNasc);
-		btSalvar = (Button) findViewById(R.id.btSalvar);
-		
-		etEmail.setText(usrUsuario.getEmail());
-		etNome.setText(usrUsuario.getNome());
 
-		stDataNasc = fd.getDataAndroid(usrUsuario.getDataNascimento());
-		etDataNasc.setText(stDataNasc);
+		userDAO = new UserDAO();
+		user = userDAO.searchUser(sessionManager.getUserID());
+
+		etEmail = (EditText) findViewById(R.id.etEmail);
+		etPassword = (EditText) findViewById(R.id.etPassword);
+		etConfPassword = (EditText) findViewById(R.id.etConfPassword);
+		etName = (EditText) findViewById(R.id.etName);
+		etBirthDate = (EditText) findViewById(R.id.etBirthDate);
+		btSave = (Button) findViewById(R.id.btSave);
+
+        dateFormat = new DateFormat();
+
+        // Create session
+        sessionManager = new SessionManager(getApplicationContext());
+
+        // Call password-encrypting class
+        cryptPassword = new CryptPassword();
+
+        etEmail.setText(user.getEmail());
+        etName.setText(user.getNome());
+
+        strBirthDate = dateFormat.getDateAndroid(user.getBirthDate());
+        etBirthDate.setText(strBirthDate);
 						
-		etDataNasc.setOnClickListener(new OnClickListener () {
+		etBirthDate.setOnClickListener(new OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -68,42 +69,30 @@ public class UserEdit extends Activity {
 			
 		});
 		
-		btSalvar.setOnClickListener(new OnClickListener() {
+		btSave.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick (View v){
 			
-				stSenha = etSenha.getText().toString();
-				stConfSenha = etConfSenha.getText().toString();
-				stCriptSenha = null;
-				
-				if (stSenha.equals(stConfSenha)){
-					try {
-						MessageDigest md = MessageDigest.getInstance("MD5");
-						md.update(stSenha.getBytes("UTF-8"));
-						BigInteger hash = new BigInteger(1, md.digest());
-						stCriptSenha = hash.toString(16);
-					} catch (NoSuchAlgorithmException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (UnsupportedEncodingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					stDataNascSQL = fd.getDataSQL(etDataNasc.getText().toString());
+				strPassword = etPassword.getText().toString();
+				strConfPassword = etConfPassword.getText().toString();
 
-					stEmail = etEmail.getText().toString();
-					stNome = etNome.getText().toString();
+				if (strPassword.equals(strConfPassword)){
+					strCryptPassword = cryptPassword.encryptPassword(strPassword);
+
+					strBirthDate_SQL = dateFormat.getDateSQL(etBirthDate.getText().toString());
+
+					strEmail = etEmail.getText().toString();
+					strName = etName.getText().toString();
 					
-					blUsr = usrDAO.atualizarUsuario(new User(
-							usrUsuario.getId(), 
-							stEmail,
-							stCriptSenha,
-							stNome, 
-							stDataNascSQL,
+					blUser = userDAO.atualizarUsuario(new User(
+							user.getId(),
+                            strEmail,
+                            strCryptPassword,
+                            strName,
+                            strBirthDate_SQL,
 							0
 					));
-					if (blUsr) {
+					if (blUser) {
 						Toast.makeText(getApplicationContext(), getString(R.string.toastUsrUpdOK), Toast.LENGTH_LONG).show();
 	                    finish();
 					}

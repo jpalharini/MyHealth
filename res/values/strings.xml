@@ -47,7 +47,7 @@
 	    <string name="tvMedida1">Defina o valor da medida:</string>
 	    <string name="tvMedida2">Defina o valor da segunda medida:</string>
 	    <string name="spTipo">Selecione o tipo</string>
-	    <string-array name="lsTipos">
+	    <string-array name="lsTypes">
 	        <item>Altura</item>
 	        <item>Peso</item>
 	        <item>Freq. Cardíaca</item>

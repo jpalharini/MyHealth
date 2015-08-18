@@ -59,7 +59,7 @@ public class PreferencesEdit extends Activity {
 		chLembreteBPM = (CheckBox) findViewById(R.id.chLembreteBPM);
 		etHoraLembreteBPM = (EditText) findViewById(R.id.horaLembreteBPM);
 		
-		btSalvar = (Button) findViewById(R.id.btSalvar);
+		btSalvar = (Button) findViewById(R.id.btSave);
 		btLogout = (Button) findViewById(R.id.btLogout);
 		
         caixa = new DialogBox();

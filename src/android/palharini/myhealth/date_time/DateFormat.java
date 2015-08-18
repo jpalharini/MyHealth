@@ -42,7 +42,7 @@ public class DateFormat {
     private String horario = 
     		String.valueOf(hora) + ":" + String.valueOf(minuto) + ":" + String.valueOf(segundo);
         
-    public String getDataSQL(String data) {
+    public String getDateSQL(String data) {
 	    
 	    try {
 	    	dataDate = sdfDataSQL.parse(data);
@@ -78,7 +78,7 @@ public class DateFormat {
 		return sdfHoraSQL.format(horaDate);
 	}
 	
-	public String getDataAndroid(String newDate) {
+	public String getDateAndroid(String newDate) {
 	    
 	    try {
 	    	dataDate = sdfDataAndroid.parse(newDate);

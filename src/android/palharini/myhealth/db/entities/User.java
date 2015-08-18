@@ -63,7 +63,7 @@ public class User {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getDataNascimento() {
+	public String getBirthDate() {
 		return dataNascimento;
 	}
 	public void setDataNascimento(String dataNascimento) {

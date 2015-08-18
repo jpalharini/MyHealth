@@ -59,11 +59,11 @@ public class IndicatorEdit extends Activity {
 		etMedida2 = (EditText) findViewById(R.id.etMedida2);
 		tvUnidade2 = (TextView) findViewById(R.id.tvUnidade2);
 		
-		btSalvar = (Button) findViewById(R.id.btSalvar);
+		btSalvar = (Button) findViewById(R.id.btSave);
 		btExcluir = (Button) findViewById(R.id.btExcluir);
 		
 		adTipos = new ArrayAdapter<String>(
-				this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.lsTipos));
+				this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.lsTypes));
 		adTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spTipo.setAdapter(adTipos);
 		

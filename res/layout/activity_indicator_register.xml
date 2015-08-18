@@ -101,7 +101,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btSalvar"
+                android:id="@+id/btSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
