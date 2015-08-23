@@ -56,7 +56,7 @@ public class UserEdit extends Activity {
         etEmail.setText(user.getEmail());
         etName.setText(user.getNome());
 
-        strBirthDate = dateFormat.getDateAndroid(user.getBirthDate());
+        strBirthDate = dateFormat.getAndroidDate(user.getBirthDate());
         etBirthDate.setText(strBirthDate);
 						
 		etBirthDate.setOnClickListener(new OnClickListener () {
@@ -79,7 +79,7 @@ public class UserEdit extends Activity {
 				if (strPassword.equals(strConfPassword)){
 					strCryptPassword = cryptPassword.encryptPassword(strPassword);
 
-					strBirthDate_SQL = dateFormat.getDateSQL(etBirthDate.getText().toString());
+					strBirthDate_SQL = dateFormat.getSqlDate(etBirthDate.getText().toString());
 
 					strEmail = etEmail.getText().toString();
 					strName = etName.getText().toString();

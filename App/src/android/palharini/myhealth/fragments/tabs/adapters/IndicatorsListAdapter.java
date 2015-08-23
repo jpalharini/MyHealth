@@ -1,7 +1,5 @@
 package android.palharini.myhealth.fragments.tabs.adapters;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.palharini.myhealth.R;
@@ -11,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class IndicatorsListAdapter extends BaseAdapter {
 	
@@ -70,13 +70,13 @@ public class IndicatorsListAdapter extends BaseAdapter {
 		
 		if (indicator != null) {
 			holder.tvMeasure.setText(indicator.getMeasure1().toString());
-			holder.tvUnit.setText(indicator.getUnidade());
+			holder.tvUnit.setText(indicator.getMeasUnit());
 			
-//			String stDate = df.getDateAndroid(indicator.getData());
-//			String stTime = df.getHorarioAndroid(indicator.getHora());
+//			String stDate = df.getAndroidDate(indicator.getData());
+//			String stTime = df.getAndroidTime(indicator.getHora());
 			
-			holder.tvDate.setText(indicator.getData());
-			holder.tvTime.setText(indicator.getHora());
+			holder.tvDate.setText(indicator.getStrDate());
+			holder.tvTime.setText(indicator.getStrTime());
 			
 		}
 

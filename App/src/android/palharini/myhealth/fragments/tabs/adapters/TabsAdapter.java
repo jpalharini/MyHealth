@@ -8,8 +8,12 @@ import android.palharini.myhealth.R;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
+import java.util.List;
+
 public class TabsAdapter extends FragmentActivity implements ActionBar.TabListener {
-		
+
+	private String[] strArrTabs;
+    private List<String> lsStrTabs;
 	private ViewPager viewPager;
 	private ActionBar actionBar;
 	
@@ -18,7 +22,8 @@ public class TabsAdapter extends FragmentActivity implements ActionBar.TabListen
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_indicators);
+
+        setContentView(R.layout.activity_indicators);
 
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
@@ -32,12 +37,10 @@ public class TabsAdapter extends FragmentActivity implements ActionBar.TabListen
         actionBar.addTab(actionBar.newTab().setText(R.string.abaMes).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.abaAno).setTabListener(this));
 	
-		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			 
 		    @Override
 		    public void onPageSelected(int position) {
-		        // on changing the page
-		        // make respected tab selected
 		        actionBar.setSelectedNavigationItem(position);
 		    }
 		 

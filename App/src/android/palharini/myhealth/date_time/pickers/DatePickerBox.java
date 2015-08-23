@@ -1,7 +1,6 @@
 package android.palharini.myhealth.date_time.pickers;
 
-import java.util.Calendar;
-
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -10,12 +9,16 @@ import android.palharini.myhealth.date_time.DateFormat;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.util.Calendar;
+
+@SuppressLint("ValidFragment")
 public class DatePickerBox extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
 	DateFormat ts = new DateFormat();
 	public EditText editDataNasc;
-	
-	public DatePickerBox(EditText datePicker) {
+
+	@SuppressLint("ValidFragment")
+    public DatePickerBox(EditText datePicker) {
 		editDataNasc = datePicker;
 	}
 	
@@ -34,7 +37,7 @@ public class DatePickerBox extends DialogFragment implements DatePickerDialog.On
     @Override
     public void onDateSet(DatePicker view, int ano, int mes, int dia) {
        String dataNasc = String.valueOf(dia) + "/" + String.valueOf(mes + 1 ) + "/" + String.valueOf(ano);
-       String dataNascAndroid = ts.getDateAndroid(dataNasc);
+       String dataNascAndroid = ts.getAndroidDate(dataNasc);
        editDataNasc.setText(dataNascAndroid);
 	       
     }

@@ -98,7 +98,7 @@ public class UserRegister extends Activity {
 					strCryptPassword = cryptPassword.encryptPassword(strPassword);
 					
 					strBirthDate = etBirthDate.getText().toString();
-					strBirthDate_SQL = dateFormat.getDateSQL(strBirthDate);
+					strBirthDate_SQL = dateFormat.getSqlDate(strBirthDate);
 					
 					blUser = userDAO.cadastrarUsuario(new User(
 							0,
@@ -120,8 +120,8 @@ public class UserRegister extends Activity {
 							dbHeight,
 							0.0,
 							lsUnits.get(0),
-							dateFormat.getDataAtualSQL(),
-							dateFormat.getHorarioAtualSQL()
+							dateFormat.getCurrentSqlDate(),
+							dateFormat.getCurrentSqlTime()
 							));
 					
 					blWeightInd = indicatorDAO.cadastrarIndicador(new Indicator(
@@ -131,8 +131,8 @@ public class UserRegister extends Activity {
 							dbWeight,
 							0.0,
 							lsUnits.get(1),
-							dateFormat.getDataAtualSQL(),
-							dateFormat.getHorarioAtualSQL()
+							dateFormat.getCurrentSqlDate(),
+							dateFormat.getCurrentSqlTime()
 							));
 					
 					if (blUser && blHeightInd && blWeightInd) {

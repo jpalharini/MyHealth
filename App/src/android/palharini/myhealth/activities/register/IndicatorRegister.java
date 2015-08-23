@@ -1,8 +1,5 @@
 package android.palharini.myhealth.activities.register;
 
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,14 +10,11 @@ import android.palharini.myhealth.db.dao.IndicatorDAO;
 import android.palharini.myhealth.db.entities.Indicator;
 import android.palharini.myhealth.session.SessionManager;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class IndicatorRegister extends Activity {
 
@@ -65,11 +59,11 @@ public class IndicatorRegister extends Activity {
 		indDAO = new IndicatorDAO();
 		
 		idUsuario = sessao.getUserID();
-		dataAtual = fd.getDataAtualSQL();
-		horarioAtual = fd.getHorarioAtualSQL();
+		dataAtual = fd.getCurrentSqlDate();
+		horarioAtual = fd.getCurrentSqlTime();
 		
 		spTipo = (Spinner) findViewById(R.id.spTipo);
-		adTipos = new ArrayAdapter<String>(
+		adTipos = new ArrayAdapter<>(
 				this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.lsTypes));
 		adTipos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spTipo.setAdapter(adTipos);

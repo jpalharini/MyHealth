@@ -3,35 +3,35 @@ package android.palharini.myhealth.db.entities;
 public class Indicator {
 
 	private Integer id;
-	private Integer idTipo;
-	private Integer idUsuario;
-	private Double medida1;
-	private Double medida2;
-	private String unidade;
-	private String data;
-	private String hora;
+	private Integer typeID;
+	private Integer userID;
+	private Double measure1;
+	private Double measure2;
+	private String measUnit;
+	private String strDate;
+	private String strTime;
 	
 	public Indicator(){}
 
-	public Indicator(Integer id, Integer idTipo, Integer idUsuario, Double medida1, Double medida2,
-			String unidade, String data, String hora) {
+	public Indicator(Integer id, Integer typeID, Integer userID, Double measure1, Double measure2,
+					 String measUnit, String strDate, String strTime) {
 		this.id = id;
-		this.idTipo = idTipo;
-		this.idUsuario = idUsuario;
-		this.medida1 = medida1;
-		this.medida2 = medida2;
-		this.unidade = unidade;
-		this.data = data;
-		this.hora = hora;
+		this.typeID = typeID;
+		this.userID = userID;
+		this.measure1 = measure1;
+		this.measure2 = measure2;
+		this.measUnit = measUnit;
+		this.strDate = strDate;
+		this.strTime = strTime;
 	}
 	
-	public Indicator(Integer id, Integer idTipo, Double medida1, Double medida2,
-			String unidade) {
+	public Indicator(Integer id, Integer typeID, Double measure1, Double measure2,
+					 String measUnit) {
 		this.id = id;
-		this.idTipo = idTipo;
-		this.medida1 = medida1;
-		this.medida2 = medida2;
-		this.unidade = unidade;
+		this.typeID = typeID;
+		this.measure1 = measure1;
+		this.measure2 = measure2;
+		this.measUnit = measUnit;
 	}
 	
 	public Integer getId() {
@@ -42,65 +42,65 @@ public class Indicator {
 		this.id = id;
 	}
 
-	public Integer getIdTipo() {
-		return idTipo;
+	public Integer getTypeID() {
+		return typeID;
 	}
 
-	public void setIdTipo(Integer idTipo) {
-		this.idTipo = idTipo;
+	public void setTypeId(Integer typeID) {
+		this.typeID = typeID;
 	}
 
-	public Integer getIdUsuario() {
-		return idUsuario;
+	public Integer getUserID() {
+		return userID;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUserId(Integer userID) {
+		this.userID = userID;
 	}
 
 	public Double getMeasure1() {
-		return medida1;
+		return measure1;
 	}
 
-	public void setMedida1(Double medida1) {
-		this.medida1 = medida1;
+	public void setMeasure1(Double measure1) {
+		this.measure1 = measure1;
 	}
 	
-	public Double getMedida2() {
-		return medida2;
+	public Double getMeasure2() {
+		return measure2;
 	}
 
-	public void setMedida2(Double medida2) {
-		this.medida2 = medida2;
+	public void setMeasure2(Double measure2) {
+		this.measure2 = measure2;
 	}
 
-	public String getUnidade() {
-		return unidade;
+	public String getMeasUnit() {
+		return measUnit;
 	}
 
-	public void setUnidade(String unidade) {
-		this.unidade = unidade;
+	public void setMeasUnit(String measUnit) {
+		this.measUnit = measUnit;
 	}
 
-	public String getData() {
-		return data;
+	public String getStrDate() {
+		return strDate;
 	}
 
-	public void setData(String data) {
-		this.data = data;
+	public void setStrDate(String strDate) {
+		this.strDate = strDate;
 	}
 
-	public String getHora() {
-		return hora;
+	public String getStrTime() {
+		return strTime;
 	}
 
-	public void setHora(String hora) {
-		this.hora = hora;
+	public void setStrTime(String strTime) {
+		this.strTime = strTime;
 	}
 
 	@Override
 	public String toString() {		
-		return this.data + " " + this.hora;
+		return this.strDate + " " + this.strTime;
 	}
 	
 }

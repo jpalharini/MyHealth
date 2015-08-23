@@ -20,7 +20,7 @@ public class IndicatorTypesList extends Activity {
 		
 		final ListView lViewTipos = (ListView) findViewById(R.id.listViewInd);
 		
-		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
+		ArrayAdapter<String> listAdapter = new ArrayAdapter<>(
 				this, 
 				android.R.layout.simple_list_item_1, 
 				getResources().getStringArray(R.array.lsTypes));

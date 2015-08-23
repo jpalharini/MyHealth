@@ -1,6 +1,6 @@
 package android.palharini.myhealth.fragments.tabs;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -86,7 +86,7 @@ public class WeekTab extends Fragment {
 		intTipoIndicador = intent.getIntExtra("tipoSelecionado", 0);
 		
 		intIdUsuario = sessao.getUserID();
-		stDataBusca = ts.getDataAtualBusca();
+		stDataBusca = ts.getCurrentSqlSearchDate();
 		
 		vtMedias1 = new Double[difData+1];
 		vtMedias2 = new Double[difData+1];
@@ -151,7 +151,7 @@ public class WeekTab extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
 				// TODO Auto-generated method stub
-				Indicator indicSelecionado = new Indicator();
+				Indicator indicSelecionado;
 				indicSelecionado = (Indicator) lvIndicadores.getItemAtPosition(position);
 				Intent irTelaEdicaoIndicador = new Intent(getActivity(), IndicatorEdit.class);
 				irTelaEdicaoIndicador.putExtra("idIndicador", indicSelecionado.getId());

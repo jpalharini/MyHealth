@@ -30,3 +30,7 @@ proguard/
 
 # Eclipse settings
 .settings/
+
+# Output directories
+production/
+test/

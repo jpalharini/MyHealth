@@ -61,16 +61,16 @@
 	    </string-array>
 	    <string name="tvUnidade">unid.</string>
 	    <string-array name="lsUnidades">
-	        <item name="altura">cm</item>
-	        <item name="peso">kg</item>
-	        <item name="bpm">BPM</item>
-	        <item name="pressao">:</item>
-	        <item name="glicose">mg/dL</item>
-	        <item name="hdl">mg/dL</item>
-	        <item name="ldl">mg/dL</item>
-	        <item name="gordCorp">%</item>
-	        <item name="cintura">cm</item>
-	        <item name="triglicerideos">mg/dL</item>
+	        <item>cm</item>
+	        <item>kg</item>
+	        <item>BPM</item>
+	        <item>:</item>
+	        <item>mg/dL</item>
+	        <item>mg/dL</item>
+	        <item>mg/dL</item>
+	        <item>%</item>
+	        <item>cm</item>
+	        <item>mg/dL</item>
 	    </string-array>    
 	    <string name="btSalvar">Salvar</string>
 	    <string name="btExcluir">Excluir indicador</string>
@@ -94,12 +94,12 @@
 	    <string name="tvIMC">Seu IMC atual é:</string>
 	    <string name="IMC">XX.X</string>
 	    <string-array name="faixasIMC">
-	        <item name="0-18.5">Abaixo do peso</item>
-	        <item name="18.6-24.9">Saudável</item>
-	        <item name="25-29.9">Excesso de peso</item>
-	        <item name="30-34.9">Obesidade</item>
-	        <item name="35-39.9">Obesidade severa</item>
-	        <item name="40+">Obesidade mórbida</item>
+	        <item>Abaixo do peso</item>
+	        <item>Saudável</item>
+	        <item>Excesso de peso</item>
+	        <item>Obesidade</item>
+	        <item>Obesidade severa</item>
+	        <item>Obesidade mórbida</item>
 	    </string-array>
 	    <string name="tvStatusIMC">[status]</string>
 	    <string name="tvAlvoBPM">Sua freq. cardíaca ideal é:</string>
@@ -112,9 +112,11 @@
 
     <!-- Tela Indicadores -->
   	    <string name="title_activity_indicator_typeslist">Indicadores</string>
-	    <string name="abaSemana">7 dias</string>
-	    <string name="abaMes">4 semanas</string>
-	    <string name="abaAno">12 meses</string>
+	    <string-array name="tabs">
+            <item>7 dias</item>
+            <item>4 semanas</item>
+            <item>12 meses</item>
+        </string-array>
 	   	<string name="btCadastrarInd">Cadastrar indicador</string>
 
     <!-- Diálogos -->

@@ -1,8 +1,5 @@
 package android.palharini.myhealth.activities.edit;
 
-import java.util.Arrays;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,14 +8,11 @@ import android.palharini.myhealth.db.dao.IndicatorDAO;
 import android.palharini.myhealth.db.entities.Indicator;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class IndicatorEdit extends Activity {
 
@@ -62,7 +56,7 @@ public class IndicatorEdit extends Activity {
 		btDelete = (Button) findViewById(R.id.btExcluir);
 
         // Setting up spinner for type selection
-		adTypes = new ArrayAdapter<String>(
+		adTypes = new ArrayAdapter<>(
 				this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.lsTypes));
 		adTypes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spType.setAdapter(adTypes);
@@ -150,7 +144,7 @@ public class IndicatorEdit extends Activity {
 		indicatorDAO = new IndicatorDAO();
 		indicator = indicatorDAO.buscarIndicadorId(intSelectedIndicator);
 		
-		spType.setSelection(indicator.getIdTipo());
+		spType.setSelection(indicator.getTypeID());
 		etMeasure1.setText(indicator.getMeasure1().toString());
 		
 		btSave.setOnClickListener(new OnClickListener() {

@@ -1,6 +1,6 @@
 package android.palharini.myhealth.fragments.tabs;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -32,7 +32,7 @@ public class MonthTab extends Fragment {
 	private static String periodo = "WEEK";
 	
 	private SessionManager sessao;
-	private DateFormat ts;
+	private DateFormat dateFormat;
 	
 	private IndicatorDAO indDAO;
 	
@@ -55,9 +55,9 @@ public class MonthTab extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.fragment_tab, container, false);
-		
+
 		sessao = new SessionManager(getActivity());
-		ts = new DateFormat();
+		dateFormat = new DateFormat();
 		indDAO = new IndicatorDAO();
 		
 		lvIndicadores = (ListView) view.findViewById(R.id.listViewInd);
@@ -86,7 +86,7 @@ public class MonthTab extends Fragment {
 		intTipoIndicador = intent.getIntExtra("tipoSelecionado", 0);
 		
 		intIdUsuario = sessao.getUserID();
-		stDataBusca = ts.getDataAtualBusca();
+		stDataBusca = dateFormat.getCurrentSqlSearchDate();
 		
 		vtMedias1 = new Double[difData+1];
 		vtMedias2 = new Double[difData+1];
@@ -151,7 +151,7 @@ public class MonthTab extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
 				// TODO Auto-generated method stub
-				Indicator indicSelecionado = new Indicator();
+				Indicator indicSelecionado;
 				indicSelecionado = (Indicator) lvIndicadores.getItemAtPosition(position);
 				Intent irTelaEdicaoIndicador = new Intent(getActivity(), IndicatorEdit.class);
 				irTelaEdicaoIndicador.putExtra("idIndicador", indicSelecionado.getId());

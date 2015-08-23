@@ -38,7 +38,7 @@ public class Main extends Activity {
 	private List<String> listRangesBMI;
 	private String stName;
     private String stFirstName;
-    private String[] vtFaixasIMC;
+    private String[] strArrBmiRanges;
 	private Double dbHeight, dbWeight, dbBMI;
 	private Integer intAge;
 	// Heart Rate measures
@@ -153,8 +153,8 @@ public class Main extends Activity {
 		DecimalFormat decimal = new DecimalFormat("0.0");
 		tvBMI.setText(decimal.format(dbBMI));
 		
-		vtFaixasIMC = getResources().getStringArray(R.array.faixasIMC);
-		listRangesBMI = Arrays.asList(vtFaixasIMC);
+		strArrBmiRanges = getResources().getStringArray(R.array.faixasIMC);
+		listRangesBMI = Arrays.asList(strArrBmiRanges);
 
         // BMI Categories - according to http://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm
 		if (dbBMI > 0 && dbBMI <= 18.5)
