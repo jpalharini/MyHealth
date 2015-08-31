@@ -24,7 +24,7 @@ import java.util.List;
 
 public class Main extends Activity {
 
-	private SessionManager session;
+	private SessionManager sessionManager;
 	
 	private UserDAO usrDAO;
 	private User user;
@@ -66,7 +66,7 @@ public class Main extends Activity {
 		btUserInfo = (Button) findViewById(R.id.btDados);
 		btSettings = (Button) findViewById(R.id.btConfiguracoes);
 		
-		session = new SessionManager(getApplicationContext());
+		sessionManager = new SessionManager(getApplicationContext());
 		
 		usrDAO = new UserDAO();
 
@@ -125,7 +125,7 @@ public class Main extends Activity {
 	
 	public void setUserName() {
 		
-		user = usrDAO.searchUser(session.getUserID());
+		user = usrDAO.searchUser(sessionManager.getUserID());
 		
 		stName = user.getNome();
 		
@@ -141,8 +141,8 @@ public class Main extends Activity {
 	
 	public void calcBMI() {
 		
-		indHeight = indDAO.buscarIndicadorTipo(session.getUserID(), 0, 1);
-		indWeight = indDAO.buscarIndicadorTipo(session.getUserID(), 1, 1);
+		indHeight = indDAO.buscarIndicadorTipo(sessionManager.getUserID(), 0, 1);
+		indWeight = indDAO.buscarIndicadorTipo(sessionManager.getUserID(), 1, 1);
 		
 		dbWeight = indWeight.getMeasure1();
 		dbHeight = indHeight.getMeasure1();
@@ -173,9 +173,9 @@ public class Main extends Activity {
 	
 	public void calcIdealBMI() {
 
-		intAge = usrDAO.selectUserAge(session.getUserID());
+		intAge = usrDAO.selectUserAge(sessionManager.getUserID());
 		
-		arrayIndicators = indDAO.selectIndicatorTypes(session.getUserID(), 2);
+		arrayIndicators = indDAO.selectIndicatorTypes(sessionManager.getUserID(), 2);
 		
 		intFinalRestingBPM =0;
 		

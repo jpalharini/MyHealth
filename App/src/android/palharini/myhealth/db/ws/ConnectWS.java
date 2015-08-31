@@ -1,4 +1,4 @@
-package android.palharini.myhealth.db;
+package android.palharini.myhealth.db.ws;
 
 public class ConnectWS {
 

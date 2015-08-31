@@ -1,6 +1,6 @@
-package android.palharini.myhealth.db.dao;
+package android.palharini.myhealth.db.ws.dao;
 
-import android.palharini.myhealth.db.ConnectWS;
+import android.palharini.myhealth.db.ws.ConnectWS;
 import android.palharini.myhealth.db.MarshalDouble;
 import android.palharini.myhealth.db.entities.Indicator;
 import org.ksoap2.SoapEnvelope;
@@ -21,10 +21,10 @@ public class IndicatorDAO {
 	private static final String NAMESPACE = conexao.getNamespace();
 	private static final Integer TIMEOUT = conexao.getTimeout();
 	
-	public static final String REGISTER = "cadastrarIndicador";
-	public static final String UPDATE = "atualizarIndicador";
-	public static final String DELETE = "excluirIndicador";
-	public static final String SEARCH_ID = "buscarIndicadorId";
+	public static final String REGISTER = "register";
+	public static final String UPDATE = "update";
+	public static final String DELETE = "delete";
+	public static final String SEARCH_ID = "searchById";
 	public static final String SEARCH_TYPE = "buscarIndicadorTipo";
 	public static final String SEARCH_ALL_TYPES = "selectIndicatorTypes";
 	public static final String SEARCH_BY_PERIOD_TYPE = "buscarIndicadoresPeriodoTipo";
@@ -32,26 +32,26 @@ public class IndicatorDAO {
 	public static final String SEARCH_AVG_PERIOD_2 = "buscarMedia2Periodo";
 	
 	
-	public boolean cadastrarIndicador (Indicator indicator) {
+	public boolean register(Indicator indicator) {
 		
-		SoapObject cadastrarIndicador = new SoapObject(NAMESPACE, REGISTER);
+		SoapObject register = new SoapObject(NAMESPACE, REGISTER);
 		
-		SoapObject ind = new SoapObject(NAMESPACE, "indicador");
+		SoapObject object = new SoapObject(NAMESPACE, "indicador");
 		
-		ind.addProperty("id", indicator.getId());
-		ind.addProperty("idTipo", indicator.getTypeID());
-		ind.addProperty("idUsuario", indicator.getUserID());
-		ind.addProperty("medida1", indicator.getMeasure1());
-		ind.addProperty("medida2", indicator.getMeasure2());
-		ind.addProperty("unidade", indicator.getMeasUnit());
-		ind.addProperty("data", indicator.getStrDate());
-		ind.addProperty("hora", indicator.getStrTime());
+		object.addProperty("id", indicator.getId());
+		object.addProperty("idTipo", indicator.getTypeID());
+		object.addProperty("idUsuario", indicator.getUserID());
+		object.addProperty("medida1", indicator.getMeasure1());
+		object.addProperty("medida2", indicator.getMeasure2());
+		object.addProperty("unidade", indicator.getMeasUnit());
+		object.addProperty("data", indicator.getStrDate());
+		object.addProperty("hora", indicator.getStrTime());
 
-		cadastrarIndicador.addSoapObject(ind);
+		register.addSoapObject(object);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		
-		envelope.setOutputSoapObject(cadastrarIndicador);
+		envelope.setOutputSoapObject(register);
 		envelope.implicitTypes = true;
 		MarshalDouble md = new MarshalDouble();
 		md.register(envelope);
@@ -61,9 +61,9 @@ public class IndicatorDAO {
 		try {
 			http.call("urn:" + REGISTER, envelope);
 			
-			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
+			SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 			
-			return Boolean.parseBoolean(resposta.toString());
+			return Boolean.parseBoolean(response.toString());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -72,23 +72,23 @@ public class IndicatorDAO {
 		return true;
 	}
 	
-	public boolean atualizarIndicador(Indicator indicator){
+	public boolean update(Indicator indicator){
 		
-		SoapObject atualizarIndicador = new SoapObject(NAMESPACE, UPDATE);
+		SoapObject update = new SoapObject(NAMESPACE, UPDATE);
 		
-		SoapObject ind = new SoapObject(NAMESPACE, "indicador");
+		SoapObject object = new SoapObject(NAMESPACE, "indicador");
 		
-		ind.addProperty("id", indicator.getId());
-		ind.addProperty("idTipo", indicator.getTypeID());
-		ind.addProperty("medida1", indicator.getMeasure1());
-		ind.addProperty("medida2", indicator.getMeasure2());
-		ind.addProperty("unidade", indicator.getMeasUnit());
+		object.addProperty("id", indicator.getId());
+		object.addProperty("idTipo", indicator.getTypeID());
+		object.addProperty("medida1", indicator.getMeasure1());
+		object.addProperty("medida2", indicator.getMeasure2());
+		object.addProperty("unidade", indicator.getMeasUnit());
 		
-		atualizarIndicador.addSoapObject(ind);
+		update.addSoapObject(object);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		
-		envelope.setOutputSoapObject(atualizarIndicador);
+		envelope.setOutputSoapObject(update);
 		envelope.implicitTypes = true;
 		MarshalDouble md = new MarshalDouble();
 		md.register(envelope);
@@ -98,9 +98,9 @@ public class IndicatorDAO {
 		try {
 			http.call("urn:" + UPDATE, envelope);
 			
-			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
+			SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 			
-			return Boolean.parseBoolean(resposta.toString());
+			return Boolean.parseBoolean(response.toString());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -110,15 +110,15 @@ public class IndicatorDAO {
 		return true;
 	}
 	
-	public boolean excluirIndicador (Integer id) {
+	public boolean delete(Integer id) {
 		
-		SoapObject excluirIndicador = new SoapObject(NAMESPACE, DELETE);
+		SoapObject delete = new SoapObject(NAMESPACE, DELETE);
 		
-		excluirIndicador.addProperty("id", id);
+		delete.addProperty("id", id);
 				
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		
-		envelope.setOutputSoapObject(excluirIndicador);
+		envelope.setOutputSoapObject(delete);
 		envelope.implicitTypes = true;
 		
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
@@ -126,9 +126,9 @@ public class IndicatorDAO {
 		try {
 			http.call("urn:" + DELETE, envelope);
 			
-			SoapPrimitive resposta = (SoapPrimitive) envelope.getResponse();
+			SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 			
-			return Boolean.parseBoolean(resposta.toString());
+			return Boolean.parseBoolean(response.toString());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -138,15 +138,15 @@ public class IndicatorDAO {
 		return true;
 	}
 	
-	public Indicator buscarIndicadorId (Integer id) {
+	public Indicator searchById(Integer id) {
 		Indicator indicator = null;
 		
-		SoapObject buscarIndicadorId = new SoapObject (NAMESPACE, SEARCH_ID);
-		buscarIndicadorId.addProperty("id", id);
+		SoapObject searchById = new SoapObject (NAMESPACE, SEARCH_ID);
+		searchById.addProperty("id", id);
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		
-		envelope.setOutputSoapObject(buscarIndicadorId);
+		envelope.setOutputSoapObject(searchById);
 		envelope.implicitTypes = true;
 		
 		HttpTransportSE http = new HttpTransportSE(URL, TIMEOUT);
@@ -154,18 +154,18 @@ public class IndicatorDAO {
 		try {
 			http.call("urn:" + SEARCH_ID, envelope);
 			
-			SoapObject resposta = (SoapObject) envelope.getResponse();
+			SoapObject response = (SoapObject) envelope.getResponse();
 			
 			indicator = new Indicator();
 			
-			indicator.setId(Integer.parseInt(resposta.getProperty("id").toString()));
-			indicator.setTypeId(Integer.parseInt(resposta.getProperty("idTipo").toString()));
-			indicator.setUserId(Integer.parseInt(resposta.getProperty("idUsuario").toString()));
-			indicator.setMeasure1(Double.parseDouble(resposta.getProperty("medida1").toString()));
-			indicator.setMeasure2(Double.parseDouble(resposta.getProperty("medida2").toString()));
-			indicator.setMeasUnit(resposta.getProperty("unidade").toString());
-			indicator.setStrDate(resposta.getProperty("data").toString());
-			indicator.setStrTime(resposta.getProperty("hora").toString());
+			indicator.setId(Integer.parseInt(response.getProperty("id").toString()));
+			indicator.setTypeId(Integer.parseInt(response.getProperty("idTipo").toString()));
+			indicator.setUserId(Integer.parseInt(response.getProperty("idUsuario").toString()));
+			indicator.setMeasure1(Double.parseDouble(response.getProperty("medida1").toString()));
+			indicator.setMeasure2(Double.parseDouble(response.getProperty("medida2").toString()));
+			indicator.setMeasUnit(response.getProperty("unidade").toString());
+			indicator.setStrDate(response.getProperty("data").toString());
+			indicator.setStrTime(response.getProperty("hora").toString());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

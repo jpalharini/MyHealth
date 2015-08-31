@@ -1,5 +1,6 @@
 package android.palharini.myhealth.activities.edit;
 
+import java.lang.String;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
@@ -26,22 +27,22 @@ import android.widget.Toast;
 
 public class PreferencesEdit extends Activity {
 
-	private DialogBox caixa;
-	private SessionManager sessao;
+	private DialogBox dialogBox;
+	private SessionManager sessionManager;
 	
-	private PreferencesDAO prefsDAO;
-	private Preferences prefs;
+	private PreferencesDAO preferencesDAO;
+	private Preferences preferences;
 	
-	private CheckBox chLembretePeso, chLembreteBPM;
-	private EditText etHoraLembretePeso, etHoraLembreteBPM;
-	private Button btSalvar, btLogout;
+	private CheckBox chWeighReminder, chHrReminder;
+	private EditText etWeighReminderTime, chHrReminderTime;
+	private Button btSave, btLogout;
 	
-	private Calendar calHoraLembretePeso, calHoraLembreteBPM;
-	private Boolean lembretePeso, lembreteBPM;
-	private Boolean blPrefs;
-	private String stHoraLembretePeso, stHoraLembreteBPM;
-	private String[] arrHoraLembretePeso, arrHoraLembreteBPM;
-	private PendingIntent pendingNotificacaoPesoIntent = null, pendingNotificacaoBPMIntent = null;
+	private Calendar calendar;
+	private Boolean blWeighReminder, blHrReminder;
+	private Boolean blPreferences;
+	private String stWeighReminderTime, stHrReminderTime;
+	private String[] stArrReminderTime;
+	private PendingIntent pendIntWeigh = null, pendIntHr = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,42 +54,42 @@ public class PreferencesEdit extends Activity {
 			StrictMode.setThreadPolicy(policy);
 		}
 		
-		chLembretePeso = (CheckBox) findViewById(R.id.chLembretePeso);
-		etHoraLembretePeso = (EditText) findViewById(R.id.horaLembretePeso);
+		chWeighReminder = (CheckBox) findViewById(R.id.chLembretePeso);
+		etWeighReminderTime = (EditText) findViewById(R.id.horaLembretePeso);
 		
-		chLembreteBPM = (CheckBox) findViewById(R.id.chLembreteBPM);
-		etHoraLembreteBPM = (EditText) findViewById(R.id.horaLembreteBPM);
+		chHrReminder = (CheckBox) findViewById(R.id.chLembreteBPM);
+		chHrReminderTime = (EditText) findViewById(R.id.horaLembreteBPM);
 		
-		btSalvar = (Button) findViewById(R.id.btSave);
+		btSave = (Button) findViewById(R.id.btSave);
 		btLogout = (Button) findViewById(R.id.btLogout);
 		
-        caixa = new DialogBox();
+        dialogBox = new DialogBox();
 		
-        sessao = new SessionManager(getApplicationContext());
+        sessionManager = new SessionManager(getApplicationContext());
 		
-		prefsDAO = new PreferencesDAO();
-		prefs = prefsDAO.buscarPreferencias(sessao.getUserID());
+		preferencesDAO = new PreferencesDAO();
+		preferences = preferencesDAO.buscarPreferencias(sessionManager.getUserID());
 		
-		if (prefs != null) {
-			if (prefs.isLembretePeso()) {
-				chLembretePeso.setChecked(true);
-				etHoraLembretePeso.setText(prefs.getHoraLembretePeso().toString());
+		if (preferences != null) {
+			if (preferences.isLembretePeso()) {
+				chWeighReminder.setChecked(true);
+				etWeighReminderTime.setText(preferences.getHoraLembretePeso().toString());
 			}
 			
-			if (prefs.isLembreteBPM()) {
-				chLembreteBPM.setChecked(true);
-				etHoraLembreteBPM.setText(prefs.getHoraLembreteBPM().toString());
+			if (preferences.isLembreteBPM()) {
+				chHrReminder.setChecked(true);
+				chHrReminderTime.setText(preferences.getHoraLembreteBPM().toString());
 			}
 		}
 		else {
-			caixa.showAlertDialog(
+			dialogBox.showAlertDialog(
         			this, 
         			getString(R.string.tvFalhaConexao), 
         			getString(R.string.tvServidorNaoResponde), 
         			false);
 		}
 		
-		etHoraLembretePeso.setOnClickListener(new EditText.OnClickListener () {
+		etWeighReminderTime.setOnClickListener(new EditText.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -98,7 +99,7 @@ public class PreferencesEdit extends Activity {
 			
 		});
 		
-		etHoraLembreteBPM.setOnClickListener(new EditText.OnClickListener () {
+		chHrReminderTime.setOnClickListener(new EditText.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
@@ -108,68 +109,68 @@ public class PreferencesEdit extends Activity {
 			
 		});
 		
-		btSalvar.setOnClickListener(new Button.OnClickListener () {
+		btSave.setOnClickListener(new Button.OnClickListener () {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				lembretePeso = chLembretePeso.isChecked();
-				lembreteBPM = chLembreteBPM.isChecked();
+				blWeighReminder = chWeighReminder.isChecked();
+				blHrReminder = chHrReminder.isChecked();
 				
-				stHoraLembretePeso = etHoraLembretePeso.getText().toString();
-				stHoraLembreteBPM = etHoraLembreteBPM.getText().toString();
+				stWeighReminderTime = etWeighReminderTime.getText().toString();
+				stHrReminderTime = chHrReminderTime.getText().toString();
 				
-				if (lembretePeso) {
-					stHoraLembretePeso = etHoraLembretePeso.getText().toString();
-					arrHoraLembretePeso = stHoraLembretePeso.split(":");
-					calHoraLembretePeso = Calendar.getInstance();
-					calHoraLembretePeso.setTimeInMillis(System.currentTimeMillis());
-					calHoraLembretePeso.set(Calendar.HOUR_OF_DAY, Integer.parseInt(arrHoraLembretePeso[0]));
-					calHoraLembretePeso.set(Calendar.MINUTE, Integer.parseInt(arrHoraLembretePeso[1]));
+				if (blWeighReminder) {
+					stWeighReminderTime = etWeighReminderTime.getText().toString();
+                    stArrReminderTime = new String[]{stHrReminderTime.split(":")};
+					calendar = Calendar.getInstance();
+					calendar.setTimeInMillis(System.currentTimeMillis());
+					calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(stArrReminderTime[0]));
+					calendar.set(Calendar.MINUTE, Integer.parseInt(stArrReminderTime[1]));
 				}
 				else {
-					stHoraLembretePeso = "00:00";
+					stWeighReminderTime = "00:00";
 				}
 				
-				if (lembreteBPM) {
-					stHoraLembreteBPM = etHoraLembreteBPM.getText().toString();
-					arrHoraLembreteBPM = stHoraLembreteBPM.split(":");
-					calHoraLembreteBPM = Calendar.getInstance();
-					calHoraLembreteBPM.setTimeInMillis(System.currentTimeMillis());
-					calHoraLembreteBPM.set(Calendar.HOUR_OF_DAY, Integer.parseInt(arrHoraLembreteBPM[0]));
-					calHoraLembreteBPM.set(Calendar.MINUTE, Integer.parseInt(arrHoraLembreteBPM[1]));
+				if (blHrReminder) {
+					stHrReminderTime = chHrReminderTime.getText().toString();
+					stArrReminderTime = new String[]{stHrReminderTime.split(":")};
+					calendar = Calendar.getInstance();
+					calendar.setTimeInMillis(System.currentTimeMillis());
+					calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(stArrReminderTime[0]));
+					calendar.set(Calendar.MINUTE, Integer.parseInt(stArrReminderTime[1]));
 				}
 				else {
-					stHoraLembreteBPM = "00:00";
+					stHrReminderTime = "00:00";
 				}
 				
 				Preferences prefsAtual = new Preferences(
-						prefs.getId(),
-						sessao.getUserID(),
-						lembretePeso,
-						stHoraLembretePeso,
-						lembreteBPM,
-						stHoraLembreteBPM
+						preferences.getId(),
+						sessionManager.getUserID(),
+						blWeighReminder,
+						stWeighReminderTime,
+						blHrReminder,
+						stHrReminderTime
 						);
 				
-				blPrefs = prefsDAO.atualizarPreferencias(prefsAtual);
+				blPreferences = preferencesDAO.atualizarPreferencias(prefsAtual);
 				
-				if (chLembretePeso.isChecked() != prefs.isLembretePeso()) {
-					if (lembretePeso) {
-						pendingNotificacaoPesoIntent = marcarNotificacaoPeso(calHoraLembretePeso.getTimeInMillis());
+				if (chWeighReminder.isChecked() != preferences.isLembretePeso()) {
+					if (blWeighReminder) {
+						pendIntWeigh = scheduleWeighNotification(calendar.getTimeInMillis());
 					}
 					else {
-						cancelarNotificacao(pendingNotificacaoPesoIntent);
+						cancelNotification(pendIntWeigh);
 					}
-					if (lembreteBPM) {
-						pendingNotificacaoBPMIntent = marcarNotificacaoBPM(calHoraLembreteBPM.getTimeInMillis());
+					if (blHrReminder) {
+						pendIntHr = scheduleHrNotification(calHrReminderTime.getTimeInMillis());
 					}
 					else {
-						cancelarNotificacao(pendingNotificacaoBPMIntent);
+						cancelNotification(pendIntHr);
 					}
 				}
 				
-				if (blPrefs) {
+				if (blPreferences) {
 					Toast.makeText(getApplicationContext(), getString(R.string.toastPrefsOK), Toast.LENGTH_LONG).show();
 					finish();
 				}
@@ -186,9 +187,9 @@ public class PreferencesEdit extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				cancelarNotificacao(pendingNotificacaoPesoIntent);
-				cancelarNotificacao(pendingNotificacaoBPMIntent);
-				sessao.logoutUsuario();
+				cancelNotification(pendIntWeigh);
+				cancelNotification(pendIntHr);
+				sessionManager.logoutUsuario();
 				Intent voltarTelaLogin = new Intent(getApplicationContext(), Login.class);
 				startActivity(voltarTelaLogin);
 			}
@@ -197,7 +198,7 @@ public class PreferencesEdit extends Activity {
 		
 	}
 	
-	public PendingIntent marcarNotificacaoPeso (long horaLembrete) {
+	public PendingIntent scheduleWeighNotification(long reminderTime) {
 		 
         Intent notificacaoIntent = new Intent(this, NotificationReceiver.class);
         notificacaoIntent.putExtra("ID_NOTIFICACAO", 1);
@@ -206,14 +207,14 @@ public class PreferencesEdit extends Activity {
         PendingIntent pendingNotificacaoPesoIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoPesoIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, reminderTime, TimeUnit.DAYS.toMillis(1), pendingNotificacaoPesoIntent);
         
         return pendingNotificacaoPesoIntent;
 
 	}
     
 
-	public PendingIntent marcarNotificacaoBPM (long horaLembrete) {
+	public PendingIntent scheduleHrNotification(long reminderTime) {
 		 
         Intent notificacaoIntent = new Intent(this, NotificationReceiver.class);
         notificacaoIntent.putExtra("ID_NOTIFICACAO", 2);
@@ -222,15 +223,15 @@ public class PreferencesEdit extends Activity {
         PendingIntent pendingNotificacaoBPMIntent = PendingIntent.getBroadcast(this, 0, notificacaoIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, horaLembrete, TimeUnit.DAYS.toMillis(1), pendingNotificacaoBPMIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, reminderTime, TimeUnit.DAYS.toMillis(1), pendingNotificacaoBPMIntent);
         
         return pendingNotificacaoBPMIntent;
         
 	} 
 	
-    public void cancelarNotificacao (PendingIntent pendingNotificacaoIntent) {
+    public void cancelNotification(PendingIntent pendIntNotification) {
     	AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-    	alarmManager.cancel(pendingNotificacaoIntent);
+    	alarmManager.cancel(pendIntNotification);
     }
     
 }
