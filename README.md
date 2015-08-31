@@ -9,8 +9,6 @@ Basically, it allows for better management of health indicators, such as weight,
 
 The interface ws initially focused on elder people, given the big buttons and simple design. However, according to research along the project, younger people also showed interest in using the application, so one of my next objectives is to add more modern UI frameworks, keeping up with the latest design principles and UI elements.
 
-By sharing the code under GNU GPL v3.0 license, I'm allowing other people to share ideas for the progression of the project and, also, given the due credits for my work, use it on their own projects. If you want to make a pull request or fork it, feel free to reach me!
-
 **João Pedro B Palharini**  
 joao@palharini.me
 
