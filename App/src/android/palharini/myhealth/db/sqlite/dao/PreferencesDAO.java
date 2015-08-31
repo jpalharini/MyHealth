@@ -6,7 +6,7 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import android.palharini.myhealth.db.ConnectWS;
+import android.palharini.myhealth.db.ws.ConnectWS;
 import android.palharini.myhealth.db.entities.Preferences;
 
 public class PreferencesDAO {
