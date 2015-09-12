@@ -1,8 +1,5 @@
 package android.palharini.myhealth.activities.register;
 
-import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
-
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -13,8 +10,8 @@ import android.os.StrictMode;
 import android.palharini.myhealth.R;
 import android.palharini.myhealth.activities.Main;
 import android.palharini.myhealth.date_time.pickers.TimePickerBox;
-import android.palharini.myhealth.db.dao.PreferencesDAO;
 import android.palharini.myhealth.db.entities.Preferences;
+import android.palharini.myhealth.db.ws.dao.PreferencesDAO;
 import android.palharini.myhealth.notifications.NotificationReceiver;
 import android.palharini.myhealth.session.SessionManager;
 import android.view.View;
@@ -23,6 +20,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class PreferencesRegister extends Activity {
 	

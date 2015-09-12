@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.R;
 import android.palharini.myhealth.activities.register.UserRegister;
-import android.palharini.myhealth.db.dao.UserDAO;
+import android.palharini.myhealth.db.ws.dao.UserDAO;
 import android.palharini.myhealth.db.entities.User;
 import android.palharini.myhealth.session.DialogBox;
 import android.palharini.myhealth.session.SessionManager;

@@ -6,7 +6,7 @@ import android.palharini.myhealth.R;
 import android.palharini.myhealth.activities.CryptPassword;
 import android.palharini.myhealth.date_time.DateFormat;
 import android.palharini.myhealth.date_time.pickers.DatePickerBox;
-import android.palharini.myhealth.db.dao.UserDAO;
+import android.palharini.myhealth.db.ws.dao.UserDAO;
 import android.palharini.myhealth.db.entities.User;
 import android.palharini.myhealth.session.SessionManager;
 import android.view.View;
