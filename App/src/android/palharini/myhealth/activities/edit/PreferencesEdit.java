@@ -1,9 +1,5 @@
 package android.palharini.myhealth.activities.edit;
 
-import java.lang.String;
-import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
-
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -14,8 +10,8 @@ import android.os.StrictMode;
 import android.palharini.myhealth.R;
 import android.palharini.myhealth.activities.Login;
 import android.palharini.myhealth.date_time.pickers.TimePickerBox;
-import android.palharini.myhealth.db.dao.PreferencesDAO;
 import android.palharini.myhealth.db.entities.Preferences;
+import android.palharini.myhealth.db.ws.dao.PreferencesDAO;
 import android.palharini.myhealth.notifications.NotificationReceiver;
 import android.palharini.myhealth.session.DialogBox;
 import android.palharini.myhealth.session.SessionManager;
@@ -24,6 +20,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class PreferencesEdit extends Activity {
 
@@ -122,7 +121,7 @@ public class PreferencesEdit extends Activity {
 				
 				if (blWeighReminder) {
 					stWeighReminderTime = etWeighReminderTime.getText().toString();
-                    stArrReminderTime = new String[]{stHrReminderTime.split(":")};
+                    stArrReminderTime = stHrReminderTime.split(":");
 					calendar = Calendar.getInstance();
 					calendar.setTimeInMillis(System.currentTimeMillis());
 					calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(stArrReminderTime[0]));
@@ -134,7 +133,7 @@ public class PreferencesEdit extends Activity {
 				
 				if (blHrReminder) {
 					stHrReminderTime = chHrReminderTime.getText().toString();
-					stArrReminderTime = new String[]{stHrReminderTime.split(":")};
+					stArrReminderTime = stHrReminderTime.split(":");
 					calendar = Calendar.getInstance();
 					calendar.setTimeInMillis(System.currentTimeMillis());
 					calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(stArrReminderTime[0]));
@@ -163,7 +162,7 @@ public class PreferencesEdit extends Activity {
 						cancelNotification(pendIntWeigh);
 					}
 					if (blHrReminder) {
-						pendIntHr = scheduleHrNotification(calHrReminderTime.getTimeInMillis());
+						pendIntHr = scheduleHrNotification(calendar.getTimeInMillis());
 					}
 					else {
 						cancelNotification(pendIntHr);

@@ -8,7 +8,7 @@ import android.palharini.myhealth.R;
 import android.palharini.myhealth.activities.edit.IndicatorEdit;
 import android.palharini.myhealth.activities.register.IndicatorRegister;
 import android.palharini.myhealth.date_time.DateFormat;
-import android.palharini.myhealth.db.dao.IndicatorDAO;
+import android.palharini.myhealth.db.ws.dao.IndicatorDAO;
 import android.palharini.myhealth.db.entities.Indicator;
 import android.palharini.myhealth.fragments.tabs.adapters.IndicatorsListAdapter;
 import android.palharini.myhealth.session.SessionManager;
@@ -28,7 +28,7 @@ import java.util.List;
 
 public class YearTab extends Fragment {
 	
-	private static Integer	difData = 4;
+	private static Integer difData = 4;
 	private static String periodo = "WEEK";
 	
 	private SessionManager sessao;

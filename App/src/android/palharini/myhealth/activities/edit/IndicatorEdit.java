@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.palharini.myhealth.R;
-import android.palharini.myhealth.db.dao.IndicatorDAO;
+import android.palharini.myhealth.db.ws.dao.IndicatorDAO;
 import android.palharini.myhealth.db.entities.Indicator;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -142,7 +142,7 @@ public class IndicatorEdit extends Activity {
 		lsMeasUnits = Arrays.asList(arrMeasUnits);
 		
 		indicatorDAO = new IndicatorDAO();
-		indicator = indicatorDAO.buscarIndicadorId(intSelectedIndicator);
+		indicator = indicatorDAO.searchById(intSelectedIndicator);
 		
 		spType.setSelection(indicator.getTypeID());
 		etMeasure1.setText(indicator.getMeasure1().toString());
@@ -155,7 +155,7 @@ public class IndicatorEdit extends Activity {
 				intSelectedIndicatorID = spType.getSelectedItemPosition();
 				
 				if (intSelectedIndicatorID !=3) {
-					blUpdate = indicatorDAO.atualizarIndicador(new Indicator(
+					blUpdate = indicatorDAO.update(new Indicator(
 							indicator.getId(),
                             intSelectedIndicatorID,
                             dbMeasure1,
@@ -165,7 +165,7 @@ public class IndicatorEdit extends Activity {
 				}
 				else {
 					dbMeasure2 = Double.parseDouble(etMeasure2.getText().toString());
-					blUpdate = indicatorDAO.atualizarIndicador(new Indicator(
+					blUpdate = indicatorDAO.update(new Indicator(
 							indicator.getId(),
                             intSelectedIndicatorID,
                             dbMeasure1,
@@ -187,7 +187,7 @@ public class IndicatorEdit extends Activity {
 		btDelete.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick (View v){
-				blDelete = indicatorDAO.excluirIndicador(indicator.getId());
+				blDelete = indicatorDAO.delete(indicator.getId());
 				
 				if (blDelete) {
 					Toast.makeText(getApplicationContext(), getString(R.string.toastIndExcOK), Toast.LENGTH_LONG).show();

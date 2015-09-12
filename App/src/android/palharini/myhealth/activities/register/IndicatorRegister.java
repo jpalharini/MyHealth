@@ -6,10 +6,11 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.palharini.myhealth.R;
 import android.palharini.myhealth.date_time.DateFormat;
-import android.palharini.myhealth.db.dao.IndicatorDAO;
+import android.palharini.myhealth.db.ws.dao.IndicatorDAO;
 import android.palharini.myhealth.db.entities.Indicator;
 import android.palharini.myhealth.session.SessionManager;
 import android.view.View;
+import android.widget.*;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import java.util.Arrays;
@@ -164,7 +165,7 @@ public class IndicatorRegister extends Activity {
 				selectedTypeId = spType.getSelectedItemPosition();
 				
 				if (selectedTypeId != 3) {
-					register = indicatorDAO.cadastrarIndicador(new Indicator(
+					register = indicatorDAO.register(new Indicator(
 							0,
 							selectedTypeId,
 							userId,
@@ -177,7 +178,7 @@ public class IndicatorRegister extends Activity {
 				}
 				else {
 					dbMeasure2 = Double.parseDouble(etMeasure2.getText().toString());
-					register = indicatorDAO.cadastrarIndicador(new Indicator(
+					register = indicatorDAO.register(new Indicator(
 							0,
 							selectedTypeId,
 							userId,

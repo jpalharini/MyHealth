@@ -8,8 +8,8 @@ import android.palharini.myhealth.R;
 import android.palharini.myhealth.activities.CryptPassword;
 import android.palharini.myhealth.date_time.DateFormat;
 import android.palharini.myhealth.date_time.pickers.DatePickerBox;
-import android.palharini.myhealth.db.dao.IndicatorDAO;
-import android.palharini.myhealth.db.dao.UserDAO;
+import android.palharini.myhealth.db.ws.dao.IndicatorDAO;
+import android.palharini.myhealth.db.ws.dao.UserDAO;
 import android.palharini.myhealth.db.entities.Indicator;
 import android.palharini.myhealth.db.entities.User;
 import android.palharini.myhealth.session.SessionManager;
@@ -113,7 +113,7 @@ public class UserRegister extends Activity {
 					strArrUnits = getResources().getStringArray(R.array.lsUnidades);
 					lsUnits = Arrays.asList(strArrUnits);
 					
-					blHeightInd = indicatorDAO.cadastrarIndicador(new Indicator(
+					blHeightInd = indicatorDAO.register(new Indicator(
 							0,
 							0,
 							user.getId(),
@@ -124,7 +124,7 @@ public class UserRegister extends Activity {
 							dateFormat.getCurrentSqlTime()
 							));
 					
-					blWeightInd = indicatorDAO.cadastrarIndicador(new Indicator(
+					blWeightInd = indicatorDAO.register(new Indicator(
 							0,
 							1,
 							user.getId(),
